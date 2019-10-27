@@ -28,7 +28,7 @@ ArrayListArrayList 是List的一个实现类，底层是基于动态数组的">
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 <body>
@@ -544,11 +544,8 @@ ArrayListArrayList 是List的一个实现类，底层是基于动态数组的">
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 </code></pre>
-<pre><code>常量介绍:
-DEFAULT_CAPACITY 是一个被final修饰的int型的常量，代表ArrayList默认初始容量。
-EMPTY_ELEMENTDATA 是一个空的列表，将会和上面的DEFAULT_CAPACITY联系起来，创造一个容量的10的列表
-DEFAULTCAPACITY_EMPTY_ELEMENTDATA也是一个空列表，但它和上面的不同，第一次添加元素时知道该 elementData 
-从空的构造函数还是有参构造函数被初始化的。以便确认如何扩容。</code></pre><blockquote>
+<p>常量介绍:<br>DEFAULT_CAPACITY 是一个被final修饰的int型的常量，代表ArrayList默认初始容量。<br>EMPTY_ELEMENTDATA 是一个空的列表，将会和上面的DEFAULT_CAPACITY联系起来，创造一个容量的10的列表<br>DEFAULTCAPACITY_EMPTY_ELEMENTDATA也是一个空列表，但它和上面的不同，第一次添加元素时知道该 elementData<br>从空的构造函数还是有参构造函数被初始化的。以便确认如何扩容。</p>
+<blockquote>
 <p>从上面的代码可以看出，ArrayList有三个构造函数，第一个构造函数是指定容量的构造函数。有如下几点，第一：如果容量传入一个负数，将会抛出一个IllegalArgumentException异常，第二：如果容量&gt;0,就创造一个容量大小的列表，如果容量为0，便指定这个列表是一个EMPTY_ELEMENTDATA空列表。</p>
 </blockquote>
 <blockquote>
