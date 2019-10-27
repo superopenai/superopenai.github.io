@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 阿宁的博客">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="arraylist源码解析, 阿宁的博客">
+    <meta name="description" content="List是一个接口，它继承于Collection,是一个有序集合，我们可以精确控制每个元素的插入位置，和集合不同，列表支持重复的元素。
+JDK版本11.04
+ArrayListArrayList 是List的一个实现类，底层是基于动态数组的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | 阿宁的博客</title>
+    <title>arraylist源码解析 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Hello World
+                        arraylist源码解析
                     </div>
                 </div>
             </div>
@@ -420,12 +422,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">jdk源码</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/java/" class="post-category">
+                                java
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -442,14 +461,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        73
+                        1.7k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        7 分
                     </div>
                     
                 
@@ -465,19 +484,66 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>是一个接口，它继承于Collection,是一个有序集合，我们可以精确控制每个元素的插入位置，和集合不同，列表支持重复的元素。<br><img src="https://i.loli.net/2019/09/22/DZfw4zBWn3C5Kuc.png" alt=""></p>
+<p>JDK版本11.04</p>
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>ArrayList 是List的一个实现类，底层是基于动态数组的形式实现的ArrayList<br><img src="https://i.loli.net/2019/09/22/s2AtWcfRg6YXrvk.png" alt=""></p>
+<h3 id="ArrayList的源码"><a href="#ArrayList的源码" class="headerlink" title="ArrayList的源码"></a><strong>ArrayList的源码</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">常量</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Default initial capacity.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Shared empty array instance used for empty instances.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Shared empty array instance used for default sized empty instances. We</span></span><br><span class="line"><span class="comment">     * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span></span><br><span class="line"><span class="comment">     * first element is added.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The array buffer into which the elements of the ArrayList are stored.</span></span><br><span class="line"><span class="comment">     * The capacity of the ArrayList is the length of this array buffer. Any</span></span><br><span class="line"><span class="comment">     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span></span><br><span class="line"><span class="comment">     * will be expanded to DEFAULT_CAPACITY when the first element is added.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></span><br><span class="line"></span><br><span class="line">构造函数</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">        elementData = c.toArray();</span><br><span class="line">        <span class="keyword">if</span> ((size = elementData.length) != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// defend against c.toArray (incorrectly) not returning Object[]</span></span><br><span class="line">            <span class="comment">// (see e.g. https://bugs.openjdk.java.net/browse/JDK-6260652)</span></span><br><span class="line">            <span class="keyword">if</span> (elementData.getClass() != Object[].class)</span><br><span class="line">                elementData = Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// replace with empty array.</span></span><br><span class="line">            <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>常量介绍:
+DEFAULT_CAPACITY 是一个被final修饰的int型的常量，代表ArrayList默认初始容量。
+EMPTY_ELEMENTDATA 是一个空的列表，将会和上面的DEFAULT_CAPACITY联系起来，创造一个容量的10的列表
+DEFAULTCAPACITY_EMPTY_ELEMENTDATA也是一个空列表，但它和上面的不同，第一次添加元素时知道该 elementData 
+从空的构造函数还是有参构造函数被初始化的。以便确认如何扩容。</code></pre><blockquote>
+<p>从上面的代码可以看出，ArrayList有三个构造函数，第一个构造函数是指定容量的构造函数。有如下几点，第一：如果容量传入一个负数，将会抛出一个IllegalArgumentException异常，第二：如果容量&gt;0,就创造一个容量大小的列表，如果容量为0，便指定这个列表是一个EMPTY_ELEMENTDATA空列表。</p>
+</blockquote>
+<blockquote>
+<p>第二个无参构造函数，按照注释解释，构造一个容量大小为 10 的空的 list 集合，但构造函数了只是给 elementData 赋值了一个空的数组，其实是在第一次添加元素时容量扩大至 10 的。</p>
+</blockquote>
+<blockquote>
+<p>第三个构造函数，将 Collection 转化为数组并赋值给 elementData，把 elementData 中元素的个数赋值给 size。 如果 size 不为零，则判断 elementData 的 class 类型是否为 Object[]，不是的话则做一次转换。 如果 size 为零，则把 EMPTY_ELEMENTDATA 赋值给 elementData，相当于new ArrayList(0)。</p>
+</blockquote>
+<p><strong>重要函数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * This helper method split out from add(E) to keep method</span></span><br><span class="line"><span class="comment">  * bytecode size under 35 (the -XX:MaxInlineSize default value),</span></span><br><span class="line"><span class="comment">  * which helps when add(E) is called in a C1-compiled loop.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(E e, Object[] elementData, <span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (s == elementData.length)</span><br><span class="line">         elementData = grow();</span><br><span class="line">     elementData[s] = e;</span><br><span class="line">     size = s + <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Appends the specified element to the end of this list.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> e element to be appended to this list</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; (as specified by &#123;<span class="doctag">@link</span> Collection#add&#125;)</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">     modCount++;</span><br><span class="line">     add(e, elementData, size);</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Inserts the specified element at the specified position in this</span></span><br><span class="line"><span class="comment">  * list. Shifts the element currently at that position (if any) and</span></span><br><span class="line"><span class="comment">  * any subsequent elements to the right (adds one to their indices).</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> index index at which the specified element is to be inserted</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> element element to be inserted</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@throws</span> IndexOutOfBoundsException &#123;<span class="doctag">@inheritDoc</span>&#125;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">     rangeCheckForAdd(index);</span><br><span class="line">     modCount++;</span><br><span class="line">     <span class="keyword">final</span> <span class="keyword">int</span> s;</span><br><span class="line">     Object[] elementData;</span><br><span class="line">     <span class="keyword">if</span> ((s = size) == (elementData = <span class="keyword">this</span>.elementData).length)</span><br><span class="line">         elementData = grow();</span><br><span class="line">     System.arraycopy(elementData, index,</span><br><span class="line">                      elementData, index + <span class="number">1</span>,</span><br><span class="line">                      s - index);</span><br><span class="line">     elementData[index] = element;</span><br><span class="line">     size = s + <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><strong>首先我们观察 add 函数</strong></p>
+<blockquote>
+<p>看源码时你会发现，有一个modCount++的操作，这是为什么呢？ 通过查看，modCount是AbstractList中定义的一个保护变量，源码注释中给出了比较详细的解释，作用大概是用于记录list结构被修改的次数。</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/09/23/GbWNupkB8PVeUT5.png" alt=""></p>
+<blockquote>
+<p>平常很少用到add(int index, E element)这个函数,这个函数有一个陷阱。在本文最下方讲解。</p>
+</blockquote>
+<blockquote>
+<p>当我们执行  list.add（Element）时，会调用了add(E e, Object[] elementData, int s)这个函数，并进行了一次判断，如果当前元素的个数已经和list的长度相同，也就是俗话说装满了，便会执行grow（）函数,用来改变list空间的大小。elementData代表着list，grow（）函数调用了newCapacity(minCapacity) minCapacity的大小为size+1。</p>
+</blockquote>
+<blockquote>
+<p>在newCapacity（）函数内部，使用了移位操作符将新容量扩容为老容量的1.5倍，然后判断新容量和所需容量，如果新容量小于所需容量，就把新容量大小改成所需容量</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> Object[] grow(<span class="keyword">int</span> minCapacity) &#123;</span><br><span class="line">    <span class="keyword">return</span> elementData = Arrays.copyOf(elementData,</span><br><span class="line">                                       newCapacity(minCapacity));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Object[] grow() &#123;</span><br><span class="line">    <span class="keyword">return</span> grow(size + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns a capacity at least as large as the given minimum capacity.</span></span><br><span class="line"><span class="comment"> * Returns the current capacity increased by 50% if that suffices.</span></span><br><span class="line"><span class="comment"> * Will not return a capacity greater than MAX_ARRAY_SIZE unless</span></span><br><span class="line"><span class="comment"> * the given minimum capacity is greater than MAX_ARRAY_SIZE.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> minCapacity the desired minimum capacity</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> OutOfMemoryError if minCapacity is less than zero</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">newCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA)</span><br><span class="line">            <span class="keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">        <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">        <span class="keyword">return</span> minCapacity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (newCapacity - MAX_ARRAY_SIZE &lt;= <span class="number">0</span>)</span><br><span class="line">        ? newCapacity</span><br><span class="line">        : hugeCapacity(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">    <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE)</span><br><span class="line">        ? Integer.MAX_VALUE</span><br><span class="line">        : MAX_ARRAY_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在newCapacity函数的的下方，将新容量将MAX_ARRAY_SIZE进行了比较，其大小为Integer.MAX_VALUE-8，在注释中也给出了解释，虚拟机在数组中存在一些保留字。MAX_VALUE的值为0x7fffffff，这是int类型（有符号）的最大值，有21亿多个，准确数值为2147483648</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/09/23/Oo9spDkmXyUuj3Y.png" alt=""></p>
+<h3 id="陷阱"><a href="#陷阱" class="headerlink" title="陷阱"></a>陷阱</h3><p><strong><a href="https://blog.csdn.net/qq_27093465/article/details/55211722" target="_blank" rel="noopener">借鉴地址</a></strong></p>
+<blockquote>
+<p>结合我自己的理解，当我们执行<br>ArrayList<Integer> integers = new ArrayList&lt;&gt;(3);时并不是创造了一个长度为3的数组队列，结合构造函数的源码可知，在底层时创造了一个长度为3的空数组集合，当前list集合仍然是一个带有初始容量3的empty list。</p>
+</blockquote>
+<p><strong>例子</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> ArrayList&lt;Integer&gt; integers = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">3</span>);</span><br><span class="line">        integers.add(<span class="number">1</span>);</span><br><span class="line">        integers.add(<span class="number">2</span>);</span><br><span class="line">        System.out.println(integers);</span><br><span class="line"><span class="comment">//        integers.add(1,4);</span></span><br><span class="line">        integers.set(<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line"><span class="comment">//        integers.add(2,3);</span></span><br><span class="line"><span class="comment">//        integers.set(2,3);</span></span><br><span class="line">        System.out.println(integers);</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我创造了一个大小为3的集合，并添加了第一个和第二个元素，在尝试使用<br>        integers.set(2,4);来添加第三个元素时，运行出错。原因如下<br><img src="https://i.loli.net/2019/09/23/bepZg6dKWVNQRoT.png" alt=""><br><img src="https://i.loli.net/2019/09/23/BatH8lu1jmgxWMF.png" alt=""><br><img src="https://i.loli.net/2019/09/23/MYrk2tqEmGfOgVH.png" alt=""></p>
+<p><strong>在if判断中判断index &gt;= length（length就是传过来的size值）index(2)=size(2)进而导致出错，只有这种index大于等于size的情况下set才会出现错误</strong></p>
+<p><img src="https://i.loli.net/2019/09/23/9TJMU58V2BlXDPa.png" alt=""></p>
+<p><strong>add情况是在index大于size的情况下报错</strong></p>
+<h4 id="闲扯一句"><a href="#闲扯一句" class="headerlink" title="闲扯一句"></a>闲扯一句</h4><p><strong>JAVA中初始化ArrayList的三种方式</strong></p>
+<p> 一、最常用的初始化方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">list1.add(<span class="string">"apple"</span>);</span><br><span class="line">list1.add(<span class="string">"banana"</span>);</span><br><span class="line">list1.add(<span class="string">"orange"</span>);</span><br></pre></td></tr></table></figure>
+<p>二、使用一个List来初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list2 = <span class="keyword">new</span> ArrayList&lt;String&gt;(Arrays.asList(<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"orange"</span>));</span><br></pre></td></tr></table></figure>
+<p>三、使用匿名内部类来初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list4 = <span class="keyword">new</span> ArrayList&lt;String&gt;() &#123;</span><br><span class="line">        &#123;</span><br><span class="line">            add(<span class="string">"apple"</span>);</span><br><span class="line">            add(<span class="string">"banana"</span>);</span><br><span class="line">            add(<span class="string">"orange"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
 
             </div>
             <hr/>
@@ -503,7 +569,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/hello-world/">https://superopenai.github.io/2019/10/27/hello-world/</a>
+                    <a href="https://superopenai.github.io/2019/10/27/arraylist%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">https://superopenai.github.io/2019/10/27/arraylist%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -540,7 +606,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                                <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">jdk源码</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -705,9 +779,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/10/27/arraylist%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
                     <div class="card-image">
@@ -727,9 +802,9 @@ ArrayListArrayList 是List的一个实现类，底层是基于动态数组的
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -742,6 +817,7 @@ ArrayListArrayList 是List的一个实现类，底层是基于动态数组的
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -761,7 +837,7 @@ ArrayListArrayList 是List的一个实现类，底层是基于动态数组的
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2019/10/27/hello-world/">
@@ -791,7 +867,6 @@ ArrayListArrayList 是List的一个实现类，底层是基于动态数组的
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
