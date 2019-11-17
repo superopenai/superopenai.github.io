@@ -4,11 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="spring中获取ip的四种办法, 阿宁的博客">
-    <meta name="description" content="第一种办法使用import javax.servlet.http.HttpServletRequest具体代码
-   HttpServletRequest request
-    {
-        String ip = request.">
+    <meta name="keywords" content="Java NIO的Buffer组件介绍, 阿宁的博客">
+    <meta name="description" content="Java NIO的Buffer组件经典步骤使用Buffer时我们通常会有四步
+
+往buffer缓冲区中写数据
+使用buffer.filp()进行读写模式转换
+从buffer缓冲区里读出数据
+使用buffer.clear()来清空缓冲区,抑或">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>spring中获取ip的四种办法 | 阿宁的博客</title>
+    <title>Java NIO的Buffer组件介绍 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -307,13 +309,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        spring中获取ip的四种办法
+                        Java NIO的Buffer组件介绍
                     </div>
                 </div>
             </div>
@@ -425,8 +427,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -437,8 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/spring/" class="post-category">
-                                spring
+                            <a href="/categories/java/" class="post-category">
+                                java
                             </a>
                         
                     </div>
@@ -449,7 +451,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-11-17
                 </div>
                 
                 
@@ -458,14 +460,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        124
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -481,28 +483,191 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第一种办法"><a href="#第一种办法" class="headerlink" title="第一种办法"></a>第一种办法</h2><pre><code>使用import javax.servlet.http.HttpServletRequest</code></pre><pre class=" language-java"><code class="language-java">具体代码
-   HttpServletRequest request
-    <span class="token punctuation">{</span>
-        String ip <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getRemoteAddr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        articleComment<span class="token punctuation">.</span><span class="token function">setIp</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h2 id="Java-NIO的Buffer组件"><a href="#Java-NIO的Buffer组件" class="headerlink" title="Java NIO的Buffer组件"></a>Java NIO的Buffer组件</h2><h3 id="经典步骤"><a href="#经典步骤" class="headerlink" title="经典步骤"></a>经典步骤</h3><p><strong>使用Buffer时我们通常会有四步</strong></p>
+<ul>
+<li>往buffer缓冲区中写数据</li>
+<li>使用<code>buffer.filp()</code>进行读写模式转换</li>
+<li>从buffer缓冲区里读出数据</li>
+<li>使用<code>buffer.clear()</code>来清空缓冲区,抑或是使用<code>buffer.compact()</code>来清除已经读出了的数据.</li>
+</ul>
+<h4 id="这是一个小例子"><a href="#这是一个小例子" class="headerlink" title="这是一个小例子"></a>这是一个小例子</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">printFormFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//这个被读取的文件里共有86字节的内容</span>
+            RandomAccessFile file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RandomAccessFile</span><span class="token punctuation">(</span><span class="token string">"src/me/superning/file/test.txt"</span><span class="token punctuation">,</span> <span class="token string">"rw"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            FileChannel channel <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//申请一个100字节大小的缓冲区</span>
+            ByteBuffer buffer <span class="token operator">=</span> ByteBuffer<span class="token punctuation">.</span><span class="token function">allocate</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//往缓冲区里写入数据</span>
+            <span class="token keyword">int</span> read <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"length"</span><span class="token operator">+</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>read<span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//把buffer切换模式 换成读出模式</span>
+                buffer<span class="token punctuation">.</span><span class="token function">flip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>buffer<span class="token punctuation">.</span><span class="token function">hasRemaining</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"this element:"</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span>buffer<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">//让read 变成了-1;</span>
+                buffer<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+             read <span class="token operator">=</span>    channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token punctuation">}</span>
+            file<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">FileNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span></code></pre>
+<h3 id="buffer的三个属性-不变量-逃"><a href="#buffer的三个属性-不变量-逃" class="headerlink" title="buffer的三个属性(不变量?)(逃"></a>buffer的三个属性(不变量?)(逃</h3><p> <img src="http://tutorials.jenkov.com/images/java-nio/buffers-modes.png" alt="Java NIO: Buffer capacity, position and limit in write and read mode."> </p>
+<p><strong><code>position</code>和 <code>limit</code> 的意义依赖与buffer的读写模式不同,而<code>Capacity</code>的意思没有什么特别的,就是指容量大小</strong></p>
+<h4 id="position"><a href="#position" class="headerlink" title="position"></a>position</h4><blockquote>
+<p>在写入(write)模式下,position将标记着写入的数据,初始值为0,每当读入一个单位的内容,position就会增加一个单位,position最大值是capacity-1.</p>
+<p>当使用filp()转换成读(read)模式时,position重置为0,一直标记下一个读出的单位内容.</p>
+</blockquote>
+<h4 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h4><blockquote>
+<p>在写入(write)模式下,limit的意义和capacity意义相同,表示能读入的最多值.</p>
+<p>当使用filp()转换成读(read)模式时,limit将会重置为<strong>(write)模式下的position的位置</strong></p>
+<p>换句话说，我们可以读取写入的字节数 </p>
+</blockquote>
+<h3 id="Buffer-组件类"><a href="#Buffer-组件类" class="headerlink" title="Buffer 组件类"></a>Buffer 组件类</h3><ul>
+<li>ByteBuffer</li>
+<li>MappedByteBuffer</li>
+<li>CharBuffer</li>
+<li>DoubleBuffer</li>
+<li>FloatBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>ShortBuffe</li>
+</ul>
+<p><strong>可以看出不同的组件类对应着Java中不同的类型，MappedByteBuffer有些特殊，将会单独介绍。</strong></p>
+<h3 id="怎么获得Buffer对象"><a href="#怎么获得Buffer对象" class="headerlink" title="怎么获得Buffer对象"></a>怎么获得Buffer对象</h3><p><strong>要获得Buffer对象，你必须要分配一块空间给buffer对象,下面是两个例子</strong></p>
+<pre class=" language-java"><code class="language-java">ByteBuffer bytebuffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ByteBuffer<span class="token punctuation">.</span>allocate</span><span class="token punctuation">(</span><span class="token number">48</span><span class="token punctuation">)</span></code></pre>
+<pre class=" language-java"><code class="language-java">CharBuffer charbuffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CharBuffer<span class="token punctuation">.</span>allocate</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span></code></pre>
+<h3 id="怎么向Buffer中写数据"><a href="#怎么向Buffer中写数据" class="headerlink" title="怎么向Buffer中写数据"></a>怎么向Buffer中写数据</h3><ul>
+<li>使用Channel来向Buffer中写入数据<code>channel.read(buffer)</code>（经常用）</li>
+<li>使用<code>put()</code>方法直接向Buffer写入数据</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token number">1</span><span class="token punctuation">.</span>
+            FileChannel channel <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ByteBuffer buffer <span class="token operator">=</span> ByteBuffer<span class="token punctuation">.</span><span class="token function">allocate</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> read <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token number">2</span><span class="token punctuation">.</span>
+    buffer<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>*<em>对于<code>put()</code> 方法，Buffer的不同子类也都给出了相应的实现，使用时参考 JavaDoc  *</em></p>
+<p><img src="C:%5CUsers%5Csuperning%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191117160118295.png" alt="image-20191117160118295"></p>
+<p><img src="C:%5CUsers%5Csuperning%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191117160138085.png" alt="image-20191117160138085"></p>
+<h3 id="怎么从Buffer里读数据"><a href="#怎么从Buffer里读数据" class="headerlink" title="怎么从Buffer里读数据"></a>怎么从Buffer里读数据</h3><ul>
+<li>使用Channel来从Buffer中读走数据<code>channel.write(buffer)</code>  (经常用)</li>
+<li>使用Buffer的<code>get()</code> 方法，一个一个取出。</li>
+</ul>
+<pre class=" language-java"><code class="language-java"><span class="token number">1</span><span class="token punctuation">.</span>
+    FileChannel outfileChannel <span class="token operator">=</span> outfile<span class="token punctuation">.</span><span class="token function">getChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//和写入例子的buffer是同一个buffer</span>
+    <span class="token keyword">int</span> write <span class="token operator">=</span> outfileChannel<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token number">2</span><span class="token punctuation">.</span>
+    buffer<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="演示例子"><a href="#演示例子" class="headerlink" title="演示例子"></a>演示例子</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">printFormFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            RandomAccessFile infile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RandomAccessFile</span><span class="token punctuation">(</span><span class="token string">"src/me/superning/file/test.txt"</span><span class="token punctuation">,</span> <span class="token string">"rw"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            RandomAccessFile outfile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RandomAccessFile</span><span class="token punctuation">(</span><span class="token string">"src/me/superning/file/to.txt"</span><span class="token punctuation">,</span> <span class="token string">"rw"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            FileChannel channel <span class="token operator">=</span> infile<span class="token punctuation">.</span><span class="token function">getChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            FileChannel outfileChannel <span class="token operator">=</span> outfile<span class="token punctuation">.</span><span class="token function">getChannel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">//缓冲区分配50byte，比文件中的数据要小。</span>
+            ByteBuffer buffer <span class="token operator">=</span> ByteBuffer<span class="token punctuation">.</span><span class="token function">allocate</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> read <span class="token operator">=</span> channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"读入的数据"</span><span class="token operator">+</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>read<span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//转换模式</span>
+                buffer<span class="token punctuation">.</span><span class="token function">flip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">int</span> write <span class="token operator">=</span> outfileChannel<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"写出的数据"</span><span class="token operator">+</span>write<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                buffer<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"-----------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//当文件里的数据都读过一次，让read 变成了-1;</span>
+             read <span class="token operator">=</span>    channel<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"读入的数据"</span><span class="token operator">+</span>read<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>read<span class="token operator">==</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"IO结束"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+            <span class="token punctuation">}</span>
+            infile<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            outfile<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">FileNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
+
+
+
+
+
+
+运行结果：
+读入的数据<span class="token number">50</span>
+写出的数据<span class="token number">50</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+读入的数据<span class="token number">50</span>
+写出的数据<span class="token number">50</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+读入的数据<span class="token number">11</span>
+写出的数据<span class="token number">11</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+读入的数据<span class="token operator">-</span><span class="token number">1</span>
+IO结束
+
 </code></pre>
-<h2 id="第二种办法"><a href="#第二种办法" class="headerlink" title="第二种办法"></a>第二种办法</h2><pre><code>使用import org.springframework.http.server.ServerHttpRequest;</code></pre><pre class=" language-java"><code class="language-java">具体代码
-ServerHttpRequest serverHttpRequest
-            String clientIp <span class="token operator">=</span> serverHttpRequest<span class="token punctuation">.</span><span class="token function">getRemoteAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            articleComment<span class="token punctuation">.</span><span class="token function">setIp</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="第三种方法"><a href="#第三种方法" class="headerlink" title="第三种方法"></a>第三种方法</h2><pre><code>使用import org.springframework.web.server.ServerWebExchange;</code></pre><pre class=" language-java"><code class="language-java">具体代码
-ServerWebExchange serverWebExchange
-String clientIp <span class="token operator">=</span> Objects<span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>serverWebExchange<span class="token punctuation">.</span><span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getRemoteAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="第四种方法"><a href="#第四种方法" class="headerlink" title="第四种方法"></a>第四种方法</h2><pre><code>使用import org.springframework.web.reactive.function.server.ServerRequest;</code></pre><pre class=" language-java"><code class="language-java">具体代码
-ServerRequest serverRequest
-    <span class="token comment" spellcheck="true">//使用WebFlux的remoteAddress方法（spring5.1加入）</span>
-    Optional<span class="token operator">&lt;</span>InetSocketAddress<span class="token operator">></span> inetSocketAddress <span class="token operator">=</span> serverRequest<span class="token punctuation">.</span><span class="token function">remoteAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    String clientIp<span class="token operator">=</span> inetSocketAddress<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<h3 id="rewind方法"><a href="#rewind方法" class="headerlink" title="rewind方法"></a>rewind方法</h3><blockquote>
+<p> <code>Buffer.rewind()</code>将<code>position</code>重新设置为0，这样你就可以重新读取缓冲区中的所有数据。在<code>limit</code>保持不变，因此仍标记着可以写入多少数据。 </p>
+</blockquote>
+<h2 id="equals-and-compareTo"><a href="#equals-and-compareTo" class="headerlink" title="equals() and compareTo()"></a>equals() and compareTo()</h2><blockquote>
+<p><code>equal()</code>:</p>
+<blockquote>
+<p>两个buffer如果相等，必须符合以下条件：</p>
+<ul>
+<li>属于同一种类型（byte，char）</li>
+<li>拥有相同数量的元素</li>
+<li>所有的元素都相同</li>
+</ul>
+</blockquote>
+<p><code>compareTo()</code>:</p>
+<blockquote>
+<p>compareTo（）方法比较两个缓冲区的其余元素（字节，字符等），以用于例如 排序例程。 在以下情况下，一个缓冲区被认为比另一个缓冲区“小”：</p>
+<ul>
+<li><p>一个缓冲区中相应元素小于另一个缓冲区中的元素。</p>
+</li>
+<li><p>所有元素都相等，但是第一个缓冲区先于第二个缓冲区用完（所有元素更少），然后用完所有元素。</p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
 
             </div>
             <hr/>
@@ -528,7 +693,7 @@ ServerRequest serverRequest
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/">https://superopenai.github.io/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/</a>
+                    <a href="https://superopenai.github.io/2019/11/17/Java-NIO%E7%9A%84Buffer%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D/">https://superopenai.github.io/2019/11/17/Java-NIO%E7%9A%84Buffer%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -566,8 +731,8 @@ ServerRequest serverRequest
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -608,83 +773,34 @@ ServerRequest serverRequest
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/Restful%E9%A3%8E%E6%A0%BC%E7%90%86%E8%A7%A3/">
+                <a href="/2019/11/17/Java-NIO%E7%9A%84Buffer%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Restful风格理解">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java NIO的Buffer组件介绍">
                         
-                        <span class="card-title">Restful风格理解</span>
+                        <span class="card-title">Java NIO的Buffer组件介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Restful风格要点在前后端分离的 Web 应用架构中，前端专注于页面，同时与后端进行数据交互；而后端则专注于提供 API 接口。在这样的结构下，REST 是一个很流行的前后端交互形式的约定。这只是一套约定，并不是某个技术标准，所以在实际
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%A3%8E%E6%A0%BC%E8%A7%84%E8%8C%83/" class="post-category">
-                                    风格规范
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/Restful/">
-                        <span class="chip bg-color">Restful</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/10/27/StringBuffer%E5%92%8CStringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="StringBuffer和StringBuilder的区别">
-                        
-                        <span class="card-title">StringBuffer和StringBuilder的区别</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            针对字符串，我们常常有修改字符串的需求但是，我们都知道String 的内容是不可变的，如果我们想要修改String类的内容。
-其本质就是改变了原来的引用，指向了一块新的空间，哪里存放着你修改后的内容。
-因此String的操作都是改变赋值地址
+                            Java NIO的Buffer组件经典步骤使用Buffer时我们通常会有四步
+
+往buffer缓冲区中写数据
+使用buffer.filp()进行读写模式转换
+从buffer缓冲区里读出数据
+使用buffer.clear()来清空缓冲区,抑或
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-17
                             </span>
                         <span class="publish-author">
                             
@@ -698,6 +814,7 @@ ServerRequest serverRequest
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -705,8 +822,62 @@ ServerRequest serverRequest
                         <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">jdk源码</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/11/17/Linux%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Linux五种IO模型">
+                        
+                        <span class="card-title">Linux五种IO模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux的IO模型与Java IO的认知区别
+  在Java中为我们提供了 BIO、NIO、AIO的IO模型，其实Java提供的IO有关的api，在文件处理层面还是调用操作系统层面的IO操作实现的，例如在linux2.6以后，Java中的
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
+                                </a>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
