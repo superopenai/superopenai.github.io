@@ -4,14 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring Data JPA相关注解, 阿宁的博客">
-    <meta name="description" content="现在版本？
-本文参考了Spring Data JPA官方文档，引用了部分文档的代码
-
-据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10
-
-
-使用Spri">
+    <meta name="keywords" content="Linux五种IO模型, 阿宁的博客">
+    <meta name="description" content="Linux的IO模型与Java IO的认知区别
+  在Java中为我们提供了 BIO、NIO、AIO的IO模型，其实Java提供的IO有关的api，在文件处理层面还是调用操作系统层面的IO操作实现的，例如在linux2.6以后，Java中的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring Data JPA相关注解 | 阿宁的博客</title>
+    <title>Linux五种IO模型 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring Data JPA相关注解
+                        Linux五种IO模型
                     </div>
                 </div>
             </div>
@@ -428,12 +423,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
                             </a>
                         
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
                     </div>
@@ -444,12 +439,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/springboot/" class="post-category">
-                                springboot
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                操作系统
                             </a>
                         
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" class="post-category">
+                                Linux
                             </a>
                         
                     </div>
@@ -460,7 +455,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-11-17
                 </div>
                 
                 
@@ -469,14 +464,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        2.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        8 分
                     </div>
                     
                 
@@ -492,118 +487,71 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="现在版本？"><a href="#现在版本？" class="headerlink" title="现在版本？"></a>现在版本？</h2><blockquote>
-<p>本文参考了Spring Data JPA官方文档，引用了部分文档的代码</p>
+                <h2 id="Linux的IO模型"><a href="#Linux的IO模型" class="headerlink" title="Linux的IO模型"></a>Linux的IO模型</h2><h3 id="与Java-IO的认知区别"><a href="#与Java-IO的认知区别" class="headerlink" title="与Java IO的认知区别"></a>与Java IO的认知区别</h3><blockquote>
+<p>  在Java中为我们提供了 BIO、NIO、AIO的IO模型，其实Java提供的IO有关的api，在文件处理层面还是调用操作系统层面的IO操作实现的，例如在linux2.6以后，Java中的nio和aio都是通过epoll来实现的—–&gt;(<strong>epoll是linux2.6内核中才有的机制，其他版本内核中是没有的，是Linux2.6内核引入的多路复用IO的一种方式，用于提高网络IO 性能的方法。在linux网络编程中，很长一段时间都是采用select来实现多事件触发处理的。Select存在如下几个方面的问题：一是每次调用时要 重复地从用户态读入参数，二是每次调用时要重复地扫描文件描述符，三是每次在调用开始时，要把当前进程放入各个文件描述符的等待队列。在调用结束后，又把 进程从各个等待队列中删除。Select采用轮询的方式来处理事件触发，当随着监听socket的文件描述符fd的数量增加时，轮询的时间也就越长，造成 效率低下。</strong>)  可以把Java中的BIO、NIO和AIO理解为是Java语言对操作系统的各种IO模型的封装,我们在使用这些API的时候，不需要关心操作系统层面的知识，也不需要根据不同操作系统编写不同的代码。只需要使用Java的API就可以了。</p>
 </blockquote>
-<p><strong>据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10</strong></p>
-<p><img src="https://i.loli.net/2019/08/13/6AMnO31jarZ8ovN.png" alt="Springboot"><br><img src="https://i.loli.net/2019/08/13/IEaJKbcWOiNy9TD.png" alt="Spring Data"></p>
-<ul>
-<li>使用Springboot，springboot将会替你选择最新的spring data模块（<strong>Spring Boot selects a recent version of Spring Data modules for you. If you still want to upgrade to a newer version, configure the property spring-data-releasetrain.version to the train name and iteration you would like to use.</strong>）。</li>
+<h3 id="五种IO模型"><a href="#五种IO模型" class="headerlink" title="五种IO模型"></a>五种IO模型</h3><ul>
+<li>阻塞IO模型</li>
+<li>非阻塞IO模型</li>
+<li>IO复用模型</li>
+<li>异步IO模型</li>
+<li>信号驱动模型</li>
 </ul>
-<p><img src="https://i.loli.net/2019/08/13/uXOPpgiCLy7Mmhs.png" alt=""><br><img src="https://i.loli.net/2019/08/13/ERyfzZALupKBnFH.png" alt=""></p>
-<h2 id="Spring-Data-Jpa-是什么？"><a href="#Spring-Data-Jpa-是什么？" class="headerlink" title="Spring Data Jpa 是什么？"></a>Spring Data Jpa 是什么？</h2><blockquote>
-<p>Spring Data JPA是更大的Spring Data系列的一部分，可以轻松实现基于JPA的存储库。此模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动应用程序变得更加容易。在相当长的一段时间内，实现应用程序的数据访问层一直很麻烦。必须编写太多样板代码来执行简单查询以及执行分页和审计。Spring Data JPA旨在通过减少实际需要的工作量来显着改善数据访问层的实现。作为开发人员，您编写存储库接口，包括自定义查找器方法，Spring将自动提供实现。</p>
-</blockquote>
-<h2 id="代码层面"><a href="#代码层面" class="headerlink" title="代码层面"></a>代码层面</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> me<span class="token punctuation">.</span>superning<span class="token punctuation">.</span>tmall<span class="token punctuation">.</span>pojo<span class="token punctuation">;</span>
-<span class="token keyword">import</span> com<span class="token punctuation">.</span>fasterxml<span class="token punctuation">.</span>jackson<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>JsonIgnoreProperties<span class="token punctuation">;</span>
-<span class="token keyword">import</span> javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Entity</span>
-<span class="token annotation punctuation">@Table</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"category"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//表名(严格区分大小写)</span>
-<span class="token annotation punctuation">@JsonIgnoreProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"handler"</span><span class="token punctuation">,</span> <span class="token string">"hibernateLazyInitializer"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Category</span>  <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Id</span>
-<span class="token comment" spellcheck="true">//    主键使用这个注解</span>
-    <span class="token annotation punctuation">@GeneratedValue</span><span class="token punctuation">(</span>strategy <span class="token operator">=</span> GenerationType<span class="token punctuation">.</span>IDENTITY<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//    自增长策略</span>
-    <span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ul>
-<li>1.@Entity：标识实体类是JPA实体，告诉JPA在程序运行时生成实体类对应表</li>
-<li>2.@Table：设置实体类在数据库所对应的表名</li>
-<li>3.@Id：标识类里所在变量为主键</li>
-<li>4.@GeneratedValue：设置主键生成策略，此方式依赖于具体的数据库</li>
-<li>5.@Basic：表示简单属性到数据库表字段的映射（几乎不用）</li>
-<li>6.@Column：表示属性所对应字段名进行个性化设置</li>
-<li>7.@Transient：表示属性并非数据库表字段的映射,ORM框架将忽略该属性（在与密码有关的实体类会用到这个注解，后续详解于另一篇文章）</li>
-</ul>
-<p>常用的注解如上，其他注解可能会以独立文章讲解。</p>
-<h3 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h3><pre><code>Spring data的中央接口是Repository，
-它还提供了扩展了持久层技术的接口例如
-CrudRepository
-MongoRepository
-JpaRepository</code></pre><p><img src="https://i.loli.net/2019/08/13/VDQYJfheO2v7ywE.png" alt="中央接口"></p>
-<h4 id="CrudRepository和JpaRepository之间的区别"><a href="#CrudRepository和JpaRepository之间的区别" class="headerlink" title="CrudRepository和JpaRepository之间的区别"></a><strong>CrudRepository和JpaRepository之间的区别</strong></h4><p><img src="https://i.loli.net/2019/08/13/xPsVpbeOry83QuC.png" alt=""></p>
-<p><strong>从上图你可以看出JpaRepository 继承了PagingAndSortingRepository，相应的也继承了CrudRepository</strong></p>
-<ul>
-<li>CrudRepository 主要提供了CRUD的方法功能</li>
-<li>PagingAndSortingRepository，提供了分页和排序记录的方法</li>
-<li>JpaRepository 则拥有了它们两个所有的方法功能，并扩展了其他方法</li>
-</ul>
-<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OrderItemDAO</span> 
-<span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token operator">&lt;</span>OrderItem<span class="token punctuation">,</span>Integer<span class="token operator">></span>
-<span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>OrderItem<span class="token operator">></span> <span class="token function">findByOrderOrderByIdDesc</span><span class="token punctuation">(</span>Order order<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre><code>由代码可知，Dao接口首先继承一个JpaRepository接口，
-JpaRepository&lt;T, ID&gt; T是泛型，ID是主键的类型。
-接口本身已经为我们提供了基础的CRUD方法，但有时我们有
-一些特殊的查询，接口无法为我们提供，这时就需要我们进行特殊参数处理。</code></pre><h5 id="特殊参数处理"><a href="#特殊参数处理" class="headerlink" title="特殊参数处理"></a>特殊参数处理</h5><pre class=" language-java"><code class="language-java">Page<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Slice<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Sort sort<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><strong>关于使用@Query(“sql语句”)在dao层的方法上写原生sql语句，<br>以后以独立文章介绍</strong></p>
-<h5 id="关系映射"><a href="#关系映射" class="headerlink" title="关系映射"></a>关系映射</h5><p><a href="https://blog.csdn.net/u010588262/article/details/76667283" target="_blank" rel="noopener">借鉴这位的csdn博客以及自我理解结合而成</a></p>
-<ul>
-<li><p>一对一</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OneToOne</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">,</span>optional<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"addressID"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释本表中指向另一个表的外键。</span>
-<span class="token keyword">public</span> Address <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-  <span class="token keyword">return</span> address<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<p>  现假设有Person表和Address表，是一对一的关系，<br>  在Person中有一个指向Address表主键的字段addressID，<br>  所以主控方一定是Person，所谓主控方就是能改变关联关系的一方，<br>  Person只要改变addressID就改变了关联关系，所以Person是主控方，<br>  所以@JoinColumn写在Person类中</p>
-</li>
-<li><p>一对多单向</p>
-</li>
-</ul>
-<p><strong>假如现在有Person表和Country表，那么一定是Person表中有country_id字段，由于我们是一对多的关系，所以站在一的角度，也就是Country的角度，在Country类中加入@JoinColumn</strong></p>
-<pre class=" language-java"><code class="language-java">
-<span class="token annotation punctuation">@OneToMany</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span> 
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"country_id"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释的是另一个表指向本表的外键。 </span>
-<span class="token keyword">public</span> List<span class="token operator">&lt;</span>Person<span class="token operator">></span> <span class="token function">getPersons</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> persons<span class="token punctuation">;</span> 
-<span class="token punctuation">}</span></code></pre>
-<p><strong>在一对多单向关系中，多的一方（Person）没有注解，一的一方（Country）有注解，如果一的一方不加@JoinColumn指定外键字段的话，Hibernate会自动生成一张中间表Country_PERSON来对Person和Country进行绑定。</strong></p>
-<ul>
-<li>多对一单向</li>
-</ul>
+<h4 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.1.png" alt="Figure 6.1. Blocking I/O model."> </p>
 <blockquote>
-<p><strong>一个产品可以属于多个分类,因此@JoinColumn放在Product类中</strong></p>
+<p>  系统通过调用 <code>recvfrom</code> 等待数据报返回，数据报只有<strong>在数据到达且被复制到缓冲区内</strong>或者<strong>发生错误返回</strong> ,也就是说,在<code>recvfrom</code>接收到数据报前,这个进程是被阻塞的,什么事情也不能干,只能等待.这样效率不免有点低下,但是实现简单,适合<strong>(并发低,时效性要求低的情况)</strong></p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/08/13/yzwNqMiDYXBtZAg.png" alt=""></p>
-<p><strong>看看数据库</strong><br><img src="https://i.loli.net/2019/08/13/VQfOLJWjimxeHG1.png" alt=""></p>
-<pre><code>可以看到在Product表出现了一个对应Category表的外键
-但是Category表中却没有外键，因此这就是单向的多对一</code></pre><p><img src="https://i.loli.net/2019/08/13/j42JOk8SCxsPEMK.png" alt=""></p>
+<h4 id="非阻塞IO模型"><a href="#非阻塞IO模型" class="headerlink" title="非阻塞IO模型"></a>非阻塞IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.2.png" alt="Figure 6.2. Nonblocking I/O model."> </p>
+<blockquote>
+<p>  当我们把一个socket设置为非阻塞时,其实就是告诉内核:”如果这个进程请求不成功时,不要让这个进程进入睡眠而阻塞,而是抛出一个(<code>EWOULDBLOCK</code>)错误”—-(we are telling the kernel “when an I/O operation that I request cannot be completed without putting the process to sleep, do not put the process to sleep, but return an error instead”. )</p>
+<p>  如图所示,在前三次调用<code>recvfrom</code>时,数据都没有准备好,系统没有让进程睡眠阻塞,而是三次都抛出了<code>EWOULDBLOCK</code>错误, 在第四次调用<code>recvfrom</code>,数据准备好了,然后拷贝到应用缓冲区, 然后<code>recvfrom</code>返回成功,进而处理数据.</p>
+</blockquote>
+<p><strong>问题在于,在数据在准备好之前,应用会循环的轮询内核以检查是否OK了,往往会耗费大量CPU时间,偶尔会遇到这种模型，通常在专门用于一个功能的系统上。</strong></p>
+<h4 id="信号驱动IO模型"><a href="#信号驱动IO模型" class="headerlink" title="信号驱动IO模型"></a>信号驱动IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.4.png" alt="Figure 6.4. Signal-Driven I/O model."> </p>
+<blockquote>
+<p>  信号驱动模型使用信号,在数据准备好的时候让内核向我们发送一个信号通知我们, 当套接字开启信号驱动功能后,会通过sigaction系统向内核注册一个信号函数,然后进程返回. 等着这个信号函数当数据准备好的时候叫它.</p>
+<p>  当数据准备好后,内核会产生一个SIGIO信号,<strong>我们既可以在信号处理函数里调用<code>recvfrom</code>来处理数据</strong>.   也可以 <strong>通知主循环,让它来读取数据报</strong></p>
+</blockquote>
+<p>但是这种 I/O 模型存在一个非常重大的<strong>缺陷问题</strong>：<code>SIGIO</code> 这种信号对于每个进程来说只有一个！如果使该信号对进程中的两个描述符（这两个文件描述符都等待着 I/O 操作）都起作用，那么进程在接到此信号后就无法判别是哪一个文件描述符准备好了。所以 <strong>Signal Driven I/O</strong> 模型在现实中用的非常少。</p>
+<h4 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h4><p><img src="https://notes.shichao.io/unp/figure_6.3.png" alt="Figure 6.3. I/O multiplexing model."></p>
+<blockquote>
+<p>   和信号驱动相比, 它的工作原理就是 select/poll/epoll 函数会不断的查询所监测的 socket 文件描述符中是否有 socket 准备好读写了，如果有，那么系统就会通知用户进程。</p>
+<p>   <strong>I/O multiplexing 的特点是通过一种机制让一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入可读的就绪状态，select/poll/epoll函数就可以立即返回。</strong></p>
+<p>   这个图和 <code>blocking I/O</code> 的图其实并没有太大的不同，事实上，开销还会更大一点。因为这里需要使用两个 system call (select 和 read)，而 blocking I/O 只调用了一个system call (read)。但是，<strong>用 select 的优势在于它可以同时处理多个connection</strong>。</p>
+</blockquote>
+<p>所以，如果处理的连接数不是很高的话，使用 <strong>select/epoll</strong> 的 web server 不一定比使用 <strong>multi-threading + blocking I/O</strong> 的 web server 性能更好，可能延迟还更大。<strong>select/epoll</strong>的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。</p>
+<h4 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.5.png" alt="Figure 6.5. Asynchronous I/O model."> </p>
+<blockquote>
+<p>很少有*nix系统支持，windows的IOCP则是此模型(这里不讨论windows)</p>
+<p>用户进程发起<code>aio_read</code>操作之后，给内核传递描述符、缓冲区指针、缓冲区大小等，告诉内核当整个操作完成时，如何通知进程，然后就立刻去做其他事情了。当内核收到<code>aio_read</code>后，会立刻返回，然后内核开始等待数据准备，数据准备好以后，直接把数据拷贝到用户控件，然后再通知进程本次IO已经完成。</p>
+<p>当内核的数据报就绪的时候，是由内核将数据报拷贝到应用进程中，返回给aio_read中定义好的函数处理程序。所以这是一种阻塞异步IO模型</p>
+</blockquote>
+<h3 id="同步IO和异步IO的区别"><a href="#同步IO和异步IO的区别" class="headerlink" title="同步IO和异步IO的区别"></a>同步IO和异步IO的区别</h3><blockquote>
+<p>在说明 <strong>Synchronous I/O</strong> 和 <strong>Asynchronous I/O</strong> 的区别之前，需要先给出两者的定义，POSIX 中两者的定义是这样子的：</p>
+<ul>
+<li>A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;</li>
+<li>An asynchronous I/O operation does not cause the requesting process to be blocked;</li>
+</ul>
+<p><strong>两者的区别就在于 Synchronous I/O 做 IO operation 的时候会将用户空间的进程阻塞。</strong></p>
+<p>按照这个定义，之前所说的 <code>Blocking I/O</code>，<code>Non-blocking I/O</code>，<code>IO multiplexing</code>都属于 <strong>Synchronous I/O</strong>。</p>
+</blockquote>
+<blockquote>
+<p>  有人会说，<code>Non-blocking I/O</code> 并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的 <code>IO operation</code> 是指<strong>真实的I/O操作</strong>，就是例子中的 read 这个 system call。<code>Non-blocking I/O</code> 在执行 read 这个system call 的时候，如果 kernel 的数据没有准备好，这时候不会 block 进程。但是，当kernel 中数据准备好的时候，read 会将数据从kernel 拷贝到用户空间的缓冲区中，这个时候进程是被 block 的。</p>
+<p>  而<strong>Asynchronous I/O</strong>则不一样，当进程发起 <strong>I/O</strong> 操作之后，就直接返回再也不理睬了，直到 kernel 发送一个信号，告诉进程说 I/O完成。在这整个过程中，<strong>进程完全没有被 block</strong>。</p>
+</blockquote>
+<p><strong>上面介绍的前4中IO模型均是同步的，因为真正的IO操作函数在进行数据读/写时，均会阻塞进程；只有异步IO模型真正符合异步IO操作的定义</strong>。</p>
+<h3 id="5种IO模型对比"><a href="#5种IO模型对比" class="headerlink" title="5种IO模型对比"></a><strong>5种IO模型对比</strong></h3><p> <img src="https://notes.shichao.io/unp/figure_6.6.png" alt="Figure 6.6. Comparison of the five I/O models."> </p>
+<ul>
+<li>blocking模型下，从应用进程调用IO操作函数到函数返回期间，进程处于阻塞状态；</li>
+<li>nonblocking模型下，应用程序调用IO操作函数时，函数会立即返回，但应用程序需要通过不断调用IO操作函数来轮询kernel，以便进行读/写操作；</li>
+<li>io多路复用模型下，应用程序调用select或poll时，进程阻塞直到select管理的fd可读/写，select或poll返回后，应用程序需要调用真正的IO操作函数进行读/写操作；</li>
+<li>signal-driven模型下，应用程序向kernel注册信号回调函数，当目标fd可读/写时，kernel通过回调通知应用程序进行数据读/写。<strong>它避免了进程阻塞</strong>；</li>
+<li>asynchronous io模型下，应用程序调用异步IO函数时，函数立即返回，当函数完成真正的IO操作后，kernel会通知应用程序进行后续操作。<strong>它也避免了进程阻塞</strong>。</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>1.Unix Network Programming, Volume 1, Chapter6.2: I/O Models(英文版)</p>
+<p>2.<a href="https://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247484746&idx=1&sn=c0a7f9129d780786cabfcac0a8aa6bb7&source=41#wechat_redirect" target="_blank" rel="noopener">漫画说IO模型</a></p>
+<p>3.Unix网络编程中文版卷一 章6.2:IO模型</p>
+<p>4.<a href="https://woshijpf.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html" target="_blank" rel="noopener">Linux I/O 模型详解</a></p>
 
             </div>
             <hr/>
@@ -629,7 +577,7 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2019/11/17/Linux%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/">https://superopenai.github.io/2019/11/17/Linux%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -667,12 +615,12 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
                                 </a>
                             
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
                         </div>
@@ -713,55 +661,57 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/Swagger2%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E8%A6%81%E7%82%B9/">
+                <a href="/2019/11/17/Linux%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Swagger2配置相关要点">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Linux五种IO模型">
                         
-                        <span class="card-title">Swagger2配置相关要点</span>
+                        <span class="card-title">Linux五种IO模型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring Boot整合Swagger2的流程
-由于springboot的便捷，以及前后端分离的趋势，后端和前端配合的桥梁便是接口细节，我们通常遵守REST的原则，为其他开发人员提供一份REST接口文档，但后期接口多又杂，手写十分耗时耗力
+                            Linux的IO模型与Java IO的认知区别
+  在Java中为我们提供了 BIO、NIO、AIO的IO模型，其实Java提供的IO有关的api，在文件处理层面还是调用操作系统层面的IO操作实现的，例如在linux2.6以后，Java中的
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
                                 </a>
                             
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
                     </a>
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
@@ -775,37 +725,35 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/spring-jpa-hibernate-ddl-auto%E5%B1%9E%E6%80%A7%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+                <a href="/2019/10/31/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="spring.jpa.hibernate.ddl-auto属性是怎么工作的">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="java中的反射机制">
                         
-                        <span class="card-title">spring.jpa.hibernate.ddl-auto属性是怎么工作的</span>
+                        <span class="card-title">java中的反射机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            查阅Springboot的官方文档可知
+                            反射什么时反射
+java的反射库提供了一个非常丰富且精心设计的工具集,能够分析类能力的程序被称为反射,反射机制极其强大,可以用来:
 
-spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一条十分近似的语句—spring.jpa.generate-ddlspring.jpa.generate-d
+在运行时分析类的能力,访问java对象的属性,方法,构造方法等
+在运行时查看对象(例如编写一个toStri
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-31
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
                             
@@ -815,12 +763,8 @@ spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
                 </div>
