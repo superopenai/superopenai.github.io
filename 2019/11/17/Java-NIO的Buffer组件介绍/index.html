@@ -566,8 +566,8 @@
     buffer<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>*<em>对于<code>put()</code> 方法，Buffer的不同子类也都给出了相应的实现，使用时参考 JavaDoc  *</em></p>
-<p><img src="C:%5CUsers%5Csuperning%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191117160118295.png" alt="image-20191117160118295"></p>
-<p><img src="C:%5CUsers%5Csuperning%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191117160138085.png" alt="image-20191117160138085"></p>
+<p><img src="https://i.loli.net/2019/11/17/rMye1LkKYisczNF.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/11/17/c3mR2D6FhxlyBSE.png" alt=""></p>
 <h3 id="怎么从Buffer里读数据"><a href="#怎么从Buffer里读数据" class="headerlink" title="怎么从Buffer里读数据"></a>怎么从Buffer里读数据</h3><ul>
 <li>使用Channel来从Buffer中读走数据<code>channel.write(buffer)</code>  (经常用)</li>
 <li>使用Buffer的<code>get()</code> 方法，一个一个取出。</li>
@@ -580,6 +580,7 @@
 <pre class=" language-java"><code class="language-java"><span class="token number">2</span><span class="token punctuation">.</span>
     buffer<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
+<p><img src="https://i.loli.net/2019/11/17/1R3ynaVN8ZIxXWb.png" alt=""></p>
 <h3 id="演示例子"><a href="#演示例子" class="headerlink" title="演示例子"></a>演示例子</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">printFormFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
         <span class="token keyword">try</span> <span class="token punctuation">{</span>
