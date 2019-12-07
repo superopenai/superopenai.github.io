@@ -4,14 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring Data JPA相关注解, 阿宁的博客">
-    <meta name="description" content="现在版本？
-本文参考了Spring Data JPA官方文档，引用了部分文档的代码
-
-据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10
-
-
-使用Spri">
+    <meta name="keywords" content="&#39;Fastdfs和nginx相关整合&#39;, 阿宁的博客">
+    <meta name="description" content="FastDFS和nginx相关整合单机模式
+ 为了项目使用方便，因而把图片等静态资源放在项目里的文件夹中 如：resources\static\file、resources\static\img等 。 这样的优点是实现方便，访问方便。但是也">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring Data JPA相关注解 | 阿宁的博客</title>
+    <title>&#39;Fastdfs和nginx相关整合&#39; | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring Data JPA相关注解
+                        &#39;Fastdfs和nginx相关整合&#39;
                     </div>
                 </div>
             </div>
@@ -428,12 +423,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                                <span class="chip bg-color">分布式</span>
                             </a>
                         
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
                             </a>
                         
                     </div>
@@ -444,12 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/springboot/" class="post-category">
-                                springboot
-                            </a>
-                        
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                spring
+                            <a href="/categories/linux/" class="post-category">
+                                linux
                             </a>
                         
                     </div>
@@ -460,7 +451,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-12-07
                 </div>
                 
                 
@@ -469,14 +460,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        2.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        10 分
                     </div>
                     
                 
@@ -492,118 +483,325 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="现在版本？"><a href="#现在版本？" class="headerlink" title="现在版本？"></a>现在版本？</h2><blockquote>
-<p>本文参考了Spring Data JPA官方文档，引用了部分文档的代码</p>
+                <h2 id="FastDFS和nginx相关整合"><a href="#FastDFS和nginx相关整合" class="headerlink" title="FastDFS和nginx相关整合"></a>FastDFS和nginx相关整合</h2><h3 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h3><blockquote>
+<p> 为了项目使用方便，因而把图片等静态资源放在项目里的文件夹中 如：<code>resources\static\file</code>、<code>resources\static\img</code>等 。 这样的优点是实现方便，访问方便。但是也有一个很大的缺点，代码和文件耦合在一起， 文件越多存放越混乱 。静态文件也会占用一些资源。因此放弃，使用其他方法</p>
 </blockquote>
-<p><strong>据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10</strong></p>
-<p><img src="https://i.loli.net/2019/08/13/6AMnO31jarZ8ovN.png" alt="Springboot"><br><img src="https://i.loli.net/2019/08/13/IEaJKbcWOiNy9TD.png" alt="Spring Data"></p>
-<ul>
-<li>使用Springboot，springboot将会替你选择最新的spring data模块（<strong>Spring Boot selects a recent version of Spring Data modules for you. If you still want to upgrade to a newer version, configure the property spring-data-releasetrain.version to the train name and iteration you would like to use.</strong>）。</li>
-</ul>
-<p><img src="https://i.loli.net/2019/08/13/uXOPpgiCLy7Mmhs.png" alt=""><br><img src="https://i.loli.net/2019/08/13/ERyfzZALupKBnFH.png" alt=""></p>
-<h2 id="Spring-Data-Jpa-是什么？"><a href="#Spring-Data-Jpa-是什么？" class="headerlink" title="Spring Data Jpa 是什么？"></a>Spring Data Jpa 是什么？</h2><blockquote>
-<p>Spring Data JPA是更大的Spring Data系列的一部分，可以轻松实现基于JPA的存储库。此模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动应用程序变得更加容易。在相当长的一段时间内，实现应用程序的数据访问层一直很麻烦。必须编写太多样板代码来执行简单查询以及执行分页和审计。Spring Data JPA旨在通过减少实际需要的工作量来显着改善数据访问层的实现。作为开发人员，您编写存储库接口，包括自定义查找器方法，Spring将自动提供实现。</p>
+<h3 id="云服务商"><a href="#云服务商" class="headerlink" title="云服务商"></a>云服务商</h3><blockquote>
+<p>​     比如Amazon S3，Azure Storage，阿里云 OSS，七牛，又拍等 厂商的服务，优点是省下了自己运维的压力，付出一定成本。但考虑提升自己技术的基础上，暂不使用此方法，但是有一说一，使用公有云服务的确是最合适的选择。</p>
 </blockquote>
-<h2 id="代码层面"><a href="#代码层面" class="headerlink" title="代码层面"></a>代码层面</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> me<span class="token punctuation">.</span>superning<span class="token punctuation">.</span>tmall<span class="token punctuation">.</span>pojo<span class="token punctuation">;</span>
-<span class="token keyword">import</span> com<span class="token punctuation">.</span>fasterxml<span class="token punctuation">.</span>jackson<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>JsonIgnoreProperties<span class="token punctuation">;</span>
-<span class="token keyword">import</span> javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Entity</span>
-<span class="token annotation punctuation">@Table</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"category"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//表名(严格区分大小写)</span>
-<span class="token annotation punctuation">@JsonIgnoreProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"handler"</span><span class="token punctuation">,</span> <span class="token string">"hibernateLazyInitializer"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Category</span>  <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Id</span>
-<span class="token comment" spellcheck="true">//    主键使用这个注解</span>
-    <span class="token annotation punctuation">@GeneratedValue</span><span class="token punctuation">(</span>strategy <span class="token operator">=</span> GenerationType<span class="token punctuation">.</span>IDENTITY<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//    自增长策略</span>
-    <span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ul>
-<li>1.@Entity：标识实体类是JPA实体，告诉JPA在程序运行时生成实体类对应表</li>
-<li>2.@Table：设置实体类在数据库所对应的表名</li>
-<li>3.@Id：标识类里所在变量为主键</li>
-<li>4.@GeneratedValue：设置主键生成策略，此方式依赖于具体的数据库</li>
-<li>5.@Basic：表示简单属性到数据库表字段的映射（几乎不用）</li>
-<li>6.@Column：表示属性所对应字段名进行个性化设置</li>
-<li>7.@Transient：表示属性并非数据库表字段的映射,ORM框架将忽略该属性（在与密码有关的实体类会用到这个注解，后续详解于另一篇文章）</li>
-</ul>
-<p>常用的注解如上，其他注解可能会以独立文章讲解。</p>
-<h3 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h3><pre><code>Spring data的中央接口是Repository，
-它还提供了扩展了持久层技术的接口例如
-CrudRepository
-MongoRepository
-JpaRepository</code></pre><p><img src="https://i.loli.net/2019/08/13/VDQYJfheO2v7ywE.png" alt="中央接口"></p>
-<h4 id="CrudRepository和JpaRepository之间的区别"><a href="#CrudRepository和JpaRepository之间的区别" class="headerlink" title="CrudRepository和JpaRepository之间的区别"></a><strong>CrudRepository和JpaRepository之间的区别</strong></h4><p><img src="https://i.loli.net/2019/08/13/xPsVpbeOry83QuC.png" alt=""></p>
-<p><strong>从上图你可以看出JpaRepository 继承了PagingAndSortingRepository，相应的也继承了CrudRepository</strong></p>
-<ul>
-<li>CrudRepository 主要提供了CRUD的方法功能</li>
-<li>PagingAndSortingRepository，提供了分页和排序记录的方法</li>
-<li>JpaRepository 则拥有了它们两个所有的方法功能，并扩展了其他方法</li>
-</ul>
-<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OrderItemDAO</span> 
-<span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token operator">&lt;</span>OrderItem<span class="token punctuation">,</span>Integer<span class="token operator">></span>
-<span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>OrderItem<span class="token operator">></span> <span class="token function">findByOrderOrderByIdDesc</span><span class="token punctuation">(</span>Order order<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre><code>由代码可知，Dao接口首先继承一个JpaRepository接口，
-JpaRepository&lt;T, ID&gt; T是泛型，ID是主键的类型。
-接口本身已经为我们提供了基础的CRUD方法，但有时我们有
-一些特殊的查询，接口无法为我们提供，这时就需要我们进行特殊参数处理。</code></pre><h5 id="特殊参数处理"><a href="#特殊参数处理" class="headerlink" title="特殊参数处理"></a>特殊参数处理</h5><pre class=" language-java"><code class="language-java">Page<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Slice<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Sort sort<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><strong>关于使用@Query(“sql语句”)在dao层的方法上写原生sql语句，<br>以后以独立文章介绍</strong></p>
-<h5 id="关系映射"><a href="#关系映射" class="headerlink" title="关系映射"></a>关系映射</h5><p><a href="https://blog.csdn.net/u010588262/article/details/76667283" target="_blank" rel="noopener">借鉴这位的csdn博客以及自我理解结合而成</a></p>
-<ul>
-<li><p>一对一</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OneToOne</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">,</span>optional<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"addressID"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释本表中指向另一个表的外键。</span>
-<span class="token keyword">public</span> Address <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-  <span class="token keyword">return</span> address<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<p>  现假设有Person表和Address表，是一对一的关系，<br>  在Person中有一个指向Address表主键的字段addressID，<br>  所以主控方一定是Person，所谓主控方就是能改变关联关系的一方，<br>  Person只要改变addressID就改变了关联关系，所以Person是主控方，<br>  所以@JoinColumn写在Person类中</p>
-</li>
-<li><p>一对多单向</p>
-</li>
-</ul>
-<p><strong>假如现在有Person表和Country表，那么一定是Person表中有country_id字段，由于我们是一对多的关系，所以站在一的角度，也就是Country的角度，在Country类中加入@JoinColumn</strong></p>
-<pre class=" language-java"><code class="language-java">
-<span class="token annotation punctuation">@OneToMany</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span> 
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"country_id"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释的是另一个表指向本表的外键。 </span>
-<span class="token keyword">public</span> List<span class="token operator">&lt;</span>Person<span class="token operator">></span> <span class="token function">getPersons</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> persons<span class="token punctuation">;</span> 
-<span class="token punctuation">}</span></code></pre>
-<p><strong>在一对多单向关系中，多的一方（Person）没有注解，一的一方（Country）有注解，如果一的一方不加@JoinColumn指定外键字段的话，Hibernate会自动生成一张中间表Country_PERSON来对Person和Country进行绑定。</strong></p>
-<ul>
-<li>多对一单向</li>
-</ul>
+<h3 id="独立文件服务器"><a href="#独立文件服务器" class="headerlink" title="独立文件服务器"></a>独立文件服务器</h3><blockquote>
+<p> 通过ftp或者ssh将文件上传到图片服务器的某个目录下，再通过ngnix或者apache来访问此目录下的文件，返回一个独立域名的图片URL地址，前端使用文件时就通过这个URL地址读取。 优点是静态文件和web服务器分离开来，各自处理自己的人任务，相互不干扰。缺点是所有的处理都在一台文件服务器上，一但出现问题宕机，影响整体业务。另外单机也存在性能的瓶颈。</p>
+</blockquote>
+<h3 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h3><blockquote>
+<p>分布式文件系统，一般分为三块内容来配合，服务的存储和访问的处理系统，文件存储系统，文件的容灾处理系统来构成，处理系统相当于文件服务器的大脑，根据一定的算法来决定文件存储的位置，文件存储系统负责保存文件，容灾系统负责文件系统和自己的相互备份。优点：扩展能力，高可用性. 弹性存储: 可以根据业务需要灵活地增加或缩减数据存储以及增删存储池中的资源，而不需要中断系统运行</p>
+<p><strong>缺点</strong>：系统复杂度稍高，需要更多服务器</p>
+</blockquote>
+<p><strong>我这次使用的是FastDFS，是一款纯C语言开发的轻量级分布式文件系统，是一个适合存储小文件、图片的分布文件系统。它对文件进行管理，功能包括：文件存储、文件同步、文件访问（文件上传、文件下载）等，解决了大容量存储和负载均衡的问题。特别适合以文件为载体的在线服务，如相册网站、视频网站等等</strong></p>
+<p>PS: 常见的分布式文件系统有，GFS、HDFS、Lustre 、Ceph 、GridFS 、mogileFS、TFS、FastDFS等。各自适用于不同的领域。它们都不是系统级的分布式文件系统，而是应用级的分布式文件存储服务 </p>
+<h3 id="什么是FastDFS"><a href="#什么是FastDFS" class="headerlink" title="什么是FastDFS"></a>什么是FastDFS</h3><blockquote>
+<p>FastDFS 架构包括 Tracker server 和 Storage server。客户端请求 Tracker server 进行文件上传、下载，通过 Tracker server 调度最终由 Storage server 完成文件上传和下载。</p>
+<p>Tracker server 作用是负载均衡和调度，通过 Tracker server 在文件上传时可以根据一些策略找到 Storage server 提供文件上传服务。可以将 tracker 称为追踪服务器或调度服务器。</p>
+<p>Storage server 作用是文件存储，客户端上传的文件最终存储在 Storage 服务器上，Storageserver 没有实现自己的文件系统而是利用操作系统 的文件系统来管理文件。可以将storage称为存储服务器。</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/12/04/aHcuvBo4T3AEMDz.png" alt=""></p>
 <blockquote>
-<p><strong>一个产品可以属于多个分类,因此@JoinColumn放在Product类中</strong></p>
+<p>储存过程: 客户端向tracker服务器提出储存请求，tracker服务器会查询Storage服务器的可用性，然后向客户端返回storage服务器的ip和端口。客户端上传文件到storage服务器上去。然后生成一串特定的连接（文件在storage服务器上的储存地址）,返回到客户端。</p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/08/13/yzwNqMiDYXBtZAg.png" alt=""></p>
-<p><strong>看看数据库</strong><br><img src="https://i.loli.net/2019/08/13/VQfOLJWjimxeHG1.png" alt=""></p>
-<pre><code>可以看到在Product表出现了一个对应Category表的外键
-但是Category表中却没有外键，因此这就是单向的多对一</code></pre><p><img src="https://i.loli.net/2019/08/13/j42JOk8SCxsPEMK.png" alt=""></p>
+<h4 id="文件存储id"><a href="#文件存储id" class="headerlink" title="文件存储id"></a>文件存储id</h4><p> *<em>superning/M00/00/00/kCLL5V3k186ALkQ0AAGnmbFMdp4402.png *</em></p>
+<ul>
+<li>组名：文件上传后所在的存储组名称，在文件上传成功后有存储服务器返回，需要客户端自行保存。</li>
+<li>虚拟磁盘路径：存储服务器配置的虚拟路径，与磁盘选项store_path*对应。</li>
+<li>数据两级目录：存储服务器在每个虚拟磁盘路径下创建的两级目录，用于存储数据文件。</li>
+<li>文件名：与文件上传时不同。是由存储服务器根据特定信息生成，文件名包含：源存储服务器IP地址、文件创建时间戳、文件大小、随机数和文件拓展名等信息</li>
+</ul>
+<h4 id="所需软件"><a href="#所需软件" class="headerlink" title="所需软件"></a>所需软件</h4><ul>
+<li>fastdfs-6.03.tar.gz</li>
+<li>libfastcommon-1.0.41.tar.gz</li>
+<li>fastdfs-nginx-module-1.22.tar.gz</li>
+<li>nginx-1.15.9.tar.gz</li>
+</ul>
+<p><strong>因为服务器数量限制，本文准备三台服务器，一台作为tracker服务器，两台作为storage服务器，这两台服务器都设置为同一个组。三台服务器都安装fastdfs和libfastcommon。 nginx和fastdfs-nginx-module都只在storage服务器上安装</strong></p>
+<h4 id="配置文件设置"><a href="#配置文件设置" class="headerlink" title="配置文件设置"></a>配置文件设置</h4><p><strong>编译安装fastdfs和libfastcommon后，首先进入fastdfs文件夹下的conf文件夹，把此文件夹下的所有配置文件 复制到 /etc/fdfs文件夹下。</strong></p>
+<p><img src="https://i.loli.net/2019/12/04/iYHJXgVIusdLpWw.png" alt=""></p>
+<p><strong>修改tracker.conf文件</strong></p>
+<p><img src="https://i.loli.net/2019/12/04/Y5ndhcJkIj6r8BG.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/12/04/K9sWuVPxrO3vkhL.png" alt=""></p>
+<p><strong>修改storage服务器设置</strong></p>
+<p><img src="https://i.loli.net/2019/12/04/pgVRLCWfEc2sTH5.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/12/04/KanU2rCEtwuxzyW.png" alt=""></p>
+<p><strong>修改client.conf设置(修改tracker服务器的client.conf)</strong></p>
+<p><img src="https://i.loli.net/2019/12/04/HBRPjL65lqx89Yk.png" alt=""></p>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><ul>
+<li><p>在storage服务器，启动storage服务</p>
+<pre class=" language-shell"><code class="language-shell">在/usr/bin目录下执行 
+
+fdfs_storaged /etc/fdfs/storage.conf restart</code></pre>
+</li>
+<li><p>在tracker服务器，启动tracker服务</p>
+<pre class=" language-shell"><code class="language-shell">在/usr/bin目录下执行 
+fdfs_trackerd /etc/fdfs/tracker.conf restart
+</code></pre>
+</li>
+<li><p>使用测试，测试图片的存储</p>
+</li>
+</ul>
+<p>  <img src="https://i.loli.net/2019/12/04/3ybfKX4R5lnoOg2.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/12/04/1MsEnqHDvemxzwg.png" alt=""></p>
+<p><strong>储存成功，成功把图片从别处存到了storage服务器上，然后到storage服务器找一找这张图片</strong></p>
+<p><img src="https://i.loli.net/2019/12/04/dZOufwGlFhVb1eD.png" alt=""></p>
+<p><strong>找到刚刚存储的图片，tracker服务器和storage服务器联系成功</strong></p>
+<h4 id="查看储存节点状态"><a href="#查看储存节点状态" class="headerlink" title="查看储存节点状态"></a>查看储存节点状态</h4><p>输入<strong>/usr/bin/fdfs_monitor    etc/fdfs/client.conf</strong></p>
+<pre class=" language-shell"><code class="language-shell">server_count=1, server_index=0
+
+tracker server is 172.17.16.13:22122
+
+group count: 2
+
+Group 1:
+group name = sueprning
+disk total space = 0 MB
+disk free space = 0 MB
+trunk free space = 0 MB
+storage server count = 1
+active server count = 0
+storage server port = 23000
+storage HTTP port = 8888
+store path count = 1
+subdir count per path = 256
+current write server index = 0
+current trunk file id = 0
+
+        Storage 1:
+                id = 47.98.178.104
+                ip_addr = 47.98.178.104 (anantes-651-1-49-net.w2-0.abo.wanadoo.fr)  DELETED
+                http domain =
+                version = 6.03
+                join time = 2019-12-05 16:17:29
+                up time =
+                total storage = 0 MB
+                free storage = 0 MB
+                upload priority = 0
+                store_path_count = 0
+                subdir_count_per_path = 0
+                storage_port = 23000
+                storage_http_port = 8888
+                current_write_path = 0
+                source storage id =
+                if_trunk_server = 0
+                connection.alloc_count = 0
+                connection.current_count = 0
+                connection.max_count = 0
+                total_upload_count = 0
+                success_upload_count = 0
+                total_append_count = 0
+                success_append_count = 0
+                total_modify_count = 0
+                success_modify_count = 0
+                total_truncate_count = 0
+                success_truncate_count = 0
+                total_set_meta_count = 0
+                success_set_meta_count = 0
+                total_delete_count = 0
+                success_delete_count = 0
+                total_download_count = 0
+                success_download_count = 0
+                total_get_meta_count = 0
+                success_get_meta_count = 0
+                total_create_link_count = 0
+                success_create_link_count = 0
+                total_delete_link_count = 0
+                success_delete_link_count = 0
+                total_upload_bytes = 0
+                success_upload_bytes = 0
+                total_append_bytes = 0
+                success_append_bytes = 0
+                total_modify_bytes = 0
+                success_modify_bytes = 0
+                stotal_download_bytes = 0
+                success_download_bytes = 0
+                total_sync_in_bytes = 0
+                success_sync_in_bytes = 0
+                total_sync_out_bytes = 0
+                success_sync_out_bytes = 0
+                total_file_open_count = 0
+                success_file_open_count = 0
+                total_file_read_count = 0
+                success_file_read_count = 0
+                total_file_write_count = 0
+                success_file_write_count = 0
+                last_heart_beat_time = 1970-01-01 08:00:00
+                last_source_update = 1970-01-01 08:00:00
+                last_sync_update = 1970-01-01 08:00:00
+                last_synced_timestamp = 1970-01-01 08:00:00
+
+Group 2:
+group name = superning
+disk total space = 40188 MB
+disk free space = 31514 MB
+trunk free space = 0 MB
+storage server count = 2
+active server count = 2
+storage server port = 23000
+storage HTTP port = 8888
+store path count = 1
+subdir count per path = 256
+current write server index = 1
+current trunk file id = 0
+
+        Storage 1:
+                id = 144.34.203.229
+                ip_addr = 144.34.203.229 (anantes-651-1-49-net.w2-0.abo.wanadoo.fr)  ACTIVE
+                http domain =
+                version = 6.03
+                join time = 2019-12-02 15:52:11
+                up time = 2019-12-06 18:41:57
+                total storage = 39796 MB
+                free storage = 35258 MB
+                upload priority = 10
+                store_path_count = 1
+                subdir_count_per_path = 256
+                storage_port = 23000
+                storage_http_port = 8888
+                current_write_path = 0
+                source storage id =
+                if_trunk_server = 0
+                connection.alloc_count = 256
+                connection.current_count = 1
+                connection.max_count = 3
+                total_upload_count = 10
+                success_upload_count = 10
+                total_append_count = 0
+                success_append_count = 0
+                total_modify_count = 0
+                success_modify_count = 0
+                total_truncate_count = 0
+                success_truncate_count = 0
+                total_set_meta_count = 10
+                success_set_meta_count = 10
+                total_delete_count = 0
+                success_delete_count = 0
+                total_download_count = 0
+                success_download_count = 0
+                total_get_meta_count = 0
+                success_get_meta_count = 0
+                total_create_link_count = 0
+                success_create_link_count = 0
+                total_delete_link_count = 0
+                success_delete_link_count = 0
+                total_upload_bytes = 1982466
+                success_upload_bytes = 1982466
+                total_append_bytes = 0
+                success_append_bytes = 0
+                total_modify_bytes = 0
+                success_modify_bytes = 0
+                stotal_download_bytes = 0
+                success_download_bytes = 0
+                total_sync_in_bytes = 0
+                success_sync_in_bytes = 0
+                total_sync_out_bytes = 0
+                success_sync_out_bytes = 0
+                total_file_open_count = 10
+                success_file_open_count = 10
+                total_file_read_count = 0
+                success_file_read_count = 0
+                total_file_write_count = 14
+                success_file_write_count = 14
+                last_heart_beat_time = 2019-12-07 13:41:02
+                last_source_update = 2019-12-06 18:51:24
+                last_sync_update = 1970-01-01 08:00:00
+                last_synced_timestamp = 1970-01-01 08:00:00
+        Storage 2:
+                id = 47.98.178.104
+                ip_addr = 47.98.178.104 (anantes-651-1-49-net.w2-0.abo.wanadoo.fr)  ACTIVE
+                http domain =
+                version = 6.03
+                join time = 2019-12-05 16:17:29
+                up time = 2019-12-06 18:42:05
+                total storage = 40188 MB
+                free storage = 31514 MB
+                upload priority = 10
+                store_path_count = 1
+                subdir_count_per_path = 256
+                storage_port = 23000
+                storage_http_port = 8888
+                current_write_path = 0
+                source storage id =
+                if_trunk_server = 0
+                connection.alloc_count = 256
+                connection.current_count = 1
+                connection.max_count = 2
+                total_upload_count = 0
+                success_upload_count = 0
+                total_append_count = 0
+                success_append_count = 0
+                total_modify_count = 0
+                success_modify_count = 0
+                total_truncate_count = 0
+                success_truncate_count = 0
+                total_set_meta_count = 0
+                success_set_meta_count = 0
+                total_delete_count = 0
+                success_delete_count = 0
+                total_download_count = 0
+                success_download_count = 0
+                total_get_meta_count = 0
+                success_get_meta_count = 0
+                total_create_link_count = 0
+                success_create_link_count = 0
+                total_delete_link_count = 0
+                success_delete_link_count = 0
+                total_upload_bytes = 0
+                success_upload_bytes = 0
+                total_append_bytes = 0
+                success_append_bytes = 0
+                total_modify_bytes = 0
+                success_modify_bytes = 0
+                stotal_download_bytes = 0
+                success_download_bytes = 0
+                total_sync_in_bytes = 882988
+                success_sync_in_bytes = 882988
+                total_sync_out_bytes = 0
+                success_sync_out_bytes = 0
+                total_file_open_count = 8
+                success_file_open_count = 8
+                total_file_read_count = 0
+                success_file_read_count = 0
+                total_file_write_count = 10
+                success_file_write_count = 10
+                last_heart_beat_time = 2019-12-07 13:41:06
+                last_source_update = 1970-01-01 08:00:00
+                last_sync_update = 2019-12-06 18:51:25
+                last_synced_timestamp = 2019-12-06 18:51:24 (0s delay)//同一组内的storage服务器相互同步。
+</code></pre>
+<h4 id="问题：我们怎么使用网络服务访问到这些存储的图片？"><a href="#问题：我们怎么使用网络服务访问到这些存储的图片？" class="headerlink" title="问题：我们怎么使用网络服务访问到这些存储的图片？"></a>问题：我们怎么使用网络服务访问到这些存储的图片？</h4><p><strong>解决方法——Nginx</strong></p>
+<blockquote>
+<p>所使用软件：</p>
+<p>​                    nginx-1.15.9.tar.gz</p>
+<p>​                    fastdfs-nginx-module-1.22.tar.gz</p>
+<p>ubuntu下载依赖包：</p>
+<p>​                     <strong>openssl</strong> ： sudo apt-get install openssl libssl-dev </p>
+<p>​                    pcre   : apt-get install libpcre3 libpcre3-dev </p>
+<p>​                    sudo apt-get install zlib1g-dev</p>
+</blockquote>
+<p><strong>fastdfs-nginx-module的配置</strong></p>
+<p>在src目录下修改config文件</p>
+<p><img src="https://i.loli.net/2019/12/07/egTMHidOXu1xArq.png" alt=""></p>
+<blockquote>
+<p>./configure <br>–prefix=/usr/local/nginx <br>–pid-path=/var/run/nginx/nginx.pid <br>–lock-path=/var/lock/nginx.lock <br>–error-log-path=/var/log/nginx/error.log <br>–http-log-path=/var/log/nginx/access.log <br>–with-http_gzip_static_module <br>–http-client-body-temp-path=/var/temp/nginx/client <br>–http-proxy-temp-path=/var/temp/nginx/proxy <br>–http-fastcgi-temp-path=/var/temp/nginx/fastcgi <br>–http-uwsgi-temp-path=/var/temp/nginx/uwsgi <br>–http-scgi-temp-path=/var/temp/nginx/scgi <br>–add-module=/home/fastdfs-nginx-module-1.22/src</p>
+<p>最后一行的路径修改你自己的安装的路径下的src路径。。</p>
+</blockquote>
+<p>进入nginx的文件夹下，粘贴上面的命令进行回车运行。</p>
+<p>然后进行 sh make.sh   /    sh make.sh install 编译安装</p>
+<p>下一步，移动并修改这个配置文件</p>
+<p><img src="https://i.loli.net/2019/12/07/MQ79eOJDErBAmgK.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/12/07/TCYowqas2yAE8cK.png" alt=""></p>
+<p>修改Nginx配置文件</p>
+<pre class=" language-shell"><code class="language-shell">vim /usr/lcoal/nginx/conf/nginx.conf
+</code></pre>
+<p><strong>新增</strong></p>
+<p><img src="C:%5CUsers%5Csuperning%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191207142115758.png" alt="image-20191207142115758"></p>
+<p>然后在  /usr/local/nginx/sbin下启动nginx，图片就可以通过网络访问了。。。。</p>
+<p><img src="https://i.loli.net/2019/12/07/tx3ioy7s9qZblJ4.png" alt=""></p>
 
             </div>
             <hr/>
@@ -629,7 +827,7 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2019/12/07/Fastdfs%E5%92%8Cnginx%E7%9B%B8%E5%85%B3%E6%95%B4%E5%90%88/">https://superopenai.github.io/2019/12/07/Fastdfs%E5%92%8Cnginx%E7%9B%B8%E5%85%B3%E6%95%B4%E5%90%88/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -667,12 +865,12 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                                    <span class="chip bg-color">分布式</span>
                                 </a>
                             
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
                                 </a>
                             
                         </div>
@@ -713,55 +911,53 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/Swagger2%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E8%A6%81%E7%82%B9/">
+                <a href="/2019/12/07/Fastdfs%E5%92%8Cnginx%E7%9B%B8%E5%85%B3%E6%95%B4%E5%90%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Swagger2配置相关要点">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="'Fastdfs和nginx相关整合'">
                         
-                        <span class="card-title">Swagger2配置相关要点</span>
+                        <span class="card-title">'Fastdfs和nginx相关整合'</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring Boot整合Swagger2的流程
-由于springboot的便捷，以及前后端分离的趋势，后端和前端配合的桥梁便是接口细节，我们通常遵守REST的原则，为其他开发人员提供一份REST接口文档，但后期接口多又杂，手写十分耗时耗力
+                            FastDFS和nginx相关整合单机模式
+ 为了项目使用方便，因而把图片等静态资源放在项目里的文件夹中 如：resources\static\file、resources\static\img等 。 这样的优点是实现方便，访问方便。但是也
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
                     </a>
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
                     </a>
                     
                 </div>
@@ -775,54 +971,46 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/spring-jpa-hibernate-ddl-auto%E5%B1%9E%E6%80%A7%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+                <a href="/2019/11/22/%E5%88%9D%E8%AF%86Netty/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="spring.jpa.hibernate.ddl-auto属性是怎么工作的">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="初识Netty">
                         
-                        <span class="card-title">spring.jpa.hibernate.ddl-auto属性是怎么工作的</span>
+                        <span class="card-title">初识Netty</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            查阅Springboot的官方文档可知
+                            初识Netty简介
+1）本质：JBoss做的一个Jar包
+2）目的：快速开发高性能、高可靠性的网络服务器和客户端程序
+3）优点：提供异步的、事件驱动的网络应用程序框架和工具
+通俗的说：一个好使的处理Socket的框架
 
-spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一条十分近似的语句—spring.jpa.generate-ddlspring.jpa.generate-d
+安装安装十分简单，去
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
+                            <a href="/categories/Netty/" class="post-category">
+                                    Netty
                                 </a>
                             
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/Netty/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
-                    </a>
-                    
                 </div>
                 
             </div>
