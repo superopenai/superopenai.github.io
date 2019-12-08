@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="spring中获取ip的四种办法, 阿宁的博客">
-    <meta name="description" content="第一种办法使用import javax.servlet.http.HttpServletRequest具体代码
-   HttpServletRequest request
-    {
-        String ip = request.">
+    <meta name="keywords" content="Comparable接口与Comparator接口的区别, 阿宁的博客">
+    <meta name="description" content="Comparable接口与Comparator接口的区别Comparable接口
+通过阅读翻译openjdk 源码关于Comparable接口的解释描述可以得知：
+Comparable接口会对所有实现它的对象施加一个总排序，这个总排序被称为">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>spring中获取ip的四种办法 | 阿宁的博客</title>
+    <title>Comparable接口与Comparator接口的区别 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -307,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        spring中获取ip的四种办法
+                        Comparable接口与Comparator接口的区别
                     </div>
                 </div>
             </div>
@@ -425,8 +424,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">jdk源码</span>
                             </a>
                         
                     </div>
@@ -437,8 +440,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/spring/" class="post-category">
-                                spring
+                            <a href="/categories/java/" class="post-category">
+                                java
+                            </a>
+                        
+                            <a href="/categories/java/jdk%E6%BA%90%E7%A0%81/" class="post-category">
+                                jdk源码
                             </a>
                         
                     </div>
@@ -449,7 +456,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-12-08
                 </div>
                 
                 
@@ -458,14 +465,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        124
+                        817
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -481,28 +488,168 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第一种办法"><a href="#第一种办法" class="headerlink" title="第一种办法"></a>第一种办法</h2><pre><code>使用import javax.servlet.http.HttpServletRequest</code></pre><pre class=" language-java"><code class="language-java">具体代码
-   HttpServletRequest request
-    <span class="token punctuation">{</span>
-        String ip <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getRemoteAddr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        articleComment<span class="token punctuation">.</span><span class="token function">setIp</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h2 id="Comparable接口与Comparator接口的区别"><a href="#Comparable接口与Comparator接口的区别" class="headerlink" title="Comparable接口与Comparator接口的区别"></a>Comparable接口与Comparator接口的区别</h2><h3 id="Comparable接口"><a href="#Comparable接口" class="headerlink" title="Comparable接口"></a>Comparable接口</h3><blockquote>
+<p>通过阅读翻译openjdk 源码关于Comparable接口的解释描述可以得知：</p>
+<p><code>Comparable</code>接口会对所有实现它的对象施加一个总排序，这个总排序被称为类的自然排序，<code>CompareTo</code>方法称为类的自然比较方法。</p>
+<p>实现这个接口的列表和数组会通过<code>Collections.sort</code>/<code>Arrays.sort</code>实现自动排序</p>
+<p>当且仅当e1.compareTo（e2）== 0对于类的每个e1和e2具有与e1.equals（e2）相同的布尔值时，才可以认为C类的自然排序与equals一致 </p>
+</blockquote>
+<p>这个接口有什么用呢？—–&gt; 例如一个数组实现了这个接口，那么它排序就十分简单（ <code>Arrays.sort()</code>）,如果一个List实现了这个接口，那么就使用<code>Collections.sort()</code>来给其排序。事实上几乎所有的java等值类都实现了这个接口，这个接口也只有一个方法。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Comparable</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span>T o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<ul>
+<li>this &lt; obj 返回负**</li>
+<li><strong>this = obj 返回 0</strong></li>
+<li>*<em>this &gt; obj 返回正 *</em></li>
+</ul>
+<p>示例代码</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> me<span class="token punctuation">.</span>superning<span class="token punctuation">.</span>nettychat<span class="token punctuation">.</span>Initialzer<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Arrays<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Collections<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">demo</span> <span class="token punctuation">{</span>
+
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>person<span class="token operator">></span> people <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>person<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">person</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">person</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">person</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>person <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">"-----"</span><span class="token operator">+</span>person<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//使用了显式的比较器</span>
+        Collections<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>people<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>person <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">"-----"</span><span class="token operator">+</span>person<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
     <span class="token punctuation">}</span>
+
+
+
+
+
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">person</span> <span class="token keyword">implements</span> <span class="token class-name">Comparable</span><span class="token operator">&lt;</span>person<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">person</span><span class="token punctuation">(</span>String name<span class="token punctuation">,</span> <span class="token keyword">int</span> age<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span>person o<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">-</span>o<span class="token punctuation">.</span>age<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+
+结果：
+a<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">10</span>
+b<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">5</span>
+c<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">80</span>
+
+b<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">5</span>
+a<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">10</span>
+c<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">80</span></code></pre>
+<h4 id="抛出的异常"><a href="#抛出的异常" class="headerlink" title="抛出的异常"></a>抛出的异常</h4><ul>
+<li><p>NullPointException: 入参为null </p>
+</li>
+<li><p>ClassCastException: 入参类型与被比较类型不兼容，如执行<code>new Integer(1).compareTo(new Double(2.1));</code>时，编译错误：<code>Error:(35, 23) java: 不兼容的类型: java.lang.Double无法转换为java.lang.Integer</code></p>
+</li>
+</ul>
+<h3 id="Comparator接口"><a href="#Comparator接口" class="headerlink" title="Comparator接口"></a>Comparator接口</h3><blockquote>
+<p>说到现在，既然有了一个<code>Comparable</code>接口，为什么还要有一个Comparator接口呢？</p>
+<p>我们需要了解一下策略模式：</p>
+<p>​        策略模式定义了一系列的算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。（原文：The Strategy Pattern defines a family of algorithms,encapsulates each one,and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.）</p>
+</blockquote>
+<p><strong>继续使用Person类来说说该如何通过使用Comparator接口来帮助我们实现排序</strong><br> Person类使用的是没有实现任何接口的Person类。<br> 那么我们该如何对Person类的对象进行排序呢？——-使用Comparator的实现类来帮助我们排序</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">demo</span> <span class="token punctuation">{</span>
+
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>person<span class="token operator">></span> people <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>person<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">person</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">person</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">person</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        people<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>person <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">"-----"</span><span class="token operator">+</span>person<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//        Collections.sort(people);</span>
+        people<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Compar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        people<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>person <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>name<span class="token operator">+</span><span class="token string">"-----"</span><span class="token operator">+</span>person<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">static</span> <span class="token keyword">class</span>  <span class="token class-name">Compar</span>  <span class="token keyword">implements</span> <span class="token class-name">Comparator</span><span class="token operator">&lt;</span>person<span class="token operator">></span>
+    <span class="token punctuation">{</span>
+
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compare</span><span class="token punctuation">(</span>person o1<span class="token punctuation">,</span> person o2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> o1<span class="token punctuation">.</span>age<span class="token operator">-</span>o2<span class="token punctuation">.</span>age<span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//class person implements Comparable&lt;person> {</span>
+<span class="token comment" spellcheck="true">//    public person(String name, int age) {</span>
+<span class="token comment" spellcheck="true">//        this.name = name;</span>
+<span class="token comment" spellcheck="true">//        this.age = age;</span>
+<span class="token comment" spellcheck="true">//    }</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token comment" spellcheck="true">//    public String name;</span>
+<span class="token comment" spellcheck="true">//    public int age;</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token comment" spellcheck="true">//    @Override</span>
+<span class="token comment" spellcheck="true">//    public int compareTo(person o) {</span>
+<span class="token comment" spellcheck="true">//        return this.age-o.age;</span>
+<span class="token comment" spellcheck="true">//</span>
+<span class="token comment" spellcheck="true">//    }</span>
+<span class="token comment" spellcheck="true">//}</span>
+<span class="token keyword">class</span> <span class="token class-name">person</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">person</span><span class="token punctuation">(</span>String name<span class="token punctuation">,</span> <span class="token keyword">int</span> age<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+
+
+
+<span class="token punctuation">}</span>
+
+
+
+
+结果：
+a<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">10</span>
+b<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">5</span>
+c<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">80</span>
+
+b<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">5</span>
+a<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">10</span>
+c<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token number">80</span>
 </code></pre>
-<h2 id="第二种办法"><a href="#第二种办法" class="headerlink" title="第二种办法"></a>第二种办法</h2><pre><code>使用import org.springframework.http.server.ServerHttpRequest;</code></pre><pre class=" language-java"><code class="language-java">具体代码
-ServerHttpRequest serverHttpRequest
-            String clientIp <span class="token operator">=</span> serverHttpRequest<span class="token punctuation">.</span><span class="token function">getRemoteAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            articleComment<span class="token punctuation">.</span><span class="token function">setIp</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="第三种方法"><a href="#第三种方法" class="headerlink" title="第三种方法"></a>第三种方法</h2><pre><code>使用import org.springframework.web.server.ServerWebExchange;</code></pre><pre class=" language-java"><code class="language-java">具体代码
-ServerWebExchange serverWebExchange
-String clientIp <span class="token operator">=</span> Objects<span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>serverWebExchange<span class="token punctuation">.</span><span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getRemoteAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="第四种方法"><a href="#第四种方法" class="headerlink" title="第四种方法"></a>第四种方法</h2><pre><code>使用import org.springframework.web.reactive.function.server.ServerRequest;</code></pre><pre class=" language-java"><code class="language-java">具体代码
-ServerRequest serverRequest
-    <span class="token comment" spellcheck="true">//使用WebFlux的remoteAddress方法（spring5.1加入）</span>
-    Optional<span class="token operator">&lt;</span>InetSocketAddress<span class="token operator">></span> inetSocketAddress <span class="token operator">=</span> serverRequest<span class="token punctuation">.</span><span class="token function">remoteAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    String clientIp<span class="token operator">=</span> inetSocketAddress<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getHostAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<p><img src="https://i.loli.net/2019/12/08/6XcKCqE4dS3mNkP.png" alt=""></p>
 
             </div>
             <hr/>
@@ -528,7 +675,7 @@ ServerRequest serverRequest
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/">https://superopenai.github.io/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/</a>
+                    <a href="https://superopenai.github.io/2019/12/08/Comparable%E6%8E%A5%E5%8F%A3%E4%B8%8EComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/">https://superopenai.github.io/2019/12/08/Comparable%E6%8E%A5%E5%8F%A3%E4%B8%8EComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -566,8 +713,12 @@ ServerRequest serverRequest
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
+                                <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">jdk源码</span>
                                 </a>
                             
                         </div>
@@ -608,50 +759,58 @@ ServerRequest serverRequest
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/Restful%E9%A3%8E%E6%A0%BC%E7%90%86%E8%A7%A3/">
+                <a href="/2019/12/08/Comparable%E6%8E%A5%E5%8F%A3%E4%B8%8EComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Restful风格理解">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Comparable接口与Comparator接口的区别">
                         
-                        <span class="card-title">Restful风格理解</span>
+                        <span class="card-title">Comparable接口与Comparator接口的区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Restful风格要点在前后端分离的 Web 应用架构中，前端专注于页面，同时与后端进行数据交互；而后端则专注于提供 API 接口。在这样的结构下，REST 是一个很流行的前后端交互形式的约定。这只是一套约定，并不是某个技术标准，所以在实际
+                            Comparable接口与Comparator接口的区别Comparable接口
+通过阅读翻译openjdk 源码关于Comparable接口的解释描述可以得知：
+Comparable接口会对所有实现它的对象施加一个总排序，这个总排序被称为
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A3%8E%E6%A0%BC%E8%A7%84%E8%8C%83/" class="post-category">
-                                    风格规范
+                            <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                            
+                            <a href="/categories/java/jdk%E6%BA%90%E7%A0%81/" class="post-category">
+                                    jdk源码
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/Restful/">
-                        <span class="chip bg-color">Restful</span>
+                    <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">jdk源码</span>
                     </a>
                     
                 </div>
@@ -665,33 +824,32 @@ ServerRequest serverRequest
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/StringBuffer%E5%92%8CStringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                <a href="/2019/12/07/Fastdfs%E5%92%8Cnginx%E7%9B%B8%E5%85%B3%E6%95%B4%E5%90%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="StringBuffer和StringBuilder的区别">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Fastdfs和nginx相关整合">
                         
-                        <span class="card-title">StringBuffer和StringBuilder的区别</span>
+                        <span class="card-title">Fastdfs和nginx相关整合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            针对字符串，我们常常有修改字符串的需求但是，我们都知道String 的内容是不可变的，如果我们想要修改String类的内容。
-其本质就是改变了原来的引用，指向了一块新的空间，哪里存放着你修改后的内容。
-因此String的操作都是改变赋值地址
+                            FastDFS和nginx相关整合单机模式
+ 为了项目使用方便，因而把图片等静态资源放在项目里的文件夹中 如：resources\static\file、resources\static\img等 。 这样的优点是实现方便，访问方便。但是也
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/linux/" class="post-category">
+                                    linux
                                 </a>
                             
                             
@@ -701,12 +859,12 @@ ServerRequest serverRequest
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
                     </a>
                     
-                    <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">jdk源码</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
                     </a>
                     
                 </div>
