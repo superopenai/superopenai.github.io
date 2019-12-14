@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Restful风格理解, 阿宁的博客">
-    <meta name="description" content="Restful风格要点在前后端分离的 Web 应用架构中，前端专注于页面，同时与后端进行数据交互；而后端则专注于提供 API 接口。在这样的结构下，REST 是一个很流行的前后端交互形式的约定。这只是一套约定，并不是某个技术标准，所以在实际">
+    <meta name="keywords" content="GFS论文读书笔记一, 阿宁的博客">
+    <meta name="description" content="GFS论文读书笔记一惰性空间分配（ Lazy space allocation ）
+最近在读Google在2003年发表的 google file system (GFS) 论文，这篇论文也可谓是大数据方向的祖师爷论文，再加上Google本">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Restful风格理解 | 阿宁的博客</title>
+    <title>GFS论文读书笔记一 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Restful风格理解
+                        GFS论文读书笔记一
                     </div>
                 </div>
             </div>
@@ -422,12 +423,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                                <span class="chip bg-color">分布式</span>
                             </a>
                         
-                            <a href="/tags/Restful/">
-                                <span class="chip bg-color">Restful</span>
+                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">读书笔记</span>
                             </a>
                         
                     </div>
@@ -438,8 +439,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%A3%8E%E6%A0%BC%E8%A7%84%E8%8C%83/" class="post-category">
-                                风格规范
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                分布式
+                            </a>
+                        
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                笔记
                             </a>
                         
                     </div>
@@ -450,23 +455,28 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-12-11
                 </div>
                 
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2019-12-14
+                </div>
                 
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        599
+                        1.3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        4 分
                     </div>
                     
                 
@@ -482,23 +492,56 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Restful风格要点"><a href="#Restful风格要点" class="headerlink" title="Restful风格要点"></a>Restful风格要点</h2><p><strong>在前后端分离的 Web 应用架构中，前端专注于页面，同时与后端进行数据交互；而后端则专注于提供 API 接口。在这样的结构下，REST 是一个很流行的前后端交互形式的约定。这只是一套约定，并不是某个技术标准，所以在实际的应用中，对器实现程度完全取决于后端开发者；</strong></p>
-<h2 id="REST-对请求的约定"><a href="#REST-对请求的约定" class="headerlink" title="REST 对请求的约定"></a>REST 对请求的约定</h2><p><strong>在以前我们经常使用GET和POST请求，来完成整个应用的交互。这无疑浪费了Rest的潜力。实际上，我们不只有GET 和 POST 可用，在 REST 架构中，有以下几个重要的请求方法：GET，POST，PUT，PATCH，DELETE。这几个方法都可以与对数据的 CRUD 操作对应起来</strong></p>
-<h3 id="个人的理解有限，望海涵。"><a href="#个人的理解有限，望海涵。" class="headerlink" title="个人的理解有限，望海涵。"></a>个人的理解有限，望海涵。</h3><blockquote>
-<p>Restful风格的核心在于R（resource）资源角度来设计系统，我们对于资源的操作有以下五种</p>
+                <h1 id="GFS论文读书笔记一"><a href="#GFS论文读书笔记一" class="headerlink" title="GFS论文读书笔记一"></a>GFS论文读书笔记一</h1><h2 id="惰性空间分配（-Lazy-space-allocation-）"><a href="#惰性空间分配（-Lazy-space-allocation-）" class="headerlink" title="惰性空间分配（ Lazy space allocation ）"></a>惰性空间分配（ Lazy space allocation ）</h2><blockquote>
+<p>最近在读Google在2003年发表的 <strong>google file system (GFS)</strong> 论文，这篇论文也可谓是大数据方向的祖师爷论文，再加上Google本身的大量数据流量，使得这篇论文十分具有参考学习的意义，本文是在阅读GFS这篇论文的过程中所产生的一些疑惑，并且通过查找资料解决了这些疑惑。</p>
 </blockquote>
-<p>学习阮一峰老师的博客</p>
-<pre><code> ·GET（SELECT）查询/取一种资源
- ·POST(CREART) 提交一种资源
- ·PUT（UPDATE）更新一个资源，整体更新
- ·PATCH(UPDATE)更新一个资源的其中一个属性，部分更新
- ·DELETE(DELETE)删除一个资源</code></pre><p>这五种差不多包含了平常使用的各种需求，我们做的就是对资源的操作。例如网址，URL格式就代表了一个资源，然后我们对对应的资源使用不同的请求，这便是我们对资源的操作。</p>
+<p><strong>PS：</strong> Google在当年发表了三篇大数据的论文，被称为大数据三剑客，也为后来的大数据发展提供了积极的影响。三篇论文分别论述了<strong>Bigtable</strong>、<strong>CFS</strong>和<strong>MapReduce</strong>。</p>
+<ol>
+<li>Google-File-System(2003年)</li>
+<li>Google-MapReduce (2004年)</li>
+<li>Google-Bigtable(2006年)</li>
+</ol>
+<h3 id="出处（图中2-5部分-Chunk-Size）"><a href="#出处（图中2-5部分-Chunk-Size）" class="headerlink" title="出处（图中2.5部分 Chunk Size）"></a>出处（图中2.5部分 Chunk Size）</h3><p><img src="https://i.loli.net/2019/12/13/aH61JAgyXQUGS42.png" alt=""></p>
+<p><strong>上图可能有些杂乱，因为阅读英文论文有一定困难，需要一定的注释，如果上图让您感到厌烦，在此说一声抱歉</strong></p>
 <blockquote>
-<p>一般资源操作只有新增、删除、查询、更新，对应HTTP协议中四类请求：POST、DELETE、GET、PUT。其中，后三个操作是幂等的。（什么是幂等？）查询资源时，更多的参数，比如分页、排序、过滤条件，一般都会放在URL的查询部分（Query String）。新增、更新资源，关于资源实体的内容，一般放在请求体（Request Body）中</p>
+<p>正如原文所说—<code>Chunksize is one of the key design parameters. We have chosen 64 MB, which is much larger than typical file system blocksizes. Each chunkreplica is stored as a plain Linux file on a chunkserver and is extended only as needed. Lazy space allocation avoids wasting space due to internal fragmentation, perhaps the greatest objection against such a large chunksize</code></p>
+<p>翻译–<code>Chunk 的大小是关键的设计参数之一。我们选择了 64MB，这个尺寸远远大于一般文件系统的 Block size。 每个 Chunk块的副本都以普通 Linux 文件的形式保存在 Chunk 服务器上，只有在需要的时候才扩大。惰性空间分配避免了因内部碎片造成的空间浪费，内部碎片或许是对选择这么大的 Chunk 尺寸最具争议一点。</code></p>
 </blockquote>
-<h4 id="每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）"><a href="#每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）" class="headerlink" title="每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）"></a>每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）</h4><p><strong>非REST的url</strong>：http://…../article?id=001&amp;type=011 </p>
-<p><strong>REST风格的url</strong>：http://…article/id/011/type/011</p>
-<p>可是这样也导致一旦逻辑复杂起来也不可避免的使得表示的长度很长。希望各位前辈能指点一番。</p>
+<h3 id="那么问题来了"><a href="#那么问题来了" class="headerlink" title="那么问题来了"></a>那么问题来了</h3><p>什么是惰性空间分配？又是为什么避免了因为内部碎片造成的空间浪费？</p>
+<blockquote>
+<p>首先，chunk的大小在Google团队的设计下，设计成了64MB，这样做的好处是我们一次能够写入更多的数据到硬盘里，但是这样也会出现一个问题！！！ 如果不是惰性空间分配，如果有一次，我们只写入了1MB的数据，但是一个chunk块是64MB，这就浪费了63MB的空间，在硬盘里成为了内部碎片。</p>
+<p>因而，使用惰性空间分配（延迟空间分配）的时候，我们还是每次写入一个1MB的数据块，但是不分配空间。类似一个缓冲区，内存只保留适当数量的文件系统块。 直到缓冲区满，然后冲刷到硬盘的时候，进行空间分配，这也就避免了空间碎片。—–这部分与<code>XFS</code>（ 一种高性能的<a href="https://zh.wikipedia.org/wiki/日志文件系统" target="_blank" rel="noopener">日志文件系统</a> ）的延迟分配类似，</p>
+</blockquote>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li>The Google File System  论文</li>
+<li><a href="https://stackoverflow.com/questions/18109582/what-is-lazy-space-allocation-in-google-file-system" target="_blank" rel="noopener">stackoverflow的讨论</a></li>
+</ol>
+<h3 id="GFS中的hot-spots-热点问题"><a href="#GFS中的hot-spots-热点问题" class="headerlink" title="GFS中的hot spots 热点问题"></a>GFS中的hot spots 热点问题</h3><p><img src="https://i.loli.net/2019/12/13/aH61JAgyXQUGS42.png" alt=""></p>
+<blockquote>
+<p><code>A small file consists of a small number of chunks, perhaps just one. The chunkservers storing those chunks may become hot spots if many clients are accessing the same file.</code></p>
+<p>一个小文件由少量的块组成，也许只有一个。如果许多客户端访问同一文件，存储这些块的<strong>chunkserver</strong>可能成为热点。 </p>
+</blockquote>
+<p><strong>虽然没有正式定义，热点通常指高负载的单一对象，所以说这个对象变成了一个热点，是指这个对象接收到比以往更高的负载</strong></p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><blockquote>
+<p>如果现在需要一个文件，而这个文件好巧不巧的正好只在一个chunk服务器上是存着，其他chunk服务器都没有，大量的客户端client向这一个chunk服务器同时发送请求，这个chunk服务器成为了热点。</p>
+</blockquote>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li><p>为什么GFS论文中非要指明是一个小文件？如果大量客户端请求的是一个大文件，会出现热点问题吗？</p>
+<blockquote>
+<p>解答：</p>
+<p>简单来说，一个小文件通常只占有几个chunk块，甚至就占一个chunk块，例如占了N个块，这时有10000个client客户端同时请求，那是10000/N的请求，如果N小的情况，小文件很容易导致热点问题。但是大文件通常占用的chunk块很多，热点问题基本很难发生。论文中也提到了这一点–<code>In practice, hot spots have not been a major issue because our applications mostly read large multi-chunkfiles sequentially.</code></p>
+</blockquote>
+</li>
+<li><p>解决方法</p>
+<blockquote>
+<p>​    解答：</p>
+<p>论文中也提到了一个方法，个人感觉允许一个客户端从其他客户端读取需要的数据更加符合分布式的特定</p>
+<p><code>We fixed this problem by storing such executables with a higher replication factor and by making the batchqueue system stagger application start times. A potential long-term solution is to allow clients to read data from other clients in such situations.</code></p>
+<p>​        译文：</p>
+<p> 我们通过使用更大的复制参数来保存可 执行文件，以及错开批处理队列系统程序的启动时间的方法解决了这个问题。一个可能的长效解决方案是， 在这种的情况下，允许客户端从其它客户端读取数据。  </p>
+</blockquote>
+</li>
+</ul>
 
             </div>
             <hr/>
@@ -524,7 +567,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Restful%E9%A3%8E%E6%A0%BC%E7%90%86%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Restful%E9%A3%8E%E6%A0%BC%E7%90%86%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2019/12/11/GFS%E8%AE%BA%E6%96%87%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B8%80/">https://superopenai.github.io/2019/12/11/GFS%E8%AE%BA%E6%96%87%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B8%80/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -562,12 +605,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                                    <span class="chip bg-color">分布式</span>
                                 </a>
                             
-                                <a href="/tags/Restful/">
-                                    <span class="chip bg-color">Restful</span>
+                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">读书笔记</span>
                                 </a>
                             
                         </div>
@@ -608,36 +651,101 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/28/java%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8CCglib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">
+                <a href="/2019/12/11/GFS%E8%AE%BA%E6%96%87%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B8%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="java中的动态代理(JDK动态代理和Cglib动态代理)">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="GFS论文读书笔记一">
                         
-                        <span class="card-title">java中的动态代理(JDK动态代理和Cglib动态代理)</span>
+                        <span class="card-title">GFS论文读书笔记一</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是代理(proxy)?
-代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，一个代理类的对象与
+                            GFS论文读书笔记一惰性空间分配（ Lazy space allocation ）
+最近在读Google在2003年发表的 google file system (GFS) 论文，这篇论文也可谓是大数据方向的祖师爷论文，再加上Google本
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-28
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
+                                </a>
+                            
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/08/Comparable%E6%8E%A5%E5%8F%A3%E4%B8%8EComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Comparable接口与Comparator接口的区别">
+                        
+                        <span class="card-title">Comparable接口与Comparator接口的区别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Comparable接口与Comparator接口的区别Comparable接口
+通过阅读翻译openjdk 源码关于Comparable接口的解释描述可以得知：
+Comparable接口会对所有实现它的对象施加一个总排序，这个总排序被称为
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
                             <a href="/categories/java/" class="post-category">
                                     java
+                                </a>
+                            
+                            <a href="/categories/java/jdk%E6%BA%90%E7%A0%81/" class="post-category">
+                                    jdk源码
                                 </a>
                             
                             
@@ -653,58 +761,6 @@
                     
                     <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
                         <span class="chip bg-color">jdk源码</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="spring中获取ip的四种办法">
-                        
-                        <span class="card-title">spring中获取ip的四种办法</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            第一种办法使用import javax.servlet.http.HttpServletRequest具体代码
-   HttpServletRequest request
-    {
-        String ip = request.
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/spring/" class="post-category">
-                                    spring
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
                     </a>
                     
                 </div>
