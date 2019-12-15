@@ -4,14 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring Data JPA相关注解, 阿宁的博客">
-    <meta name="description" content="现在版本？
-本文参考了Spring Data JPA官方文档，引用了部分文档的代码
-
-据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10
-
-
-使用Spri">
+    <meta name="keywords" content="Linux常用命令讲解(一), 阿宁的博客">
+    <meta name="description" content="Linux命令讲解（一）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义
+PerfPerf 是用来进行软件性能分析的工具。
+通过它，应用程序可以利用 PMU，tracepoint">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring Data JPA相关注解 | 阿宁的博客</title>
+    <title>Linux常用命令讲解(一) | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,13 +307,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring Data JPA相关注解
+                        Linux常用命令讲解(一)
                     </div>
                 </div>
             </div>
@@ -428,12 +425,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
-                            </a>
-                        
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
                     </div>
@@ -444,12 +437,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/springboot/" class="post-category">
-                                springboot
-                            </a>
-                        
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                spring
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
                             </a>
                         
                     </div>
@@ -460,7 +449,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-12-15
                 </div>
                 
                 
@@ -469,14 +458,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        2.9k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        12 分
                     </div>
                     
                 
@@ -492,118 +481,207 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="现在版本？"><a href="#现在版本？" class="headerlink" title="现在版本？"></a>现在版本？</h2><blockquote>
-<p>本文参考了Spring Data JPA官方文档，引用了部分文档的代码</p>
-</blockquote>
-<p><strong>据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10</strong></p>
-<p><img src="https://i.loli.net/2019/08/13/6AMnO31jarZ8ovN.png" alt="Springboot"><br><img src="https://i.loli.net/2019/08/13/IEaJKbcWOiNy9TD.png" alt="Spring Data"></p>
-<ul>
-<li>使用Springboot，springboot将会替你选择最新的spring data模块（<strong>Spring Boot selects a recent version of Spring Data modules for you. If you still want to upgrade to a newer version, configure the property spring-data-releasetrain.version to the train name and iteration you would like to use.</strong>）。</li>
-</ul>
-<p><img src="https://i.loli.net/2019/08/13/uXOPpgiCLy7Mmhs.png" alt=""><br><img src="https://i.loli.net/2019/08/13/ERyfzZALupKBnFH.png" alt=""></p>
-<h2 id="Spring-Data-Jpa-是什么？"><a href="#Spring-Data-Jpa-是什么？" class="headerlink" title="Spring Data Jpa 是什么？"></a>Spring Data Jpa 是什么？</h2><blockquote>
-<p>Spring Data JPA是更大的Spring Data系列的一部分，可以轻松实现基于JPA的存储库。此模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动应用程序变得更加容易。在相当长的一段时间内，实现应用程序的数据访问层一直很麻烦。必须编写太多样板代码来执行简单查询以及执行分页和审计。Spring Data JPA旨在通过减少实际需要的工作量来显着改善数据访问层的实现。作为开发人员，您编写存储库接口，包括自定义查找器方法，Spring将自动提供实现。</p>
-</blockquote>
-<h2 id="代码层面"><a href="#代码层面" class="headerlink" title="代码层面"></a>代码层面</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> me<span class="token punctuation">.</span>superning<span class="token punctuation">.</span>tmall<span class="token punctuation">.</span>pojo<span class="token punctuation">;</span>
-<span class="token keyword">import</span> com<span class="token punctuation">.</span>fasterxml<span class="token punctuation">.</span>jackson<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>JsonIgnoreProperties<span class="token punctuation">;</span>
-<span class="token keyword">import</span> javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Entity</span>
-<span class="token annotation punctuation">@Table</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"category"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//表名(严格区分大小写)</span>
-<span class="token annotation punctuation">@JsonIgnoreProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"handler"</span><span class="token punctuation">,</span> <span class="token string">"hibernateLazyInitializer"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Category</span>  <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Id</span>
-<span class="token comment" spellcheck="true">//    主键使用这个注解</span>
-    <span class="token annotation punctuation">@GeneratedValue</span><span class="token punctuation">(</span>strategy <span class="token operator">=</span> GenerationType<span class="token punctuation">.</span>IDENTITY<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//    自增长策略</span>
-    <span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ul>
-<li>1.@Entity：标识实体类是JPA实体，告诉JPA在程序运行时生成实体类对应表</li>
-<li>2.@Table：设置实体类在数据库所对应的表名</li>
-<li>3.@Id：标识类里所在变量为主键</li>
-<li>4.@GeneratedValue：设置主键生成策略，此方式依赖于具体的数据库</li>
-<li>5.@Basic：表示简单属性到数据库表字段的映射（几乎不用）</li>
-<li>6.@Column：表示属性所对应字段名进行个性化设置</li>
-<li>7.@Transient：表示属性并非数据库表字段的映射,ORM框架将忽略该属性（在与密码有关的实体类会用到这个注解，后续详解于另一篇文章）</li>
-</ul>
-<p>常用的注解如上，其他注解可能会以独立文章讲解。</p>
-<h3 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h3><pre><code>Spring data的中央接口是Repository，
-它还提供了扩展了持久层技术的接口例如
-CrudRepository
-MongoRepository
-JpaRepository</code></pre><p><img src="https://i.loli.net/2019/08/13/VDQYJfheO2v7ywE.png" alt="中央接口"></p>
-<h4 id="CrudRepository和JpaRepository之间的区别"><a href="#CrudRepository和JpaRepository之间的区别" class="headerlink" title="CrudRepository和JpaRepository之间的区别"></a><strong>CrudRepository和JpaRepository之间的区别</strong></h4><p><img src="https://i.loli.net/2019/08/13/xPsVpbeOry83QuC.png" alt=""></p>
-<p><strong>从上图你可以看出JpaRepository 继承了PagingAndSortingRepository，相应的也继承了CrudRepository</strong></p>
-<ul>
-<li>CrudRepository 主要提供了CRUD的方法功能</li>
-<li>PagingAndSortingRepository，提供了分页和排序记录的方法</li>
-<li>JpaRepository 则拥有了它们两个所有的方法功能，并扩展了其他方法</li>
-</ul>
-<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OrderItemDAO</span> 
-<span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token operator">&lt;</span>OrderItem<span class="token punctuation">,</span>Integer<span class="token operator">></span>
-<span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>OrderItem<span class="token operator">></span> <span class="token function">findByOrderOrderByIdDesc</span><span class="token punctuation">(</span>Order order<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre><code>由代码可知，Dao接口首先继承一个JpaRepository接口，
-JpaRepository&lt;T, ID&gt; T是泛型，ID是主键的类型。
-接口本身已经为我们提供了基础的CRUD方法，但有时我们有
-一些特殊的查询，接口无法为我们提供，这时就需要我们进行特殊参数处理。</code></pre><h5 id="特殊参数处理"><a href="#特殊参数处理" class="headerlink" title="特殊参数处理"></a>特殊参数处理</h5><pre class=" language-java"><code class="language-java">Page<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Slice<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Sort sort<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><strong>关于使用@Query(“sql语句”)在dao层的方法上写原生sql语句，<br>以后以独立文章介绍</strong></p>
-<h5 id="关系映射"><a href="#关系映射" class="headerlink" title="关系映射"></a>关系映射</h5><p><a href="https://blog.csdn.net/u010588262/article/details/76667283" target="_blank" rel="noopener">借鉴这位的csdn博客以及自我理解结合而成</a></p>
-<ul>
-<li><p>一对一</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OneToOne</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">,</span>optional<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"addressID"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释本表中指向另一个表的外键。</span>
-<span class="token keyword">public</span> Address <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-  <span class="token keyword">return</span> address<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<p>  现假设有Person表和Address表，是一对一的关系，<br>  在Person中有一个指向Address表主键的字段addressID，<br>  所以主控方一定是Person，所谓主控方就是能改变关联关系的一方，<br>  Person只要改变addressID就改变了关联关系，所以Person是主控方，<br>  所以@JoinColumn写在Person类中</p>
-</li>
-<li><p>一对多单向</p>
-</li>
-</ul>
-<p><strong>假如现在有Person表和Country表，那么一定是Person表中有country_id字段，由于我们是一对多的关系，所以站在一的角度，也就是Country的角度，在Country类中加入@JoinColumn</strong></p>
-<pre class=" language-java"><code class="language-java">
-<span class="token annotation punctuation">@OneToMany</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span> 
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"country_id"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释的是另一个表指向本表的外键。 </span>
-<span class="token keyword">public</span> List<span class="token operator">&lt;</span>Person<span class="token operator">></span> <span class="token function">getPersons</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> persons<span class="token punctuation">;</span> 
-<span class="token punctuation">}</span></code></pre>
-<p><strong>在一对多单向关系中，多的一方（Person）没有注解，一的一方（Country）有注解，如果一的一方不加@JoinColumn指定外键字段的话，Hibernate会自动生成一张中间表Country_PERSON来对Person和Country进行绑定。</strong></p>
-<ul>
-<li>多对一单向</li>
-</ul>
+                <h2 id="Linux命令讲解（一）"><a href="#Linux命令讲解（一）" class="headerlink" title="Linux命令讲解（一）"></a>Linux命令讲解（一）</h2><p><img src="https://i.loli.net/2019/12/15/vRUzMtdFP1O7G3W.png" alt=""></p>
+<p><strong>外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义</strong></p>
+<h3 id="Perf"><a href="#Perf" class="headerlink" title="Perf"></a>Perf</h3><p>Perf 是用来进行软件性能分析的工具。</p>
+<p>通过它，应用程序可以利用 PMU，tracepoint 和内核中的特殊计数器来进行性能统计。它不但可以分析指定应用程序的性能问题 (per thread)，也可以用来分析内核的性能问题，当然也可以同时分析应用代码和内核，从而全面理解应用程序中的性能瓶颈。</p>
+<h4 id="安装Perf"><a href="#安装Perf" class="headerlink" title="安装Perf"></a>安装Perf</h4><pre class=" language-shell"><code class="language-shell">sudo apt-get install linux-tools-common linux-tools-generic linux-tools-`uname -r`</code></pre>
 <blockquote>
-<p><strong>一个产品可以属于多个分类,因此@JoinColumn放在Product类中</strong></p>
+<p> 使用 <code>perf list</code>命令可以列出所有能够触发 perf 采样点的事件 ,但是列表十分之长，总体上分为三类——</p>
+<p>Hardware Event 是由 PMU 硬件产生的事件，比如 cache 命中，当您需要了解程序对硬件特性的使用情况时，便需要对这些事件进行采样；</p>
+<p>Software Event 是内核软件产生的事件，比如进程切换，tick 数等 ;</p>
+<p>Tracepoint event 是内核中的静态 tracepoint 所触发的事件，这些 tracepoint 用来判断程序运行期间内核的行为细节，比如 slab 分配器的分配次数等。</p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/08/13/yzwNqMiDYXBtZAg.png" alt=""></p>
-<p><strong>看看数据库</strong><br><img src="https://i.loli.net/2019/08/13/VQfOLJWjimxeHG1.png" alt=""></p>
-<pre><code>可以看到在Product表出现了一个对应Category表的外键
-但是Category表中却没有外键，因此这就是单向的多对一</code></pre><p><img src="https://i.loli.net/2019/08/13/j42JOk8SCxsPEMK.png" alt=""></p>
+<h4 id="Perf-stat"><a href="#Perf-stat" class="headerlink" title="Perf stat"></a>Perf stat</h4><p>Perf stat 它通过概括精简的方式提供被调试程序运行的整体情况和汇总数据.</p>
+<h4 id="perf-top"><a href="#perf-top" class="headerlink" title="perf top"></a>perf top</h4><p> perf top的作用是实时地显示系统当前的性能统计信息。前面的perf stat用于对一个特定的程序进行分析，而某些时候我们可能并不知道是哪个程序影响了系统性能，这时候就可以用perf top来查找可疑的程序。 </p>
+<p><img src="https://i.loli.net/2019/12/15/ikp76Kw8nSmIbcN.png" alt=""></p>
+<h4 id="perf-record-amp-perf-report"><a href="#perf-record-amp-perf-report" class="headerlink" title="perf record &amp; perf report"></a>perf record &amp; perf report</h4><p>perf record的作用和perf stat类似，它可以运行一个命令并生成统计信息，不过perf record不会将结果显示出来，而是将结果输出到文件中。perf record生成的文件可以用perf report来进行解析。</p>
+<p>perf record还可以通过-g参数，在分析时生成calling graph，帮助定位更上层的逻辑分布。</p>
+<p><strong>perf 的详细使用不在本篇文章的讲解范围内，有兴趣可以自行查找</strong></p>
+<h3 id="ftrace-stap-Lttng-bcc"><a href="#ftrace-stap-Lttng-bcc" class="headerlink" title="ftrace/stap/Lttng/bcc"></a>ftrace/stap/Lttng/bcc</h3><p><strong>这四个工具和上面的perf一样，均是跟踪Linux系统内核的工具，用于内核调试等等，由于本人对Linux内核并不熟悉，因此不敢在这几个工具上发表意见，如果您对这几个工具有兴趣，可以自行搜索学习</strong></p>
+<h3 id="pidstat"><a href="#pidstat" class="headerlink" title="pidstat"></a>pidstat</h3><p> <code>pidstat</code>是sysstat工具的一个命令，用于监控全部或指定进程的CPU、内存、线程、设备IO等系统资源的占用情况。<code>pidstat</code>首次运行时显示自系统启动开始的各项统计信息，之后运行<code>pidstat</code>将显示自上次运行该命令以后的统计信息。用户可以通过指定统计的次数和时间来获得所需的统计信息。 </p>
+<p> 注意重点内容，<code>pidstat</code>可以监控到进程级别的信息；这就意味着我们就可以直接定位问题源头。 </p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><pre class=" language-shell"><code class="language-shell">ubuntu
+
+sudo apt-get install sysstat
+
+centos
+
+yum install sysstat</code></pre>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><pre class=" language-shell"><code class="language-shell">pidstat help 列出pidstat常用的命令格式
+
+输出：
+Usage: pidstat [ options ] [ <interval> [ <count> ] ] [ -e <program> <args> ]
+Options are:
+[ -d ] [ -H ] [ -h ] [ -I ] [ -l ] [ -R ] [ -r ] [ -s ] [ -t ] [ -U [ <username> ] ]
+[ -u ] [ -V ] [ -v ] [ -w ] [ -C <command> ] [ -G <process_name> ] [ --human ]
+[ -p { <pid> [,...] | SELF | ALL } ] [ -T { TASK | CHILD | ALL } ]
+
+
+pidstat [间隔] [次数] [参数]
+-u 默认的参数，显示各个进程的CPU使用统计
+-r 显示各个进程的内存使用统计
+-d 显示各个进程的IO使用情况
+-p 指定进程号
+-w 显示每个进程的上下文切换情况
+-t 显示选择任务的线程的统计信息外的额外信息
+</code></pre>
+<p><strong>pidstat命令默认显示所有进程的cpu使用率</strong></p>
+<p><img src="https://i.loli.net/2019/12/15/XMQrwYAzv6BfFHy.png" alt=""></p>
+<p> <code>UID</code>：用户ID<br><code>PID</code>：进程ID<br><code>%usr</code>：进程在用户空间占用CPU的百分比<br><code>%system</code>：进程在内核空间占用CPU的百分比<br><code>%guest</code>：任务花费在虚拟机上的CPU使用率（运行在虚拟处理器）<br><code>%CPU</code>：任务总的CPU使用率<br><code>CPU</code>：正在运行这个任务的处理器编号<br><code>Command</code>：这个任务的命令名称 </p>
+<p> *<em><code>pidstat -r</code>输出进程内存使用情况统计 *</em></p>
+<p><img src="https://i.loli.net/2019/12/15/nxU3mvjewoQdXEy.png" alt=""></p>
+<p> 输出重点内容详解：<br><code>minflt/s</code>：从内存中加载数据时每秒出现的次要错误的数目，这些不要求从磁盘载入内存页面<br><code>majflt/s</code>：从内存中加载数据时每秒出现的主要错误的数目，这些要求从磁盘载入内存页面<br><code>VSZ</code>：虚拟地址大小，虚拟内存的使用KB<br><code>RSS</code>：长期内存使用，任务的不可交换物理内存的使用量KB<br><code>%MEM</code>：进程使用的物理内存百分比，<code>top</code>命令也会输出该字段 </p>
+<p>*<em><code>pidstat -d -p 1318 1 5</code>  每隔一秒，一共输出5次进程ID为1318的IO统计信息  *</em></p>
+<p><img src="https://i.loli.net/2019/12/15/3xErlJHKmVcbXjB.png" alt=""></p>
+<p> <code>kB_rd/s</code>：进程每秒从磁盘读取的数据量(以kB为单位)<br><code>kB_wr/s</code>：进程每秒向磁盘写入的数据量(以kB为单位)<br><code>kB_ccwr/s</code>：任务写入磁盘被取消的速率（KB）；当任务截断脏的pagecache的时候会发生。 </p>
+<p><strong><code>pidstat -t -p 10538</code>说明显示选择任务的线程的统计信息外的额外信息</strong></p>
+<p><img src="https://i.loli.net/2019/12/15/aQ3uCZj6ILVWfBc.png" alt=""></p>
+<p> <code>TGID</code>：主线程的标识<br><code>TID</code>：线程ID </p>
+<h3 id="lsof-一切皆文件"><a href="#lsof-一切皆文件" class="headerlink" title="lsof 一切皆文件"></a>lsof 一切皆文件</h3><p> lsof（list open files）是一个查看当前系统文件的工具。在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，系统在后台都为该应用程序分配了一个文件描述符，该文件描述符提供了大量关于这个应用程序本身的信息 </p>
+<p><code>lsof</code>也是有着最多选项的Linux/Unix命令之一。<code>lsof</code>可以查看打开的文件是：</p>
+<ul>
+<li>普通文件</li>
+<li>目录</li>
+<li>网络文件系统的文件</li>
+<li>字符或设备文件</li>
+<li>(函数)共享库</li>
+<li>管道、命名管道</li>
+<li>符号链接</li>
+<li>网络文件（例如：NFS file、网络socket，unix域名socket）</li>
+<li>还有其它类型的文件，等等</li>
+</ul>
+<p>虽然<code>lsof</code>命令有着N多的选项，但是常用的只有以下几个：</p>
+<ul>
+<li><code>-a</code>：使用AND逻辑，合并选项输出内容</li>
+<li><code>-c</code>：列出名称以指定名称开头的进程打开的文件</li>
+<li><code>-d</code>：列出打开指定文件描述的进程</li>
+<li><code>+d</code>：列出目录下被打开的文件</li>
+<li><code>+D</code>：递归列出目录下被打开的文件</li>
+<li><code>-n</code>：列出使用NFS的文件</li>
+<li><code>-u</code>：列出指定用户打开的文件</li>
+<li><code>-p</code>：列出指定进程号所打开的文件</li>
+<li><code>-i</code>：列出打开的套接字</li>
+</ul>
+<p><img src="https://i.loli.net/2019/12/15/PDbRs3tBc1FWr5C.png" alt=""></p>
+<p>输出内容详解：</p>
+<ul>
+<li><p><code>COMMAND</code>：进程的名称</p>
+</li>
+<li><p><code>PID</code>：进程标识符</p>
+</li>
+<li><p><code>TID</code>：线程标识符</p>
+</li>
+<li><p><code>USER</code>：进程所有者</p>
+</li>
+<li><p>FD</p>
+<p>：文件描述符，应用程序通过文件描述符识别该文件，一般有以下取值：</p>
+<ul>
+<li><code>cwd</code>：表示current work dirctory，即：应用程序的当前工作目录，这是该应用程序启动的目录</li>
+<li><code>txt</code>：该类型的文件是程序代码，如应用程序二进制文件本身或共享库</li>
+<li><code>lnn</code>：library references (AIX)</li>
+<li><code>er</code>：FD information error (see NAME column)</li>
+<li><code>jld</code>：jail directory (FreeBSD)</li>
+<li><code>ltx</code>：shared library text (code and data)</li>
+<li><code>mxx</code>：hex memory-mapped type number xx</li>
+<li><code>m86</code>：DOS Merge mapped file</li>
+<li><code>mem</code>：memory-mapped file</li>
+<li><code>mmap</code>：memory-mapped device</li>
+<li><code>pd</code>：parent directory</li>
+<li><code>rtd</code>：root directory</li>
+<li><code>tr</code>：kernel trace file (OpenBSD)</li>
+<li><code>v86</code>：VP/ix mapped file</li>
+<li><code>0</code>：表示标准输出</li>
+<li><code>1</code>：表示标准输入</li>
+<li><code>2</code>：表示标准错误</li>
+</ul>
+</li>
+<li><p>TYPE：文件类型，常见的文件类型有以下几种：</p>
+<ul>
+<li><code>DIR</code>：表示目录</li>
+<li><code>CHR</code>：表示字符类型</li>
+<li><code>BLK</code>：块设备类型</li>
+<li><code>UNIX</code>：UNIX域套接字</li>
+<li><code>FIFO</code>：先进先出(FIFO)队列</li>
+<li><code>IPv4</code>：网际协议(IP)套接字</li>
+</ul>
+</li>
+<li><p>DEVICE：指定磁盘的名称</p>
+</li>
+</ul>
+<ul>
+<li><p><code>SIZE/OFF</code>：文件的大小</p>
+</li>
+<li><p><code>NODE</code>：索引节点（文件在磁盘上的标识）</p>
+</li>
+<li><p><code>NAME</code>：打开文件的确切名称</p>
+</li>
+</ul>
+<h4 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h4><p>*<em><code>lsof -i :80</code>  列出80端口目前打开的文件列表 *</em></p>
+<pre class=" language-shell"><code class="language-shell">COMMAND     PID  USER   FD   TYPE    DEVICE SIZE/OFF NODE NAME
+nginx      8838  root    8u  IPv4 114512623      0t0  TCP *:http (LISTEN)
+</code></pre>
+<p> *<em><code>lsof -i</code>说明：列出所有的网络连接 *</em></p>
+<pre class=" language-shell"><code class="language-shell">COMMAND     PID            USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+systemd-n   274 systemd-network   19u  IPv4   13485      0t0  UDP huadong1C2G:bootpc
+systemd-r   426 systemd-resolve   12u  IPv4   14274      0t0  UDP localhost:domain
+systemd-r   426 systemd-resolve   13u  IPv4   14275      0t0  TCP localhost:domain (LISTEN)
+chronyd     628         _chrony    1u  IPv4   16503      0t0  UDP localhost:323
+chronyd     628         _chrony    2u  IPv6   16504      0t0  UDP localhost:323
+sshd        817            root    3u  IPv4   17785      0t0  TCP *:ssh (LISTEN)
+docker-pr  1256            root    4u  IPv6   21629      0t0  TCP *:mysql (LISTEN)
+java       1785            root   12u  IPv4  968630      0t0  TCP *:22222 (LISTEN)
+java       1785            root   27u  IPv4  968639      0t0  TCP localhost:9999 (LISTEN)
+docker-pr  8494            root    4u  IPv6  810761      0t0  TCP *:6379 (LISTEN)
+fdfs_stor  9885            root    5u  IPv4 1482145      0t0  TCP *:23000 (LISTEN)
+fdfs_stor  9885            root   20u  IPv4 1546888      0t0  TCP huadong1C2G:55630->149.129.119.32:22122 (ESTABLISHED)
+fdfs_stor  9885            root   21u  IPv4 1631104      0t0  TCP huadong1C2G:59478->144.34.203.229.16clouds.com:23000 (ESTABLISHED)
+fdfs_stor  9885            root   23u  IPv4 1546889      0t0  TCP huadong1C2G:23000->144.34.203.229.16clouds.com:47610 (ESTABLISHED)
+sshd      28722            root    3u  IPv4 1851863      0t0  TCP huadong1C2G:ssh->222.133.237.121:3880 (ESTABLISHED)
+sshd      28722            root    8u  IPv4 1852165      0t0  TCP localhost:6011 (LISTEN)
+sshd      28738            root    3u  IPv4 1851986      0t0  TCP huadong1C2G:ssh->222.133.237.121:3881 (ESTABLISHED)
+sshd      29738            root    3u  IPv4 1684947      0t0  TCP huadong1C2G:ssh->222.133.237.121:2184 (ESTABLISHED)
+sshd      29738            root    8u  IPv4 1685246      0t0  TCP localhost:6010 (LISTEN)
+sshd      29755            root    3u  IPv4 1685078      0t0  TCP huadong1C2G:ssh->222.133.237.121:2185 (ESTABLISHED)
+AliYunDun 32473            root   21u  IPv4  752164      0t0  TCP huadong1C2G:53330->100.100.30.26:http (ESTABLISHED)
+</code></pre>
+<p>*<em><code>lsof -i tcp</code> 列出所有的TCP网络连接信息  *</em></p>
+<pre class=" language-shell"><code class="language-shell">COMMAND     PID            USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+systemd-r   426 systemd-resolve   13u  IPv4   14275      0t0  TCP localhost:domain (LISTEN)
+sshd        817            root    3u  IPv4   17785      0t0  TCP *:ssh (LISTEN)
+docker-pr  1256            root    4u  IPv6   21629      0t0  TCP *:mysql (LISTEN)
+java       1785            root   12u  IPv4  968630      0t0  TCP *:22222 (LISTEN)
+java       1785            root   27u  IPv4  968639      0t0  TCP localhost:9999 (LISTEN)
+docker-pr  8494            root    4u  IPv6  810761      0t0  TCP *:6379 (LISTEN)
+fdfs_stor  9885            root    5u  IPv4 1482145      0t0  TCP *:23000 (LISTEN)
+fdfs_stor  9885            root   20u  IPv4 1546888      0t0  TCP huadong1C2G:55630->149.129.119.32:22122 (ESTABLISHED)
+fdfs_stor  9885            root   21u  IPv4 1631104      0t0  TCP huadong1C2G:59478->144.34.203.229.16clouds.com:23000 (ESTABLISHED)
+fdfs_stor  9885            root   23u  IPv4 1546889      0t0  TCP huadong1C2G:23000->144.34.203.229.16clouds.com:47610 (ESTABLISHED)
+sshd      28722            root    3u  IPv4 1851863      0t0  TCP huadong1C2G:ssh->222.133.237.121:3880 (ESTABLISHED)
+sshd      28722            root    8u  IPv4 1852165      0t0  TCP localhost:6011 (LISTEN)
+sshd      28738            root    3u  IPv4 1851986      0t0  TCP huadong1C2G:ssh->222.133.237.121:3881 (ESTABLISHED)
+sshd      29738            root    3u  IPv4 1684947      0t0  TCP huadong1C2G:ssh->222.133.237.121:2184 (ESTABLISHED)
+sshd      29738            root    8u  IPv4 1685246      0t0  TCP localhost:6010 (LISTEN)
+sshd      29755            root    3u  IPv4 1685078      0t0  TCP huadong1C2G:ssh->222.133.237.121:2185 (ESTABLISHED)
+AliYunDun 32473            root   21u  IPv4  752164      0t0  TCP huadong1C2G:53330->100.100.30.26:http (ESTABLISHED)
+</code></pre>
+<ul>
+<li>命令：<code>lsof -i udp</code><br>说明：列出所有的UDP网络连接信息</li>
+<li>命令：<code>lsof -i tcp:80</code><br>说明：列出80端口TCP协议的所有连接信息</li>
+<li>命令：<code>lsof -i udp:25</code><br>说明：列出25端口UDP协议的所有连接信息</li>
+<li>命令：<code>lsof -c ngin</code><br>说明：列出以ngin开头的进程打开的文件列表</li>
+<li>命令：<code>lsof -p 20711</code><br>说明：列出指定进程打开的文件列表</li>
+<li>命令：<code>lsof -u uasp</code><br>说明：列出指定用户打开的文件列表</li>
+<li>命令：<code>lsof -u uasp -i tcp</code><br>说明：将所有的TCP网络连接信息和指定用户打开的文件列表信息一起输出</li>
+<li>命令：<code>lsof -a -u uasp -i tcp</code><br>说明：将指定用户打开的文件列表信息，同时是TCP网络连接信息的一起输出；注意和上一条命令进行对比</li>
+<li>命令：<code>lsof +d /usr/local/</code><br>说明：列出目录下被进程打开的文件列表</li>
+<li>命令：<code>lsof +D /usr/local/</code><br>说明：递归搜索目录下被进程打开的文件列表</li>
+<li>命令：<code>lsof -i @peida.linux:20,21,22,25,53,80 -r 3</code><br>说明：列出目前连接到主机peida.linux上端口为20，21，22，25，53，80相关的所有文件信息，且每隔3秒不断的执行<code>lsof</code>指令</li>
+</ul>
+<p>参考资料</p>
+<p><a href="https://www.jellythink.com/archives/444" target="_blank" rel="noopener">pidstat参考资料</a></p>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/lsof.html" target="_blank" rel="noopener">lsof参考资料</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-perf1/index.html" target="_blank" rel="noopener">perf参考资料</a></p>
 
             </div>
             <hr/>
@@ -629,7 +707,7 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2019/12/15/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3/">https://superopenai.github.io/2019/12/15/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -667,12 +745,8 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
-                                </a>
-                            
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
                         </div>
@@ -713,55 +787,51 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/Swagger2%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E8%A6%81%E7%82%B9/">
+                <a href="/2019/12/15/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Swagger2配置相关要点">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Linux常用命令讲解(一)">
                         
-                        <span class="card-title">Swagger2配置相关要点</span>
+                        <span class="card-title">Linux常用命令讲解(一)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring Boot整合Swagger2的流程
-由于springboot的便捷，以及前后端分离的趋势，后端和前端配合的桥梁便是接口细节，我们通常遵守REST的原则，为其他开发人员提供一份REST接口文档，但后期接口多又杂，手写十分耗时耗力
+                            Linux命令讲解（一）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义
+PerfPerf 是用来进行软件性能分析的工具。
+通过它，应用程序可以利用 PMU，tracepoint
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
@@ -775,37 +845,33 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/spring-jpa-hibernate-ddl-auto%E5%B1%9E%E6%80%A7%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+                <a href="/2019/12/15/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%88%A8%E6%9E%90/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="spring.jpa.hibernate.ddl-auto属性是怎么工作的">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="内存管理刨析">
                         
-                        <span class="card-title">spring.jpa.hibernate.ddl-auto属性是怎么工作的</span>
+                        <span class="card-title">内存管理刨析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            查阅Springboot的官方文档可知
+                            内存管理内存管理是一个操作系统的核心，在应用程序和系统管理中起着至关重要的作用，下面将会着眼于内存管理的一些方面，进行阐述。示例有Linux和Windows平台。
 
-spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一条十分近似的语句—spring.jpa.generate-ddlspring.jpa.generate-d
+在多任务的系统中的每个进程都有属于他们自己的内存空间沙盒，这个沙盒的名字叫
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
@@ -815,12 +881,8 @@ spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>

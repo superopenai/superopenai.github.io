@@ -4,14 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring Data JPA相关注解, 阿宁的博客">
-    <meta name="description" content="现在版本？
-本文参考了Spring Data JPA官方文档，引用了部分文档的代码
+    <meta name="keywords" content="内存管理刨析, 阿宁的博客">
+    <meta name="description" content="内存管理内存管理是一个操作系统的核心，在应用程序和系统管理中起着至关重要的作用，下面将会着眼于内存管理的一些方面，进行阐述。示例有Linux和Windows平台。
 
-据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10
-
-
-使用Spri">
+在多任务的系统中的每个进程都有属于他们自己的内存空间沙盒，这个沙盒的名字叫">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring Data JPA相关注解 | 阿宁的博客</title>
+    <title>内存管理刨析 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring Data JPA相关注解
+                        内存管理刨析
                     </div>
                 </div>
             </div>
@@ -428,12 +424,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
-                            </a>
-                        
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
                     </div>
@@ -444,12 +436,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/springboot/" class="post-category">
-                                springboot
-                            </a>
-                        
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                spring
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
                             </a>
                         
                     </div>
@@ -460,7 +448,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2019-12-15
                 </div>
                 
                 
@@ -469,14 +457,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        3.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        11 分
                     </div>
                     
                 
@@ -492,118 +480,86 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="现在版本？"><a href="#现在版本？" class="headerlink" title="现在版本？"></a>现在版本？</h2><blockquote>
-<p>本文参考了Spring Data JPA官方文档，引用了部分文档的代码</p>
-</blockquote>
-<p><strong>据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10</strong></p>
-<p><img src="https://i.loli.net/2019/08/13/6AMnO31jarZ8ovN.png" alt="Springboot"><br><img src="https://i.loli.net/2019/08/13/IEaJKbcWOiNy9TD.png" alt="Spring Data"></p>
-<ul>
-<li>使用Springboot，springboot将会替你选择最新的spring data模块（<strong>Spring Boot selects a recent version of Spring Data modules for you. If you still want to upgrade to a newer version, configure the property spring-data-releasetrain.version to the train name and iteration you would like to use.</strong>）。</li>
-</ul>
-<p><img src="https://i.loli.net/2019/08/13/uXOPpgiCLy7Mmhs.png" alt=""><br><img src="https://i.loli.net/2019/08/13/ERyfzZALupKBnFH.png" alt=""></p>
-<h2 id="Spring-Data-Jpa-是什么？"><a href="#Spring-Data-Jpa-是什么？" class="headerlink" title="Spring Data Jpa 是什么？"></a>Spring Data Jpa 是什么？</h2><blockquote>
-<p>Spring Data JPA是更大的Spring Data系列的一部分，可以轻松实现基于JPA的存储库。此模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动应用程序变得更加容易。在相当长的一段时间内，实现应用程序的数据访问层一直很麻烦。必须编写太多样板代码来执行简单查询以及执行分页和审计。Spring Data JPA旨在通过减少实际需要的工作量来显着改善数据访问层的实现。作为开发人员，您编写存储库接口，包括自定义查找器方法，Spring将自动提供实现。</p>
-</blockquote>
-<h2 id="代码层面"><a href="#代码层面" class="headerlink" title="代码层面"></a>代码层面</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> me<span class="token punctuation">.</span>superning<span class="token punctuation">.</span>tmall<span class="token punctuation">.</span>pojo<span class="token punctuation">;</span>
-<span class="token keyword">import</span> com<span class="token punctuation">.</span>fasterxml<span class="token punctuation">.</span>jackson<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>JsonIgnoreProperties<span class="token punctuation">;</span>
-<span class="token keyword">import</span> javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Entity</span>
-<span class="token annotation punctuation">@Table</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"category"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//表名(严格区分大小写)</span>
-<span class="token annotation punctuation">@JsonIgnoreProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"handler"</span><span class="token punctuation">,</span> <span class="token string">"hibernateLazyInitializer"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Category</span>  <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Id</span>
-<span class="token comment" spellcheck="true">//    主键使用这个注解</span>
-    <span class="token annotation punctuation">@GeneratedValue</span><span class="token punctuation">(</span>strategy <span class="token operator">=</span> GenerationType<span class="token punctuation">.</span>IDENTITY<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//    自增长策略</span>
-    <span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ul>
-<li>1.@Entity：标识实体类是JPA实体，告诉JPA在程序运行时生成实体类对应表</li>
-<li>2.@Table：设置实体类在数据库所对应的表名</li>
-<li>3.@Id：标识类里所在变量为主键</li>
-<li>4.@GeneratedValue：设置主键生成策略，此方式依赖于具体的数据库</li>
-<li>5.@Basic：表示简单属性到数据库表字段的映射（几乎不用）</li>
-<li>6.@Column：表示属性所对应字段名进行个性化设置</li>
-<li>7.@Transient：表示属性并非数据库表字段的映射,ORM框架将忽略该属性（在与密码有关的实体类会用到这个注解，后续详解于另一篇文章）</li>
-</ul>
-<p>常用的注解如上，其他注解可能会以独立文章讲解。</p>
-<h3 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h3><pre><code>Spring data的中央接口是Repository，
-它还提供了扩展了持久层技术的接口例如
-CrudRepository
-MongoRepository
-JpaRepository</code></pre><p><img src="https://i.loli.net/2019/08/13/VDQYJfheO2v7ywE.png" alt="中央接口"></p>
-<h4 id="CrudRepository和JpaRepository之间的区别"><a href="#CrudRepository和JpaRepository之间的区别" class="headerlink" title="CrudRepository和JpaRepository之间的区别"></a><strong>CrudRepository和JpaRepository之间的区别</strong></h4><p><img src="https://i.loli.net/2019/08/13/xPsVpbeOry83QuC.png" alt=""></p>
-<p><strong>从上图你可以看出JpaRepository 继承了PagingAndSortingRepository，相应的也继承了CrudRepository</strong></p>
-<ul>
-<li>CrudRepository 主要提供了CRUD的方法功能</li>
-<li>PagingAndSortingRepository，提供了分页和排序记录的方法</li>
-<li>JpaRepository 则拥有了它们两个所有的方法功能，并扩展了其他方法</li>
-</ul>
-<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OrderItemDAO</span> 
-<span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token operator">&lt;</span>OrderItem<span class="token punctuation">,</span>Integer<span class="token operator">></span>
-<span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>OrderItem<span class="token operator">></span> <span class="token function">findByOrderOrderByIdDesc</span><span class="token punctuation">(</span>Order order<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre><code>由代码可知，Dao接口首先继承一个JpaRepository接口，
-JpaRepository&lt;T, ID&gt; T是泛型，ID是主键的类型。
-接口本身已经为我们提供了基础的CRUD方法，但有时我们有
-一些特殊的查询，接口无法为我们提供，这时就需要我们进行特殊参数处理。</code></pre><h5 id="特殊参数处理"><a href="#特殊参数处理" class="headerlink" title="特殊参数处理"></a>特殊参数处理</h5><pre class=" language-java"><code class="language-java">Page<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Slice<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Sort sort<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><strong>关于使用@Query(“sql语句”)在dao层的方法上写原生sql语句，<br>以后以独立文章介绍</strong></p>
-<h5 id="关系映射"><a href="#关系映射" class="headerlink" title="关系映射"></a>关系映射</h5><p><a href="https://blog.csdn.net/u010588262/article/details/76667283" target="_blank" rel="noopener">借鉴这位的csdn博客以及自我理解结合而成</a></p>
-<ul>
-<li><p>一对一</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OneToOne</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">,</span>optional<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"addressID"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释本表中指向另一个表的外键。</span>
-<span class="token keyword">public</span> Address <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-  <span class="token keyword">return</span> address<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<p>  现假设有Person表和Address表，是一对一的关系，<br>  在Person中有一个指向Address表主键的字段addressID，<br>  所以主控方一定是Person，所谓主控方就是能改变关联关系的一方，<br>  Person只要改变addressID就改变了关联关系，所以Person是主控方，<br>  所以@JoinColumn写在Person类中</p>
-</li>
-<li><p>一对多单向</p>
-</li>
-</ul>
-<p><strong>假如现在有Person表和Country表，那么一定是Person表中有country_id字段，由于我们是一对多的关系，所以站在一的角度，也就是Country的角度，在Country类中加入@JoinColumn</strong></p>
-<pre class=" language-java"><code class="language-java">
-<span class="token annotation punctuation">@OneToMany</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span> 
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"country_id"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释的是另一个表指向本表的外键。 </span>
-<span class="token keyword">public</span> List<span class="token operator">&lt;</span>Person<span class="token operator">></span> <span class="token function">getPersons</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> persons<span class="token punctuation">;</span> 
-<span class="token punctuation">}</span></code></pre>
-<p><strong>在一对多单向关系中，多的一方（Person）没有注解，一的一方（Country）有注解，如果一的一方不加@JoinColumn指定外键字段的话，Hibernate会自动生成一张中间表Country_PERSON来对Person和Country进行绑定。</strong></p>
-<ul>
-<li>多对一单向</li>
-</ul>
+                <h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p><strong>内存管理是一个操作系统的核心，在应用程序和系统管理中起着至关重要的作用，下面将会着眼于内存管理的一些方面，进行阐述。示例有Linux和Windows平台。</strong></p>
 <blockquote>
-<p><strong>一个产品可以属于多个分类,因此@JoinColumn放在Product类中</strong></p>
+<p>在多任务的系统中的每个进程都有属于他们自己的内存空间沙盒，这个沙盒的名字叫做(<code>virtual address space (VAS)</code>)    “<code>虚拟地址空间</code>”    。 在32位的系统下，内存的大小通常是2^32–&gt;4GB. 在64位的系统下，内存应该是2^64,但是基于处理器的能力限制，还达不到那么大的内存。 64位linux一般使用48位来表示虚拟地址空间，使用46位来表示物理地址空间，可以通过cat /proc/cpuinfo来查看 </p>
+<p><img src="https://i.loli.net/2019/12/14/As25qfTyXGmlivc.png" alt=""></p>
+<p>这些虚拟地址通过页表<code>Page table</code> 映射到物理内存上，由内核维护和Cpu调用，每一个进程拥有他们自己的页表集合， 一旦启用了虚拟地址，它们将应用于计算机中运行的所有软件，包括内核本身。因此，虚拟地址空间的一部分必须保留给内核 。</p>
+<p>在32位模式下它是一个4GB的内存地址块。在Linux系统中, 内核进程和用户进程所占的虚拟内存比例是1:3（高1G是内核空间，低3G是用户空间），而Windows系统为2:2(通过设置Large-Address-Aware Executables标志也可为1:3)。这并不意味着内核使用那么多物理内存， 仅表示它可支配这部分地址空间，根据需要将其映射到物理内存。</p>
+<p><img src="https://i.loli.net/2019/12/14/tDWZBYNeUwGzHIL.png" alt=""></p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/08/13/yzwNqMiDYXBtZAg.png" alt=""></p>
-<p><strong>看看数据库</strong><br><img src="https://i.loli.net/2019/08/13/VQfOLJWjimxeHG1.png" alt=""></p>
-<pre><code>可以看到在Product表出现了一个对应Category表的外键
-但是Category表中却没有外键，因此这就是单向的多对一</code></pre><p><img src="https://i.loli.net/2019/08/13/j42JOk8SCxsPEMK.png" alt=""></p>
+<p>** 内核空间一直存在，并在所有进程中映射相同的物理内存。 内核代码和数据始终是可寻址的，随时可以处理中断或系统调用。 相反，每当发生进程切换时，地址空间的用户模式部分的映射都会更改**</p>
+<p><img src="https://i.loli.net/2019/12/15/EFiQND6cI4TaHuL.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/12/15/sHcZiRyjp849Lrq.png" alt=""></p>
+<blockquote>
+<p>图中的蓝色区域指的是虚拟地址映射到物理内存的内存段，白色区域指的是未映射的那部分。</p>
+<p>因为虚拟地址空间对于计算机内的每一个进程来说几乎都是一致的，这就很容易被作为安全漏洞被黑客进行远程攻击。但是漏洞通常利用内存的绝对路径，例如：栈，内存映射段，库函数等等…     所以，为了防止黑客的攻击，Linux通过对栈，堆等等的起始位置加上随机偏移量来打乱布局。到对于32位系统来说，空间大小很有限，较小的空间使得随机化的优化能力有限—— [论地址空间随机化的有效性](On the Effectiveness of Address-Space Randomization)</p>
+</blockquote>
+<h3 id="各个分段的含义"><a href="#各个分段的含义" class="headerlink" title="各个分段的含义"></a>各个分段的含义</h3><h4 id="Kernel-space"><a href="#Kernel-space" class="headerlink" title="Kernel space"></a>Kernel space</h4><blockquote>
+<p>内核总是驻留在内存中，是操作系统的一部分，内核空间为内核保留，不允许其他应用访问。</p>
+</blockquote>
+<h4 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h4><blockquote>
+<p>在用户进程地址空间的顶层是    <code>Stack</code>，    这里储存着局部变量和函数方法的参数，调用函数方法的时候，将会向栈中压入新的栈帧（ <strong>stack frame</strong> ）。当函数方法<code>return</code>的时候，栈帧将会被摧毁。这也就意味着不需要复杂的数据结构来跟踪堆栈内容，只需要一个简单的指针就能够完成任务。</p>
+<p><code>push</code>和  <code>pop</code>的执行速度都是非常快的，另外，由于堆栈内容的不断重用，所以通常会把活跃的堆栈内容缓存到CPU的Cache中，进一步加快访问的速度。</p>
+<p>随着我们不断的向栈中压入数据，栈可能已经满了，不能再继续压入更多的数据，这是继续压入会触发一个<code>Page fault</code>  此时将会由Linux系统调用一个<code>expand_stack()</code>函数，这个函数将会返回一个<code>expand_downwards(vma, address)</code>    用于扩展栈空间，它将会检查此时栈的大小是否低于栈空间的最大值 <code>RLIMIT_STACK</code> (通常都会是 8MB)。</p>
+<p>如果栈的空间已经达到了最大值，继续push将会抛出<code>Stack Overflow堆栈溢出</code>的错误。栈的设计和动态数组不同，动态数组可以动态的扩大减小数组空间。但是栈空间只能变大，不能缩小。 </p>
+</blockquote>
+<h4 id="内存映射段"><a href="#内存映射段" class="headerlink" title="内存映射段"></a>内存映射段</h4><blockquote>
+<p> 在堆栈下方，就是内存映射段。 在这里，内核将文件的内容直接映射到内存。 任何应用程序都可以通过Linux系统的 <code>mmap（）</code>函数调用或Windows中的<code>CreateFileMapping（）</code>/ <code>MapViewOfFile（）</code>来请求此类映射。 内存映射是一种执行文件I / O的便捷且高性能的方式，因此它用于加载动态库。 也可以创建不对应于任何文件的匿名内存映射，而将其用作程序数据。 在Linux中，如果通过<code>malloc（）</code>请求大量内存，则C库将创建此类匿名映射，而不使用堆内存。 “大”表示大于<code>MMAP_THRESHOLD</code>字节，默认为128 KB，可通过<code>mallopt（）</code>进行调整。 </p>
+</blockquote>
+<h4 id="堆空间"><a href="#堆空间" class="headerlink" title="堆空间"></a>堆空间</h4><blockquote>
+<p>堆空间提供运行时的内存分配，像栈一样，函数方法等等必须要进行了内存分配后才可以正常运行。多数语言都提供了相应的堆空间的实现，在Java中，Jvm中堆空间—– 储存的都是对象（每一个对象都有一个对应class信息），另外jvm中只有一个堆区，被所有进程共享。 堆中不存放基本类型和对象引用，只存放对象本身  【这里的‘对象’，就不包括基本数据类型】 。</p>
+<ul>
+<li>基本类型  即int, short, long, byte, float, double, boolean, char 。 【因为这些字面值的数据大小可知并且生存期可知（他们在程序内某个固定代码块中，代码块退出，他们就消失），为了追求速度，于是存在栈中】 </li>
+<li>包装类，自定义类： Java用new()语句来显式地告诉编译器，在运行时才根据需要动态创建，因此比较灵活，但缺点是要占用更多的时间。 </li>
+</ul>
+</blockquote>
+<h4 id="BBS段"><a href="#BBS段" class="headerlink" title="BBS段"></a>BBS段</h4><blockquote>
+<p> BSS(Block Started by Symbol)段中通常存放程序中以下符号：</p>
+<ul>
+<li><p>未初始化的全局变量和静态局部变量</p>
+</li>
+<li><p>初始值为0的全局变量和静态局部变量(依赖于编译器实现)</p>
+</li>
+<li><p>未定义且初值不为0的符号(该初值即common block的大小)</p>
+<p> C语言中，未显式初始化的静态分配变量被初始化为0(算术类型)或空指针(指针类型)。由于程序加载时，BSS会被操作系统清零，所以未赋初值或初值为0的全局变量都在BSS中。BSS段仅为未初始化的静态分配变量预留位置，在目标文件中并不占据空间，这样可减少目标文件体积。但程序运行时需为变量分配内存空间，故目标文件必须记录所有未初始化的静态分配变量大小总和(通过start_bss和end_bss地址写入机器代码)。当加载器(loader)加载程序时，将为BSS段分配的内存初始化为0。在嵌入式软件中，进入<code>main()</code>函数之前BSS段被C运行时系统映射到初始化为全零的内存(效率较高)。</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="Data-段"><a href="#Data-段" class="headerlink" title="Data 段"></a>Data 段</h4><blockquote>
+<p>数据段通常用于存放程序中已初始化且初值不为0的全局变量和静态局部变量。数据段属于静态内存分配(静态存储区)，可读可写。</p>
+<p>   数据段保存在目标文件中(在嵌入式系统里一般固化在镜像文件中)，其内容由程序初始化。例如，对于全局变量int gVar = 10，必须在目标文件数据段中保存10这个数据，然后在程序加载时复制到相应的内存。</p>
+<p>   数据段与BSS段的区别如下： </p>
+<p>   1) BSS段不占用物理文件尺寸，但占用内存空间；数据段占用物理文件，也占用内存空间。</p>
+<p>   对于大型数组如int ar0[10000] = {1, 2, 3, …}和int ar1[10000]，ar1放在BSS段，只记录共有10000*4个字节需要初始化为0，而不是像ar0那样记录每个数据1、2、3…，此时BSS为目标文件所节省的磁盘空间相当可观。</p>
+<p>   2) 当程序读取数据段的数据时，系统会出发缺页故障，从而分配相应的物理内存；当程序读取BSS段的数据时，内核会将其转到一个全零页面，不会发生缺页故障，也不会为其分配相应的物理内存。</p>
+<p>   运行时数据段和BSS段的整个区段通常称为数据区。某些资料中“数据段”指代数据段 + BSS段 + 堆。</p>
+</blockquote>
+<h4 id="text段"><a href="#text段" class="headerlink" title="text段"></a>text段</h4><blockquote>
+<p> 代码段也称正文段或文本段，通常用于存放程序执行代码(即CPU执行的机器指令)。一般C语言执行语句都编译成机器代码保存在代码段。通常代码段是可共享的，因此频繁执行的程序只需要在内存中拥有一份拷贝即可。代码段通常属于只读，以防止其他程序意外地修改其指令(对该段的写操作将导致段错误)。某些架构也允许代码段为可写，即允许修改程序。</p>
+<p>   代码段指令根据程序设计流程依次执行，对于顺序指令，只会执行一次(每个进程)；若有反复，则需使用跳转指令；若进行递归，则需要借助栈来实现。</p>
+<p>   代码段指令中包括操作码和操作对象(或对象地址引用)。若操作对象是立即数(具体数值)，将直接包含在代码中；若是局部数据，将在栈区分配空间，然后引用该数据地址；若位于BSS段和数据段，同样引用该数据地址。</p>
+<p>   代码段最容易受优化措施影响。</p>
+</blockquote>
+<h3 id="分段的好处"><a href="#分段的好处" class="headerlink" title="分段的好处"></a>分段的好处</h3><blockquote>
+<p>  进程运行过程中，代码指令根据流程依次执行，只需访问一次(当然跳转和递归可能使代码执行多次)；而数据(数据段和BSS段)通常需要访问多次，因此单独开辟空间以方便访问和节约空间。具体解释如下：</p>
+<p>   当程序被装载后，数据和指令分别映射到两个虚存区域。数据区对于进程而言可读写，而指令区对于进程只读。两区的权限可分别设置为可读写和只读。以防止程序指令被有意或无意地改写。</p>
+<p>   现代CPU具有极为强大的缓存(Cache)体系，程序必须尽量提高缓存命中率。指令区和数据区的分离有利于提高程序的局部性。现代CPU一般数据缓存和指令缓存分离，故程序的指令和数据分开存放有利于提高CPU缓存命中率。</p>
+<p>   当系统中运行多个该程序的副本时，其指令相同，故内存中只须保存一份该程序的指令部分。若系统中运行数百进程，通过共享指令将节省大量空间(尤其对于有动态链接的系统)。其他只读数据如程序里的图标、图片、文本等资源也可共享。而每个副本进程的数据区域不同，它们是进程私有的。</p>
+<p>   此外，临时数据及需要再次使用的代码在运行时放入栈区中，生命周期短。全局数据和静态数据可能在整个程序执行过程中都需要访问，因此单独存储管理。堆区由用户自由分配，以便管理。</p>
+</blockquote>
+<h3 id="关于虚拟内存和虚拟地址空间的区别"><a href="#关于虚拟内存和虚拟地址空间的区别" class="headerlink" title="关于虚拟内存和虚拟地址空间的区别"></a>关于虚拟内存和虚拟地址空间的区别</h3><ul>
+<li><p>虚拟内存是一种用于多任务系统内核的一种内存管理技术。</p>
+<blockquote>
+<p>虚拟内存的概念可以视为内存在不同地方的备份，进程的一部分内存可以在 硬盘，可以在内存， 甚至可以在远程云端。这都于系统管理，对于用户是透明的，用户只看到内存</p>
+</blockquote>
+</li>
+<li><p>虚拟地址空间是一种用于现代操作系统的一种内存映射机制。</p>
+<blockquote>
+<p>虚拟空间地址是内存地址到用户进程的一种映射，两个不同的用户进程在内存中访问相同的地址，但是它们将包含完全不同的数据。对于小内存的系统很有意义。 这意味着每个进程都可以在地址空间允许的情况下访问尽可能多的内存，不管进程如何存在。 </p>
+</blockquote>
+</li>
+</ul>
 
             </div>
             <hr/>
@@ -629,7 +585,7 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2019/12/15/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%88%A8%E6%9E%90/">https://superopenai.github.io/2019/12/15/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%88%A8%E6%9E%90/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -667,12 +623,8 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
-                                </a>
-                            
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
                         </div>
@@ -717,36 +669,34 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/10/27/Swagger2%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E8%A6%81%E7%82%B9/">
+                <a href="/2019/12/15/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Swagger2配置相关要点">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Linux常用命令讲解(一)">
                         
-                        <span class="card-title">Swagger2配置相关要点</span>
+                        <span class="card-title">Linux常用命令讲解(一)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring Boot整合Swagger2的流程
-由于springboot的便捷，以及前后端分离的趋势，后端和前端配合的桥梁便是接口细节，我们通常遵守REST的原则，为其他开发人员提供一份REST接口文档，但后期接口多又杂，手写十分耗时耗力
+                            Linux命令讲解（一）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义
+PerfPerf 是用来进行软件性能分析的工具。
+通过它，应用程序可以利用 PMU，tracepoint
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-15
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
                                 </a>
                             
                             
@@ -756,12 +706,8 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>
@@ -775,37 +721,36 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/spring-jpa-hibernate-ddl-auto%E5%B1%9E%E6%80%A7%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+                <a href="/2019/12/11/GFS%E8%AE%BA%E6%96%87%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E4%B8%80/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="spring.jpa.hibernate.ddl-auto属性是怎么工作的">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="GFS论文读书笔记一">
                         
-                        <span class="card-title">spring.jpa.hibernate.ddl-auto属性是怎么工作的</span>
+                        <span class="card-title">GFS论文读书笔记一</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            查阅Springboot的官方文档可知
-
-spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一条十分近似的语句—spring.jpa.generate-ddlspring.jpa.generate-d
+                            GFS论文读书笔记一惰性空间分配（ Lazy space allocation ）
+最近在读Google在2003年发表的 google file system (GFS) 论文，这篇论文也可谓是大数据方向的祖师爷论文，再加上Google本
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
                                 </a>
                             
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    笔记
                                 </a>
                             
                             
@@ -815,12 +760,12 @@ spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
                     </a>
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>
