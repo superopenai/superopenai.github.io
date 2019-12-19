@@ -1,0 +1,1707 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux常用命令讲解(二), 阿宁的博客">
+    <meta name="description" content="Linux命令讲解（二）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义
+Linux命令讲解（二）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Linux常用命令讲解(二) | 阿宁的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">阿宁的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">阿宁的博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="http://github.com/superopenai" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="http://github.com/superopenai" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Linux常用命令讲解(二)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-12-19
+                </div>
+                
+                
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        24 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Linux命令讲解（二）"><a href="#Linux命令讲解（二）" class="headerlink" title="Linux命令讲解（二）"></a>Linux命令讲解（二）</h2><p><img src="https://i.loli.net/2019/12/15/vRUzMtdFP1O7G3W.png" alt=""></p>
+<p><strong>外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义</strong></p>
+<h2 id="Linux命令讲解（二）-1"><a href="#Linux命令讲解（二）-1" class="headerlink" title="Linux命令讲解（二）"></a>Linux命令讲解（二）</h2><p><img src="https://i.loli.net/2019/12/15/vRUzMtdFP1O7G3W.png" alt=""></p>
+<p><strong>外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义</strong></p>
+<h3 id="iostat命令"><a href="#iostat命令" class="headerlink" title="iostat命令"></a>iostat命令</h3><p><code>iostat</code> 用于监控统计系统输入输出设备和 CPU 的使用情况，英文 I/O statistics 的缩写。</p>
+<p>它的特点是汇报磁盘活动统计情况，同时也会汇报出 CPU 使用情况。同 <code>vmstat</code> 一样，<code>iostat</code> 也有一个弱点，就是它不能对某个进程进行深入分析，仅对系统的整体情况进行分析。<code>iostat</code> 属于 <code>sysstat</code> 软件包，所以使用前需先安装 <code>sysstat</code>。</p>
+<pre class=" language-shell"><code class="language-shell">root@iZj6c8ezzawm4vybolwi68Z:~# iostat -help
+Usage: iostat [ options ] [ <interval> [ <count> ] ]
+Options are:
+[ -c ] [ -d ] [ -h ] [ -k | -m ] [ -N ] [ -t ] [ -V ] [ -x ] [ -y ] [ -z ]
+[ -j { ID | LABEL | PATH | UUID | ... } ]
+[ [ -H ] -g <group_name> ] [ -p [ <device> [,...] | ALL ] ]
+[ <device> [...] | ALL ]
+
+
+可从上面看出， iostat的命令格式---iostat [参数] [间隔时间] [报告次数]
+
+</code></pre>
+<h4 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h4><ul>
+<li><p><code>-C</code> 显示 CPU 使用情况</p>
+</li>
+<li><p><code>-d</code> 显示磁盘使用情况</p>
+</li>
+<li><p><code>-k</code> 以 KB 为单位显示</p>
+</li>
+<li><p><code>-m</code> 以 M 为单位显示</p>
+</li>
+<li><p><code>-N</code> 显示磁盘阵列(LVM) 信息</p>
+</li>
+<li><p><code>-n</code> 显示 NFS 使用情况</p>
+</li>
+<li><p><code>-p[磁盘]</code> 显示磁盘和分区的情况</p>
+</li>
+<li><p><code>-t</code> 显示终端和 CPU 的信息</p>
+</li>
+<li><p><code>-x</code> 显示详细信息</p>
+</li>
+<li><p><code>-V</code> 显示版本信息</p>
+<p>更多参数和详细说明 可以参考 说明文档    <a href="https://linux.die.net/man/1/iostat" target="_blank" rel="noopener">iostat - Linux man page</a></p>
+</li>
+</ul>
+<h4 id="属性说明"><a href="#属性说明" class="headerlink" title="属性说明"></a>属性说明</h4><h4 id="CPU-属性值"><a href="#CPU-属性值" class="headerlink" title="CPU 属性值"></a>CPU 属性值</h4><table>
+<thead>
+<tr>
+<th>标示</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%user</td>
+<td>CPU 处在用户模式下的时间百分比</td>
+</tr>
+<tr>
+<td>%nice</td>
+<td>CPU 处在带 NICE 值的用户模式下的时间百分比</td>
+</tr>
+<tr>
+<td>%system</td>
+<td>CPU 处在系统模式下的时间百分比</td>
+</tr>
+<tr>
+<td>%iowait</td>
+<td>CPU 等待输入输出完成时间的百分比</td>
+</tr>
+<tr>
+<td>%steal</td>
+<td>管理程序维护另一个虚拟处理器时，虚拟 CPU 的无意识等待时间百分比</td>
+</tr>
+<tr>
+<td>%idle</td>
+<td>CPU 空闲时间百分比</td>
+</tr>
+</tbody></table>
+<h4 id="DISK-属性值"><a href="#DISK-属性值" class="headerlink" title="DISK 属性值"></a>DISK 属性值</h4><table>
+<thead>
+<tr>
+<th align="left">标示</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Device</td>
+<td align="left">监测设备名称</td>
+</tr>
+<tr>
+<td align="left">rrqm/s</td>
+<td align="left">每秒需要读取需求的数量</td>
+</tr>
+<tr>
+<td align="left">wrqm/s</td>
+<td align="left">每秒需要写入需求的数量</td>
+</tr>
+<tr>
+<td align="left">r/s</td>
+<td align="left">每秒实际读取需求的数量</td>
+</tr>
+<tr>
+<td align="left">w/s</td>
+<td align="left">每秒实际写入需求的数量</td>
+</tr>
+<tr>
+<td align="left">rsec/s</td>
+<td align="left">每秒读取区段的数量</td>
+</tr>
+<tr>
+<td align="left">wsec/s</td>
+<td align="left">每秒写入区段的数量</td>
+</tr>
+<tr>
+<td align="left">rkB/s</td>
+<td align="left">每秒实际读取的大小，单位为 KB</td>
+</tr>
+<tr>
+<td align="left">wkB/s</td>
+<td align="left">每秒实际写入的大小，单位为 KB</td>
+</tr>
+<tr>
+<td align="left">rMB/s</td>
+<td align="left">每秒实际读取的大小，单位为 MB</td>
+</tr>
+<tr>
+<td align="left">wMB/s</td>
+<td align="left">每秒实际写入的大小，单位为 MB</td>
+</tr>
+<tr>
+<td align="left">avgrq-sz</td>
+<td align="left">需求的平均大小区段</td>
+</tr>
+<tr>
+<td align="left">avgqu-sz</td>
+<td align="left">需求的平均队列长度</td>
+</tr>
+<tr>
+<td align="left">await</td>
+<td align="left">等待 I/O 平均的时间(milliseconds)</td>
+</tr>
+<tr>
+<td align="left">svctm</td>
+<td align="left">I/O 需求完成的平均时间</td>
+</tr>
+<tr>
+<td align="left">%util</td>
+<td align="left">被 I/O 需求消耗的 CPU 百分比</td>
+</tr>
+</tbody></table>
+<h4 id="TPS-属性值"><a href="#TPS-属性值" class="headerlink" title="TPS 属性值"></a>TPS 属性值</h4><table>
+<thead>
+<tr>
+<th>标识</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tps</td>
+<td>该设备每秒的传输次数</td>
+</tr>
+<tr>
+<td>kB_read/s</td>
+<td>每秒从设备读取的数据量</td>
+</tr>
+<tr>
+<td>kB_wrtn/s</td>
+<td>每秒向设备写入的数据量</td>
+</tr>
+<tr>
+<td>kB_read</td>
+<td>读取的总数据量</td>
+</tr>
+<tr>
+<td>kB_wrtn</td>
+<td>写入的总数据量</td>
+</tr>
+</tbody></table>
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4><pre class=" language-shell"><code class="language-shell">$ iostat
+
+Linux 4.9.0-9-amd64 (iZj6c8ezzawm4vybolwi68Z)   12/19/2019      _x86_64_        (1 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.77    0.00    0.77    0.02    0.00   98.44
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.51         0.21         3.36     261863    4265717
+
+[iostat命令显示自启动以来 所有cpu和设备的单个历史记录]</code></pre>
+<pre class=" language-shell"><code class="language-shell">$ iostat -d 2
+Linux 4.9.0-9-amd64 (iZj6c8ezzawm4vybolwi68Z)   12/19/2019      _x86_64_        (1 CPU)
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.51         0.21         3.36     261863    4266469
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               2.04         0.00         8.16          0         16
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.00         0.00         0.00          0          0
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.51         0.00         6.12          0         12
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.00         0.00         0.00          0          0
+
+
+
+
+[iostat -d 2命令 每两秒显示一个连续的设备报告 ]
+</code></pre>
+<pre class=" language-shell"><code class="language-shell">$ iostat -d 2 6
+Linux 4.9.0-9-amd64 (iZj6c8ezzawm4vybolwi68Z)   12/19/2019      _x86_64_        (1 CPU)
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.51         0.21         3.36     261863    4266949
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.00         0.00         0.00          0          0
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               1.03         0.00         6.15          0         12
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.00         0.00         0.00          0          0
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.00         0.00         0.00          0          0
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+vda               0.00         0.00         0.00          0          0
+
+
+[iostat -d 2 6命令 每两秒显示一个连续的设备报告,一共显示六次 ]
+
+</code></pre>
+<pre class=" language-shell"><code class="language-shell">$ iostat -x hda hdb 2 6
+Linux 4.9.0-9-amd64 (iZj6c8ezzawm4vybolwi68Z)   12/19/2019      _x86_64_        (1 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.77    0.00    0.77    0.02    0.00   98.44
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.02    0.00    1.52    0.00    0.00   97.46
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.02    0.00    1.02    0.51    0.00   97.46
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.51    0.00    1.03    0.00    0.00   98.46
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.52    0.00    1.01    0.00    0.00   97.47
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.52    0.00    1.52    0.00    0.00   96.95
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rkB/s    wkB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+
+
+[iostat -x hda hdb 2 6命令 每两秒显示cpu和设备的设备报告,一共显示六次 ]
+
+
+</code></pre>
+<pre class=" language-shell"><code class="language-shell">$ iostat -p sda 2 6
+Linux 4.9.0-9-amd64 (iZj6c8ezzawm4vybolwi68Z)   12/19/2019      _x86_64_        (1 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.77    0.00    0.77    0.02    0.00   98.44
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.03    0.00    0.51    0.00    0.00   98.46
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           2.00    0.00    1.50    0.00    0.00   96.50
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.52    0.00    1.02    0.00    0.00   97.46
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.02    0.00    1.02    0.00    0.00   97.96
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.99    0.00    1.99    0.00    0.00   96.02
+
+Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+
+[iostat -x hda hdb 2 6命令 每两秒显示cpu和设备所有分区的报告,一共显示六次 ]
+</code></pre>
+<h3 id="iotop命令"><a href="#iotop命令" class="headerlink" title="iotop命令"></a>iotop命令</h3><p><strong>iotop命令</strong>是一个用来监视磁盘I/O使用状况的<a href="http://man.linuxde.net/top" target="_blank" rel="noopener">top</a>类工具。iotop具有与top相似的UI，其中包括PID、用户、I/O、进程等相关信息。Linux下的IO统计工具如<a href="http://man.linuxde.net/iostat" target="_blank" rel="noopener">iostat</a>，nmon等大多数是只能统计到per设备的读写情况，如果你想知道每个进程是如何使用IO的就比较麻烦，使用iotop命令可以很方便的查看。</p>
+<p>iotop使用Python语言编写而成，要求Python2.5（及以上版本）和Linux kernel2.6.20（及以上版本）。iotop提供有源代码及<a href="http://man.linuxde.net/rpm" target="_blank" rel="noopener">rpm</a>包，可从其<a href="http://guichaz.free.fr/iotop/" target="_blank" rel="noopener">官方主页</a>下载。</p>
+<h4 id="常用参数-1"><a href="#常用参数-1" class="headerlink" title="常用参数"></a>常用参数</h4><ul>
+<li><code>--version</code>     显示程序的版本号并退出</li>
+<li><code>-h</code>，                  –help显示此帮助消息并退出</li>
+<li><code>-o</code>，                  -仅显示实际正在执行I / O的进程或线程</li>
+<li><code>-b</code>，                  –batch非交互模式</li>
+<li><code>-n NUM</code>，        –iter = NUM结束之前的迭代次数[infinite]</li>
+<li>-<code>d SEC</code>，          –delay =迭代之间的SEC延迟[1秒]</li>
+<li><code>-p PID</code>，-pid = PID进程/线程以监视[全部]</li>
+<li><code>-u USER</code>，–user = USER用户来监视[全部]</li>
+<li><code>-P</code>，–processes仅显示进程，而不是所有线程</li>
+<li><code>-a</code>，–accumulated显示累积的I / O而不是带宽</li>
+<li><code>-k</code>，-千字节使用千字节而不是人类友好的单位</li>
+<li>-<code>t</code>，–time在每行上添加一个时间戳（暗示–batch）</li>
+<li><code>-q</code>，–quiet禁止显示标题的某些行（暗示–batch）</li>
+</ul>
+<h4 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h4><pre class=" language-shell"><code class="language-shell"># iotop
+ 512 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % dhclient -4 -v -pf /run/dhclient.eth0.pid -lf /v~s -I -df /var/lib/dhcp/dhclient6.eth0.leases eth0    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init noibrs
+    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]
+    3 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]
+    5 be/0 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kworker/0:0H]
+    6 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kworker/u2:0]
+    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [rcu_sched]
+    8 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [rcu_bh]
+    9 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]
+   10 be/0 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [lru-add-drain]
+   11 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]
+   12 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [cpuhp/0]
+</code></pre>
+<h3 id="blktrace命令"><a href="#blktrace命令" class="headerlink" title="blktrace命令"></a>blktrace命令</h3><p> blktrace是一个针对Linux内核中块设备I/O层的跟踪工具，是由Linux内核块设备层的维护者开发的，目前已经集成到内核2.6.17及其之后的内核版本中。通过使用这个工具，使用者可以获取I/O请求队列的各种详细的情况，包括进行读写的进程名称、进程号、执行时间、读写的物理块号、块大小等等，是一个Linux下分析I/O相关内容的很好的工具，在使用时基本上只会占用系统2%的资源 。</p>
+<h4 id="常用参数-2"><a href="#常用参数-2" class="headerlink" title="常用参数"></a>常用参数</h4><p>-d <dev>             | –dev=<dev><br>[ -r <debugfs path>  | –relay=<debugfs path> ]<br>[ -o <file>          | –output=<file>]<br>[ -D <dir>           | –output-dir=<dir><br>[ -w <time>          | –stopwatch=<time>]<br>[ -a <action field>  | –act-mask=<action field>]<br>[ -A <action mask>   | –set-mask=<action mask>]<br>[ -b <size>          | –buffer-size]<br>[ -n <number>        | –num-sub-buffers=<number>]<br>[ -l                 | –listen]<br>[ -h <hostname>      | –host=<hostname>]<br>[ -p <port number>   | –port=<port number>]<br>[ -s                 | –no-sendfile]<br>[ -I <devs file>     | –input-devs=<devs file>]<br>[ -v <version>       | –version]<br>[ -V <version>       | –version]</p>
+<ul>
+<li><p>​     -o文件以将输出发送到</p>
+</li>
+<li><p>​     -D目录以附加到输出文件名</p>
+</li>
+<li><p>​     -w在定义的时间后停止，以秒为单位</p>
+</li>
+<li><p>​     -a仅跟踪指定的动作。 参阅文件</p>
+</li>
+<li><p>​     -A将跟踪掩码作为单个值。 参阅文件</p>
+</li>
+<li><p>​     -b KiB中的子缓冲区大小（默认为512）</p>
+</li>
+<li><p>​     -n子缓冲区数（默认为4）</p>
+</li>
+<li><p>​     -l以网络侦听模式运行（blktrace服务器）</p>
+</li>
+<li><p>​     -h以网络客户端模式行，连接到给定的主机</p>
+</li>
+<li><p>​     -p要使用的网络端口（默认8462）</p>
+</li>
+<li><p>​     -s使网络客户端不使用sendfile（）传输数据</p>
+</li>
+<li><p>​     -I添加在&lt;devs文件&gt;中找到的设备</p>
+</li>
+<li><p>​     -v打印程序版本信息</p>
+</li>
+<li><p>​     -V打印程序版本信息</p>
+<p>blktrace的运行命令可以包括许多的详细配置，一一列举起来实在太多，而且没有必要，若有需要，可以自行通过搜索引擎查找相关文档。下面通过几个例子来直观的说明常用的几个监测功能： </p>
+</li>
+</ul>
+<h4 id="使用示例-2"><a href="#使用示例-2" class="headerlink" title="使用示例"></a>使用示例</h4><p><strong>blktrace区分两种类型的块层请求，文件系统和SCSI命令。前者被称为fs请求，后者被称为pc请求。文件系统请求是正常的读/写操作，即从给定大小的特定磁盘位置进行任何类型的读或写。这些请求通常源自用户进程，但也可能是由虚拟机将脏数据刷新到磁盘或文件系统将超级块或日志块同步到磁盘引发的。pc请求是SCSI命令。blktrace将命令数据块作为有效载荷发送，以便blkparse可以对其进行解码。</strong></p>
+<p>要跟踪设备/dev/hda上的i/o并将输出解析为可读形式，请使用以下命令:</p>
+<p><code>% blk trace-d/dev/sda-o-| blk rse-I-</code></p>
+<p>要跟踪设备上的i/o并保存输出供以后使用blktrace处理，请使用如下命令</p>
+<p><code>% blktrace /dev/sda /dev/sdb</code></p>
+<p>这将跟踪设备/dev/sda和/dev/sdb上的i/o，并将记录的信息分别保存在两个不同设备的当前目录中的sda和sdb文件中。blkparse实用程序稍后可以解析该跟踪信息:</p>
+<p><code>% blkparse sda sdb</code></p>
+<p>它将以友好的显示形式将先前记录的跟踪信息输出。</p>
+<h3 id="swapon命令"><a href="#swapon命令" class="headerlink" title="swapon命令"></a>swapon命令</h3><p><strong>swapon命令用于激活Linux系统中交换空间，Linux系统的内存管理必须使用交换区来建立虚拟内存。</strong></p>
+<h4 id="常用参数-3"><a href="#常用参数-3" class="headerlink" title="常用参数"></a>常用参数</h4><p> <code>swapon [选项] [&lt;spec&gt;]</code></p>
+<p>启用设备和文件以进行分页和交换。</p>
+<p>选项：</p>
+<ul>
+<li><p>-a，–all启用/ etc / fstab中的所有交换</p>
+</li>
+<li><p>-d，–discard [= <policy>]启用交换丢弃（如果设备支持）</p>
+</li>
+<li><p>-e，–ifexists静默跳过不存在的设备</p>
+</li>
+<li><p>-f，–fixpgsz必要时重新初始化交换空间</p>
+</li>
+<li><p>-o，–options &lt;列表&gt;逗号分隔的交换选项列表</p>
+</li>
+<li><p>-p，–priority <prio>指定交换设备的优先级</p>
+</li>
+<li><p>-s，-summary显示有关已用交换设备的摘要（不建议使用）</p>
+<p>  –show [= &lt;列&gt;]在可定义表中显示摘要</p>
+<p>  –noheadings不打印表格标题（使用–show）</p>
+<p>  –raw使用原始输出格式（带有–show）</p>
+<p>  –bytes在–show输出中以字节为单位显示交换大小</p>
+</li>
+<li><p>-v，–verbose详细模式</p>
+</li>
+<li><p>-h，–help显示此帮助并退出</p>
+</li>
+<li><p>-V，–version输出版本信息并退出</p>
+</li>
+</ul>
+<p><spec>参数：</p>
+<ul>
+<li>-L <label>     LABEL = &lt;标签&gt;的同义词</li>
+<li>-U <uuid>        UUID = <uuid>的同义词</li>
+<li>LABEL = <label>     按交换区域标签指定设备</li>
+<li>UUID = <uuid>           通过交换区UUID指定设备</li>
+<li>PARTLABEL = <label>      通过分区标签指定设备</li>
+<li>PARTUUID = <uuid>       通过分区UUID指定设备</li>
+<li><device>     要使用的设备名称</li>
+<li><file>      要使用的文件名</li>
+</ul>
+<p><strong>可用的丢弃策略类型（用于–discard）：</strong></p>
+<ul>
+<li>once：仅发布一次性区域丢弃物</li>
+<li>pages：释放的页面在重用之前将被丢弃</li>
+</ul>
+<p><strong>如果未选择任何策略，则将同时启用两种丢弃类型（默认）。</strong></p>
+<p>可用列（用于–show）：</p>
+<ul>
+<li>NAME            设备文件或分区路径</li>
+<li>TYPE            设备的类型</li>
+<li>SIZE            交换区域的SIZE大小</li>
+<li>USED           使用中已使用字节</li>
+<li>PRIO           交换优先级</li>
+<li>UUID          交换uuid</li>
+<li>LABEL         交换标签</li>
+</ul>
+<h4 id="使用示例-3"><a href="#使用示例-3" class="headerlink" title="使用示例"></a>使用示例</h4><pre class=" language-shell"><code class="language-shell"># swapon -v /dev/hdb4
+# swapon -s
+Filename                                type            Size    Used    Priority
+/dev/hda5                               partition       506008 96      -1
+/dev/hdb4                               partition       489972 0       -2</code></pre>
+<h3 id="netstat-命令"><a href="#netstat-命令" class="headerlink" title="netstat 命令"></a>netstat 命令</h3><p><strong>Netstat 命令用于显示各种网络相关信息，如网络连接，路由表，接口状态 (Interface Statistics)，masquerade 连接，多播成员 (Multicast Memberships) 等等。</strong></p>
+<pre class=" language-shell"><code class="language-shell">root@iZj6c8ezzawm4vybolwi68Z:~# netstat
+
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State
+tcp        0    300 iZj6c8ezzawm4vybolw:ssh 119.178.102.173:4601    ESTABLISHED
+tcp        0      0 iZj6c8ezzawm4vybo:56154 100.100.30.26:http      ESTABLISHED
+tcp        0      0 iZj6c8ezzawm4vybo:22122 144.34.203.229.16:47196 ESTABLISHED
+tcp        0      0 iZj6c8ezzawm4vybolw:ssh 119.178.102.173:3635    ESTABLISHED
+tcp        0      0 iZj6c8ezzawm4vybo:22122 47.98.178.104:59720     ESTABLISHED
+tcp        0      0 iZj6c8ezzawm4vybolw:ssh 119.178.102.173:3636    ESTABLISHED
+
+
+Active UNIX domain sockets (w/o servers)
+Proto RefCnt Flags       Type       State         I-Node   Path
+unix  9      [ ]         DGRAM                    9270     /run/systemd/journal/dev-log
+unix  2      [ ]         DGRAM                    14232    /run/user/0/systemd/notify
+unix  3      [ ]         DGRAM                    9167     /run/systemd/notify
+unix  2      [ ]         DGRAM                    9169     /run/systemd/cgroups-agent
+unix  2      [ ]         DGRAM                    13012    /run/chrony/chronyd.sock
+unix  7      [ ]         DGRAM                    9182     /run/systemd/journal/socket
+unix  2      [ ]         DGRAM                    9443     /run/systemd/journal/syslog
+unix  3      [ ]         DGRAM                    14235
+unix  3      [ ]         DGRAM                    9171
+unix  2      [ ]         DGRAM                    5142877
+unix  3      [ ]         DGRAM                    14234
+unix  3      [ ]         STREAM     CONNECTED     14721
+unix  2      [ ]         DGRAM                    14213
+unix  2      [ ]         DGRAM                    5143057
+unix  3      [ ]         STREAM     CONNECTED     13678    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     18067    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     18066
+unix  3      [ ]         DGRAM                    10209
+unix  2      [ ]         DGRAM                    12641
+unix  2      [ ]         DGRAM                    14223
+unix  2      [ ]         DGRAM                    9608
+unix  3      [ ]         STREAM     CONNECTED     18081    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     18075
+unix  3      [ ]         STREAM     CONNECTED     11741
+unix  2      [ ]         DGRAM                    10190
+unix  2      [ ]         DGRAM                    5311755
+unix  2      [ ]         DGRAM                    11756
+unix  3      [ ]         STREAM     CONNECTED     14718
+unix  3      [ ]         STREAM     CONNECTED     11506
+unix  3      [ ]         STREAM     CONNECTED     13677
+unix  3      [ ]         STREAM     CONNECTED     14719
+unix  3      [ ]         STREAM     CONNECTED     11507    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     14720
+unix  3      [ ]         STREAM     CONNECTED     11677    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     11676
+unix  3      [ ]         STREAM     CONNECTED     10186    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    12996
+unix  3      [ ]         STREAM     CONNECTED     11675
+unix  3      [ ]         STREAM     CONNECTED     11888    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     11887
+unix  2      [ ]         DGRAM                    10585
+unix  3      [ ]         DGRAM                    9172
+unix  3      [ ]         STREAM     CONNECTED     11742    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     13805    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     10316    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     12913    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     11763    /var/run/dbus/system_bus_socket
+unix  3      [ ]         STREAM     CONNECTED     12912
+unix  2      [ ]         DGRAM                    11971
+unix  3      [ ]         STREAM     CONNECTED     11514
+unix  3      [ ]         STREAM     CONNECTED     14203    /run/systemd/journal/stdout
+unix  3      [ ]         STREAM     CONNECTED     14202
+unix  2      [ ]         DGRAM                    5234334
+unix  3      [ ]         STREAM     CONNECTED     11222
+unix  3      [ ]         STREAM     CONNECTED     11223    /run/systemd/journal/stdout
+unix  2      [ ]         DGRAM                    11574
+unix  3      [ ]         STREAM     CONNECTED     10300
+unix  3      [ ]         STREAM     CONNECTED     13804
+unix  3      [ ]         STREAM     CONNECTED     10134
+unix  3      [ ]         DGRAM                    10210
+unix  3      [ ]         STREAM     CONNECTED     11762</code></pre>
+<blockquote>
+<p>从整体上看，netstat的输出结果可以分为两个部分：</p>
+<p>一个是Active Internet connections，称为有源TCP连接，其中”Recv-Q”和”Send-Q”指%0A的是接收队列和发送队列。这些数字一般都应该是0。如果不是则表示软件包正在队列中堆积。这种情况只能在非常少的情况见到。</p>
+<p>另一个是Active UNIX domain sockets，称为有源Unix域套接口(和网络套接字一样，但是只能用于本机通信，性能可以提高一倍)。<br>Proto显示连接使用的协议,RefCnt表示连接到本套接口上的进程号,Types显示套接口的类型,State显示套接口当前的状态,Path表示连接到套接口的其它进程使用的路径名。</p>
+</blockquote>
+<h4 id="常用参数-4"><a href="#常用参数-4" class="headerlink" title="常用参数"></a>常用参数</h4><ul>
+<li><code>-a</code>     (all)显示所有选项，默认不显示LISTEN相关</li>
+<li><code>-t</code>      (tcp)仅显示tcp相关选项</li>
+<li><code>-u</code>      (udp)仅显示udp相关选项</li>
+<li><code>-n</code>      拒绝显示别名，能显示数字的全部转化成数字。</li>
+<li>-<code>l</code>       仅列出有在 Listen (监听) 的服務状态</li>
+<li><code>-p</code>      显示建立相关链接的程序名</li>
+<li><code>-r</code>       显示路由信息，路由表</li>
+<li><code>-e</code>      显示扩展信息，例如uid等</li>
+<li><code>-s</code>      按各个协议进行统计</li>
+<li><code>-c</code>     每隔一个固定时间，执行该netstat命令。</li>
+</ul>
+<h4 id="使用示例-4"><a href="#使用示例-4" class="headerlink" title="使用示例"></a>使用示例</h4><p> <strong>列出所有端口 netstat -a</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -a | more
+ Active Internet connections (servers and established)
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State
+ tcp        0      0 localhost:30037         *:*                     LISTEN
+ udp        0      0 *:bootpc                *:*
+
+Active UNIX domain sockets (servers and established)
+ Proto RefCnt Flags       Type       State         I-Node   Path
+ unix  2      [ ACC ]     STREAM     LISTENING     6135     /tmp/.X11-unix/X0
+ unix  2      [ ACC ]     STREAM     LISTENING     5140     /var/run/acpid.socket</code></pre>
+<p> <strong>列出所有 tcp 端口 netstat -at</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -at
+ Active Internet connections (servers and established)
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State
+ tcp        0      0 localhost:30037         *:*                     LISTEN
+ tcp        0      0 localhost:ipp           *:*                     LISTEN
+ tcp        0      0 *:smtp                  *:*                     LISTEN
+ tcp6       0      0 localhost:ipp           [::]:*                  LISTEN</code></pre>
+<p>  <strong>列出所有 udp 端口 netstat -au</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -au
+ Active Internet connections (servers and established)
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State
+ udp        0      0 *:bootpc                *:*
+ udp        0      0 *:49119                 *:*
+ udp        0      0 *:mdns                  *:*</code></pre>
+<p> <strong>只显示监听端口 netstat -l</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -l
+ Active Internet connections (only servers)
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State
+ tcp        0      0 localhost:ipp           *:*                     LISTEN
+ tcp6       0      0 localhost:ipp           [::]:*                  LISTEN
+ udp        0      0 *:49119                 *:*</code></pre>
+<p> <strong>只列出所有监听 tcp 端口 netstat -lt</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -l
+ Active Internet connections (only servers)
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State
+ tcp        0      0 localhost:ipp           *:*                     LISTEN
+ tcp6       0      0 localhost:ipp           [::]:*                  LISTEN
+ udp        0      0 *:49119                 *:*</code></pre>
+<p> <strong>只列出所有监听 udp 端口 netstat -lu</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -lu
+ Active Internet connections (only servers)
+ Proto Recv-Q Send-Q Local Address           Foreign Address         State
+ udp        0      0 *:49119                 *:*
+ udp        0      0 *:mdns                  *:*</code></pre>
+<p>  <strong>只列出所有监听 UNIX 端口 netstat -lx</strong></p>
+<pre class=" language-shell"><code class="language-shell"># netstat -lx
+ Active UNIX domain sockets (only servers)
+ Proto RefCnt Flags       Type       State         I-Node   Path
+ unix  2      [ ACC ]     STREAM     LISTENING     6294     private/maildrop
+ unix  2      [ ACC ]     STREAM     LISTENING     6203     public/cleanup
+ unix  2      [ ACC ]     STREAM     LISTENING     6302     private/ifmail
+ unix  2      [ ACC ]     STREAM     LISTENING     6306     private/bsmtp</code></pre>
+<p> <strong>显示所有端口的统计信息 netstat -s</strong></p>
+<pre class=" language-shell"><code class="language-shell">root@iZj6c8ezzawm4vybolwi68Z:~# netstat -s
+Ip:
+    Forwarding: 2
+    9156828 total packets received
+    2 with invalid addresses
+    0 forwarded
+    0 incoming packets discarded
+    9156826 incoming packets delivered
+    8589435 requests sent out
+Icmp:
+    35100 ICMP messages received
+    181 input ICMP message failed
+    ICMP input histogram:
+        destination unreachable: 404
+        timeout in transit: 6
+        echo requests: 34689
+        timestamp request: 1
+    39527 ICMP messages sent
+    0 ICMP messages failed
+    ICMP output histogram:
+        destination unreachable: 4837
+        echo replies: 34689
+        timestamp replies: 1
+IcmpMsg:
+        InType3: 404
+        InType8: 34689
+        InType11: 6
+        InType13: 1
+        OutType0: 34689
+        OutType3: 4837
+................................</code></pre>
+<p> <strong>显示 TCP 或 UDP 端口的统计信息 netstat -st 或 -su</strong></p>
+<pre class=" language-shell"><code class="language-shell">netstat -st 
+netstat -su</code></pre>
+<p><strong>显示网络接口列表</strong></p>
+<p>显示详细信息，像是 ifconfig 使用 netstat -ie:</p>
+<pre class=" language-shell"><code class="language-shell">root@iZj6c8ezzawm4vybolwi68Z:~# netstat -ie
+Kernel Interface table
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.16.13  netmask 255.255.192.0  broadcast 172.17.63.255
+        ether 00:16:3e:06:02:54  txqueuelen 1000  (Ethernet)
+        RX packets 11242937  bytes 8288774083 (7.7 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 5982962  bytes 8682841764 (8.0 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 2607801  bytes 7676024440 (7.1 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 2607801  bytes 7676024440 (7.1 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</code></pre>
+<p> <strong>查看连接某服务端口最多的的IP地址</strong></p>
+<pre class=" language-shell"><code class="language-shell">root@iZj6c8ezzawm4vybolwi68Z:~# netstat -nat
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State
+tcp        0      0 0.0.0.0:22122           0.0.0.0:*               LISTEN
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN
+tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN
+tcp        0      0 172.17.16.13:22         119.178.102.173:4601    ESTABLISHED
+tcp        0      0 172.17.16.13:56154      100.100.30.26:80        ESTABLISHED
+tcp        0      0 172.17.16.13:22122      144.34.203.229:47196    ESTABLISHED
+tcp        0      0 172.17.16.13:22         119.178.102.173:3635    ESTABLISHED
+tcp        0      0 172.17.16.13:22122      47.98.178.104:59720     ESTABLISHED
+tcp        0      0 172.17.16.13:22         119.178.102.173:3636    ESTABLISHED
+tcp6       0      0 :::15555                :::*                    LISTEN
+tcp6       0      0 :::80                   :::*                    LISTEN
+tcp6       0      0 :::25555                :::*                    LISTEN
+tcp6       0      0 :::443                  :::*                    LISTEN
+tcp6       0      0 :::30432                :::*                    LISTEN
+</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://superopenai.github.io" rel="external nofollow noreferrer">SuperNing</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://superopenai.github.io/2019/12/19/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3-%E4%BA%8C/">https://superopenai.github.io/2019/12/19/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3-%E4%BA%8C/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://superopenai.github.io" target="_blank">SuperNing</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/12/19/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3-%E4%BA%8C/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Linux常用命令讲解(二)">
+                        
+                        <span class="card-title">Linux常用命令讲解(二)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux命令讲解（二）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义
+Linux命令讲解（二）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/15/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B2%E8%A7%A3/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Linux常用命令讲解(一)">
+                        
+                        <span class="card-title">Linux常用命令讲解(一)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Linux命令讲解（一）
+外网一位小哥分享了linux常用命令的一张插图，这张图包含了Linux不同组件的常用命令，很有借鉴学习的意义
+PerfPerf 是用来进行软件性能分析的工具。
+通过它，应用程序可以利用 PMU，tracepoint
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://superopenai.github.io" target="_blank">SuperNing</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">30.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "10";
+                    var startDate = "27";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/superopenai" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:xining.l.se@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1921761130" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1921761130" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133732750-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-133732750-2');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
