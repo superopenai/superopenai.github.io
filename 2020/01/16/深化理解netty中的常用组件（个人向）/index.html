@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Fastdfs和nginx相关整合, 阿宁的博客">
-    <meta name="description" content="FastDFS和nginx相关整合单机模式
- 为了项目使用方便，因而把图片等静态资源放在项目里的文件夹中 如：resources\static\file、resources\static\img等 。 这样的优点是实现方便，访问方便。但是也">
+    <meta name="keywords" content="深化理解netty中的常用组件（个人向）, 阿宁的博客">
+    <meta name="description" content="深化理解netty中的常用组件（个人向)Inbound和Outbound开始的错误理解 
+
+ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Netty的时候，总是下意识的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Fastdfs和nginx相关整合 | 阿宁的博客</title>
+    <title>深化理解netty中的常用组件（个人向） | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -305,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Fastdfs和nginx相关整合
+                        深化理解netty中的常用组件（个人向）
                     </div>
                 </div>
             </div>
@@ -423,12 +424,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                                <span class="chip bg-color">分布式</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/linux/">
-                                <span class="chip bg-color">linux</span>
+                            <a href="/tags/Netty/">
+                                <span class="chip bg-color">Netty</span>
                             </a>
                         
                     </div>
@@ -439,8 +440,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/linux/" class="post-category">
-                                linux
+                            <a href="/categories/Netty/" class="post-category">
+                                Netty
+                            </a>
+                        
+                            <a href="/categories/Netty/Java/" class="post-category">
+                                Java
                             </a>
                         
                     </div>
@@ -451,28 +456,23 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-07
+                    2020-01-16
                 </div>
                 
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2019-12-08
-                </div>
                 
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.4k
+                        445
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        1 分
                     </div>
                     
                 
@@ -488,325 +488,58 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="FastDFS和nginx相关整合"><a href="#FastDFS和nginx相关整合" class="headerlink" title="FastDFS和nginx相关整合"></a>FastDFS和nginx相关整合</h2><h3 id="单机模式"><a href="#单机模式" class="headerlink" title="单机模式"></a>单机模式</h3><blockquote>
-<p> 为了项目使用方便，因而把图片等静态资源放在项目里的文件夹中 如：<code>resources\static\file</code>、<code>resources\static\img</code>等 。 这样的优点是实现方便，访问方便。但是也有一个很大的缺点，代码和文件耦合在一起， 文件越多存放越混乱 。静态文件也会占用一些资源。因此放弃，使用其他方法</p>
-</blockquote>
-<h3 id="云服务商"><a href="#云服务商" class="headerlink" title="云服务商"></a>云服务商</h3><blockquote>
-<p>​     比如Amazon S3，Azure Storage，阿里云 OSS，七牛，又拍等 厂商的服务，优点是省下了自己运维的压力，付出一定成本。但考虑提升自己技术的基础上，暂不使用此方法，但是有一说一，使用公有云服务的确是最合适的选择。</p>
-</blockquote>
-<h3 id="独立文件服务器"><a href="#独立文件服务器" class="headerlink" title="独立文件服务器"></a>独立文件服务器</h3><blockquote>
-<p> 通过ftp或者ssh将文件上传到图片服务器的某个目录下，再通过ngnix或者apache来访问此目录下的文件，返回一个独立域名的图片URL地址，前端使用文件时就通过这个URL地址读取。 优点是静态文件和web服务器分离开来，各自处理自己的人任务，相互不干扰。缺点是所有的处理都在一台文件服务器上，一但出现问题宕机，影响整体业务。另外单机也存在性能的瓶颈。</p>
-</blockquote>
-<h3 id="分布式文件系统"><a href="#分布式文件系统" class="headerlink" title="分布式文件系统"></a>分布式文件系统</h3><blockquote>
-<p>分布式文件系统，一般分为三块内容来配合，服务的存储和访问的处理系统，文件存储系统，文件的容灾处理系统来构成，处理系统相当于文件服务器的大脑，根据一定的算法来决定文件存储的位置，文件存储系统负责保存文件，容灾系统负责文件系统和自己的相互备份。优点：扩展能力，高可用性. 弹性存储: 可以根据业务需要灵活地增加或缩减数据存储以及增删存储池中的资源，而不需要中断系统运行</p>
-<p><strong>缺点</strong>：系统复杂度稍高，需要更多服务器</p>
-</blockquote>
-<p><strong>我这次使用的是FastDFS，是一款纯C语言开发的轻量级分布式文件系统，是一个适合存储小文件、图片的分布文件系统。它对文件进行管理，功能包括：文件存储、文件同步、文件访问（文件上传、文件下载）等，解决了大容量存储和负载均衡的问题。特别适合以文件为载体的在线服务，如相册网站、视频网站等等</strong></p>
-<p>PS: 常见的分布式文件系统有，GFS、HDFS、Lustre 、Ceph 、GridFS 、mogileFS、TFS、FastDFS等。各自适用于不同的领域。它们都不是系统级的分布式文件系统，而是应用级的分布式文件存储服务 </p>
-<h3 id="什么是FastDFS"><a href="#什么是FastDFS" class="headerlink" title="什么是FastDFS"></a>什么是FastDFS</h3><blockquote>
-<p>FastDFS 架构包括 Tracker server 和 Storage server。客户端请求 Tracker server 进行文件上传、下载，通过 Tracker server 调度最终由 Storage server 完成文件上传和下载。</p>
-<p>Tracker server 作用是负载均衡和调度，通过 Tracker server 在文件上传时可以根据一些策略找到 Storage server 提供文件上传服务。可以将 tracker 称为追踪服务器或调度服务器。</p>
-<p>Storage server 作用是文件存储，客户端上传的文件最终存储在 Storage 服务器上，Storageserver 没有实现自己的文件系统而是利用操作系统 的文件系统来管理文件。可以将storage称为存储服务器。</p>
-</blockquote>
-<p><img src="https://i.loli.net/2019/12/04/aHcuvBo4T3AEMDz.png" alt=""></p>
+                <h2 id="深化理解netty中的常用组件（个人向"><a href="#深化理解netty中的常用组件（个人向" class="headerlink" title="深化理解netty中的常用组件（个人向)"></a>深化理解netty中的常用组件（个人向)</h2><h3 id="Inbound和Outbound"><a href="#Inbound和Outbound" class="headerlink" title="Inbound和Outbound"></a>Inbound和Outbound</h3><p><strong>开始的错误理解</strong> </p>
 <blockquote>
-<p>储存过程: 客户端向tracker服务器提出储存请求，tracker服务器会查询Storage服务器的可用性，然后向客户端返回storage服务器的ip和端口。客户端上传文件到storage服务器上去。然后生成一串特定的连接（文件在storage服务器上的储存地址）,返回到客户端。</p>
+<p><code>ChannelInboundHandler</code>  , <code>ChanneloutboundHandler</code>   当初第一次学习使用Netty的时候，总是下意识的把这两个与 I/O的输入输出流联系在一起，但是随着使用的增多，如果，<code>ChanneloutboundHandler</code>代表输出流，为什么又有read方法？</p>
 </blockquote>
-<h4 id="文件存储id"><a href="#文件存储id" class="headerlink" title="文件存储id"></a>文件存储id</h4><p> *<em>superning/M00/00/00/kCLL5V3k186ALkQ0AAGnmbFMdp4402.png *</em></p>
+<p><strong>正确理解</strong></p>
+<blockquote>
+<p>从<a href="https://stackoverflow.com/questions/22354135/in-netty4-why-read-and-write-both-in-outboundhandler" target="_blank" rel="noopener">Stackoverflow的这篇文章能够理解一二</a></p>
+<p>Netty是由事件驱动的， 事件有  <code>inbound</code> 和 <code>outbound</code> 两种，分别由<code>ChannelInboundHandler</code>和<code>ChannelOutboundHandler</code>负责处理 。之间的区别便是</p>
+<p><strong>触发事件的源头</strong>。</p>
+</blockquote>
+<h4 id="inbound"><a href="#inbound" class="headerlink" title="inbound"></a>inbound</h4><p><strong>触发事件的源头是外部，然后影响到应用程序内部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
+<p>Inbound event propagation methods:</p>
 <ul>
-<li>组名：文件上传后所在的存储组名称，在文件上传成功后有存储服务器返回，需要客户端自行保存。</li>
-<li>虚拟磁盘路径：存储服务器配置的虚拟路径，与磁盘选项store_path*对应。</li>
-<li>数据两级目录：存储服务器在每个虚拟磁盘路径下创建的两级目录，用于存储数据文件。</li>
-<li>文件名：与文件上传时不同。是由存储服务器根据特定信息生成，文件名包含：源存储服务器IP地址、文件创建时间戳、文件大小、随机数和文件拓展名等信息</li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRegistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRegistered()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelActive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelActive()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRead-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRead(Object)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelReadComplete--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelReadComplete()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireExceptionCaught-java.lang.Throwable-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireExceptionCaught(Throwable)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireUserEventTriggered-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireUserEventTriggered(Object)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelWritabilityChanged--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelWritabilityChanged()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelInactive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelInactive()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelUnregistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelUnregistered()</code></a></li>
 </ul>
-<h4 id="所需软件"><a href="#所需软件" class="headerlink" title="所需软件"></a>所需软件</h4><ul>
-<li>fastdfs-6.03.tar.gz</li>
-<li>libfastcommon-1.0.41.tar.gz</li>
-<li>fastdfs-nginx-module-1.22.tar.gz</li>
-<li>nginx-1.15.9.tar.gz</li>
+<h4 id="outbound"><a href="#outbound" class="headerlink" title="outbound"></a>outbound</h4><p><strong>触发事件的源头是内部，然后影响到外部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
+<p>Outbound event propagation methods:</p>
+<ul>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#bind-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.bind(SocketAddress, ChannelPromise)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#connect-java.net.SocketAddress-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.connect(SocketAddress, SocketAddress, ChannelPromise)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#write-java.lang.Object-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.write(Object, ChannelPromise)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#flush--" target="_blank" rel="noopener"><code>ChannelHandlerContext.flush()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#read--" target="_blank" rel="noopener"><code>ChannelHandlerContext.read()</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#disconnect-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.disconnect(ChannelPromise)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#close-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.close(ChannelPromise)</code></a></li>
+<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#deregister-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.deregister(ChannelPromise)</code></a></li>
 </ul>
-<p><strong>因为服务器数量限制，本文准备三台服务器，一台作为tracker服务器，两台作为storage服务器，这两台服务器都设置为同一个组。三台服务器都安装fastdfs和libfastcommon。 nginx和fastdfs-nginx-module都只在storage服务器上安装</strong></p>
-<h4 id="配置文件设置"><a href="#配置文件设置" class="headerlink" title="配置文件设置"></a>配置文件设置</h4><p><strong>编译安装fastdfs和libfastcommon后，首先进入fastdfs文件夹下的conf文件夹，把此文件夹下的所有配置文件 复制到 /etc/fdfs文件夹下。</strong></p>
-<p><img src="https://i.loli.net/2019/12/04/iYHJXgVIusdLpWw.png" alt=""></p>
-<p><strong>修改tracker.conf文件</strong></p>
-<p><img src="https://i.loli.net/2019/12/04/Y5ndhcJkIj6r8BG.png" alt=""></p>
-<p><img src="https://i.loli.net/2019/12/04/K9sWuVPxrO3vkhL.png" alt=""></p>
-<p><strong>修改storage服务器设置</strong></p>
-<p><img src="https://i.loli.net/2019/12/04/pgVRLCWfEc2sTH5.png" alt=""></p>
-<p><img src="https://i.loli.net/2019/12/04/KanU2rCEtwuxzyW.png" alt=""></p>
-<p><strong>修改client.conf设置(修改tracker服务器的client.conf)</strong></p>
-<p><img src="https://i.loli.net/2019/12/04/HBRPjL65lqx89Yk.png" alt=""></p>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><ul>
-<li><p>在storage服务器，启动storage服务</p>
-<pre class=" language-shell"><code class="language-shell">在/usr/bin目录下执行 
-
-fdfs_storaged /etc/fdfs/storage.conf restart</code></pre>
-</li>
-<li><p>在tracker服务器，启动tracker服务</p>
-<pre class=" language-shell"><code class="language-shell">在/usr/bin目录下执行 
-fdfs_trackerd /etc/fdfs/tracker.conf restart
-</code></pre>
-</li>
-<li><p>使用测试，测试图片的存储</p>
-</li>
+<h3 id="ChannelGroup"><a href="#ChannelGroup" class="headerlink" title="ChannelGroup"></a>ChannelGroup</h3><h4 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h4><p> 在Netty中提供了ChannelGroup接口，是线程安全的，该接口继承Set接口，可以通过ChannelGroup可管理服务器端所有的连接的Channel，然后对所有的连接Channel广播消息。 并且ChannelGroup可以自动remove在ChannelGroup中已经关闭的Channel。因此也不用分心来关注Channel的生命周期。</p>
+<p>Channel的生命周期：</p>
+<ul>
+<li>ChannelRegistered  </li>
+<li>ChannelActive  </li>
+<li>ChannelInactive </li>
+<li>ChannelUnregistered </li>
 </ul>
-<p>  <img src="https://i.loli.net/2019/12/04/3ybfKX4R5lnoOg2.png" alt=""></p>
-<p><img src="https://i.loli.net/2019/12/04/1MsEnqHDvemxzwg.png" alt=""></p>
-<p><strong>储存成功，成功把图片从别处存到了storage服务器上，然后到storage服务器找一找这张图片</strong></p>
-<p><img src="https://i.loli.net/2019/12/04/dZOufwGlFhVb1eD.png" alt=""></p>
-<p><strong>找到刚刚存储的图片，tracker服务器和storage服务器联系成功</strong></p>
-<h4 id="查看储存节点状态"><a href="#查看储存节点状态" class="headerlink" title="查看储存节点状态"></a>查看储存节点状态</h4><p>输入<strong>/usr/bin/fdfs_monitor    etc/fdfs/client.conf</strong></p>
-<pre class=" language-shell"><code class="language-shell">server_count=1, server_index=0
-
-tracker server is 172.17.16.13:22122
-
-group count: 2
-
-Group 1:
-group name = sueprning
-disk total space = 0 MB
-disk free space = 0 MB
-trunk free space = 0 MB
-storage server count = 1
-active server count = 0
-storage server port = 23000
-storage HTTP port = 8888
-store path count = 1
-subdir count per path = 256
-current write server index = 0
-current trunk file id = 0
-
-        Storage 1:
-                id = 47.98.178.104
-                ip_addr = 47.98.178.104 (anantes-651-1-49-net.w2-0.abo.wanadoo.fr)  DELETED
-                http domain =
-                version = 6.03
-                join time = 2019-12-05 16:17:29
-                up time =
-                total storage = 0 MB
-                free storage = 0 MB
-                upload priority = 0
-                store_path_count = 0
-                subdir_count_per_path = 0
-                storage_port = 23000
-                storage_http_port = 8888
-                current_write_path = 0
-                source storage id =
-                if_trunk_server = 0
-                connection.alloc_count = 0
-                connection.current_count = 0
-                connection.max_count = 0
-                total_upload_count = 0
-                success_upload_count = 0
-                total_append_count = 0
-                success_append_count = 0
-                total_modify_count = 0
-                success_modify_count = 0
-                total_truncate_count = 0
-                success_truncate_count = 0
-                total_set_meta_count = 0
-                success_set_meta_count = 0
-                total_delete_count = 0
-                success_delete_count = 0
-                total_download_count = 0
-                success_download_count = 0
-                total_get_meta_count = 0
-                success_get_meta_count = 0
-                total_create_link_count = 0
-                success_create_link_count = 0
-                total_delete_link_count = 0
-                success_delete_link_count = 0
-                total_upload_bytes = 0
-                success_upload_bytes = 0
-                total_append_bytes = 0
-                success_append_bytes = 0
-                total_modify_bytes = 0
-                success_modify_bytes = 0
-                stotal_download_bytes = 0
-                success_download_bytes = 0
-                total_sync_in_bytes = 0
-                success_sync_in_bytes = 0
-                total_sync_out_bytes = 0
-                success_sync_out_bytes = 0
-                total_file_open_count = 0
-                success_file_open_count = 0
-                total_file_read_count = 0
-                success_file_read_count = 0
-                total_file_write_count = 0
-                success_file_write_count = 0
-                last_heart_beat_time = 1970-01-01 08:00:00
-                last_source_update = 1970-01-01 08:00:00
-                last_sync_update = 1970-01-01 08:00:00
-                last_synced_timestamp = 1970-01-01 08:00:00
-
-Group 2:
-group name = superning
-disk total space = 40188 MB
-disk free space = 31514 MB
-trunk free space = 0 MB
-storage server count = 2
-active server count = 2
-storage server port = 23000
-storage HTTP port = 8888
-store path count = 1
-subdir count per path = 256
-current write server index = 1
-current trunk file id = 0
-
-        Storage 1:
-                id = 144.34.203.229
-                ip_addr = 144.34.203.229 (anantes-651-1-49-net.w2-0.abo.wanadoo.fr)  ACTIVE
-                http domain =
-                version = 6.03
-                join time = 2019-12-02 15:52:11
-                up time = 2019-12-06 18:41:57
-                total storage = 39796 MB
-                free storage = 35258 MB
-                upload priority = 10
-                store_path_count = 1
-                subdir_count_per_path = 256
-                storage_port = 23000
-                storage_http_port = 8888
-                current_write_path = 0
-                source storage id =
-                if_trunk_server = 0
-                connection.alloc_count = 256
-                connection.current_count = 1
-                connection.max_count = 3
-                total_upload_count = 10
-                success_upload_count = 10
-                total_append_count = 0
-                success_append_count = 0
-                total_modify_count = 0
-                success_modify_count = 0
-                total_truncate_count = 0
-                success_truncate_count = 0
-                total_set_meta_count = 10
-                success_set_meta_count = 10
-                total_delete_count = 0
-                success_delete_count = 0
-                total_download_count = 0
-                success_download_count = 0
-                total_get_meta_count = 0
-                success_get_meta_count = 0
-                total_create_link_count = 0
-                success_create_link_count = 0
-                total_delete_link_count = 0
-                success_delete_link_count = 0
-                total_upload_bytes = 1982466
-                success_upload_bytes = 1982466
-                total_append_bytes = 0
-                success_append_bytes = 0
-                total_modify_bytes = 0
-                success_modify_bytes = 0
-                stotal_download_bytes = 0
-                success_download_bytes = 0
-                total_sync_in_bytes = 0
-                success_sync_in_bytes = 0
-                total_sync_out_bytes = 0
-                success_sync_out_bytes = 0
-                total_file_open_count = 10
-                success_file_open_count = 10
-                total_file_read_count = 0
-                success_file_read_count = 0
-                total_file_write_count = 14
-                success_file_write_count = 14
-                last_heart_beat_time = 2019-12-07 13:41:02
-                last_source_update = 2019-12-06 18:51:24
-                last_sync_update = 1970-01-01 08:00:00
-                last_synced_timestamp = 1970-01-01 08:00:00
-        Storage 2:
-                id = 47.98.178.104
-                ip_addr = 47.98.178.104 (anantes-651-1-49-net.w2-0.abo.wanadoo.fr)  ACTIVE
-                http domain =
-                version = 6.03
-                join time = 2019-12-05 16:17:29
-                up time = 2019-12-06 18:42:05
-                total storage = 40188 MB
-                free storage = 31514 MB
-                upload priority = 10
-                store_path_count = 1
-                subdir_count_per_path = 256
-                storage_port = 23000
-                storage_http_port = 8888
-                current_write_path = 0
-                source storage id =
-                if_trunk_server = 0
-                connection.alloc_count = 256
-                connection.current_count = 1
-                connection.max_count = 2
-                total_upload_count = 0
-                success_upload_count = 0
-                total_append_count = 0
-                success_append_count = 0
-                total_modify_count = 0
-                success_modify_count = 0
-                total_truncate_count = 0
-                success_truncate_count = 0
-                total_set_meta_count = 0
-                success_set_meta_count = 0
-                total_delete_count = 0
-                success_delete_count = 0
-                total_download_count = 0
-                success_download_count = 0
-                total_get_meta_count = 0
-                success_get_meta_count = 0
-                total_create_link_count = 0
-                success_create_link_count = 0
-                total_delete_link_count = 0
-                success_delete_link_count = 0
-                total_upload_bytes = 0
-                success_upload_bytes = 0
-                total_append_bytes = 0
-                success_append_bytes = 0
-                total_modify_bytes = 0
-                success_modify_bytes = 0
-                stotal_download_bytes = 0
-                success_download_bytes = 0
-                total_sync_in_bytes = 882988
-                success_sync_in_bytes = 882988
-                total_sync_out_bytes = 0
-                success_sync_out_bytes = 0
-                total_file_open_count = 8
-                success_file_open_count = 8
-                total_file_read_count = 0
-                success_file_read_count = 0
-                total_file_write_count = 10
-                success_file_write_count = 10
-                last_heart_beat_time = 2019-12-07 13:41:06
-                last_source_update = 1970-01-01 08:00:00
-                last_sync_update = 2019-12-06 18:51:25
-                last_synced_timestamp = 2019-12-06 18:51:24 (0s delay)//同一组内的storage服务器相互同步。
-</code></pre>
-<h4 id="问题：我们怎么使用网络服务访问到这些存储的图片？"><a href="#问题：我们怎么使用网络服务访问到这些存储的图片？" class="headerlink" title="问题：我们怎么使用网络服务访问到这些存储的图片？"></a>问题：我们怎么使用网络服务访问到这些存储的图片？</h4><p><strong>解决方法——Nginx</strong></p>
+<h4 id="简化关闭"><a href="#简化关闭" class="headerlink" title="简化关闭"></a>简化关闭</h4><p> 如果ServerChannel和非ServerChannel都存在于同一个ChannelGroup中，则首先对此组上的ServerChannel执行所有请求的I / O操作，然后对其他Channel执行操作。</p>
 <blockquote>
-<p>所使用软件：</p>
-<p>​                    nginx-1.15.9.tar.gz</p>
-<p>​                    fastdfs-nginx-module-1.22.tar.gz</p>
-<p>ubuntu下载依赖包：</p>
-<p>​                     <strong>openssl</strong> ： sudo apt-get install openssl libssl-dev </p>
-<p>​                    pcre   : apt-get install libpcre3 libpcre3-dev </p>
-<p>​                    sudo apt-get install zlib1g-dev</p>
+<pre><code>ChannelGroupFuture close()</code></pre><p>Closes all <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a>s in this group. If the <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a> is connected to a remote peer or bound to a local address, it is automatically disconnected and unbound.</p>
+<ul>
+<li><p><strong>Returns:</strong></p>
+<p>the <a href="https://netty.io/4.0/api/io/netty/channel/group/ChannelGroupFuture.html" target="_blank" rel="noopener"><code>ChannelGroupFuture</code></a> instance that notifies when the operation is done for all channels</p>
+</li>
+</ul>
 </blockquote>
-<p><strong>fastdfs-nginx-module的配置</strong></p>
-<p>在src目录下修改config文件</p>
-<p><img src="https://i.loli.net/2019/12/07/egTMHidOXu1xArq.png" alt=""></p>
-<blockquote>
-<p>./configure <br>–prefix=/usr/local/nginx <br>–pid-path=/var/run/nginx/nginx.pid <br>–lock-path=/var/lock/nginx.lock <br>–error-log-path=/var/log/nginx/error.log <br>–http-log-path=/var/log/nginx/access.log <br>–with-http_gzip_static_module <br>–http-client-body-temp-path=/var/temp/nginx/client <br>–http-proxy-temp-path=/var/temp/nginx/proxy <br>–http-fastcgi-temp-path=/var/temp/nginx/fastcgi <br>–http-uwsgi-temp-path=/var/temp/nginx/uwsgi <br>–http-scgi-temp-path=/var/temp/nginx/scgi <br>–add-module=/home/fastdfs-nginx-module-1.22/src</p>
-<p>最后一行的路径修改你自己的安装的路径下的src路径。。</p>
-</blockquote>
-<p>进入nginx的文件夹下，粘贴上面的命令进行回车运行。</p>
-<p>然后进行 sh make.sh   /    sh make.sh install 编译安装</p>
-<p>下一步，移动并修改这个配置文件</p>
-<p><img src="https://i.loli.net/2019/12/07/MQ79eOJDErBAmgK.png" alt=""></p>
-<p><img src="https://i.loli.net/2019/12/07/TCYowqas2yAE8cK.png" alt=""></p>
-<p>修改Nginx配置文件</p>
-<pre class=" language-shell"><code class="language-shell">vim /usr/lcoal/nginx/conf/nginx.conf
-</code></pre>
-<p><strong>新增</strong></p>
-<p><img src="C:%5CUsers%5Csuperning%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191207142115758.png" alt="image-20191207142115758"></p>
-<p>然后在  /usr/local/nginx/sbin下启动nginx，图片就可以通过网络访问了。。。。</p>
-<p><img src="https://i.loli.net/2019/12/07/tx3ioy7s9qZblJ4.png" alt=""></p>
 
             </div>
             <hr/>
@@ -832,7 +565,7 @@ current trunk file id = 0
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/12/07/Fastdfs%E5%92%8Cnginx%E7%9B%B8%E5%85%B3%E6%95%B4%E5%90%88/">https://superopenai.github.io/2019/12/07/Fastdfs%E5%92%8Cnginx%E7%9B%B8%E5%85%B3%E6%95%B4%E5%90%88/</a>
+                    <a href="https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/">https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -870,12 +603,12 @@ current trunk file id = 0
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                                    <span class="chip bg-color">分布式</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
-                                <a href="/tags/linux/">
-                                    <span class="chip bg-color">linux</span>
+                                <a href="/tags/Netty/">
+                                    <span class="chip bg-color">Netty</span>
                                 </a>
                             
                         </div>
@@ -916,93 +649,31 @@ current trunk file id = 0
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/12/08/Comparable%E6%8E%A5%E5%8F%A3%E4%B8%8EComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                <a href="/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Comparable接口与Comparator接口的区别">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="深化理解netty中的常用组件（个人向）">
                         
-                        <span class="card-title">Comparable接口与Comparator接口的区别</span>
+                        <span class="card-title">深化理解netty中的常用组件（个人向）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Comparable接口与Comparator接口的区别Comparable接口
-通过阅读翻译openjdk 源码关于Comparable接口的解释描述可以得知：
-Comparable接口会对所有实现它的对象施加一个总排序，这个总排序被称为
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-08
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/java/" class="post-category">
-                                    java
-                                </a>
-                            
-                            <a href="/categories/java/jdk%E6%BA%90%E7%A0%81/" class="post-category">
-                                    jdk源码
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
-                    <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">jdk源码</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/11/22/%E5%88%9D%E8%AF%86Netty/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="初识Netty">
-                        
-                        <span class="card-title">初识Netty</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            初识Netty简介
-1）本质：JBoss做的一个Jar包
-2）目的：快速开发高性能、高可靠性的网络服务器和客户端程序
-3）优点：提供异步的、事件驱动的网络应用程序框架和工具
-通俗的说：一个好使的处理Socket的框架
+                            深化理解netty中的常用组件（个人向)Inbound和Outbound开始的错误理解 
 
-安装安装十分简单，去
+ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Netty的时候，总是下意识的
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-16
                             </span>
                         <span class="publish-author">
                             
@@ -1020,6 +691,7 @@ Comparable接口会对所有实现它的对象施加一个总排序，这个总�
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1029,6 +701,56 @@ Comparable接口会对所有实现它的对象施加一个总排序，这个总�
                     
                     <a href="/tags/Netty/">
                         <span class="chip bg-color">Netty</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/01/05/%E7%90%86%E8%A7%A3Spring%E4%B8%AD%E7%9A%84-Autowired-Resource-and-Inject%E6%B3%A8%E8%A7%A3%E5%90%AB%E4%B9%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="理解Spring中的@Autowired, @Resource and @Inject注解含义(译)">
+                        
+                        <span class="card-title">理解Spring中的@Autowired, @Resource and @Inject注解含义(译)</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            总览常用的关于依赖注入( dependency injection)的相关注解有 @Resource    @Autowired     @Inject      仨个注解。 这些注解替我们为类 提供了一种声明式的方法来解析依赖项。
+例如：
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/spring/" class="post-category">
+                                    spring
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
                     </a>
                     
                 </div>
