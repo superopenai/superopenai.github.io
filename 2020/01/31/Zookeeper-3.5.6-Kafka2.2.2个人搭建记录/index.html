@@ -1,0 +1,1230 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Zookeeper-3.5.6+Kafka3.5.6个人搭建记录, 阿宁的博客">
+    <meta name="description" content="Zookeeper3.5.6 + Kafka3.5.6个人搭建记录
+一个典型的 Kafka 体系架构包括若干 Producer（消息生产者），若干 broker（作为 Kafka 节点的服务器），若干 Consumer（Group），以及依">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Zookeeper-3.5.6+Kafka3.5.6个人搭建记录 | 阿宁的博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">阿宁的博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">阿宁的博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="http://github.com/superopenai" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="http://github.com/superopenai" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Zookeeper-3.5.6+Kafka3.5.6个人搭建记录
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+                                <span class="chip bg-color">搭建教程</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
+                                搭建教程
+                            </a>
+                        
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Zookeeper/" class="post-category">
+                                Zookeeper
+                            </a>
+                        
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Zookeeper/Kafka/" class="post-category">
+                                Kafka
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-01-31
+                </div>
+                
+                
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Zookeeper3-5-6-Kafka3-5-6个人搭建记录"><a href="#Zookeeper3-5-6-Kafka3-5-6个人搭建记录" class="headerlink" title="Zookeeper3.5.6 + Kafka3.5.6个人搭建记录"></a>Zookeeper3.5.6 + Kafka3.5.6个人搭建记录</h2><blockquote>
+<p>一个典型的 Kafka 体系架构包括若干 Producer（消息生产者），若干 broker（作为 Kafka 节点的服务器），若干 Consumer（Group），以及依赖一个 ZooKeeper 集群。Kafka通过 ZooKeeper 管理集群配置、选举 Leader 以及在 consumer group 发生变化时进行 Rebalance（即消费者负载均衡）。Producer 使用 push（推）模式将消息发布到 broker，Consumer 使用 pull（拉）模式从 broker 订阅并消费消息。</p>
+<p>因此，如果要使用Kafka，首先要有一个Zookeeper集群，Kafka自带一个Zookeeper，本篇教程使用的是独立搭建的Zookeeper集群</p>
+</blockquote>
+<p>服务器：</p>
+<pre><code>                         192.168.124.133</code></pre><p>​                            192.168.124.134</p>
+<p>​                            192.168.124.135</p>
+<p><strong>满足节点数量&gt; 总结点数量/2 的子集群最多只会有一个。所以要限制 可用节点数量 &gt; 集群总结点数量/2 。因此使用三台虚拟机</strong></p>
+<h3 id="zookeeper·准备工作"><a href="#zookeeper·准备工作" class="headerlink" title="zookeeper·准备工作"></a>zookeeper·准备工作</h3><h4 id="下载Zookeeper"><a href="#下载Zookeeper" class="headerlink" title="下载Zookeeper"></a>下载Zookeeper</h4><pre class=" language-shell"><code class="language-shell"># 使用清华镜像站的tar包
+## zookeeper（保证机器已经安装Jdk1.8或更新版本）
+https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.5.6/apache-zookeeper-3.5.6-bin.tar.gz</code></pre>
+<h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><pre class=" language-shell"><code class="language-shell"># 进入解压后的zookeeper文件夹
+## 进入conf文件夹，zoo_sample.cfg 这个文件是官方给的zookeeper的样板文件，复制一份命名为zoo.cfg。zoo.cfg是官方指定的文件命名规则。
+---->修改zoo.cfg配置文件
+# 修改/etc/proflie 
+---->增加zookeeper环境变量</code></pre>
+<h4 id="配置文件解释"><a href="#配置文件解释" class="headerlink" title="配置文件解释"></a>配置文件解释</h4><pre class=" language-shell"><code class="language-shell"># zookeeper服务器心跳检测时间，单位ms
+syncLimit=2000
+# 选举新Leader的初始化时间
+initLimit=10
+# 在经过syncLimit*syncLimit的时间后，follower没有回应，leader会判断follower已经死亡
+syncLimit=5
+# 数据目录(自行创建)
+dataDir=/usr/local/data/zookeeper/zkdata
+# 日志目录（自行创建）
+dataLogDir=/usr/local/data/zookeeper/zklogdata
+
+# zookeeper客户端连接端口
+clientPort=12181
+
+# 搭建zookeeper集群必须的配置
+server.1=192.168.124.133:12888:13888
+server.2=192.168.124.134:12888:13888
+server.3=192.168.124.135:12888:13888
+
+## 两个搭配，做到每24h清理一次，保留最新的50个文件
+# 快照保留数量
+autopurge.snapRetainCount=50
+# 自动清理时间间隔 hour单位
+autopurge.purgeInterval=24</code></pre>
+<pre class=" language-shell"><code class="language-shell">#Zookeeper
+export ZOOKEEPER_HOME=/home/zookeeper/zookeeper-3.5.6
+export PATH=$PATH:$ZOOKEEPER_HOME/bin</code></pre>
+<h4 id="启动服务并查看"><a href="#启动服务并查看" class="headerlink" title="启动服务并查看"></a>启动服务并查看</h4><pre class=" language-shell"><code class="language-shell"># 在zookeeper的bin文件夹下
+## 三台服务器都执行下面的命令
+zkServer.sh start
+
+# 查看节点状态
+zkServer.sh status</code></pre>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-01-31_21-32-18.png" alt=""></p>
+<p>​    </p>
+<h3 id="Kafka准备工作"><a href="#Kafka准备工作" class="headerlink" title="Kafka准备工作"></a>Kafka准备工作</h3><h4 id="下载Kafka"><a href="#下载Kafka" class="headerlink" title="下载Kafka"></a>下载Kafka</h4><pre class=" language-shell"><code class="language-shell"># 使用清华镜像站的tar包
+# kafka
+https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.2.2/kafka_2.11-2.2.2.tgz
+
+# 创建日志目录
+mkdir -p /usr/local/data/kafka/logs
+</code></pre>
+<h4 id="修改配置文件-1"><a href="#修改配置文件-1" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>增加环境变量</p>
+<pre class=" language-shell"><code class="language-shell">#Kafka
+export KAFKA_HOME=/home/kafka/kafka_2.11-2.2.2
+export PATH=$PATH:$KAFKA_HOME/bin</code></pre>
+<p><strong>进入kafka文件夹下的config文件夹，按照个人需求选择性调整 <code>server.properties</code>文件</strong></p>
+<pre class=" language-shell"><code class="language-shell">#broker.id  每台服务器的broker.id都不能相同
+broker.id=01
+#当前kafka对外提供服务的端口默认是9092
+port=19092
+#hostname  在服务器上必须开启设置
+host.name=192.168.3.163
+#log.dirs  日志路劲
+log.dirs=/usr/kafka/kafkalogs/
+#在log.retention.hours=168 下面新增下面三项
+#消息保存的最大值5M
+message.max.byte=5242880
+#kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务
+default.replication.factor=3
+#取消息的最大直接数
+replica.fetch.max.bytes=5242880
+#设置zookeeper的连接端口
+zookeeper.connect=192.168.3.161:12181,192.168.3.162:12181,192.168.3.163:12181
+#设置删除主题的方式,true直接删除.false添加删除标记
+delete.topic.enable=true</code></pre>
+<p><strong>参数说明</strong></p>
+<pre class=" language-shell"><code class="language-shell">broker.id=0  #当前机器在集群中的唯一标识，和zookeeper的myid性质一样
+port=19092 #当前kafka对外提供服务的端口默认是9092
+host.name=192.168.3.161 #这个参数默认是关闭的，在服务器上部署时需要开启
+advertised.listeners=PLAINTEXT://106.14.178.39:9092 # 外网IP和端口,有外网时需要设置此属性
+num.network.threads=3 #这个是borker进行网络处理的线程数
+num.io.threads=8 #这个是borker进行I/O处理的线程数
+log.dirs=/usr/kafka/kafkalogs/ #消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num.io.threads要大于这个目录的个数。 如果配置多个目录，新创建的topic会把消息持久化存放到多个目录中，分区数最少的那个下面
+socket.send.buffer.bytes=102400 #发送缓冲区buffer大小，数据不是一下子就发送的，先会存储到缓冲区，到达一定的大小后在发送，能提高性能
+socket.receive.buffer.bytes=102400 #kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘
+socket.request.max.bytes=104857600 #这个参数是向kafka请求消息或者向kafka发送消息的请求的最大数，这个值不能超过java的堆栈大小
+num.partitions=1 #默认的分区数，一个topic默认1个分区数
+log.retention.hours=168 #默认消息的最大持久化时间，单位小时，168小时/7天
+message.max.byte=5242880  #消息保存的最大值5M
+default.replication.factor=2  #kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务
+replica.fetch.max.bytes=5242880  #取消息的最大直接数
+log.segment.bytes=1073741824 #这个参数是：因为kafka的消息是以追加的形式落地到文件中的，当超过这个值的时候，kafka会新起一个文件
+log.retention.check.interval.ms=300000 #每隔300000毫秒去检查上面配置的log失效时间（log.retention.hours=168 ），到目录查看是否有过期的消息如果有，删除
+log.cleaner.enable=false #是否启用log压缩，一般不用启用，启用的话可以提高性能
+zookeeper.connect=192.168.3.161:12181,192.168.3.162:12181,192.168.3.163:12181 #设置zookeeper的连接端口
+delete.topic.enable=true #设置删除主题的方式,true直接删除.false添加删除标记
+
+</code></pre>
+<h4 id="启动Kafka集群"><a href="#启动Kafka集群" class="headerlink" title="启动Kafka集群"></a>启动Kafka集群</h4><pre class=" language-shell"><code class="language-shell">#进入到kafka的bin目录
+#使用kafka的server.properties配置文件启动,-daemon参数保证kafka能在ssh断开后继续在后台运行（三台服务器都执行）
+kafka-server-start.sh -daemon ../config/server.properties
+
+</code></pre>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-01-31_21-51-27.png" alt=""></p>
+<h4 id="创建Topic"><a href="#创建Topic" class="headerlink" title="创建Topic"></a><strong>创建Topic</strong></h4><pre class=" language-shell"><code class="language-shell"># --zookeeper 参数在新版本的kafka里已经被默认废弃,代替者是--bootstrap-server
+kafka-topics.sh --create --zookeeper node:port --replication-factor 3 --partitions 3 --topic demo
+
+
+# 在某一台上执行此命令
+# --replication-factor 副本因子，表示一个信息有三个副本，1个leader副本，2个follower副本
+# --partitions topic的分区，分区可以分布在不同的服务器上，以提高性能
+kafka-topics.sh --bootstrap-server 192.168.124.133:19092 --create --topic demo --replication-factor 3 --partitions 3
+
+
+
+</code></pre>
+<blockquote>
+<p>推荐使用 <code>--bootstrap-server</code> 而非 <code>--zookeeper</code> 的原因主要有两个。</p>
+<ol>
+<li>使用 –zookeeper 会绕过 Kafka 的安全体系。这就是说，即使你为 Kafka 集群设置了安全认证，限制了主题的创建，如果你使用 –zookeeper 的命令，依然能成功创建任意主题，不受认证体系的约束。这显然是 Kafka 集群的运维人员不希望看到的。</li>
+<li>使用 –bootstrap-server 与集群进行交互，越来越成为使用 Kafka 的标准姿势。换句话说，以后会有越来越少的命令和 API 需要与 ZooKeeper 进行连接。这样，我们只需要一套连接信息，就能与 Kafka 进行全方位的交互，不用像以前一样，必须同时维护 ZooKeeper 和 Broker 的连接信息。</li>
+</ol>
+</blockquote>
+<h4 id="查看该topic的信息"><a href="#查看该topic的信息" class="headerlink" title="查看该topic的信息"></a>查看该topic的信息</h4><pre class=" language-shell"><code class="language-shell">kafka-topics.sh --bootstrap-server 192.168.124.133:19092 --describe --topic demo</code></pre>
+<p><strong>测试kafka容错能力</strong></p>
+<ul>
+<li>一开始，可以看到demo这个topic拥有三个分区，leader副本节点分别是1/2/3.</li>
+<li>然后，在3号节点上把kafka服务宕机</li>
+<li>此时，leader副本节点变成1/2/1， 我们可以知道此时分区2的leader节点为节点1，而节点3已经不再Isr中了。当从Replicas可知，节点1/2仍有topic的数据 </li>
+<li>不管当前状态的borker是leader还是follower，当我们kill掉后，只要有一个borker能够正常使用，则消息仍然能够正常的生产和发送。即Kafka的容错性是有保证！ </li>
+<li>重启节点3的kafka服务，分布状态又恢复了宕机前的状态</li>
+</ul>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-01-31_17-45-39.png" alt=""></p>
+<h4 id="测试-生产者与消费者"><a href="#测试-生产者与消费者" class="headerlink" title="测试 生产者与消费者"></a>测试 生产者与消费者</h4><p><strong>分别使用脚本kafka-console-consumer.sh和kafka-console-producer.sh</strong></p>
+<pre class=" language-shell"><code class="language-shell"># 启动生产者
+# 如果只指定了一个broker，那么当这个broker挂掉后就没法正常生产消息了。所以推荐指定两个及以上数量的broker
+# 容错机制以保证只要有一个borker能够正常使用，则消息仍然能够正常的生产和发送
+
+kafka-console-producer.sh --broken-list 192.168.124.133:19092,192.168.124.134:19092,192.168.124.134:19092 --topic demo</code></pre>
+<pre class=" language-shell"><code class="language-shell"># 启动2个消费者(指定多个消费者也是为了容错机制)
+kafka-console-consumer.sh --bootstrap-server 192.168.124.134:19092 --from-beginning --topic demo
+
+kafka-console-consumer.sh --bootstrap-server 192.168.124.134:19092 --from-beginning --topic demo</code></pre>
+<blockquote>
+<p>然后在生产者端 输入你想输入的测试内容，</p>
+<p>相应内容便会在消费者端出现</p>
+</blockquote>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-01-31_18-53-01.png" alt=""></p>
+<h3 id="Kafka-partition的数量问题"><a href="#Kafka-partition的数量问题" class="headerlink" title="Kafka partition的数量问题"></a>Kafka partition的数量问题</h3><p><strong>越多的partition可以提供更高的吞吐量</strong></p>
+<p>kafka的每个topic都可以创建多个partition，partition的数量无上限，并不会像replica一样受限于broker的数量，因此partition的数量可以随心所欲的设置。那确定partition的数量就需要思考一些权衡因素。</p>
+<blockquote>
+<p>在kafka中，单个partition是kafka并行操作的最小单元。每个partition可以独立接收推送的消息以及被consumer消费，相当于topic的一个子通道，partition和topic的关系就像高速公路的车道和高速公路的关系一样，起始点和终点相同，每个车道都可以独立实现运输，不同的是kafka中不存在车辆变道的说法，入口时选择的车道需要从一而终。而kafka的吞吐量显而易见，在资源足够的情况下，partition越多速度越快。</p>
+<p>假设一个partition的最大传输速度为p，目前kafka集群共有三个broker，每个broker的资源足够支撑三个partition最大速度传输，那我的集群最大传输速度为3<em>3</em>p=9p，假设在不增加资源的情况下将partition增加到18个，每个partition只能以p/2的速度传输数据，因此传输速度上限还是9p，并不能再提升，因此吞吐量的设计需要考虑broker的资源上限。当然，kafka跟其他集群一样，可以横向扩展，再增加三个相同资源的broker，那传输速度即可达到18p, 因此分区数小于broker数的时候，增加分区可以增加吞吐量。也可以增加消费者的并行度。 </p>
+</blockquote>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://superopenai.github.io" rel="external nofollow noreferrer">SuperNing</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://superopenai.github.io/2020/01/31/Zookeeper-3.5.6-Kafka2.2.2%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">https://superopenai.github.io/2020/01/31/Zookeeper-3.5.6-Kafka2.2.2%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://superopenai.github.io" target="_blank">SuperNing</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+                                    <span class="chip bg-color">搭建教程</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/01/31/Zookeeper-3.5.6-Kafka2.2.2%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Zookeeper-3.5.6+Kafka3.5.6个人搭建记录">
+                        
+                        <span class="card-title">Zookeeper-3.5.6+Kafka3.5.6个人搭建记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Zookeeper3.5.6 + Kafka3.5.6个人搭建记录
+一个典型的 Kafka 体系架构包括若干 Producer（消息生产者），若干 broker（作为 Kafka 节点的服务器），若干 Consumer（Group），以及依
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
+                                    搭建教程
+                                </a>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Zookeeper/" class="post-category">
+                                    Zookeeper
+                                </a>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Zookeeper/Kafka/" class="post-category">
+                                    Kafka
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">搭建教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/01/31/Hadoop-3.1.3-HBase-1.4.12%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Hadoop-3.1.3+HBase-1.4.12个人搭建记录">
+                        
+                        <span class="card-title">Hadoop-3.1.3+HBase-1.4.12个人搭建记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-31
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
+                                    搭建教程
+                                </a>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/" class="post-category">
+                                    Hadoop
+                                </a>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/HBase/" class="post-category">
+                                    HBase
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+                        <span class="chip bg-color">大数据</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">搭建教程</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="https://superopenai.github.io" target="_blank">SuperNing</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">38.6k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "10";
+                    var startDate = "27";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/superopenai" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:xining.l.se@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1921761130" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1921761130" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133732750-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-133732750-2');
+</script>
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
