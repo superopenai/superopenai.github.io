@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Hadoop-3.1.3+HBase-1.4.12个人搭建记录, 阿宁的博客">
-    <meta name="description" content="Hadoop-3.1.3+HBase-1.4.12个人搭建记录 | 阿宁的博客">
+    <meta name="description" content="Hadoop-3.1.3+HBase-1.4.12个人搭建记录部署 hadoop 集群。hadoop集群最少需要三台机，因为hdfs副本数最少为3。这里我们使用四台机子进行搭建,本文尽求详尽。
+Hadoop搭建过程环境准备java-8-op">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -462,19 +463,24 @@
                 </div>
                 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-02-01
+                </div>
+                
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        1.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        6 分
                     </div>
                     
                 
@@ -490,7 +496,260 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="Hadoop-3-1-3-HBase-1-4-12个人搭建记录"><a href="#Hadoop-3-1-3-HBase-1-4-12个人搭建记录" class="headerlink" title="Hadoop-3.1.3+HBase-1.4.12个人搭建记录"></a>Hadoop-3.1.3+HBase-1.4.12个人搭建记录</h2><p>部署 hadoop 集群。hadoop集群最少需要三台机，因为hdfs副本数最少为3。这里我们使用四台机子进行搭建,本文尽求详尽。</p>
+<h3 id="Hadoop搭建过程"><a href="#Hadoop搭建过程" class="headerlink" title="Hadoop搭建过程"></a>Hadoop搭建过程</h3><h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><p>java-8-openjdk-amd64</p>
+<p>hadoop-3.1.3</p>
+<ul>
+<li>192.168.124.133 ——master</li>
+<li>192.168.124.134—— slave1</li>
+<li>192.168.124.135—— slave2</li>
+<li>192.168.124.129—— slave3</li>
+</ul>
+<h4 id="修改Hostname-配置"><a href="#修改Hostname-配置" class="headerlink" title="修改Hostname 配置"></a>修改Hostname 配置</h4><pre class=" language-shell"><code class="language-shell">vim /etc/hosts （每台机器都需要执行）
+
+192.168.124.133 master
+192.168.124.134 slave1
+192.168.124.135 slave2
+192.168.124.129 slave3
+
+
+
+reboot  重启
+
+</code></pre>
+<h4 id="修改环境变量"><a href="#修改环境变量" class="headerlink" title="修改环境变量"></a>修改环境变量</h4><p><strong>添加Java，Hadoop，HBase的环境变量</strong></p>
+<pre class=" language-shell"><code class="language-shell">vim /etc/profile（每台机器都需要执行）
+
+
+#java
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+
+#hadoop
+export HADOOP_HOME=/home/hadoop/hadoop-3.1.3
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+#Hbase
+export HBASE_HOME=/home/hbase/hbase-1.4.12
+export PATH=$HBASE_HOME/bin:$PATH
+</code></pre>
+<h4 id="SSH-免密登入"><a href="#SSH-免密登入" class="headerlink" title="SSH 免密登入"></a>SSH 免密登入</h4><p> 在Hadoop启动以后，namenode是通过SSH（Secure Shell）来启动和停止各个节点上的各种<a href="https://www.baidu.com/s?wd=守护进程&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao" target="_blank" rel="noopener">守护进程</a>的，这就需要在节点之间执行指令的时候是不需要输入密码的方式，故我们需要配置SSH使用无密码公钥认证的方式。 </p>
+<p>所以我们需要配置四台机器之间的相互ssh免密登录</p>
+<pre class=" language-shell"><code class="language-shell"># 首先在~/.ssh目录下 建立一个config文件，便于管理这四个节点
+## 配置
+
+Host master
+        HostName 192.168.124.133
+        User root
+        Port 22
+Host slave1
+        HostName 192.168.124.134
+        User root
+        Port 22
+Host slave2
+        HostName 192.168.124.135
+        User root
+        Port 22
+Host slave3
+        HostName 192.168.124.129
+        User root
+        Port 22
+
+
+</code></pre>
+<p> <strong>四台机器均执行下面操作</strong></p>
+<ul>
+<li>首先<code>ssh-keygen -t rsa</code> 回车生成密钥</li>
+<li>然后把公钥拷贝到其他机器上 </li>
+</ul>
+<pre class=" language-shell"><code class="language-shell">
+ssh-copy-id -i ~/.ssh/id_rsa.pub master
+ssh-copy-id -i ~/.ssh/id_rsa.pub slave1
+ssh-copy-id -i ~/.ssh/id_rsa.pub slave2
+ssh-copy-id -i ~/.ssh/id_rsa.pub slave3
+
+</code></pre>
+<h4 id="hadoop-配置文件"><a href="#hadoop-配置文件" class="headerlink" title="hadoop 配置文件"></a>hadoop 配置文件</h4><p>共需要配置/opt/hadoop/hadoop-3.1.3/etc/hadoop/下的六个个文件，分别是</p>
+<p>hadoop-env.sh、core-site.xml、hdfs-site.xml、yarn-site.xml、mapred-site.xml、workers</p>
+<h5 id="创建hadoop数据存储目录"><a href="#创建hadoop数据存储目录" class="headerlink" title="创建hadoop数据存储目录"></a>创建hadoop数据存储目录</h5><ol>
+<li>NameNode 数据存放目录： /usr/local/data/hadoop/name</li>
+<li>SecondaryNameNode 数据存放目录： /usr/local/data/hadoop/secondary</li>
+<li>DataNode 数据存放目录： /usr/local/data/hadoop/data</li>
+<li>临时数据存放目录： /usr/local/data/hadoop/tmp</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">sudo mkdir -p /usr/local/data/hadoop/name
+sudo mkdir -p /usr/local/data/hadoop/secondary
+sudo mkdir -p /usr/local/data/hadoop/data
+sudo mkdir -p /usr/local/data/hadoop/tmp</code></pre>
+<h5 id="配置-hadoop-env-sh"><a href="#配置-hadoop-env-sh" class="headerlink" title="配置 hadoop-env.sh"></a>配置 hadoop-env.sh</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HDFS_NAMENODE_USER="root"
+export HDFS_DATANODE_USER="root"
+export HDFS_SECONDARYNAMENODE_USER="root"
+export YARN_RESOURCEMANAGER_USER="root"
+export YARN_NODEMANAGER_USER="root"</code></pre>
+<h5 id="配置-core-site-xml"><a href="#配置-core-site-xml" class="headerlink" title="配置  core-site.xml"></a>配置  core-site.xml</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+<configuration>
+    <property>
+     <name>fs.default.name</name>
+      <value>hdfs://master:8020</value>
+     <description>指定默认的访问地址以及端口号</description>
+     </property>
+
+ <property>                                                          <name>hadoop.tmp.dir</name>                                             <value>/usr/local/data/hadoop/data/tmp</value>
+<description>其它临时目录的父目录，会被其它临时目录用到</description>
+ </property>
+                                                                         <property>
+<name>io.file.buffer.size</name>
+<value>131072</value>
+<description>在序列中使用的缓冲区大小</description>
+</property>
+</configuration>
+</code></pre>
+<h5 id="配置-hdfs-site-xml"><a href="#配置-hdfs-site-xml" class="headerlink" title="配置  hdfs-site.xml"></a>配置  hdfs-site.xml</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+<configuration>
+<property>
+<name>dfs.replication</name>
+<value>3</value>
+<description>副本数，HDFS存储时的备份数量</description>
+</property>
+
+<property>                                                           <name>dfs.namenode.name.dir</name>                                       <value>/usr/local/data/hadoop/name</value>
+<description>namenode临时文件所存放的目录</description>
+</property>
+
+
+<property>
+<name>dfs.datanode.data.dir</name>
+<value>/usr/local/data/hadoop/data</value>
+<description>datanode临时文件所存放的目>录</description>
+</property>
+
+<property>
+                                                  <name>dfs.namenode.http-address</name>                                   <value>master:50070</value>                                             <description>hdfs web 地址</description>
+</property>
+</configuration></code></pre>
+<h5 id="配置yarn-site-xml"><a href="#配置yarn-site-xml" class="headerlink" title="配置yarn-site.xml"></a>配置yarn-site.xml</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+<configuration>
+
+<!-- Site specific YARN configuration properties -->
+    <property>
+    <name>yarn.nodemanager.aux-services</name>
+     <value>mapreduce_shuffle</value>
+      <description>nomenodeManager获取数据的方式是shuffle</description>
+ </property>
+  <property>
+         <name>yarn.resourcemanager.hostname</name>
+         <value>192.168.124.133</value>
+         <description>指定Yarn的老大(ResourceManager)的地址</description>
+ </property>
+
+ <property>
+         <name>yarn.resourcemanager.webapp.address</name>
+         <value>192.168.124.133:8088</value>
+         <description>配置 yarn 外部可访问，(外网IP:端口)</description>
+ </property>
+
+ <property>
+         <name>yarn.nodemanager.env-whitelist</name>
+         <value> JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ</value>         <description>容器可能会覆盖的环境变量，而不是使用NodeManager的默认值</description>
+ </property>
+
+
+ <property>
+         <name>yarn.nodemanager.vmem-check-enabled</name>
+         <value>false</value>
+         <description>关闭内存检测，虚拟机需要，不配会报错</description>
+
+  </property>
+
+</configuration></code></pre>
+<h5 id="配置-mapred-site-xml"><a href="#配置-mapred-site-xml" class="headerlink" title="配置 mapred-site.xml"></a>配置 mapred-site.xml</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+<configuration>
+<property>
+<name>mapreduce.framework.name</name>
+<value>yarn</value>
+<description>告诉hadoop以后MR(Map/Reduce)运行在YARN上</description>
+</property>
+
+<property>                                                           <name>mapreduce.admin.user.env</name>                                   <value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+<description>可以设置AM【AppMaster】端的环境变量，如果上面缺少配置，可能会造成mapreduce失败</description>
+</property>
+
+                                                                         <property>                                                               <name>yarn.app.mapreduce.am.env</name>
+<value>HADOOP_MAPRED_HOME=$HADOOP_HOME</value>
+<description>可以设置AM【AppMaster>】端的环境变量，如果上面缺少配置，可能会造成mapreduce失败</description>
+</property>
+</configuration></code></pre>
+<h5 id="配置worker"><a href="#配置worker" class="headerlink" title="配置worker"></a>配置worker</h5><pre class=" language-shell"><code class="language-shell">slave1
+slave2
+slave3</code></pre>
+<h5 id="从master分发配置文件到-各个slave"><a href="#从master分发配置文件到-各个slave" class="headerlink" title="从master分发配置文件到 各个slave"></a>从master分发配置文件到 各个slave</h5><pre class=" language-shell"><code class="language-shell">rsync -av /usr/local/hadoop/etc/hadoop/* slave1:/usr/local/hadoop/etc/hadoop
+rsync -av /usr/local/hadoop/etc/hadoop/* slave2:/usr/local/hadoop/etc/hadoop
+rsync -av /usr/local/hadoop/etc/hadoop/* slave3:/usr/local/hadoop/etc/hadoop
+
+</code></pre>
+<h4 id="对NameNode做格式化并启动集群"><a href="#对NameNode做格式化并启动集群" class="headerlink" title="对NameNode做格式化并启动集群"></a>对NameNode做格式化并启动集群</h4><p><strong>格式化和启动只需要在 master 执行即可</strong></p>
+<p>格式化<code>hdfs namenode -format</code></p>
+<p> 一次性启动 <code>start-all.sh</code> </p>
+<p>逐个组件启动 <code>start-dfs.sh</code> <code>start-yarn.sh</code> </p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-01_21-40-50.png" alt=""></p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-01_21-41-06.png" alt=""></p>
+<h3 id="hadoop-3-0-与-2-0-的异同"><a href="#hadoop-3-0-与-2-0-的异同" class="headerlink" title="hadoop 3.0 与 2.0 的异同"></a>hadoop 3.0 与 2.0 的异同</h3><p>官方介绍：<a href="https://hadoop.apache.org/docs/r3.0.0/index.html" target="_blank" rel="noopener">hadoop.apache.org/docs/r3.0.0…</a></p>
+<p>1 端口变化</p>
+<pre><code>Namenode ports: 50470 –&gt; 9871, 50070 –&gt; 9870, 8020 –&gt; 9820
+Secondary NN ports: 50091 –&gt; 9869, 50090 –&gt; 9868
+Datanode ports: 50020 –&gt; 9867, 50010 –&gt; 9866, 50475 –&gt; 9865, 50075 –&gt; 9864
+复制代码</code></pre><p>2 节点配置文件由slaves改为了workers</p>
+<p>3 Hadoop3.0最低支持Java8</p>
+<h3 id="HBase-搭建过程"><a href="#HBase-搭建过程" class="headerlink" title="HBase 搭建过程"></a>HBase 搭建过程</h3><p><strong>在已经搭建好Hadoop的基础上，我们开始搭建HBase</strong></p>
+<h4 id="HBase配置文件"><a href="#HBase配置文件" class="headerlink" title="HBase配置文件"></a>HBase配置文件</h4><h5 id="配置hbase-env-sh"><a href="#配置hbase-env-sh" class="headerlink" title="配置hbase-env.sh"></a>配置hbase-env.sh</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HBASE_CLASSPATH=/home/hbase/hbase-1.4.12/conf
+# 此配置信息，设置由hbase自己管理zookeeper，不需要单独的zookeeper。
+export HBASE_MANAGES_ZK=true
+export HBASE_HOME=/home/hbase/hbase-1.4.12
+export HADOOP_HOME=/home/hadoop/hadoop-3.1.3
+# Hbase日志目录（自行创建）
+export HBASE_LOG_DIR=/usr/local/data/hbase/logs</code></pre>
+<h5 id="配置-hbase-site-xml"><a href="#配置-hbase-site-xml" class="headerlink" title="配置 hbase-site.xml"></a>配置 hbase-site.xml</h5><pre class=" language-shell"><code class="language-shell">## 添加如下内容
+
+
+<configuration>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://master:8020/hbase</value>
+    </property>
+
+    <property>
+         <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+
+   <property>
+           <name>hbase.master.info.port</name>
+           <value>16010</value>
+   </property>
+
+   <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>slave1,slave2,slave3</value>
+</property>
+</configuration>
+</code></pre>
+<h5 id="配置regionservers"><a href="#配置regionservers" class="headerlink" title="配置regionservers"></a>配置regionservers</h5><pre class=" language-shell"><code class="language-shell">slave1
+slave2
+slave3</code></pre>
+<h5 id="从master分发配置文件到-各个slave-1"><a href="#从master分发配置文件到-各个slave-1" class="headerlink" title="从master分发配置文件到 各个slave"></a>从master分发配置文件到 各个slave</h5><pre class=" language-shell"><code class="language-shell">rsync -av /home/hbase/hbase-1.4.12/conf/* slave1:/home/hbase/hbase-1.4.12/conf/
+rsync -av /home/hbase/hbase-1.4.12/conf/* slave2:/home/hbase/hbase-1.4.12/conf/
+rsync -av /home/hbase/hbase-1.4.12/conf/* slave3:/home/hbase/hbase-1.4.12/conf/</code></pre>
+<h4 id="启动hbase集群"><a href="#启动hbase集群" class="headerlink" title="启动hbase集群"></a>启动hbase集群</h4><p><strong>启动HBase <code>start-hbase.sh</code> (hadoop必须处于开启状态)</strong></p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-01_21-56-20.png" alt=""></p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-01_21-57-36.png" alt=""></p>
+
             </div>
             <hr/>
 
@@ -857,7 +1116,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">38.6k</span>&nbsp;字
+                class="white-color">40k</span>&nbsp;字
             
             
             
