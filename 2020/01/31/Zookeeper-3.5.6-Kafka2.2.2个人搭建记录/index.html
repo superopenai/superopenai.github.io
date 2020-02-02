@@ -459,6 +459,11 @@
                 </div>
                 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-02-02
+                </div>
+                
 
                 
                     
@@ -492,8 +497,11 @@
 <p>因此，如果要使用Kafka，首先要有一个Zookeeper集群，Kafka自带一个Zookeeper，本篇教程使用的是独立搭建的Zookeeper集群</p>
 </blockquote>
 <p>服务器：</p>
-<pre><code>                         192.168.124.133</code></pre><p>​                            192.168.124.134</p>
-<p>​                            192.168.124.135</p>
+<ul>
+<li>192.168.124.133 </li>
+<li>192.168.124.134</li>
+<li>192.168.124.135</li>
+</ul>
 <p><strong>满足节点数量&gt; 总结点数量/2 的子集群最多只会有一个。所以要限制 可用节点数量 &gt; 集群总结点数量/2 。因此使用三台虚拟机</strong></p>
 <h3 id="zookeeper·准备工作"><a href="#zookeeper·准备工作" class="headerlink" title="zookeeper·准备工作"></a>zookeeper·准备工作</h3><h4 id="下载Zookeeper"><a href="#下载Zookeeper" class="headerlink" title="下载Zookeeper"></a>下载Zookeeper</h4><pre class=" language-shell"><code class="language-shell"># 使用清华镜像站的tar包
 ## zookeeper（保证机器已经安装Jdk1.8或更新版本）
@@ -1016,7 +1024,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">40k</span>&nbsp;字
+                class="white-color">40.3k</span>&nbsp;字
             
             
             
