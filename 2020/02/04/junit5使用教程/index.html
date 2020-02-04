@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深化理解netty中的常用组件（个人向）, 阿宁的博客">
-    <meta name="description" content="深化理解netty中的常用组件（个人向)Inbound和Outbound开始的错误理解 
-
-ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Netty的时候，总是下意识的">
+    <meta name="keywords" content="junit5使用教程, 阿宁的博客">
+    <meta name="description" content="junit5 使用教程
+junit 5是针对junit 4 所存在的一些局限性，进行想相应的增强，并且junit 4 所使用的Java 版本 是Java7， 在junit 5 ，将会使用Java 8 的许多优秀的特性。 整个Java的编码风">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>深化理解netty中的常用组件（个人向） | 阿宁的博客</title>
+    <title>junit5使用教程 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -306,13 +305,13 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        深化理解netty中的常用组件（个人向）
+                        junit5使用教程
                     </div>
                 </div>
             </div>
@@ -428,8 +427,8 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                                 <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/Netty/">
-                                <span class="chip bg-color">Netty</span>
+                            <a href="/tags/Junit/">
+                                <span class="chip bg-color">Junit</span>
                             </a>
                         
                     </div>
@@ -440,12 +439,12 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Netty/" class="post-category">
-                                Netty
+                            <a href="/categories/java/" class="post-category">
+                                java
                             </a>
                         
-                            <a href="/categories/Netty/Java/" class="post-category">
-                                Java
+                            <a href="/categories/java/junit/" class="post-category">
+                                junit
                             </a>
                         
                     </div>
@@ -456,7 +455,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-16
+                    2020-02-04
                 </div>
                 
                 
@@ -465,14 +464,14 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        445
+                        909
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -488,58 +487,118 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="深化理解netty中的常用组件（个人向"><a href="#深化理解netty中的常用组件（个人向" class="headerlink" title="深化理解netty中的常用组件（个人向)"></a>深化理解netty中的常用组件（个人向)</h2><h3 id="Inbound和Outbound"><a href="#Inbound和Outbound" class="headerlink" title="Inbound和Outbound"></a>Inbound和Outbound</h3><p><strong>开始的错误理解</strong> </p>
-<blockquote>
-<p><code>ChannelInboundHandler</code>  , <code>ChanneloutboundHandler</code>   当初第一次学习使用Netty的时候，总是下意识的把这两个与 I/O的输入输出流联系在一起，但是随着使用的增多，如果，<code>ChanneloutboundHandler</code>代表输出流，为什么又有read方法？</p>
+                <h2 id="junit5-使用教程"><a href="#junit5-使用教程" class="headerlink" title="junit5 使用教程"></a>junit5 使用教程</h2><blockquote>
+<p>junit 5是针对junit 4 所存在的一些局限性，进行想相应的增强，并且junit 4 所使用的Java 版本 是Java7， 在junit 5 ，将会使用Java 8 的许多优秀的特性。 整个Java的编码风格发生巨大的变化，JUnit5主要在希望能够适应Java8风格的编码以及相关工，这就是为什么建议在Java8之后的项目中使用JUnit5来创建和执行测试。 </p>
 </blockquote>
-<p><strong>正确理解</strong></p>
-<blockquote>
-<p>从<a href="https://stackoverflow.com/questions/22354135/in-netty4-why-read-and-write-both-in-outboundhandler" target="_blank" rel="noopener">Stackoverflow的这篇文章能够理解一二</a></p>
-<p>Netty是由事件驱动的， 事件有  <code>inbound</code> 和 <code>outbound</code> 两种，分别由<code>ChannelInboundHandler</code>和<code>ChannelOutboundHandler</code>负责处理 。之间的区别便是</p>
-<p><strong>触发事件的源头</strong>。</p>
+<p>JUnit5的第一个可用性版本是在2017年9月10日发布的。</p>
+<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>junit 5 主要由3 个组件组成：</p>
+<p> <strong>JUnit 5 = JUnit Platform+ JUnit Jupiter +JUnit Vintage</strong> ** </p>
+<ul>
+<li>JUnit Platform：  作为在JVM上启动测试框架的基础，并定义了用于开发在平台上运行的测试框架的TestEngine API </li>
+<li>JUnit Jupiter： JUnit Jupiter是新的编程模型和扩展模型的组合，用于在JUnit 5中编写测试和扩展。Jupiter子项目提供了一个TestEngine，用于在平台上运行基于Jupiter的测试 </li>
+<li>JUnit Vintage： 提供了 TestEngine ，用于在平台上运行 基于 JUnit 3 和JUnit 4 的测试。</li>
+</ul>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>部署JUnit 5 </p>
+<pre class=" language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.junit.jupiter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit-jupiter-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.6.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+
+</code></pre>
+<p>部署JUnit 5 Vintage</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.junit.vintage<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>junit-vintage-engine<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.6.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>scope</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>scope</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="编写测试用例"><a href="#编写测试用例" class="headerlink" title="编写测试用例"></a>编写测试用例</h3><p>一个最简单的测试用例</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> <span class="token keyword">static</span> org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>jupiter<span class="token punctuation">.</span>api<span class="token punctuation">.</span>Assertions<span class="token punctuation">.</span>assertEquals<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> example<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Calculator<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>jupiter<span class="token punctuation">.</span>api<span class="token punctuation">.</span>Test<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyFirstJUnitJupiterTests</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">final</span> Calculator calculator <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Calculator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">void</span> <span class="token function">addition</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">assertEquals</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> calculator<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></code></pre>
+<h3 id="相关注解变化"><a href="#相关注解变化" class="headerlink" title="相关注解变化"></a>相关注解变化</h3><h4 id="Before-注解"><a href="#Before-注解" class="headerlink" title="Before 注解"></a>Before 注解</h4><ul>
+<li><code>@BeforeEach</code> 注解 现在代替了 <code>@Before</code>， 表示方法应在当前类中的每个@ Test，@ RepeatedTest，@ ParameterizedTest或@TestFactory方法之前执行 </li>
+<li><code>@BeforeAll</code> 注解现在代替了<code>@BeforeClass</code>,  表示方法应该在所有方法前执行。</li>
+</ul>
+<h4 id="After-注解"><a href="#After-注解" class="headerlink" title="After 注解"></a>After 注解</h4><ul>
+<li><code>@AfterEach</code> 注解 现在代替了 <code>@After</code>， 这表示应该在当前类中的每个@Test、@RepeatedTest、@ParameterizedTest或@TestFactory方法之后执行方法 </li>
+<li><code>@AfterAll</code> 注解现在代替了<code>@AfterClass</code>,  表示方法应该在所有方法后执行。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><code>@DisplayName</code></th>
+<th>用于为测试类或测试方法提供任何自定义显示名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Disable</code></td>
+<td>用于禁用或忽略测试类或方法</td>
+</tr>
+<tr>
+<td><code>@Nested</code></td>
+<td>用于创建嵌套测试类</td>
+</tr>
+<tr>
+<td><code>@Tag</code></td>
+<td>用于测试发现或过滤的标签来标记测试方法或类</td>
+</tr>
+<tr>
+<td><code>@TestFactory</code></td>
+<td>标记一种方法是动态测试的测试工场</td>
+</tr>
+</tbody></table>
+<p>*<em>JUnit4和JUnit5在测试编码风格上没有太大变化，生命周期如下图 *</em></p>
+<p> <img src="https://junit.org/junit5/docs/current/user-guide/images/extensions_lifecycle.png" alt="extensions lifecycle"> </p>
+<h3 id="测试套件"><a href="#测试套件" class="headerlink" title="测试套件"></a>测试套件</h3><h4 id="注册扩展"><a href="#注册扩展" class="headerlink" title="注册扩展"></a>注册扩展</h4><blockquote>
+<p> 在JUnit4中，使用@ RunWith 将测试上下文与其他框架集成，或者更改测试用例中的整体执行流程。</p>
+<p>在JUnit5中，现在可以使用@ExtendWith注解来代替@ RunWith 来提供类似的功能。 </p>
+<p><code>@ExtendWith</code>注解 可以接受任何实现了<code>Extension</code>接口的实现类</p>
 </blockquote>
-<h4 id="inbound"><a href="#inbound" class="headerlink" title="inbound"></a>inbound</h4><p><strong>触发事件的源头是外部，然后影响到应用程序内部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
-<p>Inbound event propagation methods:</p>
+<p>另外，你也可以使用以下注解来过滤测试包、类甚至测试方法。</p>
 <ul>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRegistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRegistered()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelActive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelActive()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRead-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRead(Object)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelReadComplete--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelReadComplete()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireExceptionCaught-java.lang.Throwable-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireExceptionCaught(Throwable)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireUserEventTriggered-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireUserEventTriggered(Object)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelWritabilityChanged--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelWritabilityChanged()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelInactive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelInactive()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelUnregistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelUnregistered()</code></a></li>
+<li><code>@IncludePackages</code>和<code>@ExcludePackages</code>来过滤包 </li>
+<li><code>@IncludeClassNamePatterns</code>和<code>@ExcludeClassNamePatterns</code>过滤测试类</li>
+<li><code>@IncludeTags</code>和<code>@ExcludeTags</code>过滤测试方法</li>
 </ul>
-<h4 id="outbound"><a href="#outbound" class="headerlink" title="outbound"></a>outbound</h4><p><strong>触发事件的源头是内部，然后影响到外部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
-<p>Outbound event propagation methods:</p>
-<ul>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#bind-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.bind(SocketAddress, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#connect-java.net.SocketAddress-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.connect(SocketAddress, SocketAddress, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#write-java.lang.Object-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.write(Object, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#flush--" target="_blank" rel="noopener"><code>ChannelHandlerContext.flush()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#read--" target="_blank" rel="noopener"><code>ChannelHandlerContext.read()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#disconnect-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.disconnect(ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#close-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.close(ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#deregister-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.deregister(ChannelPromise)</code></a></li>
-</ul>
-<h3 id="ChannelGroup"><a href="#ChannelGroup" class="headerlink" title="ChannelGroup"></a>ChannelGroup</h3><h4 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h4><p> 在Netty中提供了ChannelGroup接口，是线程安全的，该接口继承Set接口，可以通过ChannelGroup可管理服务器端所有的连接的Channel，然后对所有的连接Channel广播消息。 并且ChannelGroup可以自动remove在ChannelGroup中已经关闭的Channel。因此也不用分心来关注Channel的生命周期。</p>
-<p>Channel的生命周期：</p>
-<ul>
-<li>ChannelRegistered  </li>
-<li>ChannelActive  </li>
-<li>ChannelInactive </li>
-<li>ChannelUnregistered </li>
-</ul>
-<h4 id="简化关闭"><a href="#简化关闭" class="headerlink" title="简化关闭"></a>简化关闭</h4><p> 如果ServerChannel和非ServerChannel都存在于同一个ChannelGroup中，则首先对此组上的ServerChannel执行所有请求的I / O操作，然后对其他Channel执行操作。</p>
-<blockquote>
-<pre><code>ChannelGroupFuture close()</code></pre><p>Closes all <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a>s in this group. If the <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a> is connected to a remote peer or bound to a local address, it is automatically disconnected and unbound.</p>
-<ul>
-<li><p><strong>Returns:</strong></p>
-<p>the <a href="https://netty.io/4.0/api/io/netty/channel/group/ChannelGroupFuture.html" target="_blank" rel="noopener"><code>ChannelGroupFuture</code></a> instance that notifies when the operation is done for all channels</p>
-</li>
-</ul>
-</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@RunWith</span><span class="token punctuation">(</span>JUnitPlatform<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@SelectPackages</span><span class="token punctuation">(</span><span class="token string">"me.superning.junit5.examples"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@IncludePackages</span><span class="token punctuation">(</span><span class="token string">"me.superning.junit5.examples.packageC"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@ExcludeTags</span><span class="token punctuation">(</span><span class="token string">"PROD"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JUnit5TestSuiteExample</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h3><p> 断言有助于使用测试用例的实际输出验证预期输出。为了保持简单，所有JUnit Jupiter断言是 <a href="https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api/package-summary.html" target="_blank" rel="noopener">org.junit.jupiter.api</a> 类中的静态方法，例如<code>assertEquals()</code>，<code>assertNotEquals()</code>。 </p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">testCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//Test will pass</span>
+    Assertions<span class="token punctuation">.</span><span class="token function">assertNotEquals</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> Calculator<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//Test will fail</span>
+    Assertions<span class="token punctuation">.</span><span class="token function">assertNotEquals</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> Calculator<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"Calculator.add(2, 2) test failed"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//Test will fail</span>
+    Supplier<span class="token operator">&lt;</span>String<span class="token operator">></span> messageSupplier  <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span> <span class="token string">"Calculator.add(2, 2) test failed"</span><span class="token punctuation">;</span>
+    Assertions<span class="token punctuation">.</span><span class="token function">assertNotEquals</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> Calculator<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> messageSupplier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 
             </div>
             <hr/>
@@ -565,7 +624,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/">https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/</a>
+                    <a href="https://superopenai.github.io/2020/02/04/junit5%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">https://superopenai.github.io/2020/02/04/junit5%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -607,8 +666,8 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                                     <span class="chip bg-color">Java</span>
                                 </a>
                             
-                                <a href="/tags/Netty/">
-                                    <span class="chip bg-color">Netty</span>
+                                <a href="/tags/Junit/">
+                                    <span class="chip bg-color">Junit</span>
                                 </a>
                             
                         </div>
@@ -649,59 +708,57 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/01/31/Hadoop-3.1.3-HBase-1.4.12%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">
+                <a href="/2020/02/04/junit5%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Hadoop-3.1.3+HBase-1.4.12个人搭建记录">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="junit5使用教程">
                         
-                        <span class="card-title">Hadoop-3.1.3+HBase-1.4.12个人搭建记录</span>
+                        <span class="card-title">junit5使用教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Hadoop-3.1.3+HBase-1.4.12个人搭建记录部署 hadoop 集群。hadoop集群最少需要三台机，因为hdfs副本数最少为3。这里我们使用四台机子进行搭建,本文尽求详尽。
-Hadoop搭建过程环境准备java-8-op
+                            junit5 使用教程
+junit 5是针对junit 4 所存在的一些局限性，进行想相应的增强，并且junit 4 所使用的Java 版本 是Java7， 在junit 5 ，将会使用Java 8 的许多优秀的特性。 整个Java的编码风
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
-                                    搭建教程
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/" class="post-category">
-                                    Hadoop
-                                </a>
-                            
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/HBase/" class="post-category">
-                                    HBase
+                            <a href="/categories/java/junit/" class="post-category">
+                                    junit
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
-                        <span class="chip bg-color">大数据</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">搭建教程</span>
+                    <a href="/tags/Junit/">
+                        <span class="chip bg-color">Junit</span>
                     </a>
                     
                 </div>
@@ -715,32 +772,40 @@ Hadoop搭建过程环境准备java-8-op
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/05/%E7%90%86%E8%A7%A3Spring%E4%B8%AD%E7%9A%84-Autowired-Resource-and-Inject%E6%B3%A8%E8%A7%A3%E5%90%AB%E4%B9%89/">
+                <a href="/2020/01/31/Zookeeper-3.5.6-Kafka2.2.2%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="理解Spring中的@Autowired, @Resource and @Inject注解含义(译)">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Zookeeper-3.5.6+Kafka3.5.6个人搭建记录">
                         
-                        <span class="card-title">理解Spring中的@Autowired, @Resource and @Inject注解含义(译)</span>
+                        <span class="card-title">Zookeeper-3.5.6+Kafka3.5.6个人搭建记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            总览常用的关于依赖注入( dependency injection)的相关注解有 @Resource    @Autowired     @Inject      仨个注解。 这些注解替我们为类 提供了一种声明式的方法来解析依赖项。
-例如：
+                            Zookeeper3.5.6 + Kafka3.5.6个人搭建记录
+一个典型的 Kafka 体系架构包括若干 Producer（消息生产者），若干 broker（作为 Kafka 节点的服务器），若干 Consumer（Group），以及依
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-31
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
+                                    搭建教程
+                                </a>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Zookeeper/" class="post-category">
+                                    Zookeeper
+                                </a>
+                            
+                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Zookeeper/Kafka/" class="post-category">
+                                    Kafka
                                 </a>
                             
                             
@@ -750,8 +815,8 @@ Hadoop搭建过程环境准备java-8-op
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
+                        <span class="chip bg-color">搭建教程</span>
                     </a>
                     
                 </div>
