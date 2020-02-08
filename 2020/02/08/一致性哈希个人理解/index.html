@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深化理解netty中的常用组件（个人向）, 阿宁的博客">
-    <meta name="description" content="深化理解netty中的常用组件（个人向)Inbound和Outbound开始的错误理解 
-
-ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Netty的时候，总是下意识的">
+    <meta name="keywords" content="一致性哈希个人理解, 阿宁的博客">
+    <meta name="description" content="一致性哈希个人理解
+最近在阅读 《数据密集型应用系统设计》这本书，不得不说，这是一本好书，阅读时让人意犹未尽。在书里总会出现一个词，   一致性哈希。 对于这个技术一直似懂非懂。今天花了半天的时间好好研究了它，发现一点都不复杂。于是写篇文章">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>深化理解netty中的常用组件（个人向） | 阿宁的博客</title>
+    <title>一致性哈希个人理解 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -306,13 +305,13 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        深化理解netty中的常用组件（个人向）
+                        一致性哈希个人理解
                     </div>
                 </div>
             </div>
@@ -424,12 +423,8 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/Netty/">
-                                <span class="chip bg-color">Netty</span>
+                            <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                                <span class="chip bg-color">分布式</span>
                             </a>
                         
                     </div>
@@ -440,12 +435,8 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Netty/" class="post-category">
-                                Netty
-                            </a>
-                        
-                            <a href="/categories/Netty/Java/" class="post-category">
-                                Java
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                分布式
                             </a>
                         
                     </div>
@@ -456,7 +447,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-16
+                    2020-02-08
                 </div>
                 
                 
@@ -465,14 +456,14 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        445
+                        1.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        5 分
                     </div>
                     
                 
@@ -488,58 +479,71 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="深化理解netty中的常用组件（个人向"><a href="#深化理解netty中的常用组件（个人向" class="headerlink" title="深化理解netty中的常用组件（个人向)"></a>深化理解netty中的常用组件（个人向)</h2><h3 id="Inbound和Outbound"><a href="#Inbound和Outbound" class="headerlink" title="Inbound和Outbound"></a>Inbound和Outbound</h3><p><strong>开始的错误理解</strong> </p>
-<blockquote>
-<p><code>ChannelInboundHandler</code>  , <code>ChanneloutboundHandler</code>   当初第一次学习使用Netty的时候，总是下意识的把这两个与 I/O的输入输出流联系在一起，但是随着使用的增多，如果，<code>ChanneloutboundHandler</code>代表输出流，为什么又有read方法？</p>
+                <h2 id="一致性哈希个人理解"><a href="#一致性哈希个人理解" class="headerlink" title="一致性哈希个人理解"></a>一致性哈希个人理解</h2><blockquote>
+<p>最近在阅读 《<a href="https://book.douban.com/subject/30329536/" target="_blank" rel="noopener">数据密集型应用系统设计</a>》这本书，不得不说，这是一本好书，阅读时让人意犹未尽。在书里总会出现一个词，   一致性哈希。 对于这个技术一直似懂非懂。今天花了半天的时间好好研究了它，发现一点都不复杂。于是写篇文章阐述一下个人的理解。</p>
 </blockquote>
-<p><strong>正确理解</strong></p>
-<blockquote>
-<p>从<a href="https://stackoverflow.com/questions/22354135/in-netty4-why-read-and-write-both-in-outboundhandler" target="_blank" rel="noopener">Stackoverflow的这篇文章能够理解一二</a></p>
-<p>Netty是由事件驱动的， 事件有  <code>inbound</code> 和 <code>outbound</code> 两种，分别由<code>ChannelInboundHandler</code>和<code>ChannelOutboundHandler</code>负责处理 。之间的区别便是</p>
-<p><strong>触发事件的源头</strong>。</p>
+<h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><p>一致性hash在很多领域都有应用，例如分布式缓存领域的MemCache，Redis。 它们都支持开箱即用的一致性哈希 。Nginx，各类Rpc框架。</p>
+<p>在分布式系统中，当服务增长的一定规模，出现了性能瓶颈，我们一定会考虑扩展，扩展包括 <strong>水平扩展</strong>，<strong>垂直扩展</strong>。</p>
+<p>其中，<strong>垂直扩展</strong>，简单粗暴，即购买更好，性能更好的服务器和硬件，提升了单机性能，来提高整体性能，但是，单机总会有性能极限瓶颈。所以，最终的选择并不会是<strong>垂直扩展</strong>。</p>
+<p><strong>水平扩展</strong>，惯常的做法是 服务器集群化服务，引入负载均衡，这样的好处是     1.高可用（有少数服务器失效的时候，整体服务仍然可用）2.解耦（外部通过负载均衡服务器通信）</p>
+<h3 id="一致性哈希介绍"><a href="#一致性哈希介绍" class="headerlink" title="一致性哈希介绍"></a>一致性哈希介绍</h3><p>假设一个简单的场景 ，我们有4台服务器组成了集群，当一个对象传入，我们应该把对象放在那台服务器呢？</p>
+<p>方法有很多种，轮询，随机，最小负载优先，当然也包括 一致性哈希这种方法。 一致性哈希需要保证的是 “相同的请求尽可能落到同一台服务器上”。 但是又引出了另外一个问题？  什么算是 “相同的请求”？一般在使用一致性哈希时，通常会指定一个key 来计算 Hash。</p>
+<ul>
+<li>请求方IP</li>
+<li>请求服务的服务名称</li>
+<li>用户ID</li>
+</ul>
+<p>“尽可能”，为什么不是一定？ 服务器集群总会发生某些服务器下线的情况。在某台服务器下线时，相同的请求只能发送到近似的服务器上。但少数不会影响大局。</p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>通常的Hash算法都是将Value映射到一个32位的key值上，我们可以把这些值映射到一个圆圈上。</p>
+<p>假设我们现在有五个对象，经过特定的Hash计算，分别处于如图相应的位置</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-08_19-23-25.png" alt=""></p>
+<p>然后集群里有三台服务器，经过hash计算后的位置如图。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-08_19-24-28.png" alt=""></p>
+<p>那如何将服务器和不同的对象联系起来呢？ 我们可以规定每个对象在逆时针方向最接近的服务器，把对象储存进此服务器（或者是顺时针方向，就是一个从大到小，或者从小到大的顺序）。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-08_19-39-05.png" alt=""></p>
+<p>如果我们拥有大量的服务器，大量的服务器就会被平均的分散到“圆环”的不同位置，不同的对象也就储存相应的服务器中。但是现实中 ，服务器的数量是有限的，这也就可能会发生大量集中的数据 对某一台服务器产生很大的压力。 因此，这又引入虚拟节点的概念。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-08_19-39-28.png" alt="">如上图，我们将三台服务器，例如把服务器的（ip+port）作为key 来哈希，我们可以用添加后缀的方式，将每台服务器虚拟成10个节点，再次哈希计算新的 “位置”。这样一来，不同的对象被储存进哪个服务器就很均匀了。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-08_19-43-19.png" alt=""></p>
+<p>在引入虚拟节点的情况下，如果发生服务器下线的情况呢？如上图，如果C服务器下线了，相应的C0-C9的标签都应该撤销，本来hash计算应该储存进C虚拟节点的新数据，现在会计算后，随机的存入A/B 服务器。而本来就属于A/B的数据，并不会受到影响。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/Snipaste_2020-02-08_19-43-44.png" alt=""></p>
+<p>那如果我们新添加了一台服务器上去呢，例如我们新添加了一台 D服务器，10个D虚拟节点被hash计算到 圆环不同的位置。大概有（1/n）的数据会hash后重新分配给D服务器，其余的数据将会不变。</p>
+<h3 id="哈希算法介绍"><a href="#哈希算法介绍" class="headerlink" title="哈希算法介绍"></a>哈希算法介绍</h3><p> 哈希算法是一致性哈希算法中重要的一个组成部分 ， 可以将他们分成三代 。</p>
+<ul>
+<li>第一代：SHA-1（1993），MD5（1992），CRC（1975），Lookup3（2006）</li>
+<li>第二代：MurmurHash（2008）</li>
+<li>第三代：CityHash， SpookyHash（2011）</li>
+</ul>
+<p>讨论哈希算法时，考虑哪些东西？大概总结下有以下四点：</p>
+<ol>
+<li>实现复杂程度</li>
+<li>分布均匀程度</li>
+<li>哈希碰撞概率</li>
+<li>性能</li>
+</ol>
+<p>其中值得介绍的几个哈希算法 </p>
+<ol>
+<li><blockquote>
+<p>MurmurHash 算法：高运算性能，低碰撞率，由 Austin Appleby 创建于 2008 年，现已应用到 Hadoop、libstdc++、nginx、libmemcached 等开源系统。2011 年 Appleby 被 Google 雇佣，随后 Google 推出其变种的 CityHash 算法。官方只提供了 C 语言的实现版本。</p>
+<p>Java 界中 Redis，Memcached，Cassandra，HBase，Lucene 都在使用它。</p>
+<p>在 Java 的实现，Guava 的 Hashing 类里有，上面提到的 Jedis，Cassandra 里都有相关的 Util 类。</p>
 </blockquote>
-<h4 id="inbound"><a href="#inbound" class="headerlink" title="inbound"></a>inbound</h4><p><strong>触发事件的源头是外部，然后影响到应用程序内部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
-<p>Inbound event propagation methods:</p>
-<ul>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRegistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRegistered()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelActive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelActive()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRead-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRead(Object)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelReadComplete--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelReadComplete()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireExceptionCaught-java.lang.Throwable-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireExceptionCaught(Throwable)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireUserEventTriggered-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireUserEventTriggered(Object)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelWritabilityChanged--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelWritabilityChanged()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelInactive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelInactive()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelUnregistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelUnregistered()</code></a></li>
-</ul>
-<h4 id="outbound"><a href="#outbound" class="headerlink" title="outbound"></a>outbound</h4><p><strong>触发事件的源头是内部，然后影响到外部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
-<p>Outbound event propagation methods:</p>
-<ul>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#bind-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.bind(SocketAddress, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#connect-java.net.SocketAddress-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.connect(SocketAddress, SocketAddress, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#write-java.lang.Object-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.write(Object, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#flush--" target="_blank" rel="noopener"><code>ChannelHandlerContext.flush()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#read--" target="_blank" rel="noopener"><code>ChannelHandlerContext.read()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#disconnect-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.disconnect(ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#close-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.close(ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#deregister-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.deregister(ChannelPromise)</code></a></li>
-</ul>
-<h3 id="ChannelGroup"><a href="#ChannelGroup" class="headerlink" title="ChannelGroup"></a>ChannelGroup</h3><h4 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h4><p> 在Netty中提供了ChannelGroup接口，是线程安全的，该接口继承Set接口，可以通过ChannelGroup可管理服务器端所有的连接的Channel，然后对所有的连接Channel广播消息。 并且ChannelGroup可以自动remove在ChannelGroup中已经关闭的Channel。因此也不用分心来关注Channel的生命周期。</p>
-<p>Channel的生命周期：</p>
-<ul>
-<li>ChannelRegistered  </li>
-<li>ChannelActive  </li>
-<li>ChannelInactive </li>
-<li>ChannelUnregistered </li>
-</ul>
-<h4 id="简化关闭"><a href="#简化关闭" class="headerlink" title="简化关闭"></a>简化关闭</h4><p> 如果ServerChannel和非ServerChannel都存在于同一个ChannelGroup中，则首先对此组上的ServerChannel执行所有请求的I / O操作，然后对其他Channel执行操作。</p>
-<blockquote>
-<pre><code>ChannelGroupFuture close()</code></pre><p>Closes all <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a>s in this group. If the <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a> is connected to a remote peer or bound to a local address, it is automatically disconnected and unbound.</p>
-<ul>
-<li><p><strong>Returns:</strong></p>
-<p>the <a href="https://netty.io/4.0/api/io/netty/channel/group/ChannelGroupFuture.html" target="_blank" rel="noopener"><code>ChannelGroupFuture</code></a> instance that notifies when the operation is done for all channels</p>
 </li>
-</ul>
+<li><blockquote>
+<p>FNV 算法：全名为 Fowler-Noll-Vo 算法，是以三位发明人 Glenn Fowler，Landon Curt Noll，Phong Vo 的名字来命名的，最早在 1991 年提出。</p>
+<p>特点和用途：FNV 能快速 hash 大量数据并保持较小的冲突率，它的高度分散使它适用于 hash 一些非常相近的字符串，比如 URL，hostname，文件名，text，IP 地址等。</p>
 </blockquote>
+</li>
+<li><blockquote>
+<p>Ketama 算法：将它称之为哈希算法其实不太准确，称之为一致性哈希算法可能更为合适，其他的哈希算法有通用的一致性哈希算法实现，只不过是替换了哈希方式而已，但 Ketama 是一整套的流程，我们将在后面介绍</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h3><blockquote>
+<p>  优秀的哈希算法和一致性哈希算法可以使大多数场景下应用的高可用，高稳定性，不过个人考虑,还是要根据实际情况做出相应的调整的,保证压力均匀的分散到每台服务器上..</p>
+</blockquote>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.cnkirito.moe/consistent-hash-lb/" target="_blank" rel="noopener">一致性哈希负载均衡算法的探讨(大佬介绍了不同的哈希算法和优劣)</a></p>
+<p><a href="https://www.oschina.net/translate/state-of-hash-functions" target="_blank" rel="noopener">哈希函数概览</a></p>
+<p><a href="https://www.toptal.com/big-data/consistent-hashing" target="_blank" rel="noopener">A Guide to Consistent Hashing</a></p>
 
             </div>
             <hr/>
@@ -565,7 +569,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/">https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/</a>
+                    <a href="https://superopenai.github.io/2020/02/08/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">https://superopenai.github.io/2020/02/08/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -603,12 +607,8 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/Netty/">
-                                    <span class="chip bg-color">Netty</span>
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                                    <span class="chip bg-color">分布式</span>
                                 </a>
                             
                         </div>
@@ -649,59 +649,49 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/01/31/Hadoop-3.1.3-HBase-1.4.12%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">
+                <a href="/2020/02/08/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Hadoop-3.1.3+HBase-1.4.12个人搭建记录">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="一致性哈希个人理解">
                         
-                        <span class="card-title">Hadoop-3.1.3+HBase-1.4.12个人搭建记录</span>
+                        <span class="card-title">一致性哈希个人理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Hadoop-3.1.3+HBase-1.4.12个人搭建记录部署 hadoop 集群。hadoop集群最少需要三台机，因为hdfs副本数最少为3。这里我们使用四台机子进行搭建,本文尽求详尽。
-Hadoop搭建过程环境准备java-8-op
+                            一致性哈希个人理解
+最近在阅读 《数据密集型应用系统设计》这本书，不得不说，这是一本好书，阅读时让人意犹未尽。在书里总会出现一个词，   一致性哈希。 对于这个技术一直似懂非懂。今天花了半天的时间好好研究了它，发现一点都不复杂。于是写篇文章
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
-                                    搭建教程
-                                </a>
-                            
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/" class="post-category">
-                                    Hadoop
-                                </a>
-                            
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/HBase/" class="post-category">
-                                    HBase
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
-                        <span class="chip bg-color">大数据</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">搭建教程</span>
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
                     </a>
                     
                 </div>
@@ -715,32 +705,36 @@ Hadoop搭建过程环境准备java-8-op
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/05/%E7%90%86%E8%A7%A3Spring%E4%B8%AD%E7%9A%84-Autowired-Resource-and-Inject%E6%B3%A8%E8%A7%A3%E5%90%AB%E4%B9%89/">
+                <a href="/2020/02/04/junit5%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="理解Spring中的@Autowired, @Resource and @Inject注解含义(译)">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="junit5使用教程">
                         
-                        <span class="card-title">理解Spring中的@Autowired, @Resource and @Inject注解含义(译)</span>
+                        <span class="card-title">junit5使用教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            总览常用的关于依赖注入( dependency injection)的相关注解有 @Resource    @Autowired     @Inject      仨个注解。 这些注解替我们为类 提供了一种声明式的方法来解析依赖项。
-例如：
+                            junit5 使用教程
+junit 5是针对junit 4 所存在的一些局限性，进行想相应的增强，并且junit 4 所使用的Java 版本 是Java7， 在junit 5 ，将会使用Java 8 的许多优秀的特性。 整个Java的编码风
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                            
+                            <a href="/categories/java/junit/" class="post-category">
+                                    junit
                                 </a>
                             
                             
@@ -750,8 +744,12 @@ Hadoop搭建过程环境准备java-8-op
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/Junit/">
+                        <span class="chip bg-color">Junit</span>
                     </a>
                     
                 </div>
