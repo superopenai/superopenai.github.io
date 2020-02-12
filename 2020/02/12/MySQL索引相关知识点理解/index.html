@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Restful风格理解, 阿宁的博客">
-    <meta name="description" content="Restful风格要点在前后端分离的 Web 应用架构中，前端专注于页面，同时与后端进行数据交互；而后端则专注于提供 API 接口。在这样的结构下，REST 是一个很流行的前后端交互形式的约定。这只是一套约定，并不是某个技术标准，所以在实际">
+    <meta name="keywords" content="MySQL索引相关知识点理解, 阿宁的博客">
+    <meta name="description" content="MySQL索引相关知识点理解抛砖引玉先看一个题目， 一条sql，有多个查询条件，你会选择哪个字段作为索引，依据是什么？
+select * from table where field_a = xx and field_b = xx and ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Restful风格理解 | 阿宁的博客</title>
+    <title>MySQL索引相关知识点理解 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Restful风格理解
+                        MySQL索引相关知识点理解
                     </div>
                 </div>
             </div>
@@ -422,12 +423,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
-                            </a>
-                        
-                            <a href="/tags/Restful/">
-                                <span class="chip bg-color">Restful</span>
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
                             </a>
                         
                     </div>
@@ -438,8 +435,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%A3%8E%E6%A0%BC%E8%A7%84%E8%8C%83/" class="post-category">
-                                风格规范
+                            <a href="/categories/MySQL/" class="post-category">
+                                MySQL
                             </a>
                         
                     </div>
@@ -450,7 +447,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2020-02-12
                 </div>
                 
                 
@@ -459,14 +456,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        599
+                        2.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        8 分
                     </div>
                     
                 
@@ -482,23 +479,68 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Restful风格要点"><a href="#Restful风格要点" class="headerlink" title="Restful风格要点"></a>Restful风格要点</h2><p><strong>在前后端分离的 Web 应用架构中，前端专注于页面，同时与后端进行数据交互；而后端则专注于提供 API 接口。在这样的结构下，REST 是一个很流行的前后端交互形式的约定。这只是一套约定，并不是某个技术标准，所以在实际的应用中，对器实现程度完全取决于后端开发者；</strong></p>
-<h2 id="REST-对请求的约定"><a href="#REST-对请求的约定" class="headerlink" title="REST 对请求的约定"></a>REST 对请求的约定</h2><p><strong>在以前我们经常使用GET和POST请求，来完成整个应用的交互。这无疑浪费了Rest的潜力。实际上，我们不只有GET 和 POST 可用，在 REST 架构中，有以下几个重要的请求方法：GET，POST，PUT，PATCH，DELETE。这几个方法都可以与对数据的 CRUD 操作对应起来</strong></p>
-<h3 id="个人的理解有限，望海涵。"><a href="#个人的理解有限，望海涵。" class="headerlink" title="个人的理解有限，望海涵。"></a>个人的理解有限，望海涵。</h3><blockquote>
-<p>Restful风格的核心在于R（resource）资源角度来设计系统，我们对于资源的操作有以下五种</p>
+                <h2 id="MySQL索引相关知识点理解"><a href="#MySQL索引相关知识点理解" class="headerlink" title="MySQL索引相关知识点理解"></a>MySQL索引相关知识点理解</h2><h3 id="抛砖引玉"><a href="#抛砖引玉" class="headerlink" title="抛砖引玉"></a>抛砖引玉</h3><p><strong>先看一个题目， 一条sql，有多个查询条件，你会选择哪个字段作为索引，依据是什么？</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">select * from table where field_a = xx and field_b = xx and field_c = xx
+</code></pre>
+<p>先说索引，肯定有高效索引和低效索引的区别。索引可以把这道题理解为选择哪个字段做索引更加高效。 可以创建一个测试表 <strong>test</strong>，表中插入十万条测试数据，模拟一下这个问题 。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/2.png" alt=""></p>
+<p> 这时候在没创建索引的情况下执行一下explain，可以看出默认是<strong>全表扫描</strong></p>
+<p> <img src="http://q4by8u0ey.bkt.clouddn.com/1.png" alt=""></p>
+<p> 然后查看下表test的索引情况，默认存在的是主键索引，需要关注的值是（cardinality）基数</p>
+<p>基数是指列中的数据值的唯一性。它是一种影响数据搜索、聚类和排序能力的属性。 要考虑这个字段是否适合作为索引出现，所以我们可以考虑使用Cardinality列来判断索引是否具有高选择性 </p>
+<p> <img src="http://q4by8u0ey.bkt.clouddn.com/3.png" alt=""></p>
+<p>然后再给 a和b 也都加上索引， 再查看一下（cardinality）基数值。根据下图。我们能够明显的看出是给A加上索引更适合。</p>
+<p><img src="http://q4by8u0ey.bkt.clouddn.com/6.png" alt=""></p>
+<p>上面的情况是建了索引所以可以看到Cardinality列的值，在没建索引的时候怎么办？</p>
+<p>再看下Cardinality的概念：表示唯一值的数量的预估值，所以我们可以用distinct 去计算字段的唯一值数量</p>
+<p>所以最终字段是否适合创建索引可以使用下面的sql进行判断，值等于1或趋近为1的字段最适合创建索引</p>
+<pre class=" language-mysql"><code class="language-mysql">
+select count(distinct field_a)/count(*) from test
+
+select count(distinct field_b)/count(*) from test</code></pre>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><blockquote>
+<p><strong>索引是为来加速对表中数据行中的检索而创建的一种分散的数据结果,是针对表而建立的，它是由数据页面以外的索引页面组成,每个索引页中的行都含有逻辑指针,以便加速检索物理数据，创建索引的目的在于提高查询效率， <em>InnoDB</em> 的索引都是基于b tree实现的 无论是表中的数据（主键索引）还是辅助索引最终都会使用 B+ 树来存储数据，其中前者在表中会以&lt;id,row&gt;的方式进行存储，在B+树中会表现为叶子节点中储存对应（row）行的数据，非叶子节点储存主键Id。后者在表中会以&lt;index,id&gt;的方式进行存储 ，在B+树中会表现为叶子节点会储存主键Id,非叶子节点中储存Index值</strong></p>
 </blockquote>
-<p>学习阮一峰老师的博客</p>
-<pre><code> ·GET（SELECT）查询/取一种资源
- ·POST(CREART) 提交一种资源
- ·PUT（UPDATE）更新一个资源，整体更新
- ·PATCH(UPDATE)更新一个资源的其中一个属性，部分更新
- ·DELETE(DELETE)删除一个资源</code></pre><p>这五种差不多包含了平常使用的各种需求，我们做的就是对资源的操作。例如网址，URL格式就代表了一个资源，然后我们对对应的资源使用不同的请求，这便是我们对资源的操作。</p>
-<blockquote>
-<p>一般资源操作只有新增、删除、查询、更新，对应HTTP协议中四类请求：POST、DELETE、GET、PUT。其中，后三个操作是幂等的。（什么是幂等？）查询资源时，更多的参数，比如分页、排序、过滤条件，一般都会放在URL的查询部分（Query String）。新增、更新资源，关于资源实体的内容，一般放在请求体（Request Body）中</p>
-</blockquote>
-<h4 id="每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）"><a href="#每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）" class="headerlink" title="每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）"></a>每个URI代表一种资源，客户端和服务器之间，传递这这种资源的某种表现层；（表现形式，如资源的格式JSON、XML）</h4><p><strong>非REST的url</strong>：http://…../article?id=001&amp;type=011 </p>
-<p><strong>REST风格的url</strong>：http://…article/id/011/type/011</p>
-<p>可是这样也导致一旦逻辑复杂起来也不可避免的使得表示的长度很长。希望各位前辈能指点一番。</p>
+<h4 id="使用索引的原则"><a href="#使用索引的原则" class="headerlink" title="使用索引的原则"></a>使用索引的原则</h4><ol>
+<li>索引的字段尽量要小，根据索引查询数据的快慢取决于b tree的高度，当数据量恒定的时候，字节越少，存的索引的数量就越多，树的高度就越会越低</li>
+<li>遵循索引的最左匹配原则</li>
+<li>注意使用like的时候尽量不要使用“%a%”，这样的不走索引，可以使用“a%”，走索引</li>
+<li>不要在索引的列上进行计算，比如 select * from sys_user where token_expire+1 = 10000，这样的语句 不会走索引. 可以写成where token_expire = 10000-1.这样走索引</li>
+<li>什么样的字段建索引，就是那种频繁在where，group by，order by中出现的列，最好加上索引</li>
+<li>使用联合索引的时候尽量考虑到索引下推优化</li>
+<li>对于使用or的条件，需要or左右的条件都是索引才会走索引，否则走全表扫描，可以考虑使用union代替</li>
+<li>避免使用select *，对于只需要查询主键或者where 条件中只有索引的字段， 这时会走覆盖索引建少回表次数</li>
+</ol>
+<h4 id="索引的缺点"><a href="#索引的缺点" class="headerlink" title="索引的缺点"></a>索引的缺点</h4><p>虽然索引的可以提高查询的效率，但是在进行insert，update，和delete的时候会降低效率，因为在保存数据的同时也会去保存索引。因此不要在一个表里建过多的索引。</p>
+<p>但是因为 数据库的日常操作中 读的操作压力是明显大于写的操作压力的。 如果建索引跟没建索引的效果差不多少的情况下就不要建索引了，如果是数据量大的表，就需要建索引去优化查询效率。 </p>
+<h3 id="为什么-MySQL-的-InnoDB-存储引擎会选择-B-树"><a href="#为什么-MySQL-的-InnoDB-存储引擎会选择-B-树" class="headerlink" title="为什么 MySQL 的 InnoDB 存储引擎会选择 B+ 树"></a>为什么 MySQL 的 InnoDB 存储引擎会选择 B+ 树</h3><p><strong>为什么 MySQL 的 InnoDB 存储引擎会选择 B+ 树作为底层的数据结构，而不选择 B 树或者哈希</strong></p>
+<p>  InnoDB 这样选择的原因 其实有二：</p>
+<ul>
+<li>InnoDB 需要在特定查询上拥有较强的性能 </li>
+<li>由于将磁盘上的数据加载到内存中需要花费大量的时间，这也使得 B+ 树成为了非常好的选择 </li>
+</ul>
+<pre><code>#### 读写查询性能</code></pre><p>我们通常会使用InnoDB来完成以下的任务：</p>
+<ul>
+<li>通过 <code>INSERT</code>、<code>UPDATE</code> 和 <code>DELETE</code> 语句对表中的数据进行增加、修改和删除 </li>
+<li>通过 <code>UPDATE</code> 和 <code>DELETE</code> 语句对符合条件的数据进行批量的更改或删除</li>
+<li>通过 <code>SELECT</code> 语句和主键查询某条记录的全部列；</li>
+<li>通过 <code>SELECT</code> 语句在表中查询符合某些条件的记录并根据某些字段排序</li>
+<li>通过 <code>SELECT</code> 语句查询表中数据的行数</li>
+<li>通过唯一索引保证表中某个字段或者某几个字段的唯一性</li>
+</ul>
+<p>当我们使用B+树的底层数据结构的时候，那么所有访问会修改一条数据的SQL语句的时间负复杂度都是 O(log n) 。也就是B+树的高度。 但是呢！ 使用Hash哈希却又可以达到O(1)的复杂度，但是为什么不选择Hash哈希来作为底层结构呢？</p>
+<p>是因为Hash哈希在一种情况下，会不可避免的进行全表扫描。</p>
+<p>这种情况就是我们需要进行 模糊查找或者范围查询，哈希表都不支持，都不能避免的进行遍历全表来查询 来判断是否满足条件， 全表扫描对于数据库来说是一个非常糟糕的结果。</p>
+<p> 与 B 树和 B+ 树相比，哈希作为底层的数据结构的表能够以 <code>O(1)</code> 的速度处理单个数据行的增删改查，但是面对范围查询或者排序时就会导致全表扫描的结果，而 B 树和 B+ 树虽然在单数据行的增删查改上需要 <code>O(log n)</code> 的时间，但是它会将索引列相近的数据按顺序存储，所以能够避免全表扫描。 </p>
+<h4 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h4><p> 既然使用哈希无法应对我们常见的 SQL 中排序和范围查询等操作，而 B 树和 B 树和 B+ 树都可以相对高效地执行这些查询，那么为什么我们不选择 B 树呢？ </p>
+<p> 这是因为计算机在读写文件时会以页为单位将数据加载到内存中。页的大小可能会根据操作系统的不同而发生变化，不过在大多数的操作系统中，页的大小都是 <code>4KB</code>，你可以通过如下的命令获取操作系统上的页大小: </p>
+<pre class=" language-shell"><code class="language-shell">$ getconf PAGE_SIZE
+4096</code></pre>
+<p>当我们在数据库中需要查询数据的时候，系统发现数据现在放在磁盘上而不是在内存中，这时候就只能进行I/O操作把数据加载到内存中。但是数据的I/O操作的成本是很大的（默认指机械硬盘，SSD固态硬盘的速度明显更快），需要进行寻道，旋臂旋转，数据传输，还是传输带宽的限制，这些都增加了从磁盘把数据加载到内存中的时间代价。 由此我们也应该尽量减少随机 I/O 的次数，这样才能提高性能。 </p>
+<p> B 树与 B+ 树的最大区别就是，B 树可以在非叶结点中存储数据，但是 B+ 树的所有数据其实都存储在叶子节点中 ，非叶子节点中只是索引。</p>
+<p> 由于B树中所有的节点都可能包含目标数据，我们总是要从根节点向下遍历子树查找满足条件的数据行，这个特点带来了大量的随机 I/O，也是 B 树最大的性能问题。 </p>
+<p> 但是B+ 树中就不存在这个问题了，因为所有的数据行都存储在叶节点中，而这些叶节点可以<strong>通过『指针』依次按顺序连接</strong>  所有的叶子节点和相连的节点使用双向链表相连，便于区间查找和遍历。 因此只要遍历叶子节点就可以实现整颗树的遍历。而且由于数据顺序排列并且相连，所以便于区间查找和搜索。而B树则需要进行每一层的递归遍历，相邻的元素可能在内存中不相邻，所以缓存命中性没有B+树好。 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> 任何不考虑应用场景的设计都不是最好的设计，当我们明确的定义了使用 MySQL 时的常见的查询需求之后，，当然 B+ 树可能无法对所有 场景下的查询都有着较好的性能，但是它能够解决大多数的问题。  软件工程中没有银弹。 </p>
 
             </div>
             <hr/>
@@ -524,7 +566,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Restful%E9%A3%8E%E6%A0%BC%E7%90%86%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Restful%E9%A3%8E%E6%A0%BC%E7%90%86%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2020/02/12/MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%90%86%E8%A7%A3/">https://superopenai.github.io/2020/02/12/MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%90%86%E8%A7%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -562,12 +604,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
-                                </a>
-                            
-                                <a href="/tags/Restful/">
-                                    <span class="chip bg-color">Restful</span>
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
                                 </a>
                             
                         </div>
@@ -608,51 +646,49 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/28/java%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86-JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%92%8CCglib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">
+                <a href="/2020/02/12/MySQL%E7%B4%A2%E5%BC%95%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E7%90%86%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="java中的动态代理(JDK动态代理和Cglib动态代理)">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="MySQL索引相关知识点理解">
                         
-                        <span class="card-title">java中的动态代理(JDK动态代理和Cglib动态代理)</span>
+                        <span class="card-title">MySQL索引相关知识点理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是代理(proxy)?
-代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。代理类与委托类之间通常会存在关联关系，一个代理类的对象与
+                            MySQL索引相关知识点理解抛砖引玉先看一个题目， 一条sql，有多个查询条件，你会选择哪个字段作为索引，依据是什么？
+select * from table where field_a = xx and field_b = xx and 
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
-                    <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">jdk源码</span>
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
                     </a>
                     
                 </div>
@@ -666,34 +702,32 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/">
+                <a href="/2020/02/08/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="spring中获取ip的四种办法">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="一致性哈希个人理解">
                         
-                        <span class="card-title">spring中获取ip的四种办法</span>
+                        <span class="card-title">一致性哈希个人理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一种办法使用import javax.servlet.http.HttpServletRequest具体代码
-   HttpServletRequest request
-    {
-        String ip = request.
+                            一致性哈希个人理解
+最近在阅读 《数据密集型应用系统设计》这本书，不得不说，这是一本好书，阅读时让人意犹未尽。在书里总会出现一个词，   一致性哈希。 对于这个技术一直似懂非懂。今天花了半天的时间好好研究了它，发现一点都不复杂。于是写篇文章
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="post-category">
+                                    分布式
                                 </a>
                             
                             
@@ -703,8 +737,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
+                        <span class="chip bg-color">分布式</span>
                     </a>
                     
                 </div>
