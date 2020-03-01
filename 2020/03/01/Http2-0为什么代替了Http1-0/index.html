@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux五种IO模型, 阿宁的博客">
-    <meta name="description" content="Linux的IO模型与Java IO的认知区别
-  在Java中为我们提供了 BIO、NIO、AIO的IO模型，其实Java提供的IO有关的api，在文件处理层面还是调用操作系统层面的IO操作实现的，例如在linux2.6以后，Java中的">
+    <meta name="keywords" content="Http2.0为什么代替了Http1.0??, 阿宁的博客">
+    <meta name="description" content="Http2.0为什么代替了Http1.0?什么是HTTP？
+简单来说，HTTP是超文本传输协议的英文简称，Http是基于CS 架构模型，客户端（服务接收方）和服务端（服务提供商）进行请求和响应的通信。
+现在来说，Http2.0已经基本完全代">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Linux五种IO模型 | 阿宁的博客</title>
+    <title>Http2.0为什么代替了Http1.0?? | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -305,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Linux五种IO模型
+                        Http2.0为什么代替了Http1.0??
                     </div>
                 </div>
             </div>
@@ -421,33 +422,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                                <span class="chip bg-color">操作系统</span>
-                            </a>
-                        
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                操作系统
-                            </a>
-                        
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" class="post-category">
-                                Linux
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -455,7 +435,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-11-17
+                    2020-03-01
                 </div>
                 
                 
@@ -464,14 +444,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.2k
+                        1.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        5 分
                     </div>
                     
                 
@@ -487,71 +467,65 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Linux的IO模型"><a href="#Linux的IO模型" class="headerlink" title="Linux的IO模型"></a>Linux的IO模型</h2><h3 id="与Java-IO的认知区别"><a href="#与Java-IO的认知区别" class="headerlink" title="与Java IO的认知区别"></a>与Java IO的认知区别</h3><blockquote>
-<p>  在Java中为我们提供了 BIO、NIO、AIO的IO模型，其实Java提供的IO有关的api，在文件处理层面还是调用操作系统层面的IO操作实现的，例如在linux2.6以后，Java中的nio和aio都是通过epoll来实现的—–&gt;(<strong>epoll是linux2.6内核中才有的机制，其他版本内核中是没有的，是Linux2.6内核引入的多路复用IO的一种方式，用于提高网络IO 性能的方法。在linux网络编程中，很长一段时间都是采用select来实现多事件触发处理的。Select存在如下几个方面的问题：一是每次调用时要 重复地从用户态读入参数，二是每次调用时要重复地扫描文件描述符，三是每次在调用开始时，要把当前进程放入各个文件描述符的等待队列。在调用结束后，又把 进程从各个等待队列中删除。Select采用轮询的方式来处理事件触发，当随着监听socket的文件描述符fd的数量增加时，轮询的时间也就越长，造成 效率低下。</strong>)  可以把Java中的BIO、NIO和AIO理解为是Java语言对操作系统的各种IO模型的封装,我们在使用这些API的时候，不需要关心操作系统层面的知识，也不需要根据不同操作系统编写不同的代码。只需要使用Java的API就可以了。</p>
+                <h2 id="Http2-0为什么代替了Http1-0"><a href="#Http2-0为什么代替了Http1-0" class="headerlink" title="Http2.0为什么代替了Http1.0?"></a>Http2.0为什么代替了Http1.0?</h2><h3 id="什么是HTTP？"><a href="#什么是HTTP？" class="headerlink" title="什么是HTTP？"></a>什么是HTTP？</h3><blockquote>
+<p>简单来说，HTTP是超文本传输协议的英文简称，Http是基于CS 架构模型，客户端（服务接收方）和服务端（服务提供商）进行请求和响应的通信。</p>
+<p>现在来说，Http2.0已经基本完全代替了Http1.0，拿Chrome这种主流浏览器来说，几乎所有主流浏览器都支持了Http2.0协议。但是为什么Http2.0最终代替了Http1.0呢？且听我慢慢道来。</p>
 </blockquote>
-<h3 id="五种IO模型"><a href="#五种IO模型" class="headerlink" title="五种IO模型"></a>五种IO模型</h3><ul>
-<li>阻塞IO模型</li>
-<li>非阻塞IO模型</li>
-<li>IO复用模型</li>
-<li>异步IO模型</li>
-<li>信号驱动模型</li>
-</ul>
-<h4 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.1.png" alt="Figure 6.1. Blocking I/O model."> </p>
-<blockquote>
-<p>  系统通过调用 <code>recvfrom</code> 等待数据报返回，数据报只有<strong>在数据到达且被复制到缓冲区内</strong>或者<strong>发生错误返回</strong> ,也就是说,在<code>recvfrom</code>接收到数据报前,这个进程是被阻塞的,什么事情也不能干,只能等待.这样效率不免有点低下,但是实现简单,适合<strong>(并发低,时效性要求低的情况)</strong></p>
+<h3 id="Http1-x时代"><a href="#Http1-x时代" class="headerlink" title="Http1.x时代"></a>Http1.x时代</h3><blockquote>
+<p> Http/1.1 由Timothy Berners-Lee于1989年开发，作为万维网的通信标准 ，Http协议是应用层协议，该协议用于客户端与远程服务提供服务器进行交互。</p>
+<p>通常客户端会使用 <code>GET</code>/<code>POST</code> 协议向服务端发送请求，而服务端收到请求后会把请求的资源（例如HTML页面）响应给客户端。</p>
 </blockquote>
-<h4 id="非阻塞IO模型"><a href="#非阻塞IO模型" class="headerlink" title="非阻塞IO模型"></a>非阻塞IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.2.png" alt="Figure 6.2. Nonblocking I/O model."> </p>
-<blockquote>
-<p>  当我们把一个socket设置为非阻塞时,其实就是告诉内核:”如果这个进程请求不成功时,不要让这个进程进入睡眠而阻塞,而是抛出一个(<code>EWOULDBLOCK</code>)错误”—-(we are telling the kernel “when an I/O operation that I request cannot be completed without putting the process to sleep, do not put the process to sleep, but return an error instead”. )</p>
-<p>  如图所示,在前三次调用<code>recvfrom</code>时,数据都没有准备好,系统没有让进程睡眠阻塞,而是三次都抛出了<code>EWOULDBLOCK</code>错误, 在第四次调用<code>recvfrom</code>,数据准备好了,然后拷贝到应用缓冲区, 然后<code>recvfrom</code>返回成功,进而处理数据.</p>
+<h4 id="传输模型—-管道模型和行头阻塞"><a href="#传输模型—-管道模型和行头阻塞" class="headerlink" title="传输模型—-管道模型和行头阻塞"></a>传输模型—-管道模型和行头阻塞</h4><p>我们打开一个页面，我们需要的是最后渲染完成的整体页面，但是一个完整的页面同通常是包含很多资源的，HTML页面，图片资源，CSS样式等等…  但是在Http1.0时代，每个资源都对应着一次TCP连接。举个例子就是，图片A需要一个TCP连接，图片B需要一个TCP连接，CSS样式也需要一个TCP连接。建立的TCP连接的数量和这个页面上的资源成正比，这种行为无疑是效率十分低下的，浪费了大量的TCP连接资源，页面的载入速度也很慢。</p>
+<p>在Http1.1时代，为了解决1.0时代为每一个资源都建立一个TCP的问题，Http1.1带来管道模型，所谓管道模型，就是放弃1.0时的TCP短连接，引入TCP长连接，在这一次TCP长连接时，客户端可以<strong>依次发送</strong>对多个资源的多个请求，服务端也响应的进行多次资源响应。</p>
+<p>看似1.1带来的管道模型解决1.0的问题，看来已经很完美了，但是1.1的管道模型有一个天然缺点，由于多个数据包在到达同一目的地时无法相互传递，因此存在队列头部的请求无法检索其所需资源的情况，该请求将阻塞其后面的所有请求。</p>
+<p>这称为行头(HOL)阻塞，这是在HTTP/1.1中优化连接效率的一个重大问题。</p>
+<h3 id="Http2-0时代"><a href="#Http2-0时代" class="headerlink" title="Http2.0时代"></a>Http2.0时代</h3><blockquote>
+<p>2015年，IETF推出了Http2.0协议，也是Http协议的第二个主要版本，Http2.0主要是基于谷歌在早期推出的SPDY协议（已经废弃）的基础上研发的。</p>
 </blockquote>
-<p><strong>问题在于,在数据在准备好之前,应用会循环的轮询内核以检查是否OK了,往往会耗费大量CPU时间,偶尔会遇到这种模型，通常在专门用于一个功能的系统上。</strong></p>
-<h4 id="信号驱动IO模型"><a href="#信号驱动IO模型" class="headerlink" title="信号驱动IO模型"></a>信号驱动IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.4.png" alt="Figure 6.4. Signal-Driven I/O model."> </p>
-<blockquote>
-<p>  信号驱动模型使用信号,在数据准备好的时候让内核向我们发送一个信号通知我们, 当套接字开启信号驱动功能后,会通过sigaction系统向内核注册一个信号函数,然后进程返回. 等着这个信号函数当数据准备好的时候叫它.</p>
-<p>  当数据准备好后,内核会产生一个SIGIO信号,<strong>我们既可以在信号处理函数里调用<code>recvfrom</code>来处理数据</strong>.   也可以 <strong>通知主循环,让它来读取数据报</strong></p>
-</blockquote>
-<p>但是这种 I/O 模型存在一个非常重大的<strong>缺陷问题</strong>：<code>SIGIO</code> 这种信号对于每个进程来说只有一个！如果使该信号对进程中的两个描述符（这两个文件描述符都等待着 I/O 操作）都起作用，那么进程在接到此信号后就无法判别是哪一个文件描述符准备好了。所以 <strong>Signal Driven I/O</strong> 模型在现实中用的非常少。</p>
-<h4 id="IO复用模型"><a href="#IO复用模型" class="headerlink" title="IO复用模型"></a>IO复用模型</h4><p><img src="https://notes.shichao.io/unp/figure_6.3.png" alt="Figure 6.3. I/O multiplexing model."></p>
-<blockquote>
-<p>   和信号驱动相比, 它的工作原理就是 select/poll/epoll 函数会不断的查询所监测的 socket 文件描述符中是否有 socket 准备好读写了，如果有，那么系统就会通知用户进程。</p>
-<p>   <strong>I/O multiplexing 的特点是通过一种机制让一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入可读的就绪状态，select/poll/epoll函数就可以立即返回。</strong></p>
-<p>   这个图和 <code>blocking I/O</code> 的图其实并没有太大的不同，事实上，开销还会更大一点。因为这里需要使用两个 system call (select 和 read)，而 blocking I/O 只调用了一个system call (read)。但是，<strong>用 select 的优势在于它可以同时处理多个connection</strong>。</p>
-</blockquote>
-<p>所以，如果处理的连接数不是很高的话，使用 <strong>select/epoll</strong> 的 web server 不一定比使用 <strong>multi-threading + blocking I/O</strong> 的 web server 性能更好，可能延迟还更大。<strong>select/epoll</strong>的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。</p>
-<h4 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h4><p> <img src="https://notes.shichao.io/unp/figure_6.5.png" alt="Figure 6.5. Asynchronous I/O model."> </p>
-<blockquote>
-<p>很少有*nix系统支持，windows的IOCP则是此模型(这里不讨论windows)</p>
-<p>用户进程发起<code>aio_read</code>操作之后，给内核传递描述符、缓冲区指针、缓冲区大小等，告诉内核当整个操作完成时，如何通知进程，然后就立刻去做其他事情了。当内核收到<code>aio_read</code>后，会立刻返回，然后内核开始等待数据准备，数据准备好以后，直接把数据拷贝到用户控件，然后再通知进程本次IO已经完成。</p>
-<p>当内核的数据报就绪的时候，是由内核将数据报拷贝到应用进程中，返回给aio_read中定义好的函数处理程序。所以这是一种阻塞异步IO模型</p>
-</blockquote>
-<h3 id="同步IO和异步IO的区别"><a href="#同步IO和异步IO的区别" class="headerlink" title="同步IO和异步IO的区别"></a>同步IO和异步IO的区别</h3><blockquote>
-<p>在说明 <strong>Synchronous I/O</strong> 和 <strong>Asynchronous I/O</strong> 的区别之前，需要先给出两者的定义，POSIX 中两者的定义是这样子的：</p>
+<p>Http2.0 的改进之处：</p>
 <ul>
-<li>A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;</li>
-<li>An asynchronous I/O operation does not cause the requesting process to be blocked;</li>
+<li>与Http1.1的高级兼容</li>
+<li>协议协商机制-协议选举 </li>
+<li>加快页面的载入速度：<ul>
+<li>压缩请求头</li>
+<li>使用二进制对请求/响应进行编码，提高传输的灵活性</li>
+<li>服务端资源PUSH</li>
+<li>单次TCP连接的多路复用</li>
 </ul>
-<p><strong>两者的区别就在于 Synchronous I/O 做 IO operation 的时候会将用户空间的进程阻塞。</strong></p>
-<p>按照这个定义，之前所说的 <code>Blocking I/O</code>，<code>Non-blocking I/O</code>，<code>IO multiplexing</code>都属于 <strong>Synchronous I/O</strong>。</p>
-</blockquote>
-<blockquote>
-<p>  有人会说，<code>Non-blocking I/O</code> 并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的 <code>IO operation</code> 是指<strong>真实的I/O操作</strong>，就是例子中的 read 这个 system call。<code>Non-blocking I/O</code> 在执行 read 这个system call 的时候，如果 kernel 的数据没有准备好，这时候不会 block 进程。但是，当kernel 中数据准备好的时候，read 会将数据从kernel 拷贝到用户空间的缓冲区中，这个时候进程是被 block 的。</p>
-<p>  而<strong>Asynchronous I/O</strong>则不一样，当进程发起 <strong>I/O</strong> 操作之后，就直接返回再也不理睬了，直到 kernel 发送一个信号，告诉进程说 I/O完成。在这整个过程中，<strong>进程完全没有被 block</strong>。</p>
-</blockquote>
-<p><strong>上面介绍的前4中IO模型均是同步的，因为真正的IO操作函数在进行数据读/写时，均会阻塞进程；只有异步IO模型真正符合异步IO操作的定义</strong>。</p>
-<h3 id="5种IO模型对比"><a href="#5种IO模型对比" class="headerlink" title="5种IO模型对比"></a><strong>5种IO模型对比</strong></h3><p> <img src="https://notes.shichao.io/unp/figure_6.6.png" alt="Figure 6.6. Comparison of the five I/O models."> </p>
+</li>
+</ul>
+<p><strong>接下来就以Http2.0是怎么加快页面的加载速度的，来给大家讲解一下这4处改进</strong></p>
+<h4 id="TCP连接的多路复用"><a href="#TCP连接的多路复用" class="headerlink" title="TCP连接的多路复用"></a>TCP连接的多路复用</h4><p> <img src="https://miro.medium.com/max/934/0*lY05UTuA-dWCXU-q.png" alt="img"> </p>
+<p>HTTP/2 能够在单次的TCP连接中<strong>并行</strong>发送多次请求，这是HTTP/2 最优越的特性，这使得我们能够异步的从服务端下载我们所需要的资源，这有效的减少了额外的往返时间（RTT），<strong>使得页面的加载速度变得更快</strong>，即使我们没有使用任何的优化策略。</p>
+<h4 id="报头压缩"><a href="#报头压缩" class="headerlink" title="报头压缩"></a>报头压缩</h4><p> <img src="https://miro.medium.com/max/936/0*5r8-MbhEseP6lEQg.png" alt="img"> </p>
+<p>HTTP/2 压缩了报头大量的冗余信息，使用HPACK规范来安全简单的压缩报头，在客户端和服务器端都为维护这一份之前请求过的报头列表。</p>
+<p>HPACK 会在发送到服务器端之前对每一个值进行压缩，当压缩后的报头传输到服务端后，服务端会根据其维护的报头列表来重建完成的报头信息。</p>
+<h4 id="二进制编码"><a href="#二进制编码" class="headerlink" title="二进制编码"></a>二进制编码</h4><p> <img src="https://miro.medium.com/max/924/0*0LtM_XmkauxVoY8M.png" alt="img"> </p>
+<p>在HTTP1.x时代，传输的信息是文本信息，在HTTP/2，将传输文本信息改进为把请求信息二进制编码后再传输，有效的简化了复杂性。并且还有如下优点：</p>
 <ul>
-<li>blocking模型下，从应用进程调用IO操作函数到函数返回期间，进程处于阻塞状态；</li>
-<li>nonblocking模型下，应用程序调用IO操作函数时，函数会立即返回，但应用程序需要通过不断调用IO操作函数来轮询kernel，以便进行读/写操作；</li>
-<li>io多路复用模型下，应用程序调用select或poll时，进程阻塞直到select管理的fd可读/写，select或poll返回后，应用程序需要调用真正的IO操作函数进行读/写操作；</li>
-<li>signal-driven模型下，应用程序向kernel注册信号回调函数，当目标fd可读/写时，kernel通过回调通知应用程序进行数据读/写。<strong>它避免了进程阻塞</strong>；</li>
-<li>asynchronous io模型下，应用程序调用异步IO函数时，函数立即返回，当函数完成真正的IO操作后，kernel会通知应用程序进行后续操作。<strong>它也避免了进程阻塞</strong>。</li>
+<li>更低的传输资源开销</li>
+<li>更少出错</li>
+<li>有效利用网络资源</li>
+<li>消除HTTP1.x值容易被修改的问题</li>
+<li>可以启用HTTP/2的其他功能，压缩，多路复用，TLS小绿🔒</li>
+<li>降低了网络延迟并提高了吞吐量。</li>
 </ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>1.Unix Network Programming, Volume 1, Chapter6.2: I/O Models(英文版)</p>
-<p>2.<a href="https://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&mid=2247484746&idx=1&sn=c0a7f9129d780786cabfcac0a8aa6bb7&source=41#wechat_redirect" target="_blank" rel="noopener">漫画说IO模型</a></p>
-<p>3.Unix网络编程中文版卷一 章6.2:IO模型</p>
-<p>4.<a href="https://woshijpf.github.io/linux/2017/07/10/Linux-IO%E6%A8%A1%E5%9E%8B.html" target="_blank" rel="noopener">Linux I/O 模型详解</a></p>
+<h4 id="服务端资源PUSH"><a href="#服务端资源PUSH" class="headerlink" title="服务端资源PUSH"></a>服务端资源PUSH</h4><p> <img src="https://miro.medium.com/max/623/0*ZJLgVdXq_06hcF1o.png" alt="img"> </p>
+<p>这项功能使得服务端在收到客户端的请求后，除了响应请求的资源之外，还会向客户端推送其他的资源。举个例子，如果我们请求X资源，服务端收到请求后，发现X资源引用着 Y和Z 资源，服务端认为你以后还会请求Y/Z资源，然后服务端就一次性的响应给客户端请求的X资源和额外的Y和Z资源。</p>
+<p>这就有如下好处：</p>
+<ul>
+<li>客户端把额外推送的资源放在缓存中，加快页面渲染速度</li>
+<li>服务端可以在单次TCP连接下，多路复用的向客户端push资源</li>
+<li>服务端可以根据资源的优先级来推送</li>
+<li>客户端可以限制服务端Push过来的资源的数量</li>
+</ul>
+<h3 id="速度"><a href="#速度" class="headerlink" title="速度"></a>速度</h3><p>同样请求100张图片，HTTP1.1和HTTP2.0差距明显。</p>
+<p><strong>HTTP1.1—12.97s (连续载入三次)</strong></p>
+<p> <img src="https://miro.medium.com/max/1110/0*9sthV7MhTNJlUXxv.png" alt="img"> </p>
+<p><strong>HTTP2.0—3.17s (连续载入三次)</strong></p>
+<p><img src="https://miro.medium.com/max/1463/0*BbZxFMPXuNBJcPc4.png" alt="img"> </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>HTTP 2.0从各种程度上都超越了1.x，既解决了1.x的问题还更快的加载渲染页面，现在主流的浏览器基本都支持了HTTP2.0。</p>
+<p> <img src="https://miro.medium.com/max/1463/0*yRdM_rAcuZFqd2Ml.png" alt="img"> </p>
 
             </div>
             <hr/>
@@ -577,7 +551,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/11/17/Linux%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/">https://superopenai.github.io/2019/11/17/Linux%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B/</a>
+                    <a href="https://superopenai.github.io/2020/03/01/Http2-0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%A3%E6%9B%BF%E4%BA%86Http1-0/">https://superopenai.github.io/2020/03/01/Http2-0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%A3%E6%9B%BF%E4%BA%86Http1-0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -614,15 +588,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                                    <span class="chip bg-color">操作系统</span>
-                                </a>
-                            
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -661,54 +627,41 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/11/17/Java-NIO%E7%9A%84Buffer%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D/">
+                <a href="/2020/03/01/Http2-0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%A3%E6%9B%BF%E4%BA%86Http1-0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java NIO的Buffer组件介绍">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Http2.0为什么代替了Http1.0??">
                         
-                        <span class="card-title">Java NIO的Buffer组件介绍</span>
+                        <span class="card-title">Http2.0为什么代替了Http1.0??</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Java NIO的Buffer组件经典步骤使用Buffer时我们通常会有四步
-
-往buffer缓冲区中写数据
-使用buffer.filp()进行读写模式转换
-从buffer缓冲区里读出数据
-使用buffer.clear()来清空缓冲区,抑或
+                            Http2.0为什么代替了Http1.0?什么是HTTP？
+简单来说，HTTP是超文本传输协议的英文简称，Http是基于CS 架构模型，客户端（服务接收方）和服务端（服务提供商）进行请求和响应的通信。
+现在来说，Http2.0已经基本完全代
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/java/" class="post-category">
-                                    java
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            SuperNing
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -719,35 +672,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/31/java%E4%B8%AD%E7%9A%84%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
+                <a href="/2020/02/29/ConcurrentHashMap-JDK1-7-JDK1-8%E5%BC%82%E5%90%8C%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="java中的反射机制">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="ConcurrentHashMap JDK1.7,JDK1.8异同个人理解">
                         
-                        <span class="card-title">java中的反射机制</span>
+                        <span class="card-title">ConcurrentHashMap JDK1.7,JDK1.8异同个人理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            反射什么时反射
-java的反射库提供了一个非常丰富且精心设计的工具集,能够分析类能力的程序被称为反射,反射机制极其强大,可以用来:
-
-在运行时分析类的能力,访问java对象的属性,方法,构造方法等
-在运行时查看对象(例如编写一个toStri
+                            ConcurrentHashMap 个人理解前导首先，ConcurrentHashMap（我习惯叫它并发HashMap）和HashMap一样，在JDK1.7 与JDK1.8的实现是不同的，1.7使用的是 数组+链表在加上分段锁技术（ Seg
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-29
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
@@ -757,8 +706,8 @@ java的反射库提供了一个非常丰富且精心设计的工具集,能够分
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
