@@ -4,10 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深化理解netty中的常用组件（个人向）, 阿宁的博客">
-    <meta name="description" content="深化理解netty中的常用组件（个人向)Inbound和Outbound开始的错误理解 
+    <meta name="keywords" content="Kafka如何保证数据一致性, 阿宁的博客">
+    <meta name="description" content="怎么让Kafka保证数据一致性概念先快速过一遍Kafka体系结构中的一些组成结构术语：
 
-ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Netty的时候，总是下意识的">
+Producer：生产者，也就是发送消息的一方，将消息投递到Kafka中。
+Consumer：消费者，消费消息的一方，从kafka中接受消息，并进行业">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +16,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>深化理解netty中的常用组件（个人向） | 阿宁的博客</title>
+    <title>Kafka如何保证数据一致性 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -306,13 +307,13 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        深化理解netty中的常用组件（个人向）
+                        Kafka如何保证数据一致性
                     </div>
                 </div>
             </div>
@@ -424,12 +425,12 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
+                            <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                                <span class="chip bg-color">消息队列</span>
                             </a>
                         
-                            <a href="/tags/Netty/">
-                                <span class="chip bg-color">Netty</span>
+                            <a href="/tags/Kafka/">
+                                <span class="chip bg-color">Kafka</span>
                             </a>
                         
                     </div>
@@ -440,12 +441,12 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Netty/" class="post-category">
-                                Netty
+                            <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="post-category">
+                                消息队列
                             </a>
                         
-                            <a href="/categories/Netty/Java/" class="post-category">
-                                Java
+                            <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/Kafka/" class="post-category">
+                                Kafka
                             </a>
                         
                     </div>
@@ -456,7 +457,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-16
+                    2020-03-07
                 </div>
                 
                 
@@ -465,14 +466,14 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        445
+                        1.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        5 分
                     </div>
                     
                 
@@ -488,57 +489,40 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="深化理解netty中的常用组件（个人向"><a href="#深化理解netty中的常用组件（个人向" class="headerlink" title="深化理解netty中的常用组件（个人向)"></a>深化理解netty中的常用组件（个人向)</h2><h3 id="Inbound和Outbound"><a href="#Inbound和Outbound" class="headerlink" title="Inbound和Outbound"></a>Inbound和Outbound</h3><p><strong>开始的错误理解</strong> </p>
+                <h2 id="怎么让Kafka保证数据一致性"><a href="#怎么让Kafka保证数据一致性" class="headerlink" title="怎么让Kafka保证数据一致性"></a>怎么让Kafka保证数据一致性</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong>先快速过一遍Kafka体系结构中的一些组成结构术语：</strong></p>
+<ul>
+<li>Producer：生产者，也就是发送消息的一方，将消息投递到Kafka中。</li>
+<li>Consumer：消费者，消费消息的一方，从kafka中接受消息，并进行业务处理。</li>
+<li>Broker：服务节点，对于Kafka高可用集群来说，Broker可以简单视为是一台服务器上的Kafka实例。</li>
+<li>Topic：主题，kafka中的消息都以主题来进行分类，生产者投递消息到特定的主题中，消费者从特定的主题中订阅消息。</li>
+<li>Partition：分区，通常一个主题下可以分为多个分区，每个分区中储存不同的内容。消息被追加到分区中都会被分配一个特定的偏移量Offset，偏移量是消息的唯一标识，kafka通过offset来保证消息在分区内的有序性。但是offset并不跨区，也就是说kafka保证分区有序，不保证主题有序。</li>
+</ul>
+<p>在搭建Kafka高可用集群的时候，kafka的分区可以分布在不同的broker服务器上，来提供更强的性能，即使在主题已经创建完了，后续还可以在修改分区数量，增加分区以实现水平扩展。</p>
+<h3 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h3><p>一个主题可以有多个分区，每个分区的内容都不同，如果有一个broker宕机，那这个broker上的分区岂不是也下线，无法提供服务了？ 为此，kafka提供了多副本机制（Replica）。</p>
+<p>每一个分区拥有多个副本来提高容灾能力，副本之间的关系是一主多从的关系，分为Leader副本和follower副本。同一时间Leader副本和follower副本的消息并不是完全一致的（因为follower副本需要向leader副本进行同步）。因此Kafka允许leader副本和follower副本有一定程度的延迟。</p>
+<p>当leader副本宕机下线后，会从follower副本中选取优先副本成为新leader副本来进行故障转移。</p>
+<p> <img src="https://miro.medium.com/max/1296/0*EKINPKA_r9-9ip5k.png" alt="img"> </p>
+<p>分区中所有的副本统称为AR（Assigned Replicas）—-例如上图的这九个副本。</p>
+<p>而每个leader副本与其所属的follower副本们组成ISR（In-Sync Replica），消息会先发到leader副本上，然后follower副本才能从leader副本上拉取同步。所以follower副本会比leader有一定程度的延后，这个滞后和我们设置的参数有关，默认上，follower副本会每500ms向leader副本发送同步请求。如果follower副本与leader副本滞后太多，就会被踢出ISR集合，成为OSR（Out-Of-Sync Replica），在正常情况下，OSR为空，所有的follower副本与leader副本都保持着一定程度的滞后。</p>
+<p>leader副本负责维护和跟踪ISR中所有follower副本的滞后状态，当follower副本落后的太多或者失效，leader会把这个follower从ISR中踢出，而在OSR中的副本只有追上了leader副本，才能从OSR回到ISR中，也只有ISR中的follower副本在leader副本故障的时候才有机会被选为新leader完成故障转移。</p>
+<h3 id="怎么让数据不丢失？"><a href="#怎么让数据不丢失？" class="headerlink" title="怎么让数据不丢失？"></a>怎么让数据不丢失？</h3><p>不让数据丢失，也就是怎么让数据保证一致性？Kafka为我们提供了几个参数，根据需要设置即可。</p>
+<p><strong>在生产者Producer中有这一个参数—- **acks</strong>：** </p>
+<ul>
+<li>acks=0：当设置为0的时候，生产者就不关心的broker的确认，生产者发送完消息就代表完成了任务，不关心这个消息是否成功发送，也不会重新发送消息。这保证了低延迟和信息高吞吐量，但是却有数据丢失的风险</li>
+<li>acks=1：设置为1后，生产者会等待leader副本完成同步后确认再返回，然后follower副本再向leader副本进行请求同步。在这种情况下，只有在leader副本向生产者确认之后，follower副本同步之前的时候，leader副本宕机下线了，才会出现数据的丢失。</li>
+<li>acks=all：设置为all后，只有leader副本与ISR中的所有副本完成同步后，才向生产者发送确认，这保证了数据的强一致性，数据不会有丢失的危险。</li>
+</ul>
 <blockquote>
-<p><code>ChannelInboundHandler</code>  , <code>ChanneloutboundHandler</code>   当初第一次学习使用Netty的时候，总是下意识的把这两个与 I/O的输入输出流联系在一起，但是随着使用的增多，如果，<code>ChanneloutboundHandler</code>代表输出流，为什么又有read方法？</p>
+<p>acks 的取值是一个吞吐量和数据安全性的一种均衡，如果我们需要数据的强一致性，不希望数据丢失，那就设置acks=all ，但也牺牲了信息的高吞吐量能力。如果希望高吞吐，就需要承担数据丢失的风险。</p>
+<p>通常意义上，设置acks=1就够了，均衡的中间。</p>
 </blockquote>
-<p><strong>正确理解</strong></p>
+<h4 id="Follower副本不给力怎么办？"><a href="#Follower副本不给力怎么办？" class="headerlink" title="Follower副本不给力怎么办？"></a>Follower副本不给力怎么办？</h4><p>如果我们设置了acks=all，但是在leader副本与follower副本同步的过程中，如果follower副本延迟很大，会导致整个分区不可用或者延迟极高。</p>
+<p>在故障转移小节提到了，如果follower副本落后于leader副本过多，或者同步时间过长（10s），这个follower副本将会被踢出ISR集合。这就不能不想到这种情况，那就是在ISR集合中的所有follower整体都非常慢，然后都被踢出了ISR集合，ISR集合现在成为了leader副本的独角戏。这就和acks=1时类似，速度保证了，但却有了数据丢失的风险。</p>
+<p>因此需要另一个设置，来保证follower副本的可用性。</p>
+<p><strong>在代理服务器broker中有这一个参数—- **min.insync.replicas</strong>：** </p>
 <blockquote>
-<p>从<a href="https://stackoverflow.com/questions/22354135/in-netty4-why-read-and-write-both-in-outboundhandler" target="_blank" rel="noopener">Stackoverflow的这篇文章能够理解一二</a></p>
-<p>Netty是由事件驱动的， 事件有  <code>inbound</code> 和 <code>outbound</code> 两种，分别由<code>ChannelInboundHandler</code>和<code>ChannelOutboundHandler</code>负责处理 。之间的区别便是</p>
-<p><strong>触发事件的源头</strong>。</p>
-</blockquote>
-<h4 id="inbound"><a href="#inbound" class="headerlink" title="inbound"></a>inbound</h4><p><strong>触发事件的源头是外部，然后影响到应用程序内部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
-<p>Inbound event propagation methods:</p>
-<ul>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRegistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRegistered()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelActive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelActive()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelRead-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelRead(Object)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelReadComplete--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelReadComplete()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireExceptionCaught-java.lang.Throwable-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireExceptionCaught(Throwable)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireUserEventTriggered-java.lang.Object-" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireUserEventTriggered(Object)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelWritabilityChanged--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelWritabilityChanged()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelInactive--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelInactive()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#fireChannelUnregistered--" target="_blank" rel="noopener"><code>ChannelHandlerContext.fireChannelUnregistered()</code></a></li>
-</ul>
-<h4 id="outbound"><a href="#outbound" class="headerlink" title="outbound"></a>outbound</h4><p><strong>触发事件的源头是内部，然后影响到外部。例如Netty的有关ChannelPipeline的<a href="https://netty.io/4.1/api/io/netty/channel/ChannelPipeline.html" target="_blank" rel="noopener">JavaDoc</a>中所写.</strong></p>
-<p>Outbound event propagation methods:</p>
-<ul>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#bind-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.bind(SocketAddress, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#connect-java.net.SocketAddress-java.net.SocketAddress-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.connect(SocketAddress, SocketAddress, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#write-java.lang.Object-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.write(Object, ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#flush--" target="_blank" rel="noopener"><code>ChannelHandlerContext.flush()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelHandlerContext.html#read--" target="_blank" rel="noopener"><code>ChannelHandlerContext.read()</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#disconnect-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.disconnect(ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#close-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.close(ChannelPromise)</code></a></li>
-<li><a href="https://netty.io/4.1/api/io/netty/channel/ChannelOutboundInvoker.html#deregister-io.netty.channel.ChannelPromise-" target="_blank" rel="noopener"><code>ChannelOutboundInvoker.deregister(ChannelPromise)</code></a></li>
-</ul>
-<h3 id="ChannelGroup"><a href="#ChannelGroup" class="headerlink" title="ChannelGroup"></a>ChannelGroup</h3><h4 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h4><p> 在Netty中提供了ChannelGroup接口，是线程安全的，该接口继承Set接口，可以通过ChannelGroup可管理服务器端所有的连接的Channel，然后对所有的连接Channel广播消息。 并且ChannelGroup可以自动remove在ChannelGroup中已经关闭的Channel。因此也不用分心来关注Channel的生命周期。</p>
-<p>Channel的生命周期：</p>
-<ul>
-<li>ChannelRegistered  </li>
-<li>ChannelActive  </li>
-<li>ChannelInactive </li>
-<li>ChannelUnregistered </li>
-</ul>
-<h4 id="简化关闭"><a href="#简化关闭" class="headerlink" title="简化关闭"></a>简化关闭</h4><p> 如果ServerChannel和非ServerChannel都存在于同一个ChannelGroup中，则首先对此组上的ServerChannel执行所有请求的I / O操作，然后对其他Channel执行操作。</p>
-<blockquote>
-<pre><code>ChannelGroupFuture close()</code></pre><p>Closes all <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a>s in this group. If the <a href="https://netty.io/4.0/api/io/netty/channel/Channel.html" target="_blank" rel="noopener"><code>Channel</code></a> is connected to a remote peer or bound to a local address, it is automatically disconnected and unbound.</p>
-<ul>
-<li><p><strong>Returns:</strong></p>
-<p>the <a href="https://netty.io/4.0/api/io/netty/channel/group/ChannelGroupFuture.html" target="_blank" rel="noopener"><code>ChannelGroupFuture</code></a> instance that notifies when the operation is done for all channels</p>
-</li>
-</ul>
+<p><strong>min.insync.replicas</strong> 代表着在ISR集合中最少有多少follower副本，默认值为1，当我们把值设置的越大时，表示kafka有更好的一致性持久化，但也相应的可用性就越低。因为一旦ISR集合中的follower副本少于我们设置的值，生产者将会触发一个异常（ NotEnoughReplicas 或者 NotEnoughReplicasAfterAppend ）。</p>
+<p><strong>min.insync.replicas</strong> 的值的大小于吞吐量的能力是无关的，吞吐量与acks的值有关。</p>
 </blockquote>
 
             </div>
@@ -565,7 +549,7 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/">https://superopenai.github.io/2020/01/16/%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3netty%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/</a>
+                    <a href="https://superopenai.github.io/2020/03/07/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">https://superopenai.github.io/2020/03/07/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -603,12 +587,12 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
+                                <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                                    <span class="chip bg-color">消息队列</span>
                                 </a>
                             
-                                <a href="/tags/Netty/">
-                                    <span class="chip bg-color">Netty</span>
+                                <a href="/tags/Kafka/">
+                                    <span class="chip bg-color">Kafka</span>
                                 </a>
                             
                         </div>
@@ -649,59 +633,59 @@ ChannelInboundHandler  , ChanneloutboundHandler   当初第一次学习使用Net
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/01/31/Hadoop-3.1.3-HBase-1.4.12%E4%B8%AA%E4%BA%BA%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/">
+                <a href="/2020/03/07/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Hadoop-3.1.3+HBase-1.4.12个人搭建记录">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Kafka如何保证数据一致性">
                         
-                        <span class="card-title">Hadoop-3.1.3+HBase-1.4.12个人搭建记录</span>
+                        <span class="card-title">Kafka如何保证数据一致性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Hadoop-3.1.3+HBase-1.4.12个人搭建记录部署 hadoop 集群。hadoop集群最少需要三台机，因为hdfs副本数最少为3。这里我们使用四台机子进行搭建,本文尽求详尽。
-Hadoop搭建过程环境准备java-8-op
+                            怎么让Kafka保证数据一致性概念先快速过一遍Kafka体系结构中的一些组成结构术语：
+
+Producer：生产者，也就是发送消息的一方，将消息投递到Kafka中。
+Consumer：消费者，消费消息的一方，从kafka中接受消息，并进行业
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-category">
-                                    搭建教程
+                            <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="post-category">
+                                    消息队列
                                 </a>
                             
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/" class="post-category">
-                                    Hadoop
-                                </a>
-                            
-                            <a href="/categories/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/Hadoop/HBase/" class="post-category">
-                                    HBase
+                            <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/Kafka/" class="post-category">
+                                    Kafka
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
-                        <span class="chip bg-color">大数据</span>
+                    <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+                        <span class="chip bg-color">消息队列</span>
                     </a>
                     
-                    <a href="/tags/%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">
-                        <span class="chip bg-color">搭建教程</span>
+                    <a href="/tags/Kafka/">
+                        <span class="chip bg-color">Kafka</span>
                     </a>
                     
                 </div>
@@ -715,32 +699,33 @@ Hadoop搭建过程环境准备java-8-op
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/05/%E7%90%86%E8%A7%A3Spring%E4%B8%AD%E7%9A%84-Autowired-Resource-and-Inject%E6%B3%A8%E8%A7%A3%E5%90%AB%E4%B9%89/">
+                <a href="/2020/03/01/Http2-0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%A3%E6%9B%BF%E4%BA%86Http1-0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="理解Spring中的@Autowired, @Resource and @Inject注解含义(译)">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Http2.0为什么代替了Http1.0??">
                         
-                        <span class="card-title">理解Spring中的@Autowired, @Resource and @Inject注解含义(译)</span>
+                        <span class="card-title">Http2.0为什么代替了Http1.0??</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            总览常用的关于依赖注入( dependency injection)的相关注解有 @Resource    @Autowired     @Inject      仨个注解。 这些注解替我们为类 提供了一种声明式的方法来解析依赖项。
-例如：
+                            Http2.0为什么代替了Http1.0?什么是HTTP？
+简单来说，HTTP是超文本传输协议的英文简称，Http是基于CS 架构模型，客户端（服务接收方）和服务端（服务提供商）进行请求和响应的通信。
+现在来说，Http2.0已经基本完全代
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-01
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    计算机网络
                                 </a>
                             
                             
@@ -750,8 +735,8 @@ Hadoop搭建过程环境准备java-8-op
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
                     </a>
                     
                 </div>
