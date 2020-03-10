@@ -4,10 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Http2.0为什么代替了Http1.0??, 阿宁的博客">
-    <meta name="description" content="Http2.0为什么代替了Http1.0?什么是HTTP？
-简单来说，HTTP是超文本传输协议的英文简称，Http是基于CS 架构模型，客户端（服务接收方）和服务端（服务提供商）进行请求和响应的通信。
-现在来说，Http2.0已经基本完全代">
+    <meta name="keywords" content="G1垃圾收集器相关概念, 阿宁的博客">
+    <meta name="description" content="G1垃圾回收器
+垃圾优先(G1)收集器是一种服务器样式的垃圾收集器，面向具有大内存的多处理器机器。它在实现高吞吐量的同时，以高概率满足垃圾收集(GC)暂停时间目标。
+
+G1收集器有如下目标：
+
+和CMS收集器一样，GC进程能和应用程序进程并">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Http2.0为什么代替了Http1.0?? | 阿宁的博客</title>
+    <title>G1垃圾收集器相关概念 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -306,13 +309,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Http2.0为什么代替了Http1.0??
+                        G1垃圾收集器相关概念
                     </div>
                 </div>
             </div>
@@ -424,8 +427,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                <span class="chip bg-color">计算机网络</span>
+                            <a href="/tags/JVM/">
+                                <span class="chip bg-color">JVM</span>
                             </a>
                         
                     </div>
@@ -436,8 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
-                                计算机网络
+                            <a href="/categories/JVM/" class="post-category">
+                                JVM
                             </a>
                         
                     </div>
@@ -448,7 +451,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-01
+                    2020-03-10
                 </div>
                 
                 
@@ -457,14 +460,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.5k
+                        2.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        5 分
+                        7 分
                     </div>
                     
                 
@@ -480,65 +483,92 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Http2-0为什么代替了Http1-0"><a href="#Http2-0为什么代替了Http1-0" class="headerlink" title="Http2.0为什么代替了Http1.0?"></a>Http2.0为什么代替了Http1.0?</h2><h3 id="什么是HTTP？"><a href="#什么是HTTP？" class="headerlink" title="什么是HTTP？"></a>什么是HTTP？</h3><blockquote>
-<p>简单来说，HTTP是超文本传输协议的英文简称，Http是基于CS 架构模型，客户端（服务接收方）和服务端（服务提供商）进行请求和响应的通信。</p>
-<p>现在来说，Http2.0已经基本完全代替了Http1.0，拿Chrome这种主流浏览器来说，几乎所有主流浏览器都支持了Http2.0协议。但是为什么Http2.0最终代替了Http1.0呢？且听我慢慢道来。</p>
+                <h2 id="G1垃圾回收器"><a href="#G1垃圾回收器" class="headerlink" title="G1垃圾回收器"></a>G1垃圾回收器</h2><blockquote>
+<p>垃圾优先(G1)收集器是一种服务器样式的垃圾收集器，面向具有大内存的多处理器机器。它在实现高吞吐量的同时，以高概率满足垃圾收集(GC)暂停时间目标。</p>
 </blockquote>
-<h3 id="Http1-x时代"><a href="#Http1-x时代" class="headerlink" title="Http1.x时代"></a>Http1.x时代</h3><blockquote>
-<p> Http/1.1 由Timothy Berners-Lee于1989年开发，作为万维网的通信标准 ，Http协议是应用层协议，该协议用于客户端与远程服务提供服务器进行交互。</p>
-<p>通常客户端会使用 <code>GET</code>/<code>POST</code> 协议向服务端发送请求，而服务端收到请求后会把请求的资源（例如HTML页面）响应给客户端。</p>
-</blockquote>
-<h4 id="传输模型—-管道模型和行头阻塞"><a href="#传输模型—-管道模型和行头阻塞" class="headerlink" title="传输模型—-管道模型和行头阻塞"></a>传输模型—-管道模型和行头阻塞</h4><p>我们打开一个页面，我们需要的是最后渲染完成的整体页面，但是一个完整的页面同通常是包含很多资源的，HTML页面，图片资源，CSS样式等等…  但是在Http1.0时代，每个资源都对应着一次TCP连接。举个例子就是，图片A需要一个TCP连接，图片B需要一个TCP连接，CSS样式也需要一个TCP连接。建立的TCP连接的数量和这个页面上的资源成正比，这种行为无疑是效率十分低下的，浪费了大量的TCP连接资源，页面的载入速度也很慢。</p>
-<p>在Http1.1时代，为了解决1.0时代为每一个资源都建立一个TCP的问题，Http1.1带来管道模型，所谓管道模型，就是放弃1.0时的TCP短连接，引入TCP长连接，在这一次TCP长连接时，客户端可以<strong>依次发送</strong>对多个资源的多个请求，服务端也响应的进行多次资源响应。</p>
-<p>看似1.1带来的管道模型解决1.0的问题，看来已经很完美了，但是1.1的管道模型有一个天然缺点，由于多个数据包在到达同一目的地时无法相互传递，因此存在队列头部的请求无法检索其所需资源的情况，该请求将阻塞其后面的所有请求。</p>
-<p>这称为行头(HOL)阻塞，这是在HTTP/1.1中优化连接效率的一个重大问题。</p>
-<h3 id="Http2-0时代"><a href="#Http2-0时代" class="headerlink" title="Http2.0时代"></a>Http2.0时代</h3><blockquote>
-<p>2015年，IETF推出了Http2.0协议，也是Http协议的第二个主要版本，Http2.0主要是基于谷歌在早期推出的SPDY协议（已经废弃）的基础上研发的。</p>
-</blockquote>
-<p>Http2.0 的改进之处：</p>
+<p>G1收集器有如下目标：</p>
 <ul>
-<li>与Http1.1的高级兼容</li>
-<li>协议协商机制-协议选举 </li>
-<li>加快页面的载入速度：<ul>
-<li>压缩请求头</li>
-<li>使用二进制对请求/响应进行编码，提高传输的灵活性</li>
-<li>服务端资源PUSH</li>
-<li>单次TCP连接的多路复用</li>
+<li>和CMS收集器一样，GC进程能和应用程序进程并发的执行。</li>
+<li>在减少GC停顿的同时压缩空间</li>
+<li>不会牺牲吞吐性能</li>
+<li>不需要浪费堆空间</li>
+</ul>
+<p>在长久看来，G1将会代替CMS收集器，相比较G1和CMS，G1和CMS的不同都使得G1成为更好的选择方案，G1足够紧凑，完全避免使用细粒度的空闲列表进行分配，而是依赖于区域。这极大地简化了收集器的各个部分，并在很大程度上消除了潜在的碎片问题。此外，与CMS收集器相比，G1提供了更可预测的垃圾收集暂停，并允许用户指定所需的暂停目标。</p>
+<h3 id="G1收集器操作总览"><a href="#G1收集器操作总览" class="headerlink" title="G1收集器操作总览"></a>G1收集器操作总览</h3><p>在以前的垃圾收集器时（CMS，Serial，Parallel）会把堆Heap分为三部分，分别是年轻代，老年代，永久代。所有的对象分布在这三块区域中。</p>
+<p><img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/HeapStructure.png" alt=""></p>
+<p>而G1收集器带来另外一种新概念</p>
+<p><img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide9.png" alt=""></p>
+<blockquote>
+<p>把内存区域分成一个个的小块区域，每一个区块的大小相同，每个区块可能扮演不同的角色（Eden,Survivor,Old）。它们的大小并不固定，给使用内存带来了极大的灵活性。</p>
+</blockquote>
+<p>在执行垃圾收集时，G1的操作方式类似于CMS收集器。G1执行并发全局标记阶段，以确定整个堆中对象的活跃度，在标记结束后，G1知道了内存空间里哪块区域大部分都是空的，这些区域将会被优先回收，这将会产生很多自由空间。 这就是为什么这种垃圾收集方法称为“垃圾优先”的原因 。G1将会优先收集并压缩堆空间中充满可回收对象的区域，这些对象就是垃圾，G1将会使用停顿时间预测模型，在用户自定的停顿目标时间内选择一定数量的区域来回收。</p>
+<p>被选择的区域在回收时，G1将会拷贝一个或多个区域内的对象到另外一个单独的区域中，然后清理那一个或多个区域。这个过程完成了回收并整理的功能。这种清理实在多核处理器上并行执行的，减少停顿时间来增加并发量，因此，在用户指定的停顿时间内，随着每次回收，G1持续工作以减少碎片。</p>
+<p><strong>重点：</strong></p>
+<p>G1并不是一款实时的垃圾收集器，它只会在用户定义的停顿时间内尽可能的多清理垃圾释放空间。基于之前的回收数据，G1会估算在停顿时间内可以收集多少个区域。因此，G1拥有回收区域花费成本相当准确的模型。并且利用在这个模型来决定在停顿时间内回收哪些和多少数量的区域。</p>
+<h3 id="感觉JVM体积变大了？"><a href="#感觉JVM体积变大了？" class="headerlink" title="感觉JVM体积变大了？"></a>感觉JVM体积变大了？</h3><p>如果第一次使用G1收集器，你可能会发现JVM进程的体积会很大，发生这种情况的原因在于特殊的数据结构。</p>
+<p><strong>记忆集合：</strong>  <strong>Remembered Sets</strong>  将对象引用记录到指定区域中。 堆中每个区域有一个RSet。 RSet允许并行和独立地收集区域。 RSets对JVM体积影响小于5％。 </p>
+<p><strong>收集集合： ** **Collection Sets</strong>  存在的区域见会被GC回收，CSet中存在的数据将会移动，存在CSet的区域可能是 Eden ,Survivor，Old。CSet对JVM体积影响小于1％。 </p>
+<h3 id="什么情况下适合使用G1"><a href="#什么情况下适合使用G1" class="headerlink" title="什么情况下适合使用G1?"></a>什么情况下适合使用G1?</h3><p>G1的目标是为了用户的应用程序需要大堆的同时，还要求有限的GC延迟提供一种解决方案，当堆Heap的大小大于6GB时，停顿时间将会低于0.5秒。</p>
+<p>当使用以前的收集器出现如下的情况时，可以考虑使用G1：</p>
+<ul>
+<li>完整的GC持续时间太长或太频繁。</li>
+<li>对象分配率或提升率差异很大。</li>
+<li>不必要的长时间垃圾收集或压缩暂停（长于0.5到1秒）</li>
+</ul>
+<h3 id="G1收集器的收集步骤"><a href="#G1收集器的收集步骤" class="headerlink" title="G1收集器的收集步骤"></a>G1收集器的收集步骤</h3><p> G1收集器采用了另一种分配堆的方法， 后续图片一步一步的回顾G1系统。</p>
+<h4 id="G1-的堆结构"><a href="#G1-的堆结构" class="headerlink" title="G1 的堆结构"></a>G1 的堆结构</h4><p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide8.png" alt=""></p>
+<p>G1 收集器会将JVM的一整个堆分割成大小相同的若干个区域，通常会分割成2000个区域，一个区域的大小可能是1Mb到32Mb。</p>
+<h4 id="堆空间分配"><a href="#堆空间分配" class="headerlink" title="堆空间分配"></a>堆空间分配</h4><p><img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide9.png" alt=""></p>
+<p>实际上，这些区域会被映射为不同逻辑分区（Eden，Survivor，Old）。如上图，这个区域被分配了不同的角色，长久存活的对象将会被从一个分区转移或者拷贝到另外一分区，分区的设计使得GC线程可以与应用程序线程并行的执行而不用停掉应用程序（<code>STW</code>）。</p>
+<p>除了上图上展示出来的三种逻辑分区（Eden，Survivor，Old）之外，还有额外的两种分区，第四个分区又被称为巨型分区，它是被设计出来用于容纳对象体积超过标准分区空间大下50%的大对象。第五种分区是堆中的未使用空间。</p>
+<h4 id="G1中年轻代发生GC"><a href="#G1中年轻代发生GC" class="headerlink" title="G1中年轻代发生GC"></a>G1中年轻代发生GC</h4><p><img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide10.png" alt=""></p>
+<p><strong>发生GC时</strong></p>
+<p>这将会发生一次STW，伊甸园大小和幸存者大小是为下一代年轻的GC计算的。 会计信息被保留以帮助计算大小。 诸如暂停时间目标之类的内容都会被考虑在内。此方法使调整区域大小变得非常容易，可以根据需要使其变大或变小</p>
+<p><img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide11.png" alt="img"></p>
+<p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide12.png" alt="img"> </p>
+<h4 id="年轻代GC总结"><a href="#年轻代GC总结" class="headerlink" title="年轻代GC总结"></a>年轻代GC总结</h4><ul>
+<li>一个堆被分割许多个分区</li>
+<li>年轻代是由一组非连续的内存区域组成的，在需要的时候很容易调整大小。</li>
+<li>发生年轻代GC时会引发STW停顿。</li>
+<li>年轻代GC可以被多线程并发执行。</li>
+<li>存活的对象会被拷贝到Survivor或者Old分区。</li>
+</ul>
+<h3 id="G1收集阶段–并发标记周期阶段"><a href="#G1收集阶段–并发标记周期阶段" class="headerlink" title="G1收集阶段–并发标记周期阶段"></a>G1收集阶段–并发标记周期阶段</h3><ul>
+<li>初识标记 :  这将会引发STW，这个阶段可以在一次年轻代GC顺带着完成，其主要目标是标记Survivor区域，这些区域中可能有引用到Old分区的对象。</li>
+<li>分区扫描 ：这个阶段将会在年轻代发生前完成，阶段中将会对Survivor区域进行扫描，扫描出那些引用Old的对象。</li>
+<li>并发标记 ：在整个堆中进行寻找存活对象，这个阶段可能会打断年轻代GC</li>
+<li>重新标记 ：引发STW，完成堆中所有存活对象的标记，使用的是一种叫做SATB的算法。</li>
+<li>筛选回收</li>
+</ul>
+<h3 id="G1发生老年代GC的步骤"><a href="#G1发生老年代GC的步骤" class="headerlink" title="G1发生老年代GC的步骤"></a>G1发生老年代GC的步骤</h3><h4 id="初识标记"><a href="#初识标记" class="headerlink" title="初识标记"></a>初识标记</h4><p>在GC日志中表示为 <code>GC pause (young)(inital-mark)</code>. </p>
+<p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide13.png" alt="img"> </p>
+<h4 id="并发标记"><a href="#并发标记" class="headerlink" title="并发标记"></a>并发标记</h4><p> 如果发现空区域(如“X”所示)，它们将在重新标记阶段立即删除。 此外，还会计算确定活跃度的“会计”信息。 </p>
+<p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide14.png" alt="img"> </p>
+<h4 id="重新标记阶段"><a href="#重新标记阶段" class="headerlink" title="重新标记阶段"></a>重新标记阶段</h4><p> 空区域将被删除并回收。 现在，将计算所有区域的区域活跃度。 </p>
+<p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide15.png" alt="img"> </p>
+<h4 id="筛选清理阶段"><a href="#筛选清理阶段" class="headerlink" title="筛选清理阶段"></a>筛选清理阶段</h4><p> G1选择“活跃度”最低的区域，也就是收集速度最快的区域。 然后，在年轻GC的同时收集这些区域。 这在日志中表示为[ GC pause (mixed )]。 因此，年轻一代和老年一代都是同时收集的 </p>
+<p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide16.png" alt="img"> </p>
+<h4 id="整理阶段"><a href="#整理阶段" class="headerlink" title="整理阶段"></a>整理阶段</h4><p>之前的区域已被收集并压缩为图中所示的深蓝色区域和深绿色区域。</p>
+<p> <img src="https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/G1GettingStarted/images/slide17.png" alt="img"> </p>
+<h4 id="老年代GC总结"><a href="#老年代GC总结" class="headerlink" title="老年代GC总结"></a>老年代GC总结</h4><p> 有以下几个关键点：</p>
+<ul>
+<li>并发标记阶段：<ul>
+<li>活跃度信息是在应用程序运行时并发计算的。</li>
+<li>活跃度信息标识在筛选回收期间哪些区域将是最适合回收的</li>
+<li>没有像CMS那样的横扫阶段。</li>
+</ul>
+</li>
+<li>重新标记阶段：<ul>
+<li>使用SATB算法其速度比CMS收集器的速度要快得多。</li>
+<li>被标记为空的区域直接清理。</li>
+</ul>
+</li>
+<li>筛选清理阶段：<ul>
+<li>在同一时间，年轻代空间和老年代空间都会被回收。</li>
+<li>老年代区域是根据其活跃度来选择回收的 </li>
 </ul>
 </li>
 </ul>
-<p><strong>接下来就以Http2.0是怎么加快页面的加载速度的，来给大家讲解一下这4处改进</strong></p>
-<h4 id="TCP连接的多路复用"><a href="#TCP连接的多路复用" class="headerlink" title="TCP连接的多路复用"></a>TCP连接的多路复用</h4><p> <img src="https://miro.medium.com/max/934/0*lY05UTuA-dWCXU-q.png" alt="img"> </p>
-<p>HTTP/2 能够在单次的TCP连接中<strong>并行</strong>发送多次请求，这是HTTP/2 最优越的特性，这使得我们能够异步的从服务端下载我们所需要的资源，这有效的减少了额外的往返时间（RTT），<strong>使得页面的加载速度变得更快</strong>，即使我们没有使用任何的优化策略。</p>
-<h4 id="报头压缩"><a href="#报头压缩" class="headerlink" title="报头压缩"></a>报头压缩</h4><p> <img src="https://miro.medium.com/max/936/0*5r8-MbhEseP6lEQg.png" alt="img"> </p>
-<p>HTTP/2 压缩了报头大量的冗余信息，使用HPACK规范来安全简单的压缩报头，在客户端和服务器端都为维护这一份之前请求过的报头列表。</p>
-<p>HPACK 会在发送到服务器端之前对每一个值进行压缩，当压缩后的报头传输到服务端后，服务端会根据其维护的报头列表来重建完成的报头信息。</p>
-<h4 id="二进制编码"><a href="#二进制编码" class="headerlink" title="二进制编码"></a>二进制编码</h4><p> <img src="https://miro.medium.com/max/924/0*0LtM_XmkauxVoY8M.png" alt="img"> </p>
-<p>在HTTP1.x时代，传输的信息是文本信息，在HTTP/2，将传输文本信息改进为把请求信息二进制编码后再传输，有效的简化了复杂性。并且还有如下优点：</p>
-<ul>
-<li>更低的传输资源开销</li>
-<li>更少出错</li>
-<li>有效利用网络资源</li>
-<li>消除HTTP1.x值容易被修改的问题</li>
-<li>可以启用HTTP/2的其他功能，压缩，多路复用，TLS小绿🔒</li>
-<li>降低了网络延迟并提高了吞吐量。</li>
-</ul>
-<h4 id="服务端资源PUSH"><a href="#服务端资源PUSH" class="headerlink" title="服务端资源PUSH"></a>服务端资源PUSH</h4><p> <img src="https://miro.medium.com/max/623/0*ZJLgVdXq_06hcF1o.png" alt="img"> </p>
-<p>这项功能使得服务端在收到客户端的请求后，除了响应请求的资源之外，还会向客户端推送其他的资源。举个例子，如果我们请求X资源，服务端收到请求后，发现X资源引用着 Y和Z 资源，服务端认为你以后还会请求Y/Z资源，然后服务端就一次性的响应给客户端请求的X资源和额外的Y和Z资源。</p>
-<p>这就有如下好处：</p>
-<ul>
-<li>客户端把额外推送的资源放在缓存中，加快页面渲染速度</li>
-<li>服务端可以在单次TCP连接下，多路复用的向客户端push资源</li>
-<li>服务端可以根据资源的优先级来推送</li>
-<li>客户端可以限制服务端Push过来的资源的数量</li>
-</ul>
-<h3 id="速度"><a href="#速度" class="headerlink" title="速度"></a>速度</h3><p>同样请求100张图片，HTTP1.1和HTTP2.0差距明显。</p>
-<p><strong>HTTP1.1—12.97s (连续载入三次)</strong></p>
-<p> <img src="https://miro.medium.com/max/1110/0*9sthV7MhTNJlUXxv.png" alt="img"> </p>
-<p><strong>HTTP2.0—3.17s (连续载入三次)</strong></p>
-<p><img src="https://miro.medium.com/max/1463/0*BbZxFMPXuNBJcPc4.png" alt="img"> </p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>HTTP 2.0从各种程度上都超越了1.x，既解决了1.x的问题还更快的加载渲染页面，现在主流的浏览器基本都支持了HTTP2.0。</p>
-<p> <img src="https://miro.medium.com/max/1463/0*yRdM_rAcuZFqd2Ml.png" alt="img"> </p>
 
             </div>
             <hr/>
@@ -564,7 +594,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2020/03/01/Http2-0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%A3%E6%9B%BF%E4%BA%86Http1-0/">https://superopenai.github.io/2020/03/01/Http2-0%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%A3%E6%9B%BF%E4%BA%86Http1-0/</a>
+                    <a href="https://superopenai.github.io/2020/03/10/G1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">https://superopenai.github.io/2020/03/10/G1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -602,8 +632,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                                    <span class="chip bg-color">计算机网络</span>
+                                <a href="/tags/JVM/">
+                                    <span class="chip bg-color">JVM</span>
                                 </a>
                             
                         </div>
@@ -644,9 +674,65 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/10/G1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="G1垃圾收集器相关概念">
+                        
+                        <span class="card-title">G1垃圾收集器相关概念</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            G1垃圾回收器
+垃圾优先(G1)收集器是一种服务器样式的垃圾收集器，面向具有大内存的多处理器机器。它在实现高吞吐量的同时，以高概率满足垃圾收集(GC)暂停时间目标。
+
+G1收集器有如下目标：
+
+和CMS收集器一样，GC进程能和应用程序进程并
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/03/07/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/">
                     <div class="card-image">
@@ -667,9 +753,9 @@ Consumer：消费者，消费消息的一方，从kafka中接受消息，并进�
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -695,55 +781,6 @@ Consumer：消费者，消费消息的一方，从kafka中接受消息，并进�
                     
                     <a href="/tags/Kafka/">
                         <span class="chip bg-color">Kafka</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/02/29/ConcurrentHashMap-JDK1-7-JDK1-8%E5%BC%82%E5%90%8C%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="ConcurrentHashMap JDK1.7,JDK1.8异同个人理解">
-                        
-                        <span class="card-title">ConcurrentHashMap JDK1.7,JDK1.8异同个人理解</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            ConcurrentHashMap 个人理解前导首先，ConcurrentHashMap（我习惯叫它并发HashMap）和HashMap一样，在JDK1.7 与JDK1.8的实现是不同的，1.7使用的是 数组+链表在加上分段锁技术（ Seg
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
                     </a>
                     
                 </div>
