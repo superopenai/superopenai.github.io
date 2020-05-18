@@ -4,14 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring Data JPA相关注解, 阿宁的博客">
-    <meta name="description" content="现在版本？
-本文参考了Spring Data JPA官方文档，引用了部分文档的代码
-
-据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10
-
-
-使用Spri">
+    <meta name="keywords" content="操作系统之进程和线程, 阿宁的博客">
+    <meta name="description" content="操作系统之进程和线程总览
+操作系统的核心概念是进程，进程是对正在运行的程序的一个抽象，操作系统的其他概念都是围绕着进程而展开的。进程的存在让操作系统的并发成为了可能。即使在单CPU的系统下，它会将一个CPU虚拟成多个虚拟CPU。
+进程通常代">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Spring Data JPA相关注解 | 阿宁的博客</title>
+    <title>操作系统之进程和线程 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,13 +306,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Spring Data JPA相关注解
+                        操作系统之进程和线程
                     </div>
                 </div>
             </div>
@@ -428,12 +424,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
                             </a>
                         
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/%E8%BF%9B%E7%A8%8B/">
+                                <span class="chip bg-color">进程</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BA%BF%E7%A8%8B/">
+                                <span class="chip bg-color">线程</span>
                             </a>
                         
                     </div>
@@ -444,12 +444,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/springboot/" class="post-category">
-                                springboot
-                            </a>
-                        
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                操作系统
                             </a>
                         
                     </div>
@@ -460,23 +456,28 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2020-05-15
                 </div>
                 
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-05-18
+                </div>
                 
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        3.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        10 分
                     </div>
                     
                 
@@ -492,118 +493,124 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="现在版本？"><a href="#现在版本？" class="headerlink" title="现在版本？"></a>现在版本？</h2><blockquote>
-<p>本文参考了Spring Data JPA官方文档，引用了部分文档的代码</p>
+                <h1 id="操作系统之进程和线程"><a href="#操作系统之进程和线程" class="headerlink" title="操作系统之进程和线程"></a>操作系统之进程和线程</h1><h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><blockquote>
+<p>操作系统的核心概念是进程，进程是对正在运行的程序的一个抽象，操作系统的其他概念都是围绕着进程而展开的。进程的存在让操作系统的并发成为了可能。即使在单CPU的系统下，它会将一个CPU虚拟成多个虚拟CPU。</p>
+<p>进程通常代表着一个程序，但是作为一个程序，往往在同一时间做着多项工作，如果让单进程模型来完成，虽然也能完成多项工作，但只能顺序进行，某些任务会被严重的拖后延迟。把程序中的多任务分成并行运行的多个线程，让设计模型变得更加简单。线程的存在也使得进程内部并发成为了可能。</p>
 </blockquote>
-<p><strong>据文章编辑时，Springboot的版本已经是v2.1.7.RELEASE，Spring Data的版本已经是Lovelace-SR10</strong></p>
-<p><img src="https://i.loli.net/2019/08/13/6AMnO31jarZ8ovN.png" alt="Springboot"><br><img src="https://i.loli.net/2019/08/13/IEaJKbcWOiNy9TD.png" alt="Spring Data"></p>
-<ul>
-<li>使用Springboot，springboot将会替你选择最新的spring data模块（<strong>Spring Boot selects a recent version of Spring Data modules for you. If you still want to upgrade to a newer version, configure the property spring-data-releasetrain.version to the train name and iteration you would like to use.</strong>）。</li>
-</ul>
-<p><img src="https://i.loli.net/2019/08/13/uXOPpgiCLy7Mmhs.png" alt=""><br><img src="https://i.loli.net/2019/08/13/ERyfzZALupKBnFH.png" alt=""></p>
-<h2 id="Spring-Data-Jpa-是什么？"><a href="#Spring-Data-Jpa-是什么？" class="headerlink" title="Spring Data Jpa 是什么？"></a>Spring Data Jpa 是什么？</h2><blockquote>
-<p>Spring Data JPA是更大的Spring Data系列的一部分，可以轻松实现基于JPA的存储库。此模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动应用程序变得更加容易。在相当长的一段时间内，实现应用程序的数据访问层一直很麻烦。必须编写太多样板代码来执行简单查询以及执行分页和审计。Spring Data JPA旨在通过减少实际需要的工作量来显着改善数据访问层的实现。作为开发人员，您编写存储库接口，包括自定义查找器方法，Spring将自动提供实现。</p>
-</blockquote>
-<h2 id="代码层面"><a href="#代码层面" class="headerlink" title="代码层面"></a>代码层面</h2><h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> me<span class="token punctuation">.</span>superning<span class="token punctuation">.</span>tmall<span class="token punctuation">.</span>pojo<span class="token punctuation">;</span>
-<span class="token keyword">import</span> com<span class="token punctuation">.</span>fasterxml<span class="token punctuation">.</span>jackson<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>JsonIgnoreProperties<span class="token punctuation">;</span>
-<span class="token keyword">import</span> javax<span class="token punctuation">.</span>persistence<span class="token punctuation">.</span>*<span class="token punctuation">;</span>
-<span class="token annotation punctuation">@Entity</span>
-<span class="token annotation punctuation">@Table</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"category"</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//表名(严格区分大小写)</span>
-<span class="token annotation punctuation">@JsonIgnoreProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"handler"</span><span class="token punctuation">,</span> <span class="token string">"hibernateLazyInitializer"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Category</span>  <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
-
-    <span class="token annotation punctuation">@Id</span>
-<span class="token comment" spellcheck="true">//    主键使用这个注解</span>
-    <span class="token annotation punctuation">@GeneratedValue</span><span class="token punctuation">(</span>strategy <span class="token operator">=</span> GenerationType<span class="token punctuation">.</span>IDENTITY<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//    自增长策略</span>
-    <span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"id"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token keyword">int</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<ul>
-<li>1.@Entity：标识实体类是JPA实体，告诉JPA在程序运行时生成实体类对应表</li>
-<li>2.@Table：设置实体类在数据库所对应的表名</li>
-<li>3.@Id：标识类里所在变量为主键</li>
-<li>4.@GeneratedValue：设置主键生成策略，此方式依赖于具体的数据库</li>
-<li>5.@Basic：表示简单属性到数据库表字段的映射（几乎不用）</li>
-<li>6.@Column：表示属性所对应字段名进行个性化设置</li>
-<li>7.@Transient：表示属性并非数据库表字段的映射,ORM框架将忽略该属性（在与密码有关的实体类会用到这个注解，后续详解于另一篇文章）</li>
-</ul>
-<p>常用的注解如上，其他注解可能会以独立文章讲解。</p>
-<h3 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h3><pre><code>Spring data的中央接口是Repository，
-它还提供了扩展了持久层技术的接口例如
-CrudRepository
-MongoRepository
-JpaRepository</code></pre><p><img src="https://i.loli.net/2019/08/13/VDQYJfheO2v7ywE.png" alt="中央接口"></p>
-<h4 id="CrudRepository和JpaRepository之间的区别"><a href="#CrudRepository和JpaRepository之间的区别" class="headerlink" title="CrudRepository和JpaRepository之间的区别"></a><strong>CrudRepository和JpaRepository之间的区别</strong></h4><p><img src="https://i.loli.net/2019/08/13/xPsVpbeOry83QuC.png" alt=""></p>
-<p><strong>从上图你可以看出JpaRepository 继承了PagingAndSortingRepository，相应的也继承了CrudRepository</strong></p>
-<ul>
-<li>CrudRepository 主要提供了CRUD的方法功能</li>
-<li>PagingAndSortingRepository，提供了分页和排序记录的方法</li>
-<li>JpaRepository 则拥有了它们两个所有的方法功能，并扩展了其他方法</li>
-</ul>
-<h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OrderItemDAO</span> 
-<span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token operator">&lt;</span>OrderItem<span class="token punctuation">,</span>Integer<span class="token operator">></span>
-<span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>OrderItem<span class="token operator">></span> <span class="token function">findByOrderOrderByIdDesc</span><span class="token punctuation">(</span>Order order<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre><code>由代码可知，Dao接口首先继承一个JpaRepository接口，
-JpaRepository&lt;T, ID&gt; T是泛型，ID是主键的类型。
-接口本身已经为我们提供了基础的CRUD方法，但有时我们有
-一些特殊的查询，接口无法为我们提供，这时就需要我们进行特殊参数处理。</code></pre><h5 id="特殊参数处理"><a href="#特殊参数处理" class="headerlink" title="特殊参数处理"></a>特殊参数处理</h5><pre class=" language-java"><code class="language-java">Page<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Slice<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Sort sort<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-List<span class="token operator">&lt;</span>User<span class="token operator">></span> <span class="token function">findByLastname</span><span class="token punctuation">(</span>String lastname<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p><strong>关于使用@Query(“sql语句”)在dao层的方法上写原生sql语句，<br>以后以独立文章介绍</strong></p>
-<h5 id="关系映射"><a href="#关系映射" class="headerlink" title="关系映射"></a>关系映射</h5><p><a href="https://blog.csdn.net/u010588262/article/details/76667283" target="_blank" rel="noopener">借鉴这位的csdn博客以及自我理解结合而成</a></p>
-<ul>
-<li><p>一对一</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@OneToOne</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">,</span>optional<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"addressID"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释本表中指向另一个表的外键。</span>
-<span class="token keyword">public</span> Address <span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
-  <span class="token keyword">return</span> address<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<p>  现假设有Person表和Address表，是一对一的关系，<br>  在Person中有一个指向Address表主键的字段addressID，<br>  所以主控方一定是Person，所谓主控方就是能改变关联关系的一方，<br>  Person只要改变addressID就改变了关联关系，所以Person是主控方，<br>  所以@JoinColumn写在Person类中</p>
-</li>
-<li><p>一对多单向</p>
-</li>
-</ul>
-<p><strong>假如现在有Person表和Country表，那么一定是Person表中有country_id字段，由于我们是一对多的关系，所以站在一的角度，也就是Country的角度，在Country类中加入@JoinColumn</strong></p>
-<pre class=" language-java"><code class="language-java">
-<span class="token annotation punctuation">@OneToMany</span><span class="token punctuation">(</span>cascade<span class="token operator">=</span>CascadeType<span class="token punctuation">.</span>ALL<span class="token punctuation">)</span> 
-<span class="token annotation punctuation">@JoinColumn</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"country_id"</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注释的是另一个表指向本表的外键。 </span>
-<span class="token keyword">public</span> List<span class="token operator">&lt;</span>Person<span class="token operator">></span> <span class="token function">getPersons</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> persons<span class="token punctuation">;</span> 
-<span class="token punctuation">}</span></code></pre>
-<p><strong>在一对多单向关系中，多的一方（Person）没有注解，一的一方（Country）有注解，如果一的一方不加@JoinColumn指定外键字段的话，Hibernate会自动生成一张中间表Country_PERSON来对Person和Country进行绑定。</strong></p>
-<ul>
-<li>多对一单向</li>
-</ul>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h3 id="进程模型"><a href="#进程模型" class="headerlink" title="进程模型"></a>进程模型</h3><p>在操作系统中，一个进程通常代表着一个正在执行的程序的实力，包括程序计数器，寄存器，局部变量。从进程的角度看，每个进程拥有自己的虚拟CPU，在宏观上看可知，（单核系统）实际上是一个CPU来回的在多个进程上切换，让每个进程都有机会获得CPU资源。</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200515/LYWFRfOQ7eNo.png?imageslim" alt="mark"></p>
+<p>如上图，ABCD是四道程序，每个程序都独立的运行，每个程序都有自己独立的逻辑程序计数器，当某个程序获得CPU资源的时候，它便会把自己的逻辑程序计数器，装入唯一的实际程序计数器中，（单核）在任何一个时间下都只能有一个进程运行。</p>
 <blockquote>
-<p><strong>一个产品可以属于多个分类,因此@JoinColumn放在Product类中</strong></p>
+<p>关键思想：一个进程是某种活动的一种表现，它有程序，输出，输入等状态，单核处理器下，一个处理器被多个进程共享，使用<strong>某种调度算法</strong>来决定从一个进程转换为另一个进程服务。</p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/08/13/yzwNqMiDYXBtZAg.png" alt=""></p>
-<p><strong>看看数据库</strong><br><img src="https://i.loli.net/2019/08/13/VQfOLJWjimxeHG1.png" alt=""></p>
-<pre><code>可以看到在Product表出现了一个对应Category表的外键
-但是Category表中却没有外键，因此这就是单向的多对一</code></pre><p><img src="https://i.loli.net/2019/08/13/j42JOk8SCxsPEMK.png" alt=""></p>
+<h3 id="进程的创建"><a href="#进程的创建" class="headerlink" title="进程的创建"></a>进程的创建</h3><p>4种主要事件发生时会触发进程的创建：</p>
+<ul>
+<li>系统初始化</li>
+<li>用户请求创建一个新进程</li>
+<li>执行创建进程的系统调用</li>
+<li>一个批处理作业的初始化</li>
+</ul>
+<p>在所有的这些情形中，新进程都是由一个已经存在的进程执行创建新进程的系统调用从而创建的。</p>
+<blockquote>
+<p>在UNIX中，这个系统调用只有一个，那就是<strong>fork</strong> ，调用fork后会使得父进程创建一个子进程，两个进程拥有相同的内存映像，环境字，打开的文件。</p>
+</blockquote>
+<blockquote>
+<p>但是父子进程之间的地址空间是不同的，不同的地址空间使得一个进程对自己地址空间的变量做的修改，其他的进程是不可见的。在某种情况下，父子进程可能会共享一块内存（可以参考Redis的RDB持久化时的父子进程之间的关系），只有在需要修改共享内存中的某个部分，则通过COW（写时复制），复制出需要修改的那块内存。这样最好的情况下只占N大小的空间，最坏也只是2N的空间大小。</p>
+</blockquote>
+<h3 id="进程的终结"><a href="#进程的终结" class="headerlink" title="进程的终结"></a>进程的终结</h3><p>进程会在以下的几种情况时终止：</p>
+<ul>
+<li>执行完任务，正常退出</li>
+<li>中间出现错误，退出</li>
+<li>被其他的进程通过系统调用被杀死</li>
+</ul>
+<h3 id="进程的实现"><a href="#进程的实现" class="headerlink" title="进程的实现"></a>进程的实现</h3><p><strong>为了实现进程模型，操作系统维护着一张表格 (一个结构数组)，称为进程表，每个进程占用一个进程表项，又称为PCB (进程控制块)。</strong></p>
+<p>PCB记录着进程的重要信息，包括寄存器，堆栈指针，优先级，进程ID等等。下图给出了主要的关键字段。</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200515/hLt2aKFfu0Gn.png?imageslim" alt="mark"></p>
+<h4 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h4><p>假设当一个磁盘中断发生的时候，进程２正在运行，中断硬件会中断内容的程序计数器，状态字，还有寄存器压入堆栈，任何跳到中断的位置，完成接下来的操作。当完成中断后，会从堆栈中删除由中断硬件压入堆栈的那部分信息。</p>
+<p>一个进程在执行过程中可能会中断数千次,但是每次中断结束后,被中断的进程都会返回到中断前的状态.</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><blockquote>
+<p>为什么有了进程,我们还需要线程 ? 但是许多应用中同时发生着多种活动,其中某些活动会因为时间的推移而被一直阻塞,得不到机会运行.但是 多线程的存在让这些多个活动同时进行成为了可能. 换句话说,线程的存在让 进程内部并发成为了可能.</p>
+</blockquote>
+<p>需要线程的理由:</p>
+<ul>
+<li>线程更加轻量级,创建一个线程要比创建一个进程快10-100倍,在大量的线程需要动态切换和修改的时候,线程的性能消耗也令人满意.</li>
+<li>如果多个线程都是CPU密集型的,每个线程都渴望使用CPU资源,在这种情况下,线程并没有特别的好处,但是如果CPU计算和IO处理55开的时候,多个线程可以使得同一时间有的线程进行IO处理,有的线程进行CPU计算,提高应用程序执行的速度.</li>
+</ul>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><p>理解进程的一个角度是, 进程把相关的资源集合在一起,进程有存放程序正文,数据资源,和其他资源的地址空间,以及其他相关的信息,把这些东西放进进程中更容易管理.</p>
+<p>而在线程中,线程有一个程序计数器,用来记录接下来执行那一条指令的位置.线程拥有寄存器,用来保存线程当前的工作变量,线程还有一个堆栈,用来记录执行历史,其中的每一帧保存着一个已经调用但是还没有返回的过程. 线程必须在进程中运行, 但是两者是不同的概念.<strong>进程把资源集中在一起, 而线程是CPU上调度的实体</strong></p>
+<h4 id="多进程和多线程的区别"><a href="#多进程和多线程的区别" class="headerlink" title="多进程和多线程的区别"></a>多进程和多线程的区别</h4><p><img src="http://pic.chenlun1314.top/blog/20200515/tL9j5ibz209d.png?imageslim" alt="mark"></p>
+<blockquote>
+<p>如果是多进程 ,例如上图的三进程,每个进程有一个线程.因为每个进程都有自己独立的地址空间,因此a中的三个线程拥有不同的地址空间.</p>
+<p>如果是多线程, 因为三个线程是在一个进程中的,因此三个线程共享同一个地址空间.</p>
+<p>两者都是让CPU快速的线程之间来回的切换,创造一种并行的假象.</p>
+<p>应该需要针对特定的情况,选择相应的模型.</p>
+</blockquote>
+<p><strong>下图中,左列是代表着 进程所独享的内容,让进程中所有线程共享. 右列代表着线程所独有的内容.</strong></p>
+<p><img src="http://pic.chenlun1314.top/blog/20200515/P41JUF3VQSTR.png?imageslim" alt="mark"></p>
+<p><img src="http://pic.chenlun1314.top/blog/20200515/jtKsL4NhmNTe.png?imageslim" alt="mark"></p>
+<blockquote>
+<p>要认识到每个线程都有自己的堆栈,每个堆栈代表着这个线程执行的历史.通常每个线程的执行历史都是不同的,因此有自己的堆栈很重要.</p>
+</blockquote>
+<h3 id="线程的实现"><a href="#线程的实现" class="headerlink" title="线程的实现"></a>线程的实现</h3><p><strong>线程的实现方法主要有两种,用户空间中的线程,和内核中的线程</strong></p>
+<p><img src="http://pic.chenlun1314.top/blog/20200515/kREKdeERKEwp.png?imageslim" alt="mark"></p>
+<blockquote>
+<p>在用户空间中管理内存的时候,每个进程需要有其专用的线程表(Thread table), 用来跟踪这个进程中的线程,线程表中的表项会记录着这个线程的寄存器,状态,和其他信息. </p>
+<p>用户级线程有如下优点: </p>
+<ul>
+<li>速度快,如果发生线程的调度,用户级的线程的调度速度比要陷入内核的内核级线程要明显快一个数量级</li>
+<li>它也允许每个进程制定属于自己的线程的调度算法</li>
+<li>不会占有内核的宝贵空间</li>
+</ul>
+<p>但是没有十全十美的方案,用户级线程,因为是属于进程的内部,没有时钟中断,所以就不能使用时间片轮转的方法进行的调用.</p>
+</blockquote>
+<blockquote>
+<p>内核级线程,内核维护了一个线程表,用来跟踪线程的状态,其记录的信息和用户级的线程表类似.  内核级线程,能够方便的进行调用.但是有一个缺点就是系统调用的代价比较大,因此内核会使用一种”环保”的方法来进行维护线程.</p>
+</blockquote>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><p>IPC通常会有以下有关的问题:(线程也类似)</p>
+<ul>
+<li>如何让一个进程把信息传递给另外一个</li>
+<li>如何确保两个进程或者更多,在关键活动中不会出现交叉</li>
+<li>不允许执行顺序出现偏差</li>
+</ul>
+<p>如何避免出现(进程)线程不安全问题. 好在当今的操作系统已经给出多种的解决方法.</p>
+<h2 id="调度"><a href="#调度" class="headerlink" title="调度"></a>调度</h2><p><strong>随着时代发展, CPU的速度变得越来越快, 更多的进程开始倾向于IO密集型, 基本的思想是,如果进程大部分是IO密集型的,那么就应该多运行一些这样的进程,来保证CPU被充分的利用.</strong></p>
+<h3 id="何时调度"><a href="#何时调度" class="headerlink" title="何时调度"></a>何时调度</h3><p>有关调度的一个关键问题就是何时进行调度, 如何选择最合适的调度策略.</p>
+<p>调度算法也根据不同的环境,分为了以下的三类:</p>
+<ul>
+<li>批处理</li>
+<li>交互式</li>
+<li>实时</li>
+</ul>
+<p>在不同的环境下,调度算法的目标:</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200515/P5gteKmMSFoL.png?imageslim" alt="mark"></p>
+<h4 id="批处理系统中的调度"><a href="#批处理系统中的调度" class="headerlink" title="批处理系统中的调度"></a>批处理系统中的调度</h4><ul>
+<li>先来先服务</li>
+<li>最短作业优先</li>
+<li>最短剩余时间优先</li>
+</ul>
+<h4 id="交互系统中的调度"><a href="#交互系统中的调度" class="headerlink" title="交互系统中的调度"></a>交互系统中的调度</h4><ul>
+<li>时间片轮转 (有趣的一点是时间片的长度选取,时间片选取的太短会导致过多的进程切换,降低了CPU效率,设置的太长又会导致响应时间变长.通常设置20ms-50ms是一个比较合适的范围)</li>
+<li>优先级调度 (优先级可以静态设定,也可以让系统动态设置)</li>
+<li>多级队列 (理论优秀,实践困难)</li>
+<li>最短进程优先</li>
+<li>保证调度</li>
+<li>彩票调度</li>
+<li>公平分享调度</li>
+</ul>
+<h3 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h3><blockquote>
+<p>首先考虑用户级线程,因为系统不知道线程的存在,因此系统会选择一个进程进行执行,同时分配给这个进程一个时间片,而进程的多个线程可能会根据时间片的长度每个线程运行一会,然后把CPU交给线程调度程序,让它选取进程中的下一个线程.</p>
+</blockquote>
+<blockquote>
+<p>在内核级线程的情况下,内核知道线程的存在,系统会选择一个线程, 并且赋予它一个时间片,时间片到了就强制挂起线程. 因此线程的执行顺序不会像用户级线程一样,不会一个进程的线程按顺序执行.</p>
+</blockquote>
+<p><strong>用户级线程和内核级线程的区别主要是性能, 因为用户级线程的线程切换只需要几句机器指令,便可完成切换 , 但是内核级线程的线程切换却需要完整的上下文切换,修改内存映像,让高速缓存失效.</strong></p>
+<p>从A进程的a1线程切换到B进程的b1线程的代价, 要高于进程A中的不同线程切换代价.很多情况下,综合考虑,使用用户级线程的情况更多.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>随着计算机硬件的飞速发展,CPU的核数开始越来越多, 计算能力开始越来越强,基于多核处理器的调度问题也渐渐成为了重点.  另外包括 </p>
+<p>移动设备上的低功耗调度[Some topics being researched include energy-ef-ficient  scheduling  on  mobile  devices  (Yuan  and  Nahrstedt,  2006)],   </p>
+<p>超线程级调度[hyperthread-ing-aware   scheduling   (Bulpin   and   Pratt,   2005)] </p>
+<p>也逐渐成为了研究人员的关心方向.在当下, 进程 线程 调度算法已经渐渐淡出人们的研究热点, 开始转向 低功耗, 虚拟化, 云计算,大数据等方向.   但是作为操作系统的基础, 是我们这些程序员应该仔细学习的知识.</p>
+</blockquote>
 
             </div>
             <hr/>
@@ -629,7 +636,7 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/">https://superopenai.github.io/2019/10/27/Spring-Data-JPA%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3/</a>
+                    <a href="https://superopenai.github.io/2020/05/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">https://superopenai.github.io/2020/05/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -667,12 +674,16 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
                                 </a>
                             
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/%E8%BF%9B%E7%A8%8B/">
+                                    <span class="chip bg-color">进程</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%BA%BF%E7%A8%8B/">
+                                    <span class="chip bg-color">线程</span>
                                 </a>
                             
                         </div>
@@ -713,55 +724,58 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/Swagger2%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E8%A6%81%E7%82%B9/">
+                <a href="/2020/05/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Swagger2配置相关要点">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="操作系统之进程和线程">
                         
-                        <span class="card-title">Swagger2配置相关要点</span>
+                        <span class="card-title">操作系统之进程和线程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring Boot整合Swagger2的流程
-由于springboot的便捷，以及前后端分离的趋势，后端和前端配合的桥梁便是接口细节，我们通常遵守REST的原则，为其他开发人员提供一份REST接口文档，但后期接口多又杂，手写十分耗时耗力
+                            操作系统之进程和线程总览
+操作系统的核心概念是进程，进程是对正在运行的程序的一个抽象，操作系统的其他概念都是围绕着进程而展开的。进程的存在让操作系统的并发成为了可能。即使在单CPU的系统下，它会将一个CPU虚拟成多个虚拟CPU。
+进程通常代
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
                     </a>
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E8%BF%9B%E7%A8%8B/">
+                        <span class="chip bg-color">进程</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">线程</span>
                     </a>
                     
                 </div>
@@ -775,37 +789,32 @@ List<span class="token operator">&lt;</span>User<span class="token operator">></
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/spring-jpa-hibernate-ddl-auto%E5%B1%9E%E6%80%A7%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
+                <a href="/2020/04/06/%E8%B0%88%E4%B8%80%E8%B0%88YGC-MIXGC-FGC%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="spring.jpa.hibernate.ddl-auto属性是怎么工作的">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="谈一谈YGC,MIXGC,FGC的那些事">
                         
-                        <span class="card-title">spring.jpa.hibernate.ddl-auto属性是怎么工作的</span>
+                        <span class="card-title">谈一谈YGC,MIXGC,FGC的那些事</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            查阅Springboot的官方文档可知
-
-spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一条十分近似的语句—spring.jpa.generate-ddlspring.jpa.generate-d
+                            谈一谈YGC,MIXGC,FGC的那些事
+顾名思义，YGC 便是Young GC，MIX GC就是混合GC，这个GC只出现在G1收集器中，FGC便是我们不希望出现的FULL GC。我们希望尽可能少的出现FGC，因为一旦出现FGC， 将会收集
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
                                 </a>
                             
                             
@@ -815,12 +824,8 @@ spring.jpa.hibernate.ddl-auto属于数据库初始化章节的语句，还有一
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
                 </div>
