@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="StringBuffer和StringBuilder的区别, 阿宁的博客">
-    <meta name="description" content="针对字符串，我们常常有修改字符串的需求但是，我们都知道String 的内容是不可变的，如果我们想要修改String类的内容。
-其本质就是改变了原来的引用，指向了一块新的空间，哪里存放着你修改后的内容。
-因此String的操作都是改变赋值地址">
+    <meta name="keywords" content="MSS最大报文段长度, 阿宁的博客">
+    <meta name="description" content="MSS最大报文段长度最大报文段长度(MSS) 表示TCP传往另一端的最大块的数据的长度，当一个连接建立的时候，双方都需要通告自己的MSS，MSS的设计初衷是为了约束TCP，避免发送过大的数据包，造成不必要的分片。
+Default MSSde">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>StringBuffer和StringBuilder的区别 | 阿宁的博客</title>
+    <title>MSS最大报文段长度 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -306,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        StringBuffer和StringBuilder的区别
+                        MSS最大报文段长度
                     </div>
                 </div>
             </div>
@@ -424,12 +423,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
-                            </a>
-                        
-                            <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
-                                <span class="chip bg-color">jdk源码</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
                             </a>
                         
                     </div>
@@ -440,8 +435,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/java/" class="post-category">
-                                java
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                计算机网络
                             </a>
                         
                     </div>
@@ -452,7 +447,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-27
+                    2020-05-30
                 </div>
                 
                 
@@ -461,14 +456,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.3k
+                        1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        5 分
+                        3 分
                     </div>
                     
                 
@@ -484,98 +479,43 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="针对字符串，我们常常有修改字符串的需求"><a href="#针对字符串，我们常常有修改字符串的需求" class="headerlink" title="针对字符串，我们常常有修改字符串的需求"></a>针对字符串，我们常常有修改字符串的需求</h2><pre><code>但是，我们都知道String 的内容是不可变的，如果我们想要修改String类的内容。
-其本质就是改变了原来的引用，指向了一块新的空间，哪里存放着你修改后的内容。</code></pre><blockquote>
-<p><strong>因此String的操作都是改变赋值地址而不是改变值操作。而如果是使用 StringBuffer 类则结果就不一样了，每次结果都会对 StringBuffer 对象本身进行操作，所以在一般情况下使用StringBuffer ，特别是字符串对象经常改变的情况下。而在某些特别情况下， String 对象的字符串拼接其实是被 JVM 解释成了 StringBuffer 对象的拼接，所以这些时候 String 对象的速度并不会比 StringBuffer 对象慢，而特别是以下的字符串对象生成中， String 效率是远要比 StringBuffer 快的：</strong></p>
-</blockquote>
-<pre><code>String S1 = “Hello” + “ StringBuffer” + “ StringBuilder”;
- StringBuffer Sb = new StringBuilder(“Hello”).append(“ StringBuffer”).append(“ StringBuilder”);</code></pre><blockquote>
-<p><strong>在 JVM 眼里，这个S1的拼接视为一个字符串对象（“Hello StringBuffer StringBuilder”）,但是如果你把拼接对象换成S2+S3+S4,这时候String就会开辟一块新空间，里面是Hello StringBuffer StringBuilder。效率低下。</strong></p>
-</blockquote>
-<h2 id="因此，如果我们需要经常修改字符串内容，我们应该了解使用StringBuffer和StringBuilder这两者的区别和用法"><a href="#因此，如果我们需要经常修改字符串内容，我们应该了解使用StringBuffer和StringBuilder这两者的区别和用法" class="headerlink" title="因此，如果我们需要经常修改字符串内容，我们应该了解使用StringBuffer和StringBuilder这两者的区别和用法"></a><strong>因此，如果我们需要经常修改字符串内容，我们应该了解使用StringBuffer和StringBuilder这两者的区别和用法</strong></h2><ul>
-<li><p>首先，StringBuffer是线程安全的，StringBuilder则不推荐在多线程环境下使用。</p>
-</li>
-<li><p>StringBuilder的优点是性能更快。但是，在使用多线程的情况下，必须使用StringBuffer而不是StringBuilder。</p>
-</li>
-</ul>
-<h3 id="两者的关系图"><a href="#两者的关系图" class="headerlink" title="两者的关系图"></a>两者的关系图</h3><p><img src="https://i.loli.net/2019/08/15/TvDhlHjCbqcfVSY.png" alt=""></p>
-<p><img src="https://i.loli.net/2019/08/15/kCyTmenLwPF62Jb.png" alt=""></p>
+                <h1 id="MSS最大报文段长度"><a href="#MSS最大报文段长度" class="headerlink" title="MSS最大报文段长度"></a>MSS最大报文段长度</h1><p>最大报文段长度(MSS) 表示TCP传往另一端的最大块的数据的长度，当一个连接建立的时候，双方都需要通告自己的MSS，MSS的设计初衷是为了约束TCP，避免发送过大的数据包，造成不必要的分片。</p>
+<h3 id="Default-MSS"><a href="#Default-MSS" class="headerlink" title="Default MSS"></a><strong>Default MSS</strong></h3><p><strong>default MSS = 536</strong> ，这是为什么呢？因为既然MSS是一个TCP选项，那么必然就会存在有的客户端支持，有的老客户端不支持.那么在其中一方不支持或者两方都不支持的情况下，该怎么定义MSS的大小？？？</p>
+<p>因此在建立连接的时候（MSS选项会包含在SYN报文段中），会检查MSS的大小，如果对方传来的MSS为空，则默认对方不支持，MSS就定义为默认的536（576字节-20字节的TCP首部-20字节的IP首部）</p>
+<p><strong>为什么是576呢？</strong></p>
 <blockquote>
-<p>StringBuffer和StringBuilder的用法基本类似，但是因为 StringBuffer的大多数方法都是同步synchronized。所以呢，在单线程下， StringBuilder的速度更快，在多线程环境下，应该用StringBuffer，StringBuilder则线程不安全。</p>
+<p>常用的各种物理接口MTU &gt; 1000，所以选择576这个值非常安全，可以避免极端情况下的分片。例如当前应用最多的是以太网，以太网的默认MTU是1500.</p>
 </blockquote>
-<p><img src="https://i.loli.net/2019/08/15/5dgS6xGfiUYE9Be.png" alt=""><br><img src="https://i.loli.net/2019/08/15/GyDfSebmuJWMU6X.png" alt=""></p>
-<p><strong>两者的基本方法都很类似</strong></p>
-<h4 id="以StringBuilder为例"><a href="#以StringBuilder为例" class="headerlink" title="以StringBuilder为例"></a>以StringBuilder为例</h4><ul>
-<li>StringBuilder（）：构造一个字符串构建器，其中没有字符，初始容量为16个字符。</li>
-<li>StringBuilder（int capacity）：构造一个字符串构建器，其中没有字符和capacity参数指定的初始容量。</li>
-<li>StringBuilder（CharSequence seq）：构造一个字符串构建器，其中包含与指定的CharSequence相同的字符。</li>
-<li>StringBuilder（String str）：构造一个初始化为指定字符串内容的字符串构建器。</li>
-</ul>
-<pre class=" language-java"><code class="language-java">
- <span class="token annotation punctuation">@HotSpotIntrinsicCandidate</span>
-    <span class="token keyword">public</span> <span class="token function">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+<h3 id="以太网MSS"><a href="#以太网MSS" class="headerlink" title="以太网MSS"></a>以太网MSS</h3><p>一般来说，MSS的大小还是越大越好，报文段越大，允许传输的数据也就越多，有利于提高网络传输的利用率，但是缺点就是更大的报文段对内核的压力也就越大。</p>
+<p>对于以太网的MSS，通常是以太网的默认MTU-IP Header-TCP Header =1460字节。</p>
+<h4 id="其他情况"><a href="#其他情况" class="headerlink" title="其他情况"></a><strong>其他情况</strong></h4><blockquote>
+<p>许多的BSD实现版本需要MSS为512的倍数   ( 参考自TCP/IP详解 )，因此首先MSS的大小为1024. </p>
+</blockquote>
+<p><strong>关于为什么是1024这个数值 ?</strong></p>
+<p>我找到一个出处，但因为个人水平限制，并不确定我的思考是准确的，还希望大家斧正。</p>
+<p>(<a href="https://calomel.org/freebsd_network_tuning.html" target="_blank" rel="noopener">https://calomel.org/freebsd_network_tuning.html</a>)</p>
+<p>里面中提到了一点</p>
+<pre><code># Our preference, if and only if you regularly reach your maximum upload
+# bandwidth, is to define the interface queue length as two(2) times the value
 
-    <span class="token annotation punctuation">@HotSpotIntrinsicCandidate</span>
-    <span class="token keyword">public</span> <span class="token function">StringBuilder</span><span class="token punctuation">(</span><span class="token keyword">int</span> capacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">(</span>capacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+# set in the interface transmit descriptor ring, &quot;hw.igb.txd&quot;. If
+# hw.igb.txd=&quot;1024&quot; then set the net.link.ifqmaxlen=&quot;2048&quot;.
 
-    <span class="token comment" spellcheck="true">/**
-     * Constructs a string builder initialized to the contents of the
-     * specified string. The initial capacity of the string builder is
-     * {@code 16} plus the length of the string argument.
-     *
-     * @param   str   the initial contents of the buffer.
-     */</span>
-    <span class="token annotation punctuation">@HotSpotIntrinsicCandidate</span>
-    <span class="token keyword">public</span> <span class="token function">StringBuilder</span><span class="token punctuation">(</span>String str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">super</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">append</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">/**
-     * Constructs a string builder that contains the same characters
-     * as the specified {@code CharSequence}. The initial capacity of
-     * the string builder is {@code 16} plus the length of the
-     * {@code CharSequence} argument.
-     *
-     * @param      seq   the sequence to copy.
-     */</span>
-    <span class="token keyword">public</span> <span class="token function">StringBuilder</span><span class="token punctuation">(</span>CharSequence seq<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">(</span>seq<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">append</span><span class="token punctuation">(</span>seq<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span></code></pre>
+PS: 上面的意思大概为，我们推荐的是，当我们经常达到最大上传量的带宽时，我们应该设置两倍于接口队列长度的数值，这里提到的接口队列长度在链接中的文章中也提到了（Maximum Send Queue Length,512 is greater then 256.84.so set to 512）。2x512=1024
+因此设置hw.igb.txd=&quot;1024&quot; ,这里的hw.igb.txd又指的是什么呢,让我打开Google查一查，
+它的作用是启用自适应中断调节（enable Adaptive Interrupt Moderation），它的数值是驱动程序分配的传输描述符的数量。 默认值为1024。最小值为80，最大值为4096。</code></pre><h4 id="对于其他的系统"><a href="#对于其他的系统" class="headerlink" title="对于其他的系统"></a><strong>对于其他的系统</strong></h4><p>当双方都在一个本地以太网上的时候，规定MSS为1460，在以太网上，1460的MSS在性能上要比1024的MSS要好。</p>
+<p>如果目的IP地址为 “非本地的”，通常会选择默认的MSS=536，如何区分本地还是非本地呢？？</p>
 <ul>
-<li><strong>StringBuilder append（X x）</strong>：此方法将X类型参数的字符串表示形式附加到序列中。</li>
-<li><strong>StringBuilder appendCodePoint（int codePoint）</strong>：此方法将codePoint参数的字符串表示形式附加到此序列。</li>
-<li><strong>int capacity（）</strong>：此方法返回当前容量。</li>
-<li><strong>char charAt（int index）</strong>：此方法返回指定索引处的此序列中的char值。</li>
-<li><strong>IntStream chars（）</strong>：此方法返回一个int流，对此序列中的char值进行零扩展。</li>
-<li><strong>int codePointAt（int index）</strong>：此方法返回指定索引处的字符（Unicode代码点）。</li>
-<li><strong>int codePointBefore（int index）</strong>：此方法返回指定索引之前的字符（Unicode代码点）。</li>
-<li><strong>int codePointCount（int beginIndex，int endIndex）</strong>：此方法返回此序列的指定文本范围内的Unicode代码点数。</li>
-<li><strong>IntStream codePoints（）</strong>：此方法从此序列返回代码点值流。</li>
-<li><strong>StringBuilder delete（int start，int end）</strong>：此方法删除此序列的子字符串中的字符。</li>
-<li><strong>StringBuilder deleteCharAt（int index）</strong>：此方法删除此序列中指定位置的char。</li>
-<li><strong>void ensureCapacity（int minimumCapacity）</strong>：此方法确保容量至少等于指定的最小值。</li>
-<li><strong>void getChars（int srcBegin，int srcEnd，char [] dst， int dstBegin）</strong>：此方法字符从此序列复制到目标字符数组dst。</li>
-<li><strong>int indexOf（）</strong>：此方法返回指定子字符串第一次出现的字符串中的索引。</li>
-<li><strong>StringBuilder insert（int offset，boolean b）</strong>：此方法将booalternatelean参数的字符串表示形式插入到此序列中。</li>
-<li><strong>StringBuilder insert（）</strong>：此方法将char参数的字符串表示形式插入到此序列中。</li>
-<li><strong>int lastIndexOf（）</strong>：此方法返回指定子字符串最后一次出现的字符串中的索引。</li>
-<li><strong>int length（）</strong>：此方法返回长度（字符数）。</li>
-<li><strong>int offsetByCodePoints（int index，int codePointOffset）</strong>：此方法返回此序列中的索引，该索引由codePointOffset代码点偏离给定索引。</li>
-<li><strong>StringBuilder replace（int start，int end，String str）</strong>：此方法用指定String中的字符替换此序列的子字符串中的字符。</li>
-<li><strong>StringBuilder reverse（）</strong>：此方法导致此字符序列被序列的反向替换。</li>
-<li><strong>void setCharAt（int index，char ch）</strong>：在此方法中，指定索引处的字符设置为ch。</li>
-<li><strong>void setLength（int newLength）</strong>：此方法设置字符序列的长度。</li>
-<li><strong>CharSequence subSequence（int start，int end</strong>）：此方法返回一个新的字符序列，该序列是该序列的子序列。</li>
-<li><strong>String substring（）</strong>：此方法返回一个新String，其中包含当前包含在此字符序列中的字符的子序列。</li>
-<li><strong>String toString（）</strong>：此方法返回表示此序列中数据的字符串。</li>
-<li><strong>void trimToSize（）</strong>：此方法尝试减少用于字符序列的存储空间。</li>
+<li><p>如果<strong>目的IP地址</strong> 的网络号和子网号和我们相同，则可以直接判断是本地的。</p>
+</li>
+<li><p>如果<strong>目的IP地址</strong> 的网络号和子网号和我们都不同，则可以直接判断是非本地的。</p>
+</li>
+<li><p>如果网络号相同但是子网号不同，则可能是本地，也可能是非本地，这是TCP会有一个配置来判断结果是什么，并以此确定MSS的结果.</p>
+</li>
 </ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>MTU：</strong> <strong>Maximum Transmit Unit</strong>，最大传输单元，即物理接口（数据链路层）提供给其上层最大一次传输数据的大小。</p>
+<p><strong>MSS：Maximum Segment Size</strong> ，最大TCP分段大小，不包含TCP头和 option，只包含TCP Payload ，TCP用来限制自己每次发送的最大分段尺寸。</p>
+<p>MSS和MTU是息息相关的，如果允许的MSS很大，例如1460，但是出口的MTU要小，例如512，那么它的MSS就只能是MTU-40,不能超过这个大小。</p>
 
             </div>
             <hr/>
@@ -601,7 +541,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2019/10/27/StringBuffer%E5%92%8CStringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">https://superopenai.github.io/2019/10/27/StringBuffer%E5%92%8CStringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/</a>
+                    <a href="https://superopenai.github.io/2020/05/30/MSS%E6%9C%80%E5%A4%A7%E6%8A%A5%E6%96%87%E6%AE%B5%E9%95%BF%E5%BA%A6/">https://superopenai.github.io/2020/05/30/MSS%E6%9C%80%E5%A4%A7%E6%8A%A5%E6%96%87%E6%AE%B5%E9%95%BF%E5%BA%A6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -639,12 +579,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
-                                </a>
-                            
-                                <a href="/tags/jdk%E6%BA%90%E7%A0%81/">
-                                    <span class="chip bg-color">jdk源码</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
                                 </a>
                             
                         </div>
@@ -685,49 +621,49 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/10/27/spring%E4%B8%AD%E8%8E%B7%E5%8F%96ip%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%8A%9E%E6%B3%95/">
+                <a href="/2020/05/30/MSS%E6%9C%80%E5%A4%A7%E6%8A%A5%E6%96%87%E6%AE%B5%E9%95%BF%E5%BA%A6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="spring中获取ip的四种办法">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="MSS最大报文段长度">
                         
-                        <span class="card-title">spring中获取ip的四种办法</span>
+                        <span class="card-title">MSS最大报文段长度</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一种办法使用import javax.servlet.http.HttpServletRequest具体代码
-   HttpServletRequest request
-    {
-        String ip = request.
+                            MSS最大报文段长度最大报文段长度(MSS) 表示TCP传往另一端的最大块的数据的长度，当一个连接建立的时候，双方都需要通告自己的MSS，MSS的设计初衷是为了约束TCP，避免发送过大的数据包，造成不必要的分片。
+Default MSSde
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    计算机网络
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
                     </a>
                     
                 </div>
@@ -741,36 +677,33 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/27/Swagger2%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E8%A6%81%E7%82%B9/">
+                <a href="/2020/05/15/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B9%8B%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Swagger2配置相关要点">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="操作系统之进程和线程">
                         
-                        <span class="card-title">Swagger2配置相关要点</span>
+                        <span class="card-title">操作系统之进程和线程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Spring Boot整合Swagger2的流程
-由于springboot的便捷，以及前后端分离的趋势，后端和前端配合的桥梁便是接口细节，我们通常遵守REST的原则，为其他开发人员提供一份REST接口文档，但后期接口多又杂，手写十分耗时耗力
+                            操作系统之进程和线程总览
+操作系统的核心概念是进程，进程是对正在运行的程序的一个抽象，操作系统的其他概念都是围绕着进程而展开的。进程的存在让操作系统的并发成为了可能。即使在单CPU的系统下，它会将一个CPU虚拟成多个虚拟CPU。
+进程通常代
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
                                 </a>
                             
                             
@@ -780,12 +713,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
                     </a>
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E8%BF%9B%E7%A8%8B/">
+                        <span class="chip bg-color">进程</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">线程</span>
                     </a>
                     
                 </div>
