@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis -过期策略及内存淘汰机制, 阿宁的博客">
-    <meta name="description" content="Redis -过期策略及内存淘汰机制Redis的用途十分广泛，作为一款高性能的内存数据库，经常被用于数据库缓存，把经常访问的热点数据储存于内存之中，这样省去了数据库频繁的与磁盘进行I/O。但是内存空间是有限的，缓存也不能无限占用内存空间，如">
+    <meta name="keywords" content="操作系统内存管理及页面置换算法的优劣, 阿宁的博客">
+    <meta name="description" content="操作系统内存管理及页面置换算法的优劣如果计算机的物理内存足够的大，可以将所有的任务都装进内存，而不会超限，那么我们基本不用考虑太多的内存管理，只需要保证计算机不会突然断电关机导致任务未保存退出就好。
+但是很多时候，计算机的内存都是不够的，如">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Redis -过期策略及内存淘汰机制 | 阿宁的博客</title>
+    <title>操作系统内存管理及页面置换算法的优劣 | 阿宁的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Redis -过期策略及内存淘汰机制
+                        操作系统内存管理及页面置换算法的优劣
                     </div>
                 </div>
             </div>
@@ -422,8 +423,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Redis/">
-                                <span class="chip bg-color">Redis</span>
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+                                <span class="chip bg-color">内存管理</span>
                             </a>
                         
                     </div>
@@ -434,8 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Redis/" class="post-category">
-                                Redis
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                操作系统
                             </a>
                         
                     </div>
@@ -446,23 +451,28 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-02-16
+                    2020-05-30
                 </div>
                 
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-05-31
+                </div>
                 
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.3k
+                        3.7k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        12 分
                     </div>
                     
                 
@@ -478,60 +488,126 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Redis-过期策略及内存淘汰机制"><a href="#Redis-过期策略及内存淘汰机制" class="headerlink" title="Redis -过期策略及内存淘汰机制"></a>Redis -过期策略及内存淘汰机制</h2><p>Redis的用途十分广泛，作为一款高性能的内存数据库，经常被用于数据库缓存，把经常访问的热点数据储存于内存之中，这样省去了数据库频繁的与磁盘进行I/O。但是内存空间是有限的，缓存也不能无限占用内存空间，如果热点数据凉凉了呢？如何清理这些过期的数据呢？</p>
-<p>Redis 给我们解决的答案：</p>
+                <h1 id="操作系统内存管理及页面置换算法的优劣"><a href="#操作系统内存管理及页面置换算法的优劣" class="headerlink" title="操作系统内存管理及页面置换算法的优劣"></a>操作系统内存管理及页面置换算法的优劣</h1><p>如果计算机的物理内存足够的大，可以将所有的任务都装进内存，而不会超限，那么我们基本不用考虑太多的内存管理，只需要保证计算机不会突然断电关机导致任务未保存退出就好。</p>
+<p>但是很多时候，计算机的内存都是不够的，如果内存超载，我们就需要处理内存超载的问题。有两种解决办法。</p>
 <ul>
-<li><strong>过期策略</strong> </li>
-<li>内存淘汰机制</li>
+<li>最简单的策略是交换，把一个进程调入内存，让它在内存中运行，当进程空闲的时候，再将其放回磁盘，这样就不占用内存资源了，但是会将进程周期性的唤醒调入内存，再将其睡眠放回磁盘.</li>
+<li>另一个种策略是虚拟内存，它能使进程只有一部分在内存也能运行。</li>
 </ul>
-<h3 id="过期策略"><a href="#过期策略" class="headerlink" title="过期策略"></a>过期策略</h3><p><strong>结论：Redis 使用的是 定期删除 和 惰性删除 配合的过期策略。</strong></p>
+<h2 id="内存交换"><a href="#内存交换" class="headerlink" title="内存交换"></a>内存交换</h2><p><img src="http://pic.chenlun1314.top/blog/20200530/kzPSnwJGnOIE.png?imageslim" alt="mark"></p>
+<p><strong>图中的阴影区域表示未使用的内存空间</strong></p>
+<p>使用内存交换，频繁的交换使得内存中不可避免的出现了空洞（小到无法装下任何一个进程），这时候就需要使用“内存紧缩”，将这些分散的一个个小空间合并成一个大的可用空间。但是通常不进行这个操作，因为内存紧缩十分耗费CPU时间。利用16G的内存进行内存紧缩，完成需要花费16s的时间.</p>
+<p><strong>但是有一个问题值得注意</strong></p>
+<p>当我们为一个进程分配内存空间的时候，我们并不确定这个进程就一定占用这些内存，不再改变。如果一个进程数据会增长的时候，我们就需要动态的分配内存，如果这时此进程的附近都是其他进程，没有空闲空间给他用，这就只能将此进程分配到一个内存空闲区域更大的对方去，或者将其他的一个或者多个进程交换出去。</p>
+<p>一个可用的解决方法是，在为进程分配内存空间的时候，额外的多分配一些内存，以便于它的数据增加时的需要。</p>
+<h2 id="空闲内存管理"><a href="#空闲内存管理" class="headerlink" title="空闲内存管理"></a>空闲内存管理</h2><blockquote>
+<p>在动态分配内存的时候，操作系统必须对此进行管理，以保证在分配的时候，明确知道内存中哪块空间时空闲的，哪些是已经被占用了的。一般而言，会使用 位图 和 空闲区链表来跟踪内存状态.</p>
+</blockquote>
+<h3 id="使用位图的储存管理"><a href="#使用位图的储存管理" class="headerlink" title="使用位图的储存管理"></a>使用位图的储存管理</h3><p>使用位图的时候，内存会被划分成一个个的分配单元，分配单元的大小并不固定，是实际情况而定。每个分配单元代表位图中的一位，0代表空闲，1代表占用。</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200530/5nX8aDycu3Fe.png?imageslim" alt="mark"></p>
+<p>内存的大小和分配单元的大小决定了位图的大小，但是使用位图的内存管理方法存在一个缺点，当我们要分配一个占用空间大小为K的进程时，就必须搜索位图，找出能容纳K大小进程的地方，这个操作可能会十分的耗时。这便是位图的缺点。</p>
+<h3 id="空闲区链表管理"><a href="#空闲区链表管理" class="headerlink" title="空闲区链表管理"></a>空闲区链表管理</h3><p><img src="C:%5CUsers%5CDesti%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200530213508156.png" alt="image-20200530213508156"></p>
+<p>链表中的每个结点代表一个进程（P）或者代表内存中的一块空闲区（H）。</p>
+<p>当按照地址顺序在链表中存放进程和空闲区域时，有以下几种算法可以用来为新进程在内存中分配内存。</p>
 <ul>
-<li>定期删除： Redis 会每隔100ms 随机的检测一些设置了过期时间的Key，检测这些Key是否已经过期。如果已经过期，就将其删除。（不能进行全盘扫描Key的状态，因为那样将会占用大量的系统资源）</li>
-<li>惰性删除： 因为只靠 <strong>定期删除</strong> 是肯定无法去除所有的过期Key的，因此需要配合惰性删除，所谓惰性删除，意如其名，只有在访问Key要取Value的时候，再检测这个Key的过期状态，若已经过期，将其删除，并且返回空，否则便返回访问的Key的Value。</li>
+<li>首次适配：最简单的方法，从头开始找，找到的第一个可以容纳进程的空间，并把进程分配在这里.，<strong>首次适配是很快的算法，因为它省去了搜索其他结点的操作.</strong></li>
+<li>下次适配：和首次适配不同， 它不是每次从头开始找，而是从上一次结束的地点开始找，找到第一个可以容纳进程的空间.</li>
+<li>最佳适配：意如其名，完全搜索，找到一个最适合进程（最接近进程大小）的一块空间，并把进程分配在这里.</li>
 </ul>
 <blockquote>
-<p>不使用定时删除的原因 :  因为如果要使用定时删除，需要为每一个Key 额外的添加一个定时器来负责监视key，当这个key过期就自动删除，虽然内存及时释放，但是十分消耗CPU资源，因此一般不推荐采用这一策略。 </p>
+<p>因为最佳适配要搜索整个链表，所以它的速度要比首次适配慢得多，除此之外，最佳适配还比首次适配和下次适配浪费更多的内存空间，因为最佳适配会生成很多的无用微小空间，一般来说，首次适配留下的空间要大一些，能派的上用场.</p>
 </blockquote>
-<h3 id="内存淘汰机制"><a href="#内存淘汰机制" class="headerlink" title="内存淘汰机制"></a>内存淘汰机制</h3><p><strong>所谓内存淘汰，就是Redis设置了一个可以使用的内存空间阈值，一旦占用的空间大小达到了阈值，便会执行设置的淘汰机制，删除一些数据以清理出空间储存新数据。</strong></p>
-<pre class=" language-shell"><code class="language-shell"># maxmemory <bytes> 配置内存阈值
-# maxmemory-policy noeviction 选择淘汰机制</code></pre>
-<p><code>maxmemory 0</code> </p>
-<p>当把内存阈值设置为 0 的时候，或默认无限大，在32位系统之下，会隐性的设置成为3GB大小。</p>
+<h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><p>随着时代和科技的发展,计算机的各个部件也开始飞速的发展，软件也变得越来越大，对内存的需求也越来越多，前几天看到的一张趣图，也从侧面展现出了这方面的变化.</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200531/FkbyrH25gyUe.png?imageslim" alt="mark"></p>
+<p>程序大于内存的问题需要解决，常用的解决之道便是 <strong>“虚拟内存”</strong>。</p>
+<blockquote>
+<p>虚拟内存的基本思想是，我们把物理内存映射到虚拟空间上，虚拟空间的大小肯定要比计算机的物理内存大，当程序使用的虚拟空间的部分在物理内存中的时候，就直接通过硬件映射到物理内存上，如果当前程序使用的部分不在物理内存中，我们就需要通过页面置换，将我们所需要的页面置换到内存中.</p>
+</blockquote>
+<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>现在大部分的虚拟内存系统中都使用的是 <strong>分页</strong> 的技术。</p>
+<p>由程序产生的这些地址叫做 虚拟地址，很多的程序的虚拟地址组成了虚拟地址空间，在计算机使用虚拟内存的时候，虚拟地址会被送到一个叫做MMU（内存管理单元）的硬件上，再由MMU将虚拟地址映射为实际的物理内存地址， 如下图所示 。</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200531/H3jLPUwt3sPl.png?imageslim" alt="mark"></p>
+<p>例如只有32KB内存的机器，可以产生16位地址，利用虚拟内存技术，我们可以编写64KB的程序，但是呢，这64KB的程序不能完全在内存中运行，需要时，必须进行页面置换.</p>
+<p><img src="http://pic.chenlun1314.top/blog/20200531/GjM9FgTtrvfb.png?imageslim" alt="mark"></p>
+<p>让我们观察一下上图， 虚拟地址空间中，有的页面映射到物理内存上了，有的并没有，那么这时，如果我们访问了一个不在物理内存上的页面，会发生什么呢？ MMU会怎么做呢？</p>
+<blockquote>
+<p>当我们访问了一个未映射的页面时，MMU发现该页面并没有被映射，那么就使CPU陷入到操作系统中，这也就是所谓的“缺页中断”，操作系统会选择一个已经映射的页面（算法决定），将选择的页面保存到磁盘中，把我们要访问的页面读写到选择的页面中，修改映射关系，然后重新执行访问指令.</p>
+</blockquote>
+<h3 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h3><p>页表的目的就是把虚拟页面映射为物理内存，从数学角度来说，页表就是一个函数， 它的参数是虚拟页号，结果是物理页框号。通过这个函数，可以把虚拟地址中的虚拟页面域改变成物理内存页框域，从而成为物理内存地址。</p>
+<h4 id="页表项的结构"><a href="#页表项的结构" class="headerlink" title="页表项的结构"></a>页表项的结构</h4><p><strong>一个典型的页表项</strong></p>
+<p><img src="http://pic.chenlun1314.top/blog/20200531/8iqzfUfcEyYr.png?imageslim" alt="mark"></p>
+<p>从左往右分别是：</p>
 <ul>
-<li><strong>noeviction</strong>  ： 当Redis占用空间已经达到极限，这时如果一条命令想要占用更多的空间，Redis将会返回错误。</li>
-<li><strong>allkeys-lru</strong>  ： 这时Redis将会删除最近最不常用的Key，以为新数据腾出空间</li>
-<li><strong>volatile-lru</strong>  ：仅在设置了过期时间的Key中，选择最近最不常用的Key来删除，为新数据腾出空间。</li>
-<li><strong>allkeys-random</strong> ：随机的删除一些Key，为新数据腾出空间。</li>
-<li><strong>volatile-random</strong>  ：在设置了过期时间的Key中，随机的删除一些Key，为新数据腾出空间。</li>
-<li><strong>volatile-ttl</strong>  ：删除所有设置了过期时间的Key，然后尝试删除具有较短TTL（生存周期）的Key，新数据腾出空间。</li>
-</ul>
-<p>其中 <code>volatile-lru</code>,<code>volatile-random</code>,<code>volatile-ttl</code> 如果条件不符合，其结果将会和 <code>noeviction</code> 一样。</p>
-<h4 id="回收-删除-过程如何工作"><a href="#回收-删除-过程如何工作" class="headerlink" title="回收(删除)过程如何工作"></a>回收(删除)过程如何工作</h4><ul>
-<li>首先，客户端运行一条命令，这时需要添加新数据</li>
-<li>Redis检查是否达到了内存阈值，如果达到了，根据设置的淘汰机制，清理空间以便添加新数据。</li>
-<li>执行新命令。</li>
+<li>Caching disabled： 缓存禁止位</li>
+<li>Referenced： 访问位</li>
+<li>Modified：修改位</li>
+<li>Protection：保护位</li>
+<li>Present/ absent ：是否存在位——-1代表存在，0代表不存在。（如果访问到该页表项，检查存在位为0，代表这个虚拟页面不在内存中，发生缺页中断）</li>
+<li>Page frame number：页框号</li>
 </ul>
 <blockquote>
-<p>这样会造成一种现象，那就是Redis已经到达了内存阈值，然后为了新数据，根据机制释放了一些空间，然后被新数据又占满。再往后为新数据在释放空间，然后又被占满。这时如果一次申请大量空间，大大的超过了内存阈值，就会出现意想不到的结果。</p>
+<p>虚拟内存本质上是一个抽象概念，这个概念是对物理内存的抽象，虚拟内存的实现，是将虚拟内存分页成一个个的页面，并将每页在需要时映射到物理内存上的某个页框.</p>
 </blockquote>
-<h4 id="Redis回收使用的算法"><a href="#Redis回收使用的算法" class="headerlink" title="Redis回收使用的算法"></a>Redis回收使用的算法</h4><p><strong>Redis使用的是LRU算法，但只是近似的实现，不是LRU算法的精确实现。</strong></p>
-<p>这也就意味着我们选择删除的Key并不是最优选择（整体上最近最少访问的）。相应的，Redis实现的是一种近似的LRU算法，通过选取少量的样本，在样本当中删除最优的Key（最近最少访问）。</p>
-<p>自Redis 3.0 以后，Redis改进了近似的LRU算法，提高了性能，使得选择出来的Key更加近似于真实的Key。 Redis LRU算法的重要之处在于，可以通过更改每次逐出检查的样本数来调整算法的精度。 样本数越多，精度越高。</p>
-<pre class=" language-shel"><code class="language-shel">maxmemory-samples 10</code></pre>
-<p><img src="http://redis.io/images/redisdoc/lru_comparison.png" alt=""></p>
-<p>上面的图像展示了 LRU算法和Redis实现的LRU算法，已经不同版本，不同样本数之间的区别。</p>
+<p><strong>分页的问题</strong></p>
 <ul>
-<li><p>浅灰色带是被删除的对象。</p>
+<li><p>虚拟地址到物理地址的映射速度要求必须非常快</p>
+<blockquote>
+<p>为了加快分页，最明显的优化就是减少对页面的重复多次访问，解决方法有如下几种，暂且一笔带过，以后深入了解后，再用新文章讲解.</p>
+<ul>
+<li>转换检测缓冲区（TLB）</li>
+<li>软件TLB管理</li>
+</ul>
+</blockquote>
 </li>
-<li><p>灰色地带是未被删除的对象。</p>
-</li>
-<li><p>绿色带是添加的对象。</p>
+<li><p>如果虚拟地址空间很大，相应的页表就会很大</p>
+<blockquote>
+<p>​    针对大内存的页表，有两种解决方案，暂且一笔带过.</p>
+<ul>
+<li>多级页表</li>
+<li>倒排页表</li>
+</ul>
+</blockquote>
 </li>
 </ul>
+<h2 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h2><p>正如我们前面谈到的发生缺页中断时，操作系统会再物理内存选择一个页面保存到磁盘中，再让要访问的页面读写到我们选择的页面中，完成映射的转换。</p>
+<p>这里的选择方法，就是接下来要聊的页面置换算法，这有很多算法，也各有优劣.</p>
+<p>谈置换算法之前，先聊一聊时钟滴答是什么东西？</p>
 <blockquote>
-<p> 与Redis2.8相比，Redis3.0使用5个样例做得更好，但是大多数最近访问的对象仍然保留在Redis2.8中。在Redis3.0中样本量为10的情况下，近似结果与Redis3.0的理论性能非常接近。</p>
-<p>但是，将样本大小提高到10，要牺牲一些额外的CPU使用率，以接近真实的LRU性能。 可以根据实际情况，决定是否要牺牲一些CPU使用率，来提供更高的命中率。</p>
+<p>时钟滴答也被称为时钟周期，时钟周期是计算机中一个最基本的时间单位，在一个时钟周期内，CPU仅仅完成一个动作，更小的时钟周期代表着更高的工作频率.</p>
 </blockquote>
+<h3 id="最优页面置换算法"><a href="#最优页面置换算法" class="headerlink" title="最优页面置换算法"></a>最优页面置换算法</h3><p>这个算法无法实现，它的思想是在进行页面置换时，换出一个以后很少会用到的页面，但是我们不能预测未来，预测哪个页面以后不用，但是这个算法可以拿来与其他可以实现的算法进行比较，比较其他算法的优劣.</p>
+<h3 id="最近未使用页面置换算法NRU"><a href="#最近未使用页面置换算法NRU" class="headerlink" title="最近未使用页面置换算法NRU"></a>最近未使用页面置换算法NRU</h3><p>当发生缺页中断的时候，操作系统会<strong>检查</strong> 所有页面的访问位和修改位。将他们分为四类</p>
+<ul>
+<li>未访问，未修改</li>
+<li>未访问，被修改</li>
+<li>被访问，未修改</li>
+<li>被访问，被修改</li>
+</ul>
+<p>算法会随机的从 编号最小的非空类中挑选一个进行淘汰，这个算法有一个隐含的意思（在最近一个时钟滴答中，淘汰一个没有被访问的已修改页面要比淘汰一个频繁使用的干净页面要好），NRU性能虽然不是最好，但够用.</p>
+<h3 id="先进先出置换算法"><a href="#先进先出置换算法" class="headerlink" title="先进先出置换算法"></a>先进先出置换算法</h3><p>意如其名，FIFO，因为纯粹的FIFO算法会淘汰热点页面，导致热点页面频繁换入换出，性能低下，所以一般不用纯粹的FIFO</p>
+<h3 id="第二次机会置换算法"><a href="#第二次机会置换算法" class="headerlink" title="第二次机会置换算法"></a>第二次机会置换算法</h3><p>改进版的FIFO算法。为了避免简单的FIFO算法把热点页面置换出去，第二次机会算法在淘汰一个页面时，会检查这个页面有没有被访问过，如果被访问过，就将它置于链表尾端，像刚装入一样.</p>
+<p>第二次机会算法是在最近的一个时钟滴答中，找一个没有被访问的页面淘汰出去，如果每个页面都被访问了，就退化成FIFO算法了.</p>
+<h3 id="最近最少使用页面置换算法LRU"><a href="#最近最少使用页面置换算法LRU" class="headerlink" title="最近最少使用页面置换算法LRU"></a>最近最少使用页面置换算法LRU</h3><p>简单来说就是淘汰一个最近一段时间最少使用的页面，因为这个页面可以未来一段时间内也会很少使用，但是要完全实现LRU算法，代价太高</p>
+<h3 id="最不常用算法NFU"><a href="#最不常用算法NFU" class="headerlink" title="最不常用算法NFU"></a>最不常用算法NFU</h3><p>LRU算法实现代价太高，因此需要一个能用软件实现的解决方案，这便是NFU算法，这个算法将每个页面与一个软件计数器相关联，计数器大体上反映了页面被访问的频繁程度，发生缺页中断时，置换计数器值最小的页面.</p>
+<p>但是呢，NFU也有缺点，就是不会错过任何事情，这就会导致操作系统可能会把有用的热点页面给置换出去。</p>
+<p>我们可以针对NFU算法进行一定的修改让其来模拟LRU算法，修改后的算法被称为<strong>老化</strong>算法。</p>
+<p>老化算法的详细介绍因为篇幅问题，暂且略过，后续详细了解过后，在讲解 。</p>
+<h3 id="工作集页面置换算法"><a href="#工作集页面置换算法" class="headerlink" title="工作集页面置换算法"></a>工作集页面置换算法</h3><p>一个进程当前正在使用的页面的集合被称为<strong>工作集</strong>，如果进程的整个工作集都装进了内存中，那就不会发生太多的缺页中断页面置换。但是如果进程的工作集只有一部分装进内存，这就使得执行一会程序就需要去磁盘读取页面（这种情况叫做发生了“颠簸”），执行的速度很快，去磁盘读取的速度非常慢，这就导致执行任务完成需要花费很长时间.</p>
+<p>因此工作集页面置换算法，是确保进程在运行以前，将它的工作集预先的调入进内存中，使其在执行的时候，减少缺页率。</p>
+<h3 id="工作集时钟算法"><a href="#工作集时钟算法" class="headerlink" title="工作集时钟算法"></a>工作集时钟算法</h3><p>这个算法实现简单，效率高，但是关于这个算法，我个人的理解还不是十分清楚，先在这里挖一个坑，后续填上.</p>
+<h3 id="页面置换算法总结"><a href="#页面置换算法总结" class="headerlink" title="页面置换算法总结"></a>页面置换算法总结</h3><ul>
+<li>最优置换算法：不能实现，可以作为一个标准</li>
+<li>NRU最近未使用算法：NRU性能虽然不是最好，但够用</li>
+<li>FIFO算法：可能会淘汰热点页面</li>
+<li>第二次机会算法: 增强版FIFO算法，性能有了提高</li>
+<li>LRU 最近最少使用算法：性能优秀，但是完全的LRU算法很难实现</li>
+<li>NFU 最不常用算法：近似于LRU算法</li>
+<li>老化算法：模拟的LRU算法，十分近似于LRU，性能优秀</li>
+<li>工作集算法：性能好，但是系统开销很大</li>
+<li>工作集时钟算法：性能好，效率高</li>
+</ul>
+<p>总之 最好的两种算法是老化算法和工作集时钟算法，都具有良好的页面调度功能，也便于实现。</p>
+<h3 id="全局置换-和-局部置换"><a href="#全局置换-和-局部置换" class="headerlink" title="全局置换 和 局部置换"></a>全局置换 和 局部置换</h3><p>简单来说两者的区别，局部置换就是在当前进程在内存中的所有页面来使用页面置换算法。全局置换就是针对在内存中的所有页面使用页面置换算法，无论是不是当前进程的页面 。</p>
+<p>全局算法的性能要比局部算法的性能高，若使用局部算法，视野就被局限住了，只关注自己的一片地方，即使当前内存中其他地方有空闲区域存在，局部算法也会视而不见。浪费了内存。</p>
 
             </div>
             <hr/>
@@ -557,7 +633,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2020/02/16/Redis-%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E5%8F%8A%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6/">https://superopenai.github.io/2020/02/16/Redis-%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5%E5%8F%8A%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6/</a>
+                    <a href="https://superopenai.github.io/2020/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%8F%8A%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8A%A3/">https://superopenai.github.io/2020/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%8F%8A%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8A%A3/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -595,8 +671,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Redis/">
-                                    <span class="chip bg-color">Redis</span>
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+                                    <span class="chip bg-color">内存管理</span>
                                 </a>
                             
                         </div>
@@ -637,56 +717,53 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/02/20/Spring-Aop%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%AD%A6%E4%B9%A0%E7%90%86%E8%A7%A3/">
+                <a href="/2020/05/30/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%8F%8A%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E5%8A%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Spring-Aop面向切面编程之学习理解">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="操作系统内存管理及页面置换算法的优劣">
                         
-                        <span class="card-title">Spring-Aop面向切面编程之学习理解</span>
+                        <span class="card-title">操作系统内存管理及页面置换算法的优劣</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            AOP面向切面编程之学习理解
-AOP做到了什么？
-OOP (面向对象编程) 更多的操作还是在类的纵向方向上，例如类的继承，类的实现。这就导致了一种情况，例如我们需要横向方向上不同模块的服务，像增加 处理异常并打日志，安全校验，权限管理等等新
+                            操作系统内存管理及页面置换算法的优劣如果计算机的物理内存足够的大，可以将所有的任务都装进内存，而不会超限，那么我们基本不用考虑太多的内存管理，只需要保证计算机不会突然断电关机导致任务未保存退出就好。
+但是很多时候，计算机的内存都是不够的，如
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springboot/" class="post-category">
-                                    springboot
-                                </a>
-                            
-                            <a href="/categories/springboot/spring/" class="post-category">
-                                    spring
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
                     </a>
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+                        <span class="chip bg-color">内存管理</span>
                     </a>
                     
                 </div>
@@ -700,34 +777,32 @@ OOP (面向对象编程) 更多的操作还是在类的纵向方向上，例如�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/16/Redis%20-%20%E7%BC%93%E5%AD%98%E6%8C%81%E4%B9%85%E5%8C%96%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/">
+                <a href="/2020/05/30/MSS%E6%9C%80%E5%A4%A7%E6%8A%A5%E6%96%87%E6%AE%B5%E9%95%BF%E5%BA%A6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Redis - 缓存持久化原理以及优缺点">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="MSS最大报文段长度">
                         
-                        <span class="card-title">Redis - 缓存持久化原理以及优缺点</span>
+                        <span class="card-title">MSS最大报文段长度</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis - 缓存持久化原理以及优缺点Redis 持久化方式Redis 持久化方式共有两种，分别是RDB    和AOF    两种持久化方式
-
-RDB ： RDB 持久化机制，是对 redis 中的数据执行周期性的持久化。 
-AOF ：
+                            MSS最大报文段长度最大报文段长度(MSS) 表示TCP传往另一端的最大块的数据的长度，当一个连接建立的时候，双方都需要通告自己的MSS，MSS的设计初衷是为了约束TCP，避免发送过大的数据包，造成不必要的分片。
+Default MSSde
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Redis/" class="post-category">
-                                    Redis
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    计算机网络
                                 </a>
                             
                             
@@ -737,8 +812,8 @@ AOF ：
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Redis/">
-                        <span class="chip bg-color">Redis</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
                     </a>
                     
                 </div>
