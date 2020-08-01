@@ -5,7 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="test, 阿宁的博客">
-    <meta name="description" content="test | 阿宁的博客">
+    <meta name="description" content="知识记录
+由于最近在实习中需要经常编写shell脚本，其中不免要大量接触到 awk 、grep、sed 这三个重要的命令，本文就这三条命令做一个简单的知识记录。
+
+grep = global regular expression print">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -48,7 +51,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/" class="waves-effect waves-light">
+    <a href="/index.html" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -150,7 +153,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/" class="waves-effect waves-light">
+		<a href="/index.html" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -420,12 +423,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category">
+                                Linux
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -442,14 +458,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        1.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        5 分
                     </div>
                     
                 
@@ -465,7 +481,86 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="知识记录"><a href="#知识记录" class="headerlink" title="知识记录"></a>知识记录</h1><blockquote>
+<p>由于最近在实习中需要经常编写shell脚本，其中不免要大量接触到 awk 、grep、sed 这三个重要的命令，本文就这三条命令做一个简单的知识记录。</p>
+</blockquote>
+<h2 id="grep-global-regular-expression-print"><a href="#grep-global-regular-expression-print" class="headerlink" title="grep = global regular expression print"></a>grep = global regular expression print</h2><p>grep 通常会处理输入的文件信息，并且输出符合匹配的行或者信息。grep会从第一行开始，一行一行的一直到最后一行，grep会将每一行拷贝一份到buffer缓冲区中，并且与我们输入的匹配信息进行比较，如果匹配的话，就将这一行打印到屏幕上。</p>
+<blockquote>
+<p>grep 不会对信息中的数据进行储存，改变。只是简单的对行进行搜索。</p>
+</blockquote>
+<p>接下来利用下面的这个例子，例子命名为file ，来讲解grep的参数用法。</p>
+<pre><code>boot
+book
+booze
+machine
+boots
+bungie
+bark
+aardvark
+broken$tuff
+robots</code></pre><pre><code>grep -n &quot;boo&quot; file
+
+1:boot
+2:book
+3:booze
+5:boots</code></pre><p>-n 参数，会让grep输出匹配的行前面加上这一行的行数。</p>
+<pre><code>grep -v &quot;boo&quot; file
+
+machine
+bungie
+bark
+aardvark
+broken$tuff
+robots</code></pre><p>-v 参数， 会让grep输出不匹要求的行。</p>
+<pre><code>grep -c &quot;boo&quot; file
+
+4</code></pre><p>-c 参数，会让grep输出匹配要求的行的数量。</p>
+<pre><code>grep -l &quot;boo&quot;  *
+
+file</code></pre><p>-l 参数，会让grep 输出匹配要求的文件名字</p>
+<pre><code>grep -i &quot;BOO&quot; file
+
+boot
+book
+booze
+boots</code></pre><p>-i 参数， 会让grep 不在分辨大小写的区别。</p>
+<pre><code>grep -x &quot;boo&quot; file
+
+</code></pre><p>-x 参数，会让grep输出精准匹配的行，因此，上面的输出为空。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>如果想要更广泛的正则表达式命令，那么就使用“grep -E”(也称为<br>如egrep命令)。例如 ？将匹配1或0次出现的前一个字符:</p>
+<pre><code>grep -E &quot;boots?&quot; file
+
+boot
+boots</code></pre><pre><code>grep -E &quot;boot|boots&quot; file
+
+boot
+boots</code></pre><p>如果想要了解更多的正则 ，—&gt; <a href="https://gnosis.cx/publish/programming/regular_expressions.html" target="_blank" rel="noopener">https://gnosis.cx/publish/programming/regular_expressions.html</a></p>
+<h2 id="AWK"><a href="#AWK" class="headerlink" title="AWK"></a>AWK</h2><p>awk 是一个文本扫描与处理的语言，由Aho, Weinberger &amp; Kernighan 创造，awk可以非常的复杂，在这个作为知识笔记的博文全写出来肯定不现实。但是呢，awk也有一些比较简单的用法，如果需要更多更复杂的用法，网上也有很多的资料，如果你擅长Linux系统，你也可以用 <code>man awk</code> 命令</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>首先，awk命令通常有一个模板，如果我们要使用awk命令，最好对照着模板来编写。</p>
+<pre><code>BEGIN { …. initialization awk commands …}
+{ …. awk commands for each line of the file…}
+END { …. finalization awk commands …}</code></pre><p>上面也介绍的很明白了，awk分为三部分，先是BEGIN的初始awk命令，然后是awk对文件操作的命令，最后是END中 结束命令。awk也像grep一样，支持正则表达式。另外awk还支持复杂的数学运算，也支持关联数组。</p>
+<p>在awk中，awk会将每一行分为几个部分来对待，默认情况下，awk是使用空格来分割不同的部分，当然，你也可以自定义需要的分隔符号。</p>
+<pre><code>this is a awk text demo </code></pre><p>在默认情况下，上面的文本会被分割成6个部分，$1 是 this, $ 6是demo。 $0 就是指的 这一行。</p>
+<h3 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h3><pre class=" language-shell"><code class="language-shell">ning@LXN:~/got$ ll
+total 16
+drwxr-xr-x  2 ning ning 4096 Aug  1 21:16 ./
+drwxr-xr-x 11 ning ning 4096 Aug  1 16:42 ../
+-rw-r--r--  1 ning ning   70 Aug  1 16:47 a_file
+-rw-r--r--  1 ning ning  670 Aug  1 21:16 test
+PS: 上面是我本机上的Linux在got文件夹的ll命令的输出。有a_file和test两个文件。
+如果我们想要知道在got文件夹下的所有文件的总大小是多大，利用awk怎么做到呢？
+</code></pre>
+<p>首先看一下，我们想要的内容在第三行之后开始出现，然后文件的大小内容在每一行的第5列。这时有了两个关键信息，有效的行的行数要比3大，如果按照默认来说，有效的列数应该是第5列。这时我们便可以编写如下的语句。</p>
+<pre class=" language-shell"><code class="language-shell">ning@LXN:~/got$ ll | awk 'BEGIN{sum=0} {if(NR>3) {sum=sum+$5}} END {print "总大小"sum}'
+
+总大小740</code></pre>
+<p>上面有几个需要注意的点 ，最后的END如果忘记加上，那么print的这一条命令就会对每一行执行。因此，如果想要命令在最后结束的时候执行，想要加上END。另外就是注意 awk 后面的命令应该用单引号包起来。</p>
+<p>关于awk的更多用法可以参考其他的资料，也可以在需要的使用根据需求去查询相关的操作。</p>
+<h2 id="sed-stream-editor"><a href="#sed-stream-editor" class="headerlink" title="sed = stream editor"></a>sed = stream editor</h2><p>sed对中的输入流(文件或管道输入)执行基本的文本转换，它是非常高效的，sed可以在命令行中使用，也可以在shell脚本中使用，以非交互方式编辑文件。最有用的功能是将一个字符串“搜索并替换”到另一个字符串。</p>
+<p>可以使用‘-e’选项将sed命令嵌入到调用sed的命令行中，或者。<br>将它们放在单独的文件中，例如‘sed.in’，然后使用‘-f sed.in’选项调用sed。大多数情况下，sed命令很复杂并且涉及大量正则表达式。</p>
+<pre><code>sed -e &#39;s/input/output/&#39; my_file</code></pre><p>将从my_file回显每一行到标准输出，更改每一行上第一次出现的“输入” 进入“输出”行。注意sed是面向行的，所以如果你想改变每一行中的每个事件， 然后你需要把它变成一个贪婪搜索。</p>
+<pre><code>sed -e &#39;s/input/output/g&#39; my_file</code></pre>
             </div>
             <hr/>
 
@@ -490,7 +585,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://superopenai.github.io/2020/08/01/test/">https://superopenai.github.io/2020/08/01/test/</a>
+                    <a href="https://superopenai.github.io/2020/08/01/grep,%20awk,sed,%E4%B8%89%E4%B8%AA%E9%9D%9E%E5%B8%B8%E6%9C%89%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/">https://superopenai.github.io/2020/08/01/grep,%20awk,sed,%E4%B8%89%E4%B8%AA%E9%9D%9E%E5%B8%B8%E6%9C%89%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -527,7 +622,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -571,7 +670,7 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2020/08/01/test/">
+                <a href="/2020/08/01/grep,%20awk,sed,%E4%B8%89%E4%B8%AA%E9%9D%9E%E5%B8%B8%E6%9C%89%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/">
                     <div class="card-image">
                         
                         
@@ -583,7 +682,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            知识记录
+由于最近在实习中需要经常编写shell脚本，其中不免要大量接触到 awk 、grep、sed 这三个重要的命令，本文就这三条命令做一个简单的知识记录。
+
+grep = global regular expression print
                         
                     </div>
                     <div class="publish-info">
@@ -592,13 +694,25 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            SuperNing
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -839,7 +953,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">70.1k</span>&nbsp;字
+                class="white-color">71.5k</span>&nbsp;字
             
             
             
